@@ -113,10 +113,10 @@ def main ():
     learn_rate = 0.01
 
     #sets the matplotlib display backend (most likely not needed)
-    mp.use('TkAgg', force=True)
+    #mp.use('TkAgg', force=True)                    #COMMENTED OUT IN ORDER TO RUN THE CODE. LUDVIK
 
     #load the training data
-    base_path = Path('/home/gkiss/Data/CAMUS_resized')
+    base_path = Path('data/CAMUS_resized')
     data = DatasetLoader(base_path/'train_gray', 
                         base_path/'train_gt')
     print(len(data))
