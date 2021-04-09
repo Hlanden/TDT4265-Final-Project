@@ -73,7 +73,7 @@ def train(model, train_dl, valid_dl, loss_fn, optimizer, acc_fn, epochs=1):
 
                 if step % 100 == 0:
                     # clear_output(wait=True)
-                    print('Current step: {}  Loss: {}  Acc: {}  AllocMem (Mb): {}'.format(step, loss, acc, torch.cuda.memory_allocated()/1024/1024))
+                    print('Current step: {}  Loss: {}  dice/acc: {}  AllocMem (Mb): {}'.format(step, loss, acc, torch.cuda.memory_allocated()/1024/1024))
                     # print(torch.cuda.memory_summary())
 
             epoch_loss = running_loss / len(dataloader.dataset)
@@ -93,6 +93,14 @@ def train(model, train_dl, valid_dl, loss_fn, optimizer, acc_fn, epochs=1):
 
 def acc_metric(predb, yb):
     return (predb.argmax(dim=1) == yb.cuda()).float().mean()
+
+def dice_score(predb, yb):
+    predb = predb.argmax(dim=1)
+    predb = predb.view(-1)
+    yb = yb.view(-1)
+    intersection = (predb * yb).sum()                      
+    dice = (2*intersection)/(predb.sum() + yb.sum())
+    return dice
 
 def batch_to_img(xb, idx):
     img = np.array(xb[idx,0:3])
@@ -171,7 +179,7 @@ def main ():
     opt = torch.optim.Adam(unet.parameters(), lr=learn_rate)
 
     #do some training
-    train_loss, valid_loss = train(unet, train_data, valid_data, loss_fn, opt, acc_metric, epochs=epochs_val)
+    train_loss, valid_loss = train(unet, train_data, valid_data, loss_fn, opt, dice_score, epochs=epochs_val)
 
     #plot training and validation losses
     if visual_debug:
