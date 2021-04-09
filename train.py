@@ -120,7 +120,7 @@ def main ():
     data = DatasetLoader(base_path/'train_gray', 
                         base_path/'train_gt')
     print(len(data))
-
+    
     #split the training dataset and initialize the data loaders
     train_dataset, valid_dataset = torch.utils.data.random_split(data, (300, 150))
     train_data = DataLoader(train_dataset, batch_size=bs, shuffle=True)
