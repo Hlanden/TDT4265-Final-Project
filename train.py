@@ -12,6 +12,9 @@ from torch import nn
 from DatasetLoader import DatasetLoader
 from Unet2D import Unet2D
 
+from config.defaults import cfg
+
+import argparse
 
 def train(model, train_dl, valid_dl, loss_fn, optimizer, acc_fn, epochs=1):
     start = time.time()
@@ -99,18 +102,43 @@ def predb_to_mask(predb, idx):
     p = torch.functional.F.softmax(predb[idx], 0)
     return p.argmax(0).cpu()
 
+def get_parser():
+    parser = argparse.ArgumentParser(description='Single Shot MultiBox Detector Training With PyTorch')
+    parser.add_argument(
+        "--config_file",
+        default="config/models/CAMUS.yaml",
+        metavar="FILE",
+        help="path to config file",
+        type=str
+    )
+    parser.add_argument(
+        "--opts",
+        help="Modify config options using the command-line",
+        default=None,
+        nargs=argparse.REMAINDER,
+    )
+    return parser
+
 def main ():
+    args = get_parser().parse_args()
+    print(args)
+    cfg.merge_from_file(args.config_file)
+    if args.opts:
+        cfg.merge_from_list(args.opts)
+    cfg.freeze()
+
     #enable if you want to see some plotting
-    visual_debug = True
+    
+    visual_debug = cfg.LOGGER.VISUAL_DEBUG
 
     #batch size
-    bs = 12
+    bs = cfg.TEST.BATCH_SIZE
 
     #epochs
-    epochs_val = 50
+    epochs_val = cfg.TEST.NUM_EPOCHS
 
     #learning rate
-    learn_rate = 0.01
+    learn_rate = cfg.SOLVER.LR
 
     #sets the matplotlib display backend (most likely not needed)
     #mp.use('TkAgg', force=True)                    #COMMENTED OUT IN ORDER TO RUN THE CODE. LUDVIK
