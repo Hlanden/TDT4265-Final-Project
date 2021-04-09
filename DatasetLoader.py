@@ -7,16 +7,18 @@ from pathlib import Path
 from torch.utils.data import Dataset, DataLoader, dataloader, sampler
 from PIL import Image
 from torchvision.transforms.transforms import ToPILImage, ToTensor
+import torchvision.transforms.functional as TF
 
 #load data from a folder
 class DatasetLoader(Dataset):
-    def __init__(self, gray_dir, gt_dir,transforms=None, pytorch=True): #legger til muligheten for transform her
+    def __init__(self, gray_dir, gt_dir,transforms=None, flip=False, pytorch=True): #legger til muligheten for transform her
         super().__init__()
         
         # Loop through the files in red folder and combine, into a dictionary, the other bands
         self.files = [self.combine_files(f, gt_dir) for f in gray_dir.iterdir() if not f.is_dir()]
         self.pytorch = pytorch
         self.rot_deg = 180
+        self.flip = flip
         self.transforms = transforms
         
     def combine_files(self, gray_file: Path, gt_dir):
@@ -49,13 +51,19 @@ class DatasetLoader(Dataset):
         
         return np.expand_dims(raw_mask, 0) if add_dims else raw_mask
     
+    def rotate_image(self, img):
+        return img.flip(2)
+        
+
     def __getitem__(self, idx):
         #get the image and mask as arrays
         x = torch.tensor(self.open_as_array(idx, invert=self.pytorch), dtype=torch.float32)
-        y = torch.tensor(self.open_mask(idx, add_dims=False), dtype=torch.torch.int64)
+        y = torch.tensor(self.open_mask(idx, add_dims=True), dtype=torch.torch.int64)
         #x = self.open_as_array(idx, invert=self.pytorch)
         #y = self.open_mask(idx, add_dims=False)
-        sample = {'gray': x, 'gt': y}
+        if self.flip:
+            x = self.rotate_image(x)
+            y = self.rotate_image(y)
         if self.transforms:
             try:
                 x = self.transforms(x)
@@ -92,19 +100,16 @@ class DatasetLoader(Dataset):
             rotate_img(gray_file_path, self.rot_deg)
             rotate_img(gt_file_path, self.rot_deg)
         
-def rotate_img(img_path, deg): #her må jeg få tak i riktig img path også også erstatte originalt bilde med dette
-        img = Image.open(img_path)
-        img.rotate(rt_degr, expand=1)
-        img.save(path) # to override your old file
 
 
-    
+
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
     import os
     trans = transforms.Compose([
-        transforms.RandomCrop(150),
-        transforms.RandomRotation(30),
+        #transforms.RandomCrop(150),
+        #transforms.RandomRotation(30),
+        #TF.rotate(180)
         #transforms.RandomVerticalFlip(p=0.5),
         #transforms.ToTensor()
     ]
@@ -112,7 +117,7 @@ if __name__ == '__main__':
     base_path = Path('data/CAMUS_resized')
     datasetloader = DatasetLoader(base_path/'train_gray', 
                         base_path/'train_gt',
-                        transforms=trans)
+                        transforms=None)
 
     train_data = DataLoader(datasetloader, batch_size=5, shuffle=True)
     fig, ax = plt.subplots(1,5)
