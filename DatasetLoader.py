@@ -1,23 +1,40 @@
+from matplotlib.colors import cnames
 import numpy as np
 import torch
 
 from pathlib import Path
 from torch.utils.data import Dataset, DataLoader, sampler
 from PIL import Image
+import os
+from medimage import image
 
 #load data from a folder
 class DatasetLoader(Dataset):
-    def __init__(self, gray_dir, gt_dir, pytorch=True):
+    def __init__(self, gray_dir, gt_dir='', medimage=True, pytorch=True):
         super().__init__()
-        
+        # TODO: Fix if statement below. Not obvious enough to understand what is happening!
         # Loop through the files in red folder and combine, into a dictionary, the other bands
-        self.files = [self.combine_files(f, gt_dir) for f in gray_dir.iterdir() if not f.is_dir()]
+        if gt_dir:
+            self.files = [self.combine_files(f, gt_dir, False) for f in gray_dir.iterdir() if not f.is_dir()]
+        else:
+            self.files = []
+            for f in gray_dir.iterdir():
+                filename, filetype = os.path.splitext(f)
+                
+                if not f.is_dir() and str(f).__contains__('.mhd') \
+                    and not filename.__contains__('gt') \
+                    and not filename.__contains__('sequence'): #TODO: What shall we do with sequence?
+                        self.files.append(self.combine_files(filename, '', True))
         self.pytorch = pytorch
-        
-    def combine_files(self, gray_file: Path, gt_dir):
-        
-        files = {'gray': gray_file, 
-                 'gt': gt_dir/gray_file.name.replace('gray', 'gt')}
+        self.medimage = medimage
+
+    def combine_files(self, gray_file: Path, gt_dir, camus=True):
+        if camus:
+            files = {'gray': gray_file + '.mhd', 
+                    'gt': gray_file + '_gt.mhd'}
+        else:
+            files = {'gray': gray_file, 
+                    'gt': gt_dir/gray_file.name.replace('gray', 'gt')}
 
         return files
                                        
@@ -27,8 +44,11 @@ class DatasetLoader(Dataset):
      
     def open_as_array(self, idx, invert=False):
         #open ultrasound data
-        raw_us = np.stack([np.array(Image.open(self.files[idx]['gray'])),
-                           ], axis=2)
+        if self.medimage:
+            raw_us = image(self.files[idx]['gray']).imdata
+        else:
+            raw_us = np.stack([np.array(Image.open(self.files[idx]['gray'])),
+                            ], axis=2)
     
         if invert:
             raw_us = raw_us.transpose((2,0,1))
@@ -39,8 +59,14 @@ class DatasetLoader(Dataset):
 
     def open_mask(self, idx, add_dims=False):
         #open mask file
-        raw_mask = np.array(Image.open(self.files[idx]['gt']))
-        raw_mask = np.where(raw_mask>100, 1, 0)
+        if self.medimage:
+            raw_mask = image(self.files[idx]['gt']).imdata
+            raw_mask = raw_mask.squeeze()
+            gtbox_type = 3 # TODO: Change this to the correct type
+            raw_mask = np.where(raw_mask==gtbox_type, gtbox_type, 0)
+        else:
+            raw_mask = np.array(Image.open(self.files[idx]['gt']))            
+            raw_mask = np.where(raw_mask>100, 1, 0)
         
         return np.expand_dims(raw_mask, 0) if add_dims else raw_mask
     
@@ -57,3 +83,24 @@ class DatasetLoader(Dataset):
         
         return Image.fromarray(arr.astype(np.uint8), 'RGB')
     
+if __name__ == '__main__':
+    # base_path = Path('data/CAMUS_resized')
+    # data = DatasetLoader(base_path/'train_gray', 
+    #                     base_path/'train_gt', 
+    #                     medimage=False)
+
+    # Simple test sxript for plotting of data + gt 
+    
+    data = DatasetLoader(Path('patient0001',''))
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots(2, 4) 
+    i = 0
+    for d in data:
+        if i < 10:
+            ax[0, i].imshow(d[0].squeeze())
+            ax[1, i].imshow(d[1].squeeze())
+            i += 1
+        else:
+            break
+    plt.show()
+
