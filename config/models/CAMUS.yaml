@@ -1,0 +1,20 @@
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+# DATASETS:
+    #TRAIN: ("mnist_detection_train", "mnist_detection_val")
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
