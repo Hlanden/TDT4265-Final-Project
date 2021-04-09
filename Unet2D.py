@@ -2,16 +2,16 @@ import torch
 from torch import nn
 
 class Unet2D(nn.Module):
-    def __init__(self, in_channels, out_channels):
+    def __init__(self, cfg):
         super().__init__()
 
-        self.conv1 = self.contract_block(in_channels, 32, 7, 3)
+        self.conv1 = self.contract_block(cfg.MODEL.IN_CHANNELS, 32, 7, 3)
         self.conv2 = self.contract_block(32, 64, 3, 1)
         self.conv3 = self.contract_block(64, 128, 3, 1)
 
         self.upconv3 = self.expand_block(128, 64, 3, 1)
         self.upconv2 = self.expand_block(64*2, 32, 3, 1)
-        self.upconv1 = self.expand_block(32*2, out_channels, 3, 1)
+        self.upconv1 = self.expand_block(32*2, cfg.MODELS.OUT_CHANNELS, 3, 1)
 
     def __call__(self, x):
         # downsampling part
