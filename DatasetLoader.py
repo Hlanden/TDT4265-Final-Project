@@ -9,6 +9,7 @@ from torch.utils.data import Dataset, DataLoader, dataloader, sampler
 from PIL import Image
 from torchvision.transforms.transforms import ToPILImage, ToTensor
 import torchvision.transforms.functional as TF
+import cv2
 
 #load data from a folder
 class DatasetLoader(Dataset):
@@ -62,8 +63,9 @@ class DatasetLoader(Dataset):
         #x = torch.tensor(self.open_as_array(idx, invert=self.pytorch), dtype=torch.float32)
         #y = torch.tensor(self.open_mask(idx, add_dims=True), dtype=torch.torch.int64)
 
-        x = self.open_as_array(idx, invert=self.pytorch)
-        y = self.open_mask(idx, add_dims=False)
+        x = self.open_as_array(idx, invert=self.pytorch).astype(np.float32)
+        y = self.open_mask(idx, add_dims=False).astype(np.float32)
+
         if self.flip:
             x = self.rotate_image(x)
             y = self.rotate_image(y)
@@ -100,7 +102,7 @@ if __name__ == '__main__':
     import os
 
     transtest = aug.Compose([
-        aug.HorizontalFlip(p=1)
+        aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1) 
     ])
 
 
