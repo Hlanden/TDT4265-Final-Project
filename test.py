@@ -43,7 +43,6 @@ def train(model, train_dl, valid_dl, loss_fn, optimizer, acc_fn, epochs=1):
 
             # iterate over data
             for x, y in dataloader:
-                print(x.shape)
                 x = x.cuda()
                 y = y.cuda()
                 step += 1
@@ -153,26 +152,27 @@ def main ():
     #mp.use('TkAgg', force=True)                    #COMMENTED OUT IN ORDER TO RUN THE CODE. LUDVIK
 
     #load the training data
-    base_path = Path('patient0001')
-    data = DatasetLoader(base_path)
+    base_path = Path('../../../../work/datasets/medical_project/CAMUS')
+    data = DatasetLoader(,
+                        base_path/'train_gt')
     print(len(data))
 
     #split the training dataset and initialize the data loaders
-    #train_dataset, valid_dataset = torch.utils.data.random_split(data, (300, 150))
-    train_data = DataLoader(data, batch_size=bs, shuffle=False)
-    valid_data = DataLoader(data, batch_size=bs, shuffle=False)
-    
+    train_dataset, valid_dataset = torch.utils.data.random_split(data, (300, 150))
+    train_data = DataLoader(train_dataset, batch_size=bs, shuffle=True)
+    valid_data = DataLoader(valid_dataset, batch_size=bs, shuffle=True)
+
     if visual_debug:
         fig, ax = plt.subplots(1,2)
-        ax[0].imshow(data.open_as_array(1).squeeze())
-        ax[1].imshow(data.open_mask(1).squeeze())
+        ax[0].imshow(data.open_as_array(150))
+        ax[1].imshow(data.open_mask(150))
         plt.show()
-    
-    #xb, yb = next(iter(train_data))
-    #print (xb.shape, yb.shape)
-    
+
+    xb, yb = next(iter(train_data))
+    print (xb.shape, yb.shape)
+
     # build the Unet2D with one channel as input and 2 channels as output
-    unet = Unet2D(1,3)
+    unet = Unet2D(1,2)
 
     #loss function and optimizer
     loss_fn = nn.CrossEntropyLoss()
@@ -182,7 +182,6 @@ def main ():
     train_loss, valid_loss = train(unet, train_data, valid_data, loss_fn, opt, dice_score, epochs=epochs_val)
 
     #plot training and validation losses
-    '''
     if visual_debug:
         plt.figure(figsize=(10,8))
         plt.plot(train_loss, label='Train loss')
@@ -204,7 +203,6 @@ def main ():
             ax[i,2].imshow(predb_to_mask(predb, i))
 
         plt.show()
-    '''
 
 if __name__ == "__main__":
     main()

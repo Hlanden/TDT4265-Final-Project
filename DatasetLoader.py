@@ -45,13 +45,17 @@ class DatasetLoader(Dataset):
         #open ultrasound data
         if self.medimage:
             raw_us = image(self.files[idx]['gray']).imdata
-            raw_us = raw_us.squeeze()
+            raw_us = np.stack([raw_us.squeeze(), ], axis=2)
+            #raw_us = np.expand_dims(raw_us, axis=0)
+            print('Raw us shape', raw_us.shape)
+            #raw_us = raw_us.squeeze()
+            #print(raw_us.shape)
         else:
             raw_us = np.stack([np.array(Image.open(self.files[idx]['gray'])),
                             ], axis=2)
     
-        #if invert:
-        #    raw_us = raw_us.transpose((2,0,1))
+        if invert:
+            raw_us = raw_us.transpose((2,0,1))
     
         # normalize
         return (raw_us / np.iinfo(raw_us.dtype).max)
@@ -79,7 +83,7 @@ class DatasetLoader(Dataset):
         #get the image and mask as arrays
         x = torch.tensor(self.open_as_array(idx, invert=self.pytorch), dtype=torch.float32)
         y = torch.tensor(self.open_mask(idx, add_dims=False), dtype=torch.torch.int64)
-        
+        print('y shape', y.shape)
         return x, y
     
     def get_as_pil(self, idx):
