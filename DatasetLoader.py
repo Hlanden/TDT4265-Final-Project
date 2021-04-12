@@ -32,6 +32,7 @@ class DatasetLoader(Dataset):
         if camus:
             files = {'gray': gray_file + '.mhd', 
                     'gt': gray_file + '_gt.mhd'}
+
         else:
             files = {'gray': gray_file, 
                     'gt': gt_dir/gray_file.name.replace('gray', 'gt')}
@@ -63,7 +64,8 @@ class DatasetLoader(Dataset):
             raw_mask = image(self.files[idx]['gt']).imdata
             raw_mask = raw_mask.squeeze()
             gtbox_type = 3 # TODO: Change this to the correct type
-            raw_mask = np.where(raw_mask==gtbox_type, gtbox_type, 0)
+            raw_mask = np.where(raw_mask==gtbox_type, 1, 0)
+
         else:
             raw_mask = np.array(Image.open(self.files[idx]['gt']))            
             raw_mask = np.where(raw_mask>100, 1, 0)
