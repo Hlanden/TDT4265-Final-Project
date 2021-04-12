@@ -20,7 +20,21 @@ import utils.torch_utils as torch_utils
 from utils.checkpoint import CheckPointer 
 from engine.trainer import do_train
 
-def start_train(cfg):
+def start_train(cfg, train_loader):
+    """
+    Starts training the model with configurations defined by cfg.
+
+    TODO: Fill in more detailed description here. 
+
+    Input arguments: 
+        cfg [yacs.configCfgNode] -- Model configuration 
+        trainloader[pytorch.Dataloader] -- Dataloader for training set. TODO: Remove this
+            should be configured in the cfg file, not explicit
+    
+    Returns: 
+        model [torch.nn.Module] -- Trained model
+    
+    """
     logger = logging.getLogger('SSD.trainer')
     model = Unet2D(cfg)
     model = torch_utils.to_cuda(model)
@@ -183,7 +197,7 @@ def main ():
 
     # TODO: Move this out of main
     #load the training data
-    base_path = Path('data/CAMUS_resized')
+    base_path = Path('datasets/CAMUS_resized')
     data = DatasetLoader(base_path/'train_gray', 
                         base_path/'train_gt')
     print(len(data))
@@ -192,7 +206,7 @@ def main ():
     train_dataset, valid_dataset = torch.utils.data.random_split(data, (300, 150))
     train_data = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     valid_data = DataLoader(valid_dataset, batch_size=batch_size, shuffle=True)
-
+    start_train(cfg, train_data)
     if visual_debug:
         fig, ax = plt.subplots(1,2)
         ax[0].imshow(data.open_as_array(150))
