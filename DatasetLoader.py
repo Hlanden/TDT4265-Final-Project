@@ -10,7 +10,7 @@ from medimage import image
 
 #load data from a folder
 class DatasetLoader(Dataset):
-    def __init__(self, gray_dir, gt_dir='', medimage=True, pytorch=True):
+    def __init__(self, gray_dir, gt_dir='', medimage=True, pytorch=True, classes=[1,2]):
         super().__init__()
         # TODO: Fix if statement below. Not obvious enough to understand what is happening!
         # Loop through the files in red folder and combine, into a dictionary, the other bands
@@ -27,6 +27,7 @@ class DatasetLoader(Dataset):
                         self.files.append(self.combine_files(filename, '', True))
         self.pytorch = pytorch
         self.medimage = medimage
+        self.classes = classes
 
     def combine_files(self, gray_file: Path, gt_dir, camus=True):
         if camus:
@@ -63,9 +64,10 @@ class DatasetLoader(Dataset):
         if self.medimage:
             raw_mask = image(self.files[idx]['gt']).imdata
             raw_mask = raw_mask.squeeze()
-            gtbox_type = 3 # TODO: Change this to the correct type
-            raw_mask = np.where(raw_mask==gtbox_type, 1, 0)
-
+            combined_classes = np.zeros_like(raw_mask)
+            for c in self.classes:
+                combined_classes += np.where(raw_mask==c, c, 0).astype(np.uint8)
+            raw_mask = combined_classes
         else:
             raw_mask = np.array(Image.open(self.files[idx]['gt']))            
             raw_mask = np.where(raw_mask>100, 1, 0)

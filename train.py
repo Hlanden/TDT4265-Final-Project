@@ -15,11 +15,11 @@ from DatasetLoader import DatasetLoader
 from Unet2D import Unet2D
 
 from config.defaults import cfg
-<<<<<<< HEAD
 from utils.logger import setup_logger
 import utils.torch_utils as torch_utils
 from utils.checkpoint import CheckPointer 
 from engine.trainer import do_train
+import argparse
 
 def start_train(cfg, train_loader):
     """
@@ -47,6 +47,8 @@ def start_train(cfg, train_loader):
     #     weight_decay=cfg.SOLVER.WEIGHT_DECAY
     # )
     optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
+    loss_fn = nn.CrossEntropyLoss()
+
     arguments = {"iteration": 0}
     save_to_disk = True
     checkpointer = CheckPointer(
@@ -61,12 +63,10 @@ def start_train(cfg, train_loader):
 
     model = do_train(
         cfg, model, train_loader, optimizer,
-        checkpointer, arguments)
+        checkpointer, arguments, loss_fn)
     return model
-=======
 
-import argparse
->>>>>>> main
+
 
 def train(model, train_dl, valid_dl, loss_fn, optimizer, acc_fn, epochs=1):
     start = time.time()
@@ -213,9 +213,8 @@ def main ():
     #load the training data
     base_path = Path('datasets/CAMUS_resized')
     data = DatasetLoader(base_path/'train_gray', 
-                        base_path/'train_gt')
-    print(len(data))
-    
+                        base_path/'train_gt', 
+                        medimage=False)    
 
     #split the training dataset and initialize the data loaders
     train_dataset, valid_dataset = torch.utils.data.random_split(data, (300, 150))

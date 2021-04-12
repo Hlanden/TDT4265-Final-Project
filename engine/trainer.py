@@ -25,7 +25,8 @@ def do_train(cfg, model,
              data_loader,
              optimizer,
              checkpointer,
-             arguments):
+             arguments,
+             loss_fn):
     logger = logging.getLogger("SSD.trainer")
     logger.info("Start training ...")
     meters = MetricLogger()
@@ -46,10 +47,10 @@ def do_train(cfg, model,
         images = torch_utils.to_cuda(images)
         targets = torch_utils.to_cuda(targets)
         
-        loss_dict = model(images, targets=targets)
-        loss = sum(loss for loss in loss_dict.values())
+        #loss_dict = model(images, targets=targets)
+        loss = loss_fn(images, targets)
 
-        meters.update(total_loss=loss, **loss_dict)
+        meters.update(total_loss=loss)
 
         optimizer.zero_grad()
         loss.backward()
@@ -75,10 +76,10 @@ def do_train(cfg, model,
             global_step = iteration
             summary_writer.add_scalar(
                 'losses/total_loss', loss, global_step=global_step)
-            for loss_name, loss_item in loss_dict.items():
-                summary_writer.add_scalar(
-                    'losses/{}'.format(loss_name), loss_item,
-                    global_step=global_step)
+            # for loss_name, loss_item in loss_dict.items():
+            #     summary_writer.add_scalar(
+            #         'losses/{}'.format(loss_name), loss_item,
+            #         global_step=global_step)
             summary_writer.add_scalar(
                 'lr', optimizer.param_groups[0]['lr'],
                 global_step=global_step)
