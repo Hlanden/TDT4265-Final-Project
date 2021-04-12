@@ -157,10 +157,18 @@ def main ():
                         base_path/'train_gt')
     print(len(data))
 
+    data.rotate_all_images()
+
     #split the training dataset and initialize the data loaders
     train_dataset, valid_dataset = torch.utils.data.random_split(data, (300, 150))
     train_data = DataLoader(train_dataset, batch_size=bs, shuffle=True)
     valid_data = DataLoader(valid_dataset, batch_size=bs, shuffle=True)
+
+
+    path = data.files[1]['gray']
+    print(path)
+    im = Image.open(path)
+    im.save('test_foto.tif')
 
     if visual_debug:
         fig, ax = plt.subplots(1,2)
