@@ -4,6 +4,7 @@ import logging
 import os
 import time
 import torch
+from torch.utils.data import dataloader
 import torch.utils.tensorboard
 from engine.inference import do_evaluation
 from utils.metric_logger import MetricLogger
@@ -38,11 +39,13 @@ def do_train(cfg, model,
     start_iter = arguments["iteration"]
     start_training_time = time.time()
     end = time.time()
-    for iteration, (images, targets, _) in enumerate(data_loader, start_iter):
+    
+    for iteration, (images, targets) in enumerate(data_loader):
         iteration = iteration + 1
         arguments["iteration"] = iteration
         images = torch_utils.to_cuda(images)
         targets = torch_utils.to_cuda(targets)
+        
         loss_dict = model(images, targets=targets)
         loss = sum(loss for loss in loss_dict.values())
 

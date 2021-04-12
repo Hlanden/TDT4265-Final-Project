@@ -11,7 +11,7 @@ class Unet2D(nn.Module):
 
         self.upconv3 = self.expand_block(128, 64, 3, 1)
         self.upconv2 = self.expand_block(64*2, 32, 3, 1)
-        self.upconv1 = self.expand_block(32*2, cfg.MODELS.OUT_CHANNELS, 3, 1)
+        self.upconv1 = self.expand_block(32*2, cfg.MODEL.OUT_CHANNELS, 3, 1)
 
     def __call__(self, x):
         # downsampling part

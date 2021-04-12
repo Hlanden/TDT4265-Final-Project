@@ -39,13 +39,13 @@ def start_train(cfg, train_loader):
     model = Unet2D(cfg)
     model = torch_utils.to_cuda(model)
 
-    optimizer = torch.optim.SGD(
-        model.parameters(),
-        lr=cfg.SOLVER.LR,
-        momentum=cfg.SOLVER.MOMENTUM,
-        weight_decay=cfg.SOLVER.WEIGHT_DECAY
-    )
-
+    # optimizer = torch.optim.SGD(
+    #     model.parameters(),
+    #     lr=cfg.SOLVER.LR,
+    #     momentum=cfg.SOLVER.MOMENTUM,
+    #     weight_decay=cfg.SOLVER.WEIGHT_DECAY
+    # )
+    optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
     arguments = {"iteration": 0}
     save_to_disk = True
     checkpointer = CheckPointer(
@@ -201,10 +201,16 @@ def main ():
     data = DatasetLoader(base_path/'train_gray', 
                         base_path/'train_gt')
     print(len(data))
+    
 
     #split the training dataset and initialize the data loaders
     train_dataset, valid_dataset = torch.utils.data.random_split(data, (300, 150))
     train_data = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    for i, (inputs, targets) in enumerate(train_data):
+        with torch.no_grad():
+                print("targets.data", inputs.shape)
+                print('Targets', targets.shape)
+                break
     valid_data = DataLoader(valid_dataset, batch_size=batch_size, shuffle=True)
     start_train(cfg, train_data)
     if visual_debug:
@@ -222,6 +228,7 @@ def main ():
 
     #loss function and optimizer
     loss_fn = nn.CrossEntropyLoss()
+
     opt = torch.optim.Adam(unet.parameters(), lr=learning_rate)
 
     #do some training

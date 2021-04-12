@@ -82,7 +82,7 @@ cfg.DATA_LOADER.PIN_MEMORY = True
 # ---------------------------------------------------------------------------- #
 cfg.SOLVER = CN()
 # train configs
-# cfg.SOLVER.MAX_ITER = 120000
+cfg.SOLVER.MAX_ITER = 120000
 # cfg.SOLVER.GAMMA = 0.1
 # cfg.SOLVER.BATCH_SIZE = 32
 cfg.SOLVER.LR = 1e-2
@@ -102,9 +102,9 @@ cfg.TEST = CN()
 cfg.TEST.BATCH_SIZE = 12
 cfg.TEST.NUM_EPOCHS = 50
 
-# cfg.EVAL_STEP = 500 # Evaluate dataset every eval_step, disabled when eval_step < 0
-# cfg.MODEL_SAVE_STEP = 500 # Save checkpoint every save_step
-# cfg.LOG_STEP = 10 # Print logs every log_stepPrint logs every log_step
+cfg.EVAL_STEP = 500 # Evaluate dataset every eval_step, disabled when eval_step < 0
+cfg.MODEL_SAVE_STEP = 500 # Save checkpoint every save_step
+cfg.LOG_STEP = 10 # Print logs every log_stepPrint logs every log_step
 cfg.OUTPUT_DIR = "outputs"
 # cfg.DATASET_DIR = "datasets"
 
