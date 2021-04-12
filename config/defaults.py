@@ -7,7 +7,7 @@ cfg.MODEL = CN()
 
 # TODO: Fill in right values for training
 cfg.MODEL.IN_CHANNELS = 1
-cfg.MODEL.OUT_CHANNELS = 2
+cfg.MODEL.OUT_CHANNELS = 3
 
 # cfg.MODEL.THRESHOLD = 0.5
 # cfg.MODEL.NUM_CLASSES = 21
@@ -99,7 +99,7 @@ cfg.TEST = CN()
 # cfg.TEST.CONFIDENCE_THRESHOLD = 0.01
 # cfg.TEST.MAX_PER_CLASS = -1
 # cfg.TEST.MAX_PER_IMAGE = 100
-cfg.TEST.BATCH_SIZE = 12
+cfg.TEST.BATCH_SIZE = 4
 cfg.TEST.NUM_EPOCHS = 50
 
 # cfg.EVAL_STEP = 500 # Evaluate dataset every eval_step, disabled when eval_step < 0

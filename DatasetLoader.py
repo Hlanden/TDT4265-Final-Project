@@ -14,17 +14,17 @@ class DatasetLoader(Dataset):
         super().__init__()
         # TODO: Fix if statement below. Not obvious enough to understand what is happening!
         # Loop through the files in red folder and combine, into a dictionary, the other bands
-        if gt_dir:
-            self.files = [self.combine_files(f, gt_dir, False) for f in gray_dir.iterdir() if not f.is_dir()]
-        else:
-            self.files = []
-            for f in gray_dir.iterdir():
-                filename, filetype = os.path.splitext(f)
-                
-                if not f.is_dir() and str(f).__contains__('.mhd') \
-                    and not filename.__contains__('gt') \
-                    and not filename.__contains__('sequence'): #TODO: What shall we do with sequence?
-                        self.files.append(self.combine_files(filename, '', True))
+        #if gt_dir:
+        #    self.files = [self.combine_files(f, gt_dir, False) for f in gray_dir.iterdir() if not f.is_dir()]
+        #else:
+        self.files = []
+        for f in gray_dir.iterdir():
+            filename, filetype = os.path.splitext(f)
+            
+            if not f.is_dir() and str(f).__contains__('.mhd') \
+                and not filename.__contains__('gt') \
+                and not filename.__contains__('sequence'): #TODO: What shall we do with sequence?
+                    self.files.append(self.combine_files(filename, '', True))
         self.pytorch = pytorch
         self.medimage = medimage
 
@@ -45,12 +45,13 @@ class DatasetLoader(Dataset):
         #open ultrasound data
         if self.medimage:
             raw_us = image(self.files[idx]['gray']).imdata
+            raw_us = raw_us.squeeze()
         else:
             raw_us = np.stack([np.array(Image.open(self.files[idx]['gray'])),
                             ], axis=2)
     
-        if invert:
-            raw_us = raw_us.transpose((2,0,1))
+        #if invert:
+        #    raw_us = raw_us.transpose((2,0,1))
     
         # normalize
         return (raw_us / np.iinfo(raw_us.dtype).max)
@@ -61,8 +62,13 @@ class DatasetLoader(Dataset):
         if self.medimage:
             raw_mask = image(self.files[idx]['gt']).imdata
             raw_mask = raw_mask.squeeze()
-            gtbox_type = 1 # TODO: Change this to the correct type
-            raw_mask = np.where(raw_mask==1, gtbox_type, 0)
+            gtbox_type = 3 # TODO: Change this to the correct type
+            raw_mask_temp1 = raw_mask.copy()
+            raw_mask_temp2 = raw_mask.copy()
+            #raw_mask_temp3 = raw_mask
+            raw_mask_temp1 = np.where(raw_mask==1, 1, 0)
+            raw_mask_temp2 = np.where(raw_mask==2, 2, 0)
+            raw_mask = (raw_mask_temp1 + raw_mask_temp2).copy()
         else:
             raw_mask = np.array(Image.open(self.files[idx]['gt']))            
             raw_mask = np.where(raw_mask>100, 1, 0)
@@ -94,6 +100,8 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots(2, 4) 
     i = 0
+
+    ''
     for d in data:
         if i < 10:
             ax[0, i].imshow(d[0].squeeze())
