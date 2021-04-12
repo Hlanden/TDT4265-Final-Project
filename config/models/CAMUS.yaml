@@ -3,8 +3,8 @@ MODEL:
     OUT_CHANNELS: 2
 INPUT:
     IMAGE_SIZE: [300, 300]
-# DATASETS:
-    #TRAIN: ("mnist_detection_train", "mnist_detection_val")
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
     #TEST: ("mnist_detection_val", )
 # SOLVER:
     # MAX_ITER: 15000

@@ -18,13 +18,14 @@ class DatasetLoader(Dataset):
             self.files = [self.combine_files(f, gt_dir, False) for f in gray_dir.iterdir() if not f.is_dir()]
         else:
             self.files = []
-            for f in gray_dir.iterdir():
-                filename, filetype = os.path.splitext(f)
-                
-                if not f.is_dir() and str(f).__contains__('.mhd') \
-                    and not filename.__contains__('gt') \
-                    and not filename.__contains__('sequence'): #TODO: What shall we do with sequence?
-                        self.files.append(self.combine_files(filename, '', True))
+            for patient in gray_dir.iterdir():
+                for f in patient.iterdir():
+                    filename, filetype = os.path.splitext(f)
+
+                    if not f.is_dir() and str(f).__contains__('.mhd') \
+                        and not filename.__contains__('gt') \
+                        and not filename.__contains__('sequence'): #TODO: What shall we do with sequence?
+                            self.files.append(self.combine_files(filename, '', True))
         self.pytorch = pytorch
         self.medimage = medimage
         self.classes = classes
@@ -74,10 +75,12 @@ class DatasetLoader(Dataset):
         
         return np.expand_dims(raw_mask, 0) if add_dims else raw_mask
     
-    def __getitem__(self, idx):
+    def __getitem__(self, idx, retries=0):
         #get the image and mask as arrays
+      
         x = torch.tensor(self.open_as_array(idx, invert=self.pytorch), dtype=torch.float32)
         y = torch.tensor(self.open_mask(idx, add_dims=False), dtype=torch.torch.int64)
+        
         
         return x, y
     

@@ -65,7 +65,8 @@ cfg.PREPROCESSING.DATA_AUGMENTATION.RANDOM_ROTATION.ENABLED = False
 # -----------------------------------------------------------------------------
 cfg.DATASETS = CN()
 # List of the dataset names for training, as present in pathscfgatalog.py
-# cfg.DATASETS.TRAIN = ()
+cfg.DATASETS.TRAIN_IMAGES = '../../../../work/datasets/medical_project/CAMUS'
+cfg.DATASETS.GT_IMAGES = ''
 # # List of the dataset names for testing, as present in pathscfgatalog.py
 # cfg.DATASETS.TEST = ()
 
