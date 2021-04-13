@@ -1564,3 +1564,1760 @@ SOLVER:
 TEST:
   BATCH_SIZE: 12
   NUM_EPOCHS: 50
+2021-04-13 10:35:24,305 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 10:35:24,305 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 10:35:24,305 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 10:35:24,305 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 10:35:26,373 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_000060.pth
+2021-04-13 10:35:26,386 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_000060.pth
+2021-04-13 10:35:26,395 UNET.trainer INFO: Start training ...
+2021-04-13 10:35:36,587 UNET.trainer INFO: iter: 000070, lr: 0.01000, total_loss: 0.212 (0.212), time: 0.881 (0.881), eta: 0:00:59, mem: 3599M
+2021-04-13 10:35:42,245 UNET.trainer INFO: iter: 000080, lr: 0.01000, total_loss: 0.202 (0.207), time: 0.566 (0.723), eta: 0:00:41, mem: 3599M
+2021-04-13 10:35:52,722 UNET.trainer INFO: iter: 000090, lr: 0.01000, total_loss: 0.185 (0.200), time: 1.048 (0.831), eta: 0:00:39, mem: 3599M
+2021-04-13 10:35:53,054 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000090.pth
+2021-04-13 10:36:03,712 UNET.trainer INFO: iter: 000100, lr: 0.01000, total_loss: 0.191 (0.197), time: 1.099 (0.898), eta: 0:00:34, mem: 3599M
+2021-04-13 10:36:12,285 UNET.trainer INFO: iter: 000110, lr: 0.01000, total_loss: 0.180 (0.194), time: 0.857 (0.890), eta: 0:00:24, mem: 3599M
+2021-04-13 10:36:21,280 UNET.trainer INFO: iter: 000120, lr: 0.01000, total_loss: 0.181 (0.192), time: 0.899 (0.892), eta: 0:00:16, mem: 3599M
+2021-04-13 10:36:21,610 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000120.pth
+2021-04-13 10:36:30,794 UNET.trainer INFO: iter: 000130, lr: 0.01000, total_loss: 0.173 (0.189), time: 0.951 (0.900), eta: 0:00:07, mem: 3599M
+2021-04-13 10:37:00,010 UNET.trainer INFO: iter: 000140, lr: 0.01000, total_loss: 0.183 (0.188), time: 2.922 (1.153), eta: -1 day, 23:59:58, mem: 3599M
+2021-04-13 10:37:24,074 UNET.trainer INFO: iter: 000150, lr: 0.01000, total_loss: 0.174 (0.187), time: 2.406 (1.292), eta: -1 day, 23:59:45, mem: 3599M
+2021-04-13 10:37:24,434 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000150.pth
+2021-04-13 10:37:39,380 UNET.trainer INFO: iter: 000160, lr: 0.01000, total_loss: 0.172 (0.185), time: 1.531 (1.316), eta: -1 day, 23:59:32, mem: 3599M
+2021-04-13 10:38:54,523 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 10:38:54,524 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 10:38:54,524 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 10:38:54,524 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 10:38:56,812 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_000150.pth
+2021-04-13 10:38:56,825 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_000150.pth
+2021-04-13 10:38:56,834 UNET.trainer INFO: Start training ...
+2021-04-13 10:39:12,250 UNET.trainer INFO: iter: 000160, lr: 0.01000, total_loss: 0.197 (0.197), time: 1.401 (1.401), eta: -1 day, 23:59:30, mem: 8088M
+2021-04-13 10:39:34,606 UNET.trainer INFO: iter: 000170, lr: 0.01000, total_loss: 0.183 (0.190), time: 2.236 (1.818), eta: -1 day, 23:59:02, mem: 8088M
+2021-04-13 10:39:53,558 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 10:39:53,558 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 10:39:53,559 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 10:39:53,559 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 10:39:55,629 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_000150.pth
+2021-04-13 10:39:55,641 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_000150.pth
+2021-04-13 10:39:55,649 UNET.trainer INFO: Start training ...
+2021-04-13 10:40:18,516 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 10:40:18,516 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 10:40:18,516 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 10:40:18,516 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 10:40:20,675 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_000150.pth
+2021-04-13 10:40:20,688 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_000150.pth
+2021-04-13 10:40:20,697 UNET.trainer INFO: Start training ...
+2021-04-13 10:40:27,386 UNET.trainer INFO: iter: 000160, lr: 0.01000, total_loss: 0.166 (0.166), time: 0.539 (0.539), eta: -1 day, 23:59:49, mem: 909M
+2021-04-13 10:40:29,403 UNET.trainer INFO: iter: 000170, lr: 0.01000, total_loss: 0.153 (0.159), time: 0.202 (0.371), eta: -1 day, 23:59:49, mem: 909M
+2021-04-13 10:40:34,684 UNET.trainer INFO: iter: 000180, lr: 0.01000, total_loss: 0.156 (0.158), time: 0.528 (0.423), eta: -1 day, 23:59:43, mem: 909M
+2021-04-13 10:40:34,802 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000180.pth
+2021-04-13 10:40:40,889 UNET.trainer INFO: iter: 000190, lr: 0.01000, total_loss: 0.143 (0.155), time: 0.621 (0.472), eta: -1 day, 23:59:36, mem: 909M
+2021-04-13 10:40:44,684 UNET.trainer INFO: iter: 000200, lr: 0.01000, total_loss: 0.140 (0.152), time: 0.379 (0.454), eta: -1 day, 23:59:32, mem: 909M
+2021-04-13 10:40:55,781 UNET.trainer INFO: iter: 000210, lr: 0.01000, total_loss: 0.130 (0.148), time: 1.110 (0.563), eta: -1 day, 23:59:20, mem: 909M
+2021-04-13 10:40:55,866 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000210.pth
+2021-04-13 10:41:02,642 UNET.trainer INFO: iter: 000220, lr: 0.01000, total_loss: 0.132 (0.146), time: 0.686 (0.581), eta: -1 day, 23:59:13, mem: 909M
+2021-04-13 10:41:06,372 UNET.trainer INFO: iter: 000230, lr: 0.01000, total_loss: 0.127 (0.143), time: 0.373 (0.555), eta: -1 day, 23:59:09, mem: 909M
+2021-04-13 10:41:11,283 UNET.trainer INFO: iter: 000240, lr: 0.01000, total_loss: 0.131 (0.142), time: 0.491 (0.548), eta: -1 day, 23:59:05, mem: 909M
+2021-04-13 10:41:11,354 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000240.pth
+2021-04-13 10:57:46,097 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 10:57:46,097 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 10:57:46,097 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 10:57:46,097 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 10:57:48,160 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_000240.pth
+2021-04-13 10:57:48,174 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_000240.pth
+2021-04-13 10:57:48,183 UNET.trainer INFO: Start training ...
+2021-04-13 10:58:11,023 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 10:58:11,023 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 10:58:11,023 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 10:58:11,024 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 10:58:13,104 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_000240.pth
+2021-04-13 10:58:13,116 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_000240.pth
+2021-04-13 10:58:13,125 UNET.trainer INFO: Start training ...
+2021-04-13 10:58:57,194 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 10:58:57,195 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 10:58:57,195 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 10:58:57,195 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 10:58:59,338 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_000240.pth
+2021-04-13 10:58:59,353 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_000240.pth
+2021-04-13 10:58:59,363 UNET.trainer INFO: Start training ...
+2021-04-13 10:59:03,451 UNET.trainer INFO: iter: 000250, lr: 0.01000, total_loss: 0.213 (0.213), time: 0.276 (0.276), eta: -1 day, 23:59:30, mem: 35M
+2021-04-13 10:59:04,382 UNET.trainer INFO: iter: 000260, lr: 0.01000, total_loss: 0.147 (0.180), time: 0.093 (0.185), eta: -1 day, 23:59:38, mem: 35M
+2021-04-13 10:59:05,266 UNET.trainer INFO: iter: 000270, lr: 0.01000, total_loss: 0.129 (0.163), time: 0.088 (0.153), eta: -1 day, 23:59:40, mem: 35M
+2021-04-13 10:59:05,268 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000270.pth
+2021-04-13 10:59:06,116 UNET.trainer INFO: iter: 000280, lr: 0.01000, total_loss: 0.118 (0.152), time: 0.085 (0.136), eta: -1 day, 23:59:41, mem: 35M
+2021-04-13 10:59:06,857 UNET.trainer INFO: iter: 000290, lr: 0.01000, total_loss: 0.116 (0.145), time: 0.074 (0.123), eta: -1 day, 23:59:42, mem: 35M
+2021-04-13 10:59:07,651 UNET.trainer INFO: iter: 000300, lr: 0.01000, total_loss: 0.111 (0.139), time: 0.079 (0.116), eta: -1 day, 23:59:42, mem: 35M
+2021-04-13 10:59:07,652 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000300.pth
+2021-04-13 10:59:08,483 UNET.trainer INFO: iter: 000310, lr: 0.01000, total_loss: 0.109 (0.135), time: 0.083 (0.111), eta: -1 day, 23:59:41, mem: 35M
+2021-04-13 10:59:09,242 UNET.trainer INFO: iter: 000320, lr: 0.01000, total_loss: 0.102 (0.131), time: 0.076 (0.107), eta: -1 day, 23:59:41, mem: 35M
+2021-04-13 10:59:10,094 UNET.trainer INFO: iter: 000330, lr: 0.01000, total_loss: 0.103 (0.128), time: 0.085 (0.105), eta: -1 day, 23:59:40, mem: 35M
+2021-04-13 10:59:10,095 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000330.pth
+2021-04-13 10:59:10,898 UNET.trainer INFO: iter: 000340, lr: 0.01000, total_loss: 0.101 (0.125), time: 0.080 (0.102), eta: -1 day, 23:59:40, mem: 35M
+2021-04-13 10:59:11,660 UNET.trainer INFO: iter: 000350, lr: 0.01000, total_loss: 0.099 (0.123), time: 0.076 (0.100), eta: -1 day, 23:59:39, mem: 35M
+2021-04-13 10:59:12,473 UNET.trainer INFO: iter: 000360, lr: 0.01000, total_loss: 0.092 (0.120), time: 0.081 (0.098), eta: -1 day, 23:59:39, mem: 35M
+2021-04-13 10:59:12,475 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000360.pth
+2021-04-13 10:59:13,303 UNET.trainer INFO: iter: 000370, lr: 0.01000, total_loss: 0.088 (0.118), time: 0.083 (0.097), eta: -1 day, 23:59:38, mem: 35M
+2021-04-13 10:59:13,918 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 10:59:13,938 UNET.trainer INFO: Total training time: 0:00:13 (0.0942 s / it)
+2021-04-13 11:08:30,618 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:08:30,619 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:08:30,619 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:08:30,619 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:08:32,884 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:08:32,902 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:08:32,914 UNET.trainer INFO: Start training ...
+2021-04-13 11:08:36,502 UNET.trainer INFO: iter: 000380, lr: 0.01000, total_loss: 0.089 (0.089), time: 1.113 (1.113), eta: -1 day, 23:55:31, mem: 35M
+2021-04-13 11:08:37,416 UNET.trainer INFO: iter: 000390, lr: 0.01000, total_loss: 0.093 (0.092), time: 0.091 (0.262), eta: -1 day, 23:58:55, mem: 35M
+2021-04-13 11:08:37,417 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000390.pth
+2021-04-13 11:08:38,310 UNET.trainer INFO: iter: 000400, lr: 0.01000, total_loss: 0.089 (0.091), time: 0.089 (0.183), eta: -1 day, 23:59:12, mem: 35M
+2021-04-13 11:08:39,180 UNET.trainer INFO: iter: 000410, lr: 0.01000, total_loss: 0.081 (0.088), time: 0.087 (0.153), eta: -1 day, 23:59:19, mem: 35M
+2021-04-13 11:08:40,067 UNET.trainer INFO: iter: 000420, lr: 0.01000, total_loss: 0.084 (0.087), time: 0.089 (0.138), eta: -1 day, 23:59:22, mem: 35M
+2021-04-13 11:08:40,068 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000420.pth
+2021-04-13 11:08:40,965 UNET.trainer INFO: iter: 000430, lr: 0.01000, total_loss: 0.080 (0.086), time: 0.090 (0.129), eta: -1 day, 23:59:23, mem: 35M
+2021-04-13 11:08:41,926 UNET.trainer INFO: iter: 000440, lr: 0.01000, total_loss: 0.072 (0.083), time: 0.096 (0.123), eta: -1 day, 23:59:23, mem: 35M
+2021-04-13 11:08:42,825 UNET.trainer INFO: iter: 000450, lr: 0.01000, total_loss: 0.081 (0.083), time: 0.090 (0.119), eta: -1 day, 23:59:23, mem: 35M
+2021-04-13 11:08:42,826 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000450.pth
+2021-04-13 11:08:43,780 UNET.trainer INFO: iter: 000460, lr: 0.01000, total_loss: 0.073 (0.082), time: 0.096 (0.116), eta: -1 day, 23:59:23, mem: 35M
+2021-04-13 11:08:44,663 UNET.trainer INFO: iter: 000470, lr: 0.01000, total_loss: 0.070 (0.081), time: 0.088 (0.113), eta: -1 day, 23:59:23, mem: 35M
+2021-04-13 11:08:45,567 UNET.trainer INFO: iter: 000480, lr: 0.01000, total_loss: 0.078 (0.080), time: 0.090 (0.111), eta: -1 day, 23:59:23, mem: 35M
+2021-04-13 11:08:45,568 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000480.pth
+2021-04-13 11:08:46,476 UNET.trainer INFO: iter: 000490, lr: 0.01000, total_loss: 0.078 (0.080), time: 0.091 (0.109), eta: -1 day, 23:59:22, mem: 35M
+2021-04-13 11:08:47,381 UNET.trainer INFO: iter: 000500, lr: 0.01000, total_loss: 0.074 (0.080), time: 0.090 (0.107), eta: -1 day, 23:59:22, mem: 35M
+2021-04-13 11:08:48,359 UNET.trainer INFO: iter: 000510, lr: 0.01000, total_loss: 0.070 (0.079), time: 0.098 (0.107), eta: -1 day, 23:59:21, mem: 35M
+2021-04-13 11:08:48,360 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000510.pth
+2021-04-13 11:08:48,939 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:08:48,968 UNET.trainer INFO: Total training time: 0:00:14 (0.1014 s / it)
+2021-04-13 11:13:34,264 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:13:34,264 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:13:34,264 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:13:34,264 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:13:36,447 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:13:36,457 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:13:36,465 UNET.trainer INFO: Start training ...
+2021-04-13 11:13:40,196 UNET.trainer INFO: iter: 000520, lr: 0.01000, total_loss: 0.064 (0.064), time: 0.612 (0.612), eta: -1 day, 23:56:07, mem: 35M
+2021-04-13 11:13:41,079 UNET.trainer INFO: iter: 000530, lr: 0.01000, total_loss: 0.074 (0.071), time: 0.088 (0.238), eta: -1 day, 23:58:27, mem: 35M
+2021-04-13 11:13:41,961 UNET.trainer INFO: iter: 000540, lr: 0.01000, total_loss: 0.067 (0.070), time: 0.088 (0.176), eta: -1 day, 23:58:50, mem: 35M
+2021-04-13 11:13:41,962 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000540.pth
+2021-04-13 11:13:42,881 UNET.trainer INFO: iter: 000550, lr: 0.01000, total_loss: 0.067 (0.069), time: 0.092 (0.151), eta: -1 day, 23:58:58, mem: 35M
+2021-04-13 11:13:43,693 UNET.trainer INFO: iter: 000560, lr: 0.01000, total_loss: 0.065 (0.068), time: 0.081 (0.135), eta: -1 day, 23:59:03, mem: 35M
+2021-04-13 11:13:44,483 UNET.trainer INFO: iter: 000570, lr: 0.01000, total_loss: 0.063 (0.067), time: 0.079 (0.125), eta: -1 day, 23:59:07, mem: 35M
+2021-04-13 11:13:44,484 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000570.pth
+2021-04-13 11:13:45,339 UNET.trainer INFO: iter: 000580, lr: 0.01000, total_loss: 0.060 (0.066), time: 0.086 (0.119), eta: -1 day, 23:59:08, mem: 35M
+2021-04-13 11:13:46,154 UNET.trainer INFO: iter: 000590, lr: 0.01000, total_loss: 0.065 (0.066), time: 0.081 (0.114), eta: -1 day, 23:59:09, mem: 35M
+2021-04-13 11:13:46,994 UNET.trainer INFO: iter: 000600, lr: 0.01000, total_loss: 0.060 (0.065), time: 0.084 (0.110), eta: -1 day, 23:59:10, mem: 35M
+2021-04-13 11:13:46,995 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000600.pth
+2021-04-13 11:13:47,846 UNET.trainer INFO: iter: 000610, lr: 0.01000, total_loss: 0.059 (0.064), time: 0.085 (0.107), eta: -1 day, 23:59:10, mem: 35M
+2021-04-13 11:13:48,728 UNET.trainer INFO: iter: 000620, lr: 0.01000, total_loss: 0.056 (0.063), time: 0.088 (0.106), eta: -1 day, 23:59:10, mem: 35M
+2021-04-13 11:13:49,524 UNET.trainer INFO: iter: 000630, lr: 0.01000, total_loss: 0.062 (0.063), time: 0.080 (0.103), eta: -1 day, 23:59:10, mem: 35M
+2021-04-13 11:13:49,526 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000630.pth
+2021-04-13 11:13:50,363 UNET.trainer INFO: iter: 000640, lr: 0.01000, total_loss: 0.058 (0.063), time: 0.084 (0.102), eta: -1 day, 23:59:09, mem: 35M
+2021-04-13 11:13:51,163 UNET.trainer INFO: iter: 000650, lr: 0.01000, total_loss: 0.074 (0.064), time: 0.080 (0.100), eta: -1 day, 23:59:09, mem: 35M
+2021-04-13 11:13:51,495 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:13:51,535 UNET.trainer INFO: Total training time: 0:00:13 (0.0942 s / it)
+2021-04-13 11:14:12,869 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:14:12,869 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:14:12,869 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:14:12,869 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:14:14,932 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:14:14,944 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:14:14,952 UNET.trainer INFO: Start training ...
+2021-04-13 11:14:18,489 UNET.trainer INFO: iter: 000660, lr: 0.01000, total_loss: 0.062 (0.062), time: 0.393 (0.393), eta: -1 day, 23:56:35, mem: 35M
+2021-04-13 11:14:18,490 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000660.pth
+2021-04-13 11:14:19,333 UNET.trainer INFO: iter: 000670, lr: 0.01000, total_loss: 0.059 (0.060), time: 0.084 (0.200), eta: -1 day, 23:58:14, mem: 35M
+2021-04-13 11:14:20,135 UNET.trainer INFO: iter: 000680, lr: 0.01000, total_loss: 0.057 (0.059), time: 0.080 (0.154), eta: -1 day, 23:58:37, mem: 35M
+2021-04-13 11:14:20,951 UNET.trainer INFO: iter: 000690, lr: 0.01000, total_loss: 0.052 (0.057), time: 0.082 (0.134), eta: -1 day, 23:58:47, mem: 35M
+2021-04-13 11:14:20,952 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000690.pth
+2021-04-13 11:14:21,711 UNET.trainer INFO: iter: 000700, lr: 0.01000, total_loss: 0.058 (0.057), time: 0.076 (0.121), eta: -1 day, 23:58:52, mem: 35M
+2021-04-13 11:14:22,497 UNET.trainer INFO: iter: 000710, lr: 0.01000, total_loss: 0.057 (0.057), time: 0.079 (0.114), eta: -1 day, 23:58:55, mem: 35M
+2021-04-13 11:14:23,277 UNET.trainer INFO: iter: 000720, lr: 0.01000, total_loss: 0.056 (0.057), time: 0.078 (0.108), eta: -1 day, 23:58:57, mem: 35M
+2021-04-13 11:14:23,279 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000720.pth
+2021-04-13 11:14:24,056 UNET.trainer INFO: iter: 000730, lr: 0.01000, total_loss: 0.059 (0.057), time: 0.078 (0.104), eta: -1 day, 23:58:59, mem: 35M
+2021-04-13 11:14:24,874 UNET.trainer INFO: iter: 000740, lr: 0.01000, total_loss: 0.058 (0.057), time: 0.082 (0.102), eta: -1 day, 23:58:59, mem: 35M
+2021-04-13 11:14:25,657 UNET.trainer INFO: iter: 000750, lr: 0.01000, total_loss: 0.059 (0.057), time: 0.078 (0.099), eta: -1 day, 23:59:00, mem: 35M
+2021-04-13 11:14:25,658 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000750.pth
+2021-04-13 11:14:26,455 UNET.trainer INFO: iter: 000760, lr: 0.01000, total_loss: 0.054 (0.057), time: 0.080 (0.097), eta: -1 day, 23:59:00, mem: 35M
+2021-04-13 11:14:27,249 UNET.trainer INFO: iter: 000770, lr: 0.01000, total_loss: 0.055 (0.057), time: 0.079 (0.096), eta: -1 day, 23:59:00, mem: 35M
+2021-04-13 11:14:28,013 UNET.trainer INFO: iter: 000780, lr: 0.01000, total_loss: 0.059 (0.057), time: 0.076 (0.094), eta: -1 day, 23:59:00, mem: 35M
+2021-04-13 11:14:28,014 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000780.pth
+2021-04-13 11:14:28,854 UNET.trainer INFO: iter: 000790, lr: 0.01000, total_loss: 0.056 (0.057), time: 0.084 (0.094), eta: -1 day, 23:58:59, mem: 35M
+2021-04-13 11:14:28,987 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:14:29,009 UNET.trainer INFO: Total training time: 0:00:12 (0.0870 s / it)
+2021-04-13 11:15:19,949 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:15:19,949 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:15:19,949 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:15:19,949 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:15:22,166 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:15:22,179 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:15:22,187 UNET.trainer INFO: Start training ...
+2021-04-13 11:15:26,353 UNET.trainer INFO: iter: 000800, lr: 0.01000, total_loss: 0.053 (0.053), time: 0.352 (0.352), eta: -1 day, 23:56:07, mem: 35M
+2021-04-13 11:15:27,237 UNET.trainer INFO: iter: 000810, lr: 0.01000, total_loss: 0.054 (0.053), time: 0.088 (0.206), eta: -1 day, 23:57:42, mem: 35M
+2021-04-13 11:15:27,238 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000810.pth
+2021-04-13 11:15:28,157 UNET.trainer INFO: iter: 000820, lr: 0.01000, total_loss: 0.054 (0.054), time: 0.092 (0.165), eta: -1 day, 23:58:08, mem: 35M
+2021-04-13 11:15:29,124 UNET.trainer INFO: iter: 000830, lr: 0.01000, total_loss: 0.048 (0.052), time: 0.097 (0.147), eta: -1 day, 23:58:19, mem: 35M
+2021-04-13 11:15:30,081 UNET.trainer INFO: iter: 000840, lr: 0.01000, total_loss: 0.049 (0.052), time: 0.096 (0.136), eta: -1 day, 23:58:25, mem: 35M
+2021-04-13 11:15:30,082 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000840.pth
+2021-04-13 11:15:31,051 UNET.trainer INFO: iter: 000850, lr: 0.01000, total_loss: 0.050 (0.051), time: 0.097 (0.130), eta: -1 day, 23:58:28, mem: 35M
+2021-04-13 11:15:31,940 UNET.trainer INFO: iter: 000860, lr: 0.01000, total_loss: 0.049 (0.051), time: 0.089 (0.124), eta: -1 day, 23:58:31, mem: 35M
+2021-04-13 11:15:32,804 UNET.trainer INFO: iter: 000870, lr: 0.01000, total_loss: 0.053 (0.051), time: 0.086 (0.119), eta: -1 day, 23:58:34, mem: 35M
+2021-04-13 11:15:32,806 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000870.pth
+2021-04-13 11:15:33,683 UNET.trainer INFO: iter: 000880, lr: 0.01000, total_loss: 0.052 (0.051), time: 0.088 (0.115), eta: -1 day, 23:58:35, mem: 35M
+2021-04-13 11:15:34,559 UNET.trainer INFO: iter: 000890, lr: 0.01000, total_loss: 0.055 (0.052), time: 0.088 (0.112), eta: -1 day, 23:58:36, mem: 35M
+2021-04-13 11:15:35,414 UNET.trainer INFO: iter: 000900, lr: 0.01000, total_loss: 0.051 (0.052), time: 0.086 (0.110), eta: -1 day, 23:58:37, mem: 35M
+2021-04-13 11:15:35,416 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000900.pth
+2021-04-13 11:15:36,350 UNET.trainer INFO: iter: 000910, lr: 0.01000, total_loss: 0.052 (0.052), time: 0.094 (0.109), eta: -1 day, 23:58:37, mem: 35M
+2021-04-13 11:15:37,284 UNET.trainer INFO: iter: 000920, lr: 0.01000, total_loss: 0.048 (0.051), time: 0.093 (0.107), eta: -1 day, 23:58:37, mem: 35M
+2021-04-13 11:15:38,169 UNET.trainer INFO: iter: 000930, lr: 0.01000, total_loss: 0.049 (0.051), time: 0.088 (0.106), eta: -1 day, 23:58:37, mem: 35M
+2021-04-13 11:15:38,172 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000930.pth
+2021-04-13 11:15:38,194 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:15:38,232 UNET.trainer INFO: Total training time: 0:00:14 (0.1014 s / it)
+2021-04-13 11:19:06,851 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:19:06,851 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:19:06,851 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:19:06,851 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:19:08,893 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:19:08,905 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:19:08,914 UNET.trainer INFO: Start training ...
+2021-04-13 11:19:12,905 UNET.trainer INFO: iter: 000940, lr: 0.01000, total_loss: 0.052 (0.052), time: 0.270 (0.270), eta: -1 day, 23:56:24, mem: 35M
+2021-04-13 11:19:13,780 UNET.trainer INFO: iter: 000950, lr: 0.01000, total_loss: 0.054 (0.053), time: 0.087 (0.179), eta: -1 day, 23:57:35, mem: 35M
+2021-04-13 11:19:14,578 UNET.trainer INFO: iter: 000960, lr: 0.01000, total_loss: 0.059 (0.055), time: 0.080 (0.146), eta: -1 day, 23:58:01, mem: 35M
+2021-04-13 11:19:14,579 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000960.pth
+2021-04-13 11:19:15,425 UNET.trainer INFO: iter: 000970, lr: 0.01000, total_loss: 0.054 (0.055), time: 0.085 (0.130), eta: -1 day, 23:58:12, mem: 35M
+2021-04-13 11:19:16,233 UNET.trainer INFO: iter: 000980, lr: 0.01000, total_loss: 0.049 (0.054), time: 0.081 (0.121), eta: -1 day, 23:58:19, mem: 35M
+2021-04-13 11:19:17,043 UNET.trainer INFO: iter: 000990, lr: 0.01000, total_loss: 0.046 (0.052), time: 0.081 (0.114), eta: -1 day, 23:58:23, mem: 35M
+2021-04-13 11:19:17,044 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_000990.pth
+2021-04-13 11:19:17,861 UNET.trainer INFO: iter: 001000, lr: 0.01000, total_loss: 0.043 (0.051), time: 0.082 (0.109), eta: -1 day, 23:58:26, mem: 35M
+2021-04-13 11:19:18,696 UNET.trainer INFO: iter: 001010, lr: 0.01000, total_loss: 0.051 (0.051), time: 0.083 (0.106), eta: -1 day, 23:58:28, mem: 35M
+2021-04-13 11:19:19,485 UNET.trainer INFO: iter: 001020, lr: 0.01000, total_loss: 0.047 (0.051), time: 0.079 (0.103), eta: -1 day, 23:58:30, mem: 35M
+2021-04-13 11:19:19,486 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001020.pth
+2021-04-13 11:19:20,333 UNET.trainer INFO: iter: 001030, lr: 0.01000, total_loss: 0.049 (0.050), time: 0.085 (0.101), eta: -1 day, 23:58:30, mem: 35M
+2021-04-13 11:19:21,139 UNET.trainer INFO: iter: 001040, lr: 0.01000, total_loss: 0.050 (0.050), time: 0.081 (0.099), eta: -1 day, 23:58:31, mem: 35M
+2021-04-13 11:19:21,932 UNET.trainer INFO: iter: 001050, lr: 0.01000, total_loss: 0.049 (0.050), time: 0.079 (0.098), eta: -1 day, 23:58:31, mem: 35M
+2021-04-13 11:19:21,934 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001050.pth
+2021-04-13 11:19:22,736 UNET.trainer INFO: iter: 001060, lr: 0.01000, total_loss: 0.047 (0.050), time: 0.080 (0.096), eta: -1 day, 23:58:32, mem: 35M
+2021-04-13 11:19:23,377 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:19:23,418 UNET.trainer INFO: Total training time: 0:00:13 (0.0942 s / it)
+2021-04-13 11:21:04,005 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:21:04,005 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:21:04,005 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:21:04,006 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:21:06,139 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:21:06,153 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:21:06,166 UNET.trainer INFO: Start training ...
+2021-04-13 11:21:09,490 UNET.trainer INFO: iter: 001070, lr: 0.01000, total_loss: 0.054 (0.054), time: 1.035 (1.035), eta: -1 day, 23:43:56, mem: 35M
+2021-04-13 11:21:10,270 UNET.trainer INFO: iter: 001080, lr: 0.01000, total_loss: 0.044 (0.045), time: 0.078 (0.238), eta: -1 day, 23:56:17, mem: 35M
+2021-04-13 11:21:10,271 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001080.pth
+2021-04-13 11:21:11,090 UNET.trainer INFO: iter: 001090, lr: 0.01000, total_loss: 0.047 (0.046), time: 0.082 (0.167), eta: -1 day, 23:57:22, mem: 35M
+2021-04-13 11:21:11,860 UNET.trainer INFO: iter: 001100, lr: 0.01000, total_loss: 0.045 (0.046), time: 0.077 (0.139), eta: -1 day, 23:57:47, mem: 35M
+2021-04-13 11:21:12,651 UNET.trainer INFO: iter: 001110, lr: 0.01000, total_loss: 0.046 (0.046), time: 0.079 (0.125), eta: -1 day, 23:57:59, mem: 35M
+2021-04-13 11:21:12,652 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001110.pth
+2021-04-13 11:21:13,478 UNET.trainer INFO: iter: 001120, lr: 0.01000, total_loss: 0.044 (0.045), time: 0.083 (0.117), eta: -1 day, 23:58:06, mem: 35M
+2021-04-13 11:21:14,239 UNET.trainer INFO: iter: 001130, lr: 0.01000, total_loss: 0.047 (0.045), time: 0.076 (0.110), eta: -1 day, 23:58:11, mem: 35M
+2021-04-13 11:21:15,060 UNET.trainer INFO: iter: 001140, lr: 0.01000, total_loss: 0.048 (0.046), time: 0.082 (0.106), eta: -1 day, 23:58:14, mem: 35M
+2021-04-13 11:21:15,062 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001140.pth
+2021-04-13 11:21:15,887 UNET.trainer INFO: iter: 001150, lr: 0.01000, total_loss: 0.046 (0.046), time: 0.083 (0.103), eta: -1 day, 23:58:16, mem: 35M
+2021-04-13 11:21:16,701 UNET.trainer INFO: iter: 001160, lr: 0.01000, total_loss: 0.047 (0.046), time: 0.081 (0.101), eta: -1 day, 23:58:17, mem: 35M
+2021-04-13 11:21:17,542 UNET.trainer INFO: iter: 001170, lr: 0.01000, total_loss: 0.047 (0.046), time: 0.084 (0.099), eta: -1 day, 23:58:18, mem: 35M
+2021-04-13 11:21:17,543 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001170.pth
+2021-04-13 11:21:18,394 UNET.trainer INFO: iter: 001180, lr: 0.01000, total_loss: 0.047 (0.046), time: 0.085 (0.098), eta: -1 day, 23:58:18, mem: 35M
+2021-04-13 11:21:19,192 UNET.trainer INFO: iter: 001190, lr: 0.01000, total_loss: 0.045 (0.046), time: 0.080 (0.097), eta: -1 day, 23:58:19, mem: 35M
+2021-04-13 11:21:20,008 UNET.trainer INFO: iter: 001200, lr: 0.01000, total_loss: 0.044 (0.046), time: 0.082 (0.095), eta: -1 day, 23:58:19, mem: 35M
+2021-04-13 11:21:20,010 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001200.pth
+2021-04-13 11:21:20,461 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:21:20,488 UNET.trainer INFO: Total training time: 0:00:13 (0.0942 s / it)
+2021-04-13 11:21:44,925 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:21:44,925 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:21:44,925 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:21:44,926 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:21:46,924 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:21:46,934 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:21:46,942 UNET.trainer INFO: Start training ...
+2021-04-13 11:21:50,253 UNET.trainer INFO: iter: 001210, lr: 0.01000, total_loss: 0.050 (0.050), time: 0.531 (0.531), eta: -1 day, 23:50:31, mem: 35M
+2021-04-13 11:21:51,067 UNET.trainer INFO: iter: 001220, lr: 0.01000, total_loss: 0.041 (0.044), time: 0.081 (0.210), eta: -1 day, 23:56:13, mem: 35M
+2021-04-13 11:21:51,817 UNET.trainer INFO: iter: 001230, lr: 0.01000, total_loss: 0.045 (0.044), time: 0.075 (0.154), eta: -1 day, 23:57:13, mem: 35M
+2021-04-13 11:21:51,818 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001230.pth
+2021-04-13 11:21:52,613 UNET.trainer INFO: iter: 001240, lr: 0.01000, total_loss: 0.041 (0.043), time: 0.080 (0.132), eta: -1 day, 23:57:35, mem: 35M
+2021-04-13 11:21:53,363 UNET.trainer INFO: iter: 001250, lr: 0.01000, total_loss: 0.044 (0.043), time: 0.075 (0.119), eta: -1 day, 23:57:48, mem: 35M
+2021-04-13 11:21:54,103 UNET.trainer INFO: iter: 001260, lr: 0.01000, total_loss: 0.044 (0.043), time: 0.074 (0.111), eta: -1 day, 23:57:56, mem: 35M
+2021-04-13 11:21:54,104 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001260.pth
+2021-04-13 11:21:54,919 UNET.trainer INFO: iter: 001270, lr: 0.01000, total_loss: 0.043 (0.043), time: 0.082 (0.106), eta: -1 day, 23:58:00, mem: 35M
+2021-04-13 11:21:55,733 UNET.trainer INFO: iter: 001280, lr: 0.01000, total_loss: 0.044 (0.044), time: 0.081 (0.103), eta: -1 day, 23:58:03, mem: 35M
+2021-04-13 11:21:56,493 UNET.trainer INFO: iter: 001290, lr: 0.01000, total_loss: 0.042 (0.043), time: 0.076 (0.100), eta: -1 day, 23:58:06, mem: 35M
+2021-04-13 11:21:56,494 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001290.pth
+2021-04-13 11:21:57,347 UNET.trainer INFO: iter: 001300, lr: 0.01000, total_loss: 0.044 (0.043), time: 0.085 (0.098), eta: -1 day, 23:58:07, mem: 35M
+2021-04-13 11:21:58,111 UNET.trainer INFO: iter: 001310, lr: 0.01000, total_loss: 0.043 (0.043), time: 0.076 (0.096), eta: -1 day, 23:58:08, mem: 35M
+2021-04-13 11:21:58,861 UNET.trainer INFO: iter: 001320, lr: 0.01000, total_loss: 0.045 (0.043), time: 0.075 (0.094), eta: -1 day, 23:58:09, mem: 35M
+2021-04-13 11:21:58,862 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001320.pth
+2021-04-13 11:21:59,627 UNET.trainer INFO: iter: 001330, lr: 0.01000, total_loss: 0.042 (0.043), time: 0.077 (0.093), eta: -1 day, 23:58:10, mem: 35M
+2021-04-13 11:22:00,391 UNET.trainer INFO: iter: 001340, lr: 0.01000, total_loss: 0.040 (0.043), time: 0.076 (0.092), eta: -1 day, 23:58:11, mem: 35M
+2021-04-13 11:22:00,691 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:22:00,728 UNET.trainer INFO: Total training time: 0:00:12 (0.0870 s / it)
+2021-04-13 11:22:35,010 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:22:35,010 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:22:35,010 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:22:35,011 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:22:37,307 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:22:37,321 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:22:37,331 UNET.trainer INFO: Start training ...
+2021-04-13 11:22:41,327 UNET.trainer INFO: iter: 001350, lr: 0.01000, total_loss: 0.046 (0.046), time: 0.441 (0.441), eta: -1 day, 23:51:07, mem: 35M
+2021-04-13 11:22:41,328 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001350.pth
+2021-04-13 11:22:42,267 UNET.trainer INFO: iter: 001360, lr: 0.01000, total_loss: 0.042 (0.043), time: 0.094 (0.224), eta: -1 day, 23:55:27, mem: 35M
+2021-04-13 11:22:43,189 UNET.trainer INFO: iter: 001370, lr: 0.01000, total_loss: 0.044 (0.044), time: 0.092 (0.173), eta: -1 day, 23:56:27, mem: 35M
+2021-04-13 11:22:44,075 UNET.trainer INFO: iter: 001380, lr: 0.01000, total_loss: 0.041 (0.043), time: 0.089 (0.150), eta: -1 day, 23:56:54, mem: 35M
+2021-04-13 11:22:44,076 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001380.pth
+2021-04-13 11:22:44,948 UNET.trainer INFO: iter: 001390, lr: 0.01000, total_loss: 0.044 (0.043), time: 0.087 (0.136), eta: -1 day, 23:57:10, mem: 35M
+2021-04-13 11:22:45,815 UNET.trainer INFO: iter: 001400, lr: 0.01000, total_loss: 0.045 (0.043), time: 0.087 (0.127), eta: -1 day, 23:57:20, mem: 35M
+2021-04-13 11:22:46,676 UNET.trainer INFO: iter: 001410, lr: 0.01000, total_loss: 0.043 (0.043), time: 0.086 (0.121), eta: -1 day, 23:57:26, mem: 35M
+2021-04-13 11:22:46,677 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001410.pth
+2021-04-13 11:22:47,600 UNET.trainer INFO: iter: 001420, lr: 0.01000, total_loss: 0.043 (0.043), time: 0.092 (0.117), eta: -1 day, 23:57:30, mem: 35M
+2021-04-13 11:22:48,529 UNET.trainer INFO: iter: 001430, lr: 0.01000, total_loss: 0.040 (0.043), time: 0.093 (0.114), eta: -1 day, 23:57:33, mem: 35M
+2021-04-13 11:22:49,446 UNET.trainer INFO: iter: 001440, lr: 0.01000, total_loss: 0.042 (0.043), time: 0.092 (0.112), eta: -1 day, 23:57:35, mem: 35M
+2021-04-13 11:22:49,447 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001440.pth
+2021-04-13 11:22:50,359 UNET.trainer INFO: iter: 001450, lr: 0.01000, total_loss: 0.041 (0.043), time: 0.091 (0.110), eta: -1 day, 23:57:36, mem: 35M
+2021-04-13 11:22:51,294 UNET.trainer INFO: iter: 001460, lr: 0.01000, total_loss: 0.041 (0.042), time: 0.093 (0.109), eta: -1 day, 23:57:37, mem: 35M
+2021-04-13 11:22:52,177 UNET.trainer INFO: iter: 001470, lr: 0.01000, total_loss: 0.044 (0.043), time: 0.088 (0.107), eta: -1 day, 23:57:38, mem: 35M
+2021-04-13 11:22:52,178 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001470.pth
+2021-04-13 11:22:53,097 UNET.trainer INFO: iter: 001480, lr: 0.01000, total_loss: 0.043 (0.043), time: 0.092 (0.106), eta: -1 day, 23:57:38, mem: 35M
+2021-04-13 11:22:53,260 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:22:53,286 UNET.trainer INFO: Total training time: 0:00:14 (0.1014 s / it)
+2021-04-13 11:23:22,284 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:23:22,285 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:23:22,285 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:23:22,285 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:23:24,389 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:23:24,401 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:23:24,409 UNET.trainer INFO: Start training ...
+2021-04-13 11:23:28,300 UNET.trainer INFO: iter: 001490, lr: 0.01000, total_loss: 0.040 (0.040), time: 0.334 (0.334), eta: -1 day, 23:52:29, mem: 35M
+2021-04-13 11:23:29,228 UNET.trainer INFO: iter: 001500, lr: 0.01000, total_loss: 0.041 (0.040), time: 0.093 (0.200), eta: -1 day, 23:55:28, mem: 35M
+2021-04-13 11:23:29,229 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001500.pth
+2021-04-13 11:23:30,065 UNET.trainer INFO: iter: 001510, lr: 0.01000, total_loss: 0.041 (0.041), time: 0.084 (0.158), eta: -1 day, 23:56:23, mem: 35M
+2021-04-13 11:23:30,905 UNET.trainer INFO: iter: 001520, lr: 0.01000, total_loss: 0.039 (0.040), time: 0.084 (0.139), eta: -1 day, 23:56:49, mem: 35M
+2021-04-13 11:23:31,747 UNET.trainer INFO: iter: 001530, lr: 0.01000, total_loss: 0.039 (0.040), time: 0.084 (0.127), eta: -1 day, 23:57:03, mem: 35M
+2021-04-13 11:23:31,748 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001530.pth
+2021-04-13 11:23:32,546 UNET.trainer INFO: iter: 001540, lr: 0.01000, total_loss: 0.040 (0.040), time: 0.080 (0.119), eta: -1 day, 23:57:13, mem: 35M
+2021-04-13 11:23:33,355 UNET.trainer INFO: iter: 001550, lr: 0.01000, total_loss: 0.043 (0.040), time: 0.081 (0.114), eta: -1 day, 23:57:20, mem: 35M
+2021-04-13 11:23:34,215 UNET.trainer INFO: iter: 001560, lr: 0.01000, total_loss: 0.043 (0.041), time: 0.086 (0.110), eta: -1 day, 23:57:24, mem: 35M
+2021-04-13 11:23:34,216 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001560.pth
+2021-04-13 11:23:35,056 UNET.trainer INFO: iter: 001570, lr: 0.01000, total_loss: 0.042 (0.041), time: 0.084 (0.107), eta: -1 day, 23:57:27, mem: 35M
+2021-04-13 11:23:35,873 UNET.trainer INFO: iter: 001580, lr: 0.01000, total_loss: 0.042 (0.041), time: 0.082 (0.105), eta: -1 day, 23:57:30, mem: 35M
+2021-04-13 11:23:36,640 UNET.trainer INFO: iter: 001590, lr: 0.01000, total_loss: 0.044 (0.041), time: 0.077 (0.102), eta: -1 day, 23:57:32, mem: 35M
+2021-04-13 11:23:36,641 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001590.pth
+2021-04-13 11:23:37,430 UNET.trainer INFO: iter: 001600, lr: 0.01000, total_loss: 0.043 (0.042), time: 0.079 (0.100), eta: -1 day, 23:57:34, mem: 35M
+2021-04-13 11:23:38,240 UNET.trainer INFO: iter: 001610, lr: 0.01000, total_loss: 0.039 (0.041), time: 0.081 (0.099), eta: -1 day, 23:57:35, mem: 35M
+2021-04-13 11:23:39,056 UNET.trainer INFO: iter: 001620, lr: 0.01000, total_loss: 0.043 (0.041), time: 0.082 (0.097), eta: -1 day, 23:57:36, mem: 35M
+2021-04-13 11:23:39,057 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001620.pth
+2021-04-13 11:23:39,077 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:23:39,102 UNET.trainer INFO: Total training time: 0:00:13 (0.0942 s / it)
+2021-04-13 11:24:16,358 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:24:16,358 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:24:16,358 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:24:16,358 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:24:18,516 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:24:18,527 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:24:18,536 UNET.trainer INFO: Start training ...
+2021-04-13 11:24:22,787 UNET.trainer INFO: iter: 001630, lr: 0.01000, total_loss: 0.039 (0.039), time: 0.297 (0.297), eta: -1 day, 23:52:37, mem: 35M
+2021-04-13 11:24:23,645 UNET.trainer INFO: iter: 001640, lr: 0.01000, total_loss: 0.041 (0.040), time: 0.086 (0.192), eta: -1 day, 23:55:13, mem: 35M
+2021-04-13 11:24:24,486 UNET.trainer INFO: iter: 001650, lr: 0.01000, total_loss: 0.039 (0.039), time: 0.084 (0.156), eta: -1 day, 23:56:05, mem: 35M
+2021-04-13 11:24:24,487 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001650.pth
+2021-04-13 11:24:25,356 UNET.trainer INFO: iter: 001660, lr: 0.01000, total_loss: 0.040 (0.039), time: 0.087 (0.139), eta: -1 day, 23:56:30, mem: 35M
+2021-04-13 11:24:26,165 UNET.trainer INFO: iter: 001670, lr: 0.01000, total_loss: 0.041 (0.040), time: 0.081 (0.127), eta: -1 day, 23:56:46, mem: 35M
+2021-04-13 11:24:26,968 UNET.trainer INFO: iter: 001680, lr: 0.01000, total_loss: 0.039 (0.040), time: 0.080 (0.119), eta: -1 day, 23:56:57, mem: 35M
+2021-04-13 11:24:26,969 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001680.pth
+2021-04-13 11:24:27,782 UNET.trainer INFO: iter: 001690, lr: 0.01000, total_loss: 0.042 (0.040), time: 0.081 (0.114), eta: -1 day, 23:57:04, mem: 35M
+2021-04-13 11:24:28,573 UNET.trainer INFO: iter: 001700, lr: 0.01000, total_loss: 0.040 (0.040), time: 0.079 (0.109), eta: -1 day, 23:57:09, mem: 35M
+2021-04-13 11:24:29,361 UNET.trainer INFO: iter: 001710, lr: 0.01000, total_loss: 0.038 (0.040), time: 0.079 (0.106), eta: -1 day, 23:57:14, mem: 35M
+2021-04-13 11:24:29,363 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001710.pth
+2021-04-13 11:24:30,124 UNET.trainer INFO: iter: 001720, lr: 0.01000, total_loss: 0.041 (0.040), time: 0.076 (0.103), eta: -1 day, 23:57:17, mem: 35M
+2021-04-13 11:24:30,971 UNET.trainer INFO: iter: 001730, lr: 0.01000, total_loss: 0.040 (0.040), time: 0.085 (0.101), eta: -1 day, 23:57:19, mem: 35M
+2021-04-13 11:24:31,733 UNET.trainer INFO: iter: 001740, lr: 0.01000, total_loss: 0.040 (0.040), time: 0.076 (0.099), eta: -1 day, 23:57:21, mem: 35M
+2021-04-13 11:24:31,734 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001740.pth
+2021-04-13 11:24:32,511 UNET.trainer INFO: iter: 001750, lr: 0.01000, total_loss: 0.041 (0.040), time: 0.078 (0.098), eta: -1 day, 23:57:23, mem: 35M
+2021-04-13 11:24:33,122 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:24:33,149 UNET.trainer INFO: Total training time: 0:00:13 (0.0942 s / it)
+2021-04-13 11:25:00,898 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:25:00,898 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:25:00,898 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:25:00,898 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:25:03,112 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:25:03,123 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:25:03,132 UNET.trainer INFO: Start training ...
+2021-04-13 11:25:06,313 UNET.trainer INFO: iter: 001760, lr: 0.01000, total_loss: 0.037 (0.037), time: 0.992 (0.992), eta: -1 day, 23:33:11, mem: 35M
+2021-04-13 11:25:07,065 UNET.trainer INFO: iter: 001770, lr: 0.01000, total_loss: 0.041 (0.040), time: 0.075 (0.228), eta: -1 day, 23:53:48, mem: 35M
+2021-04-13 11:25:07,067 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001770.pth
+2021-04-13 11:25:07,844 UNET.trainer INFO: iter: 001780, lr: 0.01000, total_loss: 0.040 (0.040), time: 0.078 (0.160), eta: -1 day, 23:55:38, mem: 35M
+2021-04-13 11:25:08,619 UNET.trainer INFO: iter: 001790, lr: 0.01000, total_loss: 0.040 (0.040), time: 0.077 (0.134), eta: -1 day, 23:56:19, mem: 35M
+2021-04-13 11:25:09,358 UNET.trainer INFO: iter: 001800, lr: 0.01000, total_loss: 0.038 (0.040), time: 0.074 (0.120), eta: -1 day, 23:56:42, mem: 35M
+2021-04-13 11:25:09,359 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001800.pth
+2021-04-13 11:25:10,184 UNET.trainer INFO: iter: 001810, lr: 0.01000, total_loss: 0.041 (0.040), time: 0.083 (0.113), eta: -1 day, 23:56:52, mem: 35M
+2021-04-13 11:25:10,978 UNET.trainer INFO: iter: 001820, lr: 0.01000, total_loss: 0.041 (0.040), time: 0.079 (0.107), eta: -1 day, 23:57:00, mem: 35M
+2021-04-13 11:25:11,805 UNET.trainer INFO: iter: 001830, lr: 0.01000, total_loss: 0.038 (0.040), time: 0.083 (0.104), eta: -1 day, 23:57:05, mem: 35M
+2021-04-13 11:25:11,807 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001830.pth
+2021-04-13 11:25:12,602 UNET.trainer INFO: iter: 001840, lr: 0.01000, total_loss: 0.038 (0.039), time: 0.080 (0.101), eta: -1 day, 23:57:09, mem: 35M
+2021-04-13 11:25:13,397 UNET.trainer INFO: iter: 001850, lr: 0.01000, total_loss: 0.040 (0.040), time: 0.080 (0.099), eta: -1 day, 23:57:12, mem: 35M
+2021-04-13 11:25:14,184 UNET.trainer INFO: iter: 001860, lr: 0.01000, total_loss: 0.042 (0.040), time: 0.079 (0.097), eta: -1 day, 23:57:14, mem: 35M
+2021-04-13 11:25:14,185 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001860.pth
+2021-04-13 11:25:14,998 UNET.trainer INFO: iter: 001870, lr: 0.01000, total_loss: 0.038 (0.040), time: 0.081 (0.095), eta: -1 day, 23:57:16, mem: 35M
+2021-04-13 11:25:15,782 UNET.trainer INFO: iter: 001880, lr: 0.01000, total_loss: 0.038 (0.039), time: 0.078 (0.094), eta: -1 day, 23:57:17, mem: 35M
+2021-04-13 11:25:16,568 UNET.trainer INFO: iter: 001890, lr: 0.01000, total_loss: 0.038 (0.039), time: 0.079 (0.093), eta: -1 day, 23:57:18, mem: 35M
+2021-04-13 11:25:16,570 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001890.pth
+2021-04-13 11:25:17,058 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:25:17,089 UNET.trainer INFO: Total training time: 0:00:12 (0.0870 s / it)
+2021-04-13 11:25:17,246 UNET INFO: Showing visual plotting
+2021-04-13 11:27:00,016 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:27:00,016 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:27:00,016 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:27:00,016 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:27:02,240 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:27:02,252 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:27:02,261 UNET.trainer INFO: Start training ...
+2021-04-13 11:27:05,800 UNET.trainer INFO: iter: 001900, lr: 0.01000, total_loss: 0.039 (0.039), time: 0.571 (0.571), eta: -1 day, 23:43:15, mem: 35M
+2021-04-13 11:27:06,603 UNET.trainer INFO: iter: 001910, lr: 0.01000, total_loss: 0.038 (0.039), time: 0.080 (0.220), eta: -1 day, 23:53:30, mem: 35M
+2021-04-13 11:27:07,378 UNET.trainer INFO: iter: 001920, lr: 0.01000, total_loss: 0.041 (0.040), time: 0.077 (0.161), eta: -1 day, 23:55:14, mem: 35M
+2021-04-13 11:27:07,380 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001920.pth
+2021-04-13 11:27:08,143 UNET.trainer INFO: iter: 001930, lr: 0.01000, total_loss: 0.037 (0.039), time: 0.076 (0.136), eta: -1 day, 23:55:57, mem: 35M
+2021-04-13 11:27:09,064 UNET.trainer INFO: iter: 001940, lr: 0.01000, total_loss: 0.037 (0.038), time: 0.092 (0.126), eta: -1 day, 23:56:13, mem: 35M
+2021-04-13 11:27:09,972 UNET.trainer INFO: iter: 001950, lr: 0.01000, total_loss: 0.037 (0.038), time: 0.091 (0.120), eta: -1 day, 23:56:24, mem: 35M
+2021-04-13 11:27:09,973 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001950.pth
+2021-04-13 11:27:10,965 UNET.trainer INFO: iter: 001960, lr: 0.01000, total_loss: 0.037 (0.038), time: 0.099 (0.116), eta: -1 day, 23:56:28, mem: 35M
+2021-04-13 11:27:11,879 UNET.trainer INFO: iter: 001970, lr: 0.01000, total_loss: 0.038 (0.038), time: 0.091 (0.113), eta: -1 day, 23:56:34, mem: 35M
+2021-04-13 11:27:12,749 UNET.trainer INFO: iter: 001980, lr: 0.01000, total_loss: 0.040 (0.038), time: 0.087 (0.110), eta: -1 day, 23:56:38, mem: 35M
+2021-04-13 11:27:12,750 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_001980.pth
+2021-04-13 11:27:13,618 UNET.trainer INFO: iter: 001990, lr: 0.01000, total_loss: 0.042 (0.039), time: 0.087 (0.107), eta: -1 day, 23:56:41, mem: 35M
+2021-04-13 11:27:14,435 UNET.trainer INFO: iter: 002000, lr: 0.01000, total_loss: 0.041 (0.039), time: 0.082 (0.105), eta: -1 day, 23:56:45, mem: 35M
+2021-04-13 11:27:15,242 UNET.trainer INFO: iter: 002010, lr: 0.01000, total_loss: 0.042 (0.039), time: 0.081 (0.103), eta: -1 day, 23:56:48, mem: 35M
+2021-04-13 11:27:15,243 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002010.pth
+2021-04-13 11:27:16,131 UNET.trainer INFO: iter: 002020, lr: 0.01000, total_loss: 0.040 (0.039), time: 0.089 (0.102), eta: -1 day, 23:56:49, mem: 35M
+2021-04-13 11:27:16,973 UNET.trainer INFO: iter: 002030, lr: 0.01000, total_loss: 0.041 (0.039), time: 0.084 (0.100), eta: -1 day, 23:56:51, mem: 35M
+2021-04-13 11:27:17,336 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:27:17,363 UNET.trainer INFO: Total training time: 0:00:13 (0.0942 s / it)
+2021-04-13 11:27:17,431 UNET INFO: Showing visual plotting
+2021-04-13 11:28:34,053 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:28:34,053 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:28:34,053 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:28:34,053 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:29:21,768 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:29:21,768 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:29:21,768 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:29:21,768 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:29:23,773 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:29:23,786 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:29:23,794 UNET.trainer INFO: Start training ...
+2021-04-13 11:29:27,343 UNET.trainer INFO: iter: 002040, lr: 0.01000, total_loss: 0.035 (0.035), time: 0.382 (0.382), eta: -1 day, 23:47:53, mem: 35M
+2021-04-13 11:29:27,346 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002040.pth
+2021-04-13 11:29:28,188 UNET.trainer INFO: iter: 002050, lr: 0.01000, total_loss: 0.035 (0.035), time: 0.085 (0.196), eta: -1 day, 23:53:45, mem: 35M
+2021-04-13 11:29:28,988 UNET.trainer INFO: iter: 002060, lr: 0.01000, total_loss: 0.037 (0.036), time: 0.080 (0.152), eta: -1 day, 23:55:09, mem: 35M
+2021-04-13 11:29:29,730 UNET.trainer INFO: iter: 002070, lr: 0.01000, total_loss: 0.042 (0.037), time: 0.074 (0.130), eta: -1 day, 23:55:49, mem: 35M
+2021-04-13 11:29:29,731 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002070.pth
+2021-04-13 11:29:30,527 UNET.trainer INFO: iter: 002080, lr: 0.01000, total_loss: 0.039 (0.038), time: 0.080 (0.119), eta: -1 day, 23:56:09, mem: 35M
+2021-04-13 11:29:31,313 UNET.trainer INFO: iter: 002090, lr: 0.01000, total_loss: 0.039 (0.038), time: 0.079 (0.112), eta: -1 day, 23:56:22, mem: 35M
+2021-04-13 11:29:32,080 UNET.trainer INFO: iter: 002100, lr: 0.01000, total_loss: 0.040 (0.038), time: 0.077 (0.107), eta: -1 day, 23:56:31, mem: 35M
+2021-04-13 11:29:32,081 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002100.pth
+2021-04-13 11:29:32,919 UNET.trainer INFO: iter: 002110, lr: 0.01000, total_loss: 0.042 (0.039), time: 0.084 (0.104), eta: -1 day, 23:56:36, mem: 35M
+2021-04-13 11:29:33,706 UNET.trainer INFO: iter: 002120, lr: 0.01000, total_loss: 0.038 (0.039), time: 0.079 (0.101), eta: -1 day, 23:56:41, mem: 35M
+2021-04-13 11:29:34,498 UNET.trainer INFO: iter: 002130, lr: 0.01000, total_loss: 0.036 (0.038), time: 0.079 (0.098), eta: -1 day, 23:56:44, mem: 35M
+2021-04-13 11:29:34,499 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002130.pth
+2021-04-13 11:29:35,352 UNET.trainer INFO: iter: 002140, lr: 0.01000, total_loss: 0.036 (0.038), time: 0.085 (0.097), eta: -1 day, 23:56:46, mem: 35M
+2021-04-13 11:29:36,149 UNET.trainer INFO: iter: 002150, lr: 0.01000, total_loss: 0.037 (0.038), time: 0.080 (0.096), eta: -1 day, 23:56:48, mem: 35M
+2021-04-13 11:29:36,951 UNET.trainer INFO: iter: 002160, lr: 0.01000, total_loss: 0.037 (0.038), time: 0.080 (0.094), eta: -1 day, 23:56:49, mem: 35M
+2021-04-13 11:29:36,953 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002160.pth
+2021-04-13 11:29:37,800 UNET.trainer INFO: iter: 002170, lr: 0.01000, total_loss: 0.036 (0.038), time: 0.085 (0.094), eta: -1 day, 23:56:50, mem: 35M
+2021-04-13 11:29:37,955 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:29:37,979 UNET.trainer INFO: Total training time: 0:00:12 (0.0870 s / it)
+2021-04-13 11:29:38,042 UNET INFO: Showing visual plotting
+2021-04-13 11:31:48,531 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:31:48,531 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:31:48,531 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:31:48,531 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:31:50,613 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:31:50,624 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:31:50,633 UNET.trainer INFO: Start training ...
+2021-04-13 11:31:54,546 UNET.trainer INFO: iter: 002180, lr: 0.01000, total_loss: 0.164 (0.164), time: 0.332 (0.332), eta: -1 day, 23:48:43, mem: 222M
+2021-04-13 11:31:55,487 UNET.trainer INFO: iter: 002190, lr: 0.01000, total_loss: 0.078 (0.117), time: 0.094 (0.200), eta: -1 day, 23:53:10, mem: 222M
+2021-04-13 11:31:55,493 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002190.pth
+2021-04-13 11:31:56,461 UNET.trainer INFO: iter: 002200, lr: 0.01000, total_loss: 0.066 (0.098), time: 0.097 (0.163), eta: -1 day, 23:54:24, mem: 222M
+2021-04-13 11:31:57,411 UNET.trainer INFO: iter: 002210, lr: 0.01000, total_loss: 0.065 (0.090), time: 0.095 (0.145), eta: -1 day, 23:55:00, mem: 222M
+2021-04-13 11:31:58,404 UNET.trainer INFO: iter: 002220, lr: 0.01000, total_loss: 0.060 (0.083), time: 0.099 (0.136), eta: -1 day, 23:55:18, mem: 222M
+2021-04-13 11:31:58,412 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002220.pth
+2021-04-13 11:31:59,386 UNET.trainer INFO: iter: 002230, lr: 0.01000, total_loss: 0.052 (0.078), time: 0.098 (0.129), eta: -1 day, 23:55:30, mem: 222M
+2021-04-13 11:32:00,318 UNET.trainer INFO: iter: 002240, lr: 0.01000, total_loss: 0.050 (0.074), time: 0.093 (0.124), eta: -1 day, 23:55:40, mem: 222M
+2021-04-13 11:32:01,196 UNET.trainer INFO: iter: 002250, lr: 0.01000, total_loss: 0.056 (0.071), time: 0.088 (0.119), eta: -1 day, 23:55:49, mem: 222M
+2021-04-13 11:32:01,201 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002250.pth
+2021-04-13 11:32:02,042 UNET.trainer INFO: iter: 002260, lr: 0.01000, total_loss: 0.051 (0.069), time: 0.085 (0.115), eta: -1 day, 23:55:56, mem: 222M
+2021-04-13 11:32:02,925 UNET.trainer INFO: iter: 002270, lr: 0.01000, total_loss: 0.058 (0.068), time: 0.088 (0.113), eta: -1 day, 23:56:00, mem: 222M
+2021-04-13 11:32:03,801 UNET.trainer INFO: iter: 002280, lr: 0.01000, total_loss: 0.050 (0.066), time: 0.088 (0.110), eta: -1 day, 23:56:04, mem: 222M
+2021-04-13 11:32:03,808 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002280.pth
+2021-04-13 11:32:04,626 UNET.trainer INFO: iter: 002290, lr: 0.01000, total_loss: 0.046 (0.065), time: 0.082 (0.108), eta: -1 day, 23:56:08, mem: 222M
+2021-04-13 11:32:05,502 UNET.trainer INFO: iter: 002300, lr: 0.01000, total_loss: 0.047 (0.063), time: 0.088 (0.106), eta: -1 day, 23:56:11, mem: 222M
+2021-04-13 11:32:06,335 UNET.trainer INFO: iter: 002310, lr: 0.01000, total_loss: 0.045 (0.062), time: 0.083 (0.105), eta: -1 day, 23:56:13, mem: 222M
+2021-04-13 11:32:06,336 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002310.pth
+2021-04-13 11:32:06,358 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:32:06,405 UNET.trainer INFO: Total training time: 0:00:14 (0.1014 s / it)
+2021-04-13 11:32:06,483 UNET INFO: Showing visual plotting
+2021-04-13 11:34:36,011 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-13 11:34:36,012 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-13 11:34:36,012 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-13 11:34:36,012 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 30
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-13 11:34:38,120 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:34:38,130 UNET.trainer INFO: Loading optimizer from outputs/UNET_base_model/model_final.pth
+2021-04-13 11:34:38,145 UNET.trainer INFO: Start training ...
+2021-04-13 11:34:42,380 UNET.trainer INFO: iter: 002320, lr: 0.01000, total_loss: 0.117 (0.117), time: 0.299 (0.299), eta: -1 day, 23:49:09, mem: 837M
+2021-04-13 11:34:43,445 UNET.trainer INFO: iter: 002330, lr: 0.01000, total_loss: 0.081 (0.099), time: 0.106 (0.203), eta: -1 day, 23:52:36, mem: 837M
+2021-04-13 11:34:44,550 UNET.trainer INFO: iter: 002340, lr: 0.01000, total_loss: 0.068 (0.089), time: 0.110 (0.172), eta: -1 day, 23:53:42, mem: 837M
+2021-04-13 11:34:44,590 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002340.pth
+2021-04-13 11:34:45,797 UNET.trainer INFO: iter: 002350, lr: 0.01000, total_loss: 0.063 (0.082), time: 0.125 (0.160), eta: -1 day, 23:54:06, mem: 837M
+2021-04-13 11:34:46,883 UNET.trainer INFO: iter: 002360, lr: 0.01000, total_loss: 0.056 (0.077), time: 0.109 (0.150), eta: -1 day, 23:54:28, mem: 837M
+2021-04-13 11:34:47,920 UNET.trainer INFO: iter: 002370, lr: 0.01000, total_loss: 0.058 (0.074), time: 0.104 (0.142), eta: -1 day, 23:54:43, mem: 837M
+2021-04-13 11:34:47,968 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002370.pth
+2021-04-13 11:34:48,977 UNET.trainer INFO: iter: 002380, lr: 0.01000, total_loss: 0.052 (0.071), time: 0.106 (0.137), eta: -1 day, 23:54:54, mem: 837M
+2021-04-13 11:34:49,983 UNET.trainer INFO: iter: 002390, lr: 0.01000, total_loss: 0.050 (0.068), time: 0.101 (0.132), eta: -1 day, 23:55:02, mem: 837M
+2021-04-13 11:34:51,066 UNET.trainer INFO: iter: 002400, lr: 0.01000, total_loss: 0.049 (0.066), time: 0.108 (0.130), eta: -1 day, 23:55:07, mem: 837M
+2021-04-13 11:34:51,113 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002400.pth
+2021-04-13 11:34:52,143 UNET.trainer INFO: iter: 002410, lr: 0.01000, total_loss: 0.056 (0.065), time: 0.108 (0.127), eta: -1 day, 23:55:11, mem: 837M
+2021-04-13 11:34:53,201 UNET.trainer INFO: iter: 002420, lr: 0.01000, total_loss: 0.051 (0.064), time: 0.106 (0.126), eta: -1 day, 23:55:14, mem: 837M
+2021-04-13 11:34:54,292 UNET.trainer INFO: iter: 002430, lr: 0.01000, total_loss: 0.044 (0.062), time: 0.109 (0.124), eta: -1 day, 23:55:16, mem: 837M
+2021-04-13 11:34:54,340 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_002430.pth
+2021-04-13 11:34:55,353 UNET.trainer INFO: iter: 002440, lr: 0.01000, total_loss: 0.047 (0.061), time: 0.106 (0.123), eta: -1 day, 23:55:18, mem: 837M
+2021-04-13 11:34:56,164 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
+2021-04-13 11:34:56,208 UNET.trainer INFO: Total training time: 0:00:16 (0.1159 s / it)
+2021-04-13 11:34:56,281 UNET INFO: Showing visual plotting

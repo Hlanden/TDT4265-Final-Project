@@ -21,6 +21,7 @@ from utils.checkpoint import CheckPointer
 from engine.trainer import do_train
 import argparse
 import albumentations as aug
+import cv2
 
 def start_train(cfg, train_loader):
     """
@@ -215,7 +216,7 @@ def main ():
     # TODO: Move this out of main
     #load the training data
     transtest = aug.Compose([
-        aug.augmentations.Resize(384, 384, interpolation=1, always_apply=False, p=1) 
+        aug.augmentations.Resize(128, 128, interpolation=cv2.INTER_LINEAR, always_apply=False, p=1) 
     ])
     
     data = DatasetLoader(Path(cfg.DATASETS.TRAIN_IMAGES), 
@@ -234,12 +235,16 @@ def main ():
     train_data = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     
     valid_data = DataLoader(valid_dataset, batch_size=batch_size, shuffle=True)
-    start_train(cfg, train_data)
+    model = start_train(cfg, train_data)
+    
     if visual_debug:
-        fig, ax = plt.subplots(1,2)
-        ax[0].imshow(data.open_as_array(150))
-        ax[1].imshow(data.open_mask(150))
+        x, y = data[150]
+        fig, ax = plt.subplots(1,3)
+        ax[0].imshow(x.squeeze())
+        ax[1].imshow(y.squeeze())
+        ax[2].imshow(predb_to_mask(model(torch.tensor(np.expand_dims(x,0)).cuda()),0))
         logger.info('Showing visual plotting')
+        plt.savefig('pic.png')
         plt.show()
 
     #xb, yb = next(iter(train_data))
