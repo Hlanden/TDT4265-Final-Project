@@ -102,7 +102,8 @@ if __name__ == '__main__':
     import os
 
     transtest = aug.Compose([
-        aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1) 
+        aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
+        #aug.HorizontalFlip(p=1)
     ])
 
 
