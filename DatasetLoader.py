@@ -16,7 +16,14 @@ import cv2
 
 #load data from a folder
 class DatasetLoader(Dataset):
-    def __init__(self, gray_dir, gt_dir,transforms=None, flip=False, pytorch=True, classes=[1,2]): #legger til muligheten for transform her
+    def __init__(self,
+                 gray_dir,
+                 gt_dir,
+                 transforms=None,
+                 flip=False,
+                 pytorch=True,
+                 medimage=True,
+                 classes=[1, 2]):  # legger til muligheten for transform her
         super().__init__()
         # TODO: Fix if statement below. Not obvious enough to understand what is happening!
         # Loop through the files in red folder and combine, into a dictionary, the other bands
@@ -24,13 +31,14 @@ class DatasetLoader(Dataset):
             self.files = [self.combine_files(f, gt_dir, False) for f in gray_dir.iterdir() if not f.is_dir()]
         else:
             self.files = []
-            for f in gray_dir.iterdir():
-                filename, filetype = os.path.splitext(f)
-                
-                if not f.is_dir() and str(f).__contains__('.mhd') \
-                    and not filename.__contains__('gt') \
-                    and not filename.__contains__('sequence'): #TODO: What shall we do with sequence?
-                        self.files.append(self.combine_files(filename, '', True))
+            for patient in gray_dir.iterdir():
+                for f in patient.iterdir():
+                    filename, filetype = os.path.splitext(f)
+
+                    if not f.is_dir() and str(f).__contains__('.mhd') \
+                        and not filename.__contains__('gt') \
+                        and not filename.__contains__('sequence'): #TODO: What shall we do with sequence?
+                            self.files.append(self.combine_files(filename, '', True))
         self.pytorch = pytorch
         self.medimage = medimage
         self.classes = classes
@@ -103,6 +111,7 @@ class DatasetLoader(Dataset):
 
             aug_data2 = self.transforms(image=y)
             y = aug_data2["image"]
+        
         
         return x, y
     

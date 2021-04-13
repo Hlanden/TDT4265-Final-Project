@@ -212,15 +212,13 @@ def main ():
     # TODO: Move this out of main
     #load the training data
     base_path = Path('datasets/CAMUS_resized')
-    data = DatasetLoader(base_path/'train_gray', 
-                        base_path/'train_gt', 
-                        medimage=False)    
-
-    data.rotate_all_images()
-
+    data = DatasetLoader(Path(cfg.DATASETS.TRAIN_IMAGES), 
+                        medimage=True)
+    
     #split the training dataset and initialize the data loaders
-    train_dataset, valid_dataset = torch.utils.data.random_split(data, (300, 150))
+    train_dataset, valid_dataset = torch.utils.data.random_split(data, (1650, 150)) #TODO: Okay split? Ot more on valid?
     train_data = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    
     for i, (inputs, targets) in enumerate(train_data):
         with torch.no_grad():
                 print("targets.data", inputs.shape)

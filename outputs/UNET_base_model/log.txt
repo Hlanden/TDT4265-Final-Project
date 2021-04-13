@@ -1,0 +1,1566 @@
+2021-04-12 15:34:33,196 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:34:33,196 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:34:33,196 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:34:33,196 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:36:47,092 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:36:47,092 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:36:47,092 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:36:47,092 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:37:33,972 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:37:33,972 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:37:33,972 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:37:33,972 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:37:54,041 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:37:54,041 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:37:54,041 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:37:54,041 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:38:15,078 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:38:15,078 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:38:15,079 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:38:15,079 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:38:52,785 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:38:52,786 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:38:52,786 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:38:52,786 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:39:42,887 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:39:42,887 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:39:42,887 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:39:42,888 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:40:20,064 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:40:20,064 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:40:20,064 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:40:20,065 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:41:56,138 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:41:56,138 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:41:56,138 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:41:56,138 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:44:03,010 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:44:03,010 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:44:03,010 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:44:03,010 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:44:31,374 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:44:31,374 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:44:31,374 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:44:31,374 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:44:51,805 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:44:51,806 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:44:51,806 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:44:51,806 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:45:12,404 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:45:12,405 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:45:12,405 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:45:12,405 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:47:11,989 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:47:11,990 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:47:11,990 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:47:11,990 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:47:30,429 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:47:30,429 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:47:30,429 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:47:30,429 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:47:40,005 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:47:40,005 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:47:40,005 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:47:40,006 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:48:44,429 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:48:44,429 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:48:44,429 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:48:44,430 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:49:51,444 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:49:51,445 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:49:51,445 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:49:51,445 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:51:24,100 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:51:24,100 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:51:24,100 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:51:24,100 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:54:53,275 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:54:53,275 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:54:53,275 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:54:53,276 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:55:08,842 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:55:08,843 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:55:08,843 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:55:08,843 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:55:17,628 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:55:17,628 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:55:17,628 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:55:17,629 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:55:30,547 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:55:30,547 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:55:30,547 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:55:30,547 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:55:53,961 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:55:53,962 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:55:53,962 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:55:53,962 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:56:01,220 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:56:01,220 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:56:01,220 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:56:01,220 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:56:15,114 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:56:15,114 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:56:15,114 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:56:15,114 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
+2021-04-12 15:56:21,024 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-12 15:56:21,024 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-12 15:56:21,024 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1
+    OUT_CHANNELS: 2
+INPUT:
+    IMAGE_SIZE: [300, 300]
+DATASETS:
+    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+    #TEST: ("mnist_detection_val", )
+# SOLVER:
+    # MAX_ITER: 15000
+    # GAMMA: 0.1
+    # BATCH_SIZE: 16
+    # LR: 2e-3
+    # WEIGHT_DECAY: 5e-4
+    # WEIGHT_DECAY: 1e-3
+    # MOMENTUM: 0.9
+OUTPUT_DIR: 'outputs/UNET_base_model'
+LOGGER:
+    SAVE_DIR: True
+    
+
+2021-04-12 15:56:21,024 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+EVAL_STEP: 500
+INPUT:
+  IMAGE_SIZE: [300, 300]
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 2
+MODEL_SAVE_STEP: 500
+OUTPUT_DIR: outputs/UNET_base_model
+PREPROCESSING:
+  DATA_AUGMENTATION:
+    RANDOM_ROTATION:
+      ENABLED: False
+    RANDOM_SAMPLE_CROP:
+      ENABLED: False
+  IMAGE_FILTERING: True
+  ISOTROPIC_PIXEL_SIZE: True
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+TEST:
+  BATCH_SIZE: 12
+  NUM_EPOCHS: 50
