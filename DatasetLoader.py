@@ -8,13 +8,23 @@ import albumentations as aug
 from pathlib import Path
 from torch.utils.data import Dataset, DataLoader, dataloader, sampler
 from PIL import Image
+import os
+from medimage.medimage import image
 from torchvision.transforms.transforms import ToPILImage, ToTensor
 import torchvision.transforms.functional as TF
 import cv2
 
 #load data from a folder
 class DatasetLoader(Dataset):
-    def __init__(self, gray_dir, gt_dir='', transforms=None, medimage=True, pytorch=True):
+    def __init__(self,
+                 gray_dir,
+                 gt_dir='',
+                 transforms=None,
+                 flip=False,
+                 pytorch=True,
+                 medimage=True,
+                 classes=[1, 2]):  # legger til muligheten for transform her
+
         super().__init__()
         # TODO: Fix if statement below. Not obvious enough to understand what is happening!
         # Loop through the files in red folder and combine, into a dictionary, the other bands
@@ -22,15 +32,18 @@ class DatasetLoader(Dataset):
             self.files = [self.combine_files(f, gt_dir, False) for f in gray_dir.iterdir() if not f.is_dir()]
         else:
             self.files = []
-            for f in gray_dir.iterdir():
-                filename, filetype = os.path.splitext(f)
-                
-                if not f.is_dir() and str(f).__contains__('.mhd') \
-                    and not filename.__contains__('gt') \
-                    and not filename.__contains__('sequence'): #TODO: What shall we do with sequence?
-                        self.files.append(self.combine_files(filename, '', True))
+            for patient in gray_dir.iterdir():
+                for f in patient.iterdir():
+                    filename, filetype = os.path.splitext(f)
+
+                    if not f.is_dir() and str(f).__contains__('.mhd') \
+                        and not filename.__contains__('gt') \
+                        and not filename.__contains__('sequence'): #TODO: What shall we do with sequence?
+                            self.files.append(self.combine_files(filename, '', True))
         self.pytorch = pytorch
         self.medimage = medimage
+        self.classes = classes
+        self.flip = flip
         self.transforms = transforms
 
     def combine_files(self, gray_file: Path, gt_dir, camus=True):
@@ -54,22 +67,25 @@ class DatasetLoader(Dataset):
             raw_us = image(self.files[idx]['gray']).imdata
         else:
             raw_us = np.stack([np.array(Image.open(self.files[idx]['gray'])),
-                            ], axis=2) #exkra dim legges til for å ha kontroll på batch size
+                              ], axis=2) #exkra dim legges til for å ha kontroll på batch size
+
     
         if invert:
             raw_us = raw_us.transpose((2,0,1))
-    
+
         # normalize
         return (raw_us / np.iinfo(raw_us.dtype).max)
     
 
-    def open_mask(self, idx, add_dims=False):
+    def open_mask(self, idx, add_dims=False, transforms=False):
         #open mask file
         if self.medimage:
             raw_mask = image(self.files[idx]['gt']).imdata
             raw_mask = raw_mask.squeeze()
-            gtbox_type = 1 # TODO: Change this to the correct type
-            raw_mask = np.where(raw_mask==gtbox_type, 1, 0)
+            combined_classes = np.zeros_like(raw_mask)
+            for c in self.classes:
+                combined_classes += np.where(raw_mask==c, c, 0).astype(np.uint8)
+            raw_mask = combined_classes
 
         else:
             raw_mask = np.array(Image.open(self.files[idx]['gt']))            
@@ -94,11 +110,14 @@ class DatasetLoader(Dataset):
         #     y = self.rotate_image(y)
         if self.transforms:
                 
-            aug_data = self.transforms(image=x.squeeze()) #ikke noe problem med å legge til squeeze her hilsen Gabriel Kiss
-            x = aug_data["image"]
+            #aug_data = self.transforms(image=x.squeeze()) #ikke noe problem med å legge til squeeze her hilsen Gabriel Kiss
+            aug_gray = self.transforms(image=x.squeeze()) 
+            x = np.expand_dims(aug_gray["image"], 0)
+            
 
-            aug_data2 = self.transforms(image=y)
-            y = aug_data2["image"]
+            aug_gt = self.transforms(image=y)
+            y = aug_gt["image"]
+        
         
         return x, y
     
@@ -107,14 +126,10 @@ class DatasetLoader(Dataset):
         arr = 256*self.open_as_array(idx)
         
         return Image.fromarray(arr.astype(np.uint8), 'RGB')
-    
-if __name__ == '__main__':
-    # base_path = Path('data/CAMUS_resized')
-    # data = DatasetLoader(base_path/'train_gray', 
-    #                     base_path/'train_gt', 
-    #                     medimage=False)
 
-    # Simple test sxript for plotting of data + gt 
+if __name__ == '__main__':
+    import matplotlib.pyplot as plt
+    import os
 
     transtest = aug.Compose([
         aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
@@ -151,5 +166,3 @@ if __name__ == '__main__':
         plt.show()
         print(i)
         os.exit()
-
-
