@@ -37,7 +37,7 @@ def start_train(cfg, train_loader):
         model [torch.nn.Module] -- Trained model
     
     """
-    logger = logging.getLogger('SSD.trainer')
+    logger = logging.getLogger('UNET.trainer')
     model = Unet2D(cfg)
     model = torch_utils.to_cuda(model)
 
@@ -57,6 +57,7 @@ def start_train(cfg, train_loader):
         )
     extra_checkpoint_data = checkpointer.load()
     arguments.update(extra_checkpoint_data)
+
 
     max_iter = cfg.SOLVER.MAX_ITER
     # TODO: Import dataloader here
@@ -232,11 +233,6 @@ def main ():
     train_dataset, valid_dataset = torch.utils.data.random_split(data, (1650, 150)) #TODO: Okay split? Ot more on valid?
     train_data = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     
-    for i, (inputs, targets) in enumerate(train_data):
-        with torch.no_grad():
-                print("targets.data", inputs.shape)
-                print('Targets', targets.shape)
-                break
     valid_data = DataLoader(valid_dataset, batch_size=batch_size, shuffle=True)
     start_train(cfg, train_data)
     if visual_debug:

@@ -41,7 +41,7 @@ def do_train(cfg, model,
     start_training_time = time.time()
     end = time.time()
     
-    for iteration, (images, targets) in enumerate(data_loader):
+    for iteration, (images, targets) in enumerate(data_loader, start_iter):
         iteration = iteration + 1
         arguments["iteration"] = iteration
         images = torch_utils.to_cuda(images)
