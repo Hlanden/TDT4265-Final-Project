@@ -102,8 +102,9 @@ if __name__ == '__main__':
     import os
 
     transtest = aug.Compose([
-        aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
+        #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
         #aug.HorizontalFlip(p=1)
+        aug.Blur(blur_limit=30, always_apply=False, p=1) # Lagt til slik at ting kan blurres
     ])
 
 
