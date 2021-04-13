@@ -27,7 +27,7 @@ def do_train(cfg, model,
              checkpointer,
              arguments,
              loss_fn):
-    logger = logging.getLogger("SSD.trainer")
+    logger = logging.getLogger("UNET.trainer")
     logger.info("Start training ...")
     meters = MetricLogger()
 
@@ -46,9 +46,10 @@ def do_train(cfg, model,
         arguments["iteration"] = iteration
         images = torch_utils.to_cuda(images)
         targets = torch_utils.to_cuda(targets)
+        print('Iteration ', iteration)
+        x = model(images)
         
-        #loss_dict = model(images, targets=targets)
-        loss = loss_fn(images, targets)
+        loss = loss_fn(x, targets.long())
 
         meters.update(total_loss=loss)
 

@@ -20,6 +20,7 @@ import utils.torch_utils as torch_utils
 from utils.checkpoint import CheckPointer 
 from engine.trainer import do_train
 import argparse
+import albumentations as aug
 
 def start_train(cfg, train_loader):
     """
@@ -186,6 +187,7 @@ def main ():
     if args.opts:
         cfg.merge_from_list(args.opts)
     cfg.freeze()
+    
 
     #enable if you want to see some plotting
     visual_debug = cfg.LOGGER.VISUAL_DEBUG
@@ -211,10 +213,21 @@ def main ():
 
     # TODO: Move this out of main
     #load the training data
-    base_path = Path('datasets/CAMUS_resized')
-    data = DatasetLoader(Path(cfg.DATASETS.TRAIN_IMAGES), 
-                        medimage=True)
+    transtest = aug.Compose([
+        aug.augmentations.Resize(384, 384, interpolation=1, always_apply=False, p=1) 
+    ])
     
+    data = DatasetLoader(Path(cfg.DATASETS.TRAIN_IMAGES), 
+                        medimage=True,
+                        transforms=transtest,
+                        classes=[1])
+    
+    #base_path = Path('datasets/CAMUS_resized')
+    #data = DatasetLoader(base_path + '\gray',
+    #                     base_path + '\gt',
+    #                    medimage=False,
+    #                    #transforms=transtest,
+    #                    classes=[1])
     #split the training dataset and initialize the data loaders
     train_dataset, valid_dataset = torch.utils.data.random_split(data, (1650, 150)) #TODO: Okay split? Ot more on valid?
     train_data = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
@@ -233,42 +246,42 @@ def main ():
         logger.info('Showing visual plotting')
         plt.show()
 
-    xb, yb = next(iter(train_data))
-    print (xb.shape, yb.shape)
+    #xb, yb = next(iter(train_data))
+    #print (xb.shape, yb.shape)
 
-    # build the Unet2D with one channel as input and 2 channels as output
-    unet = Unet2D(1,2)
+    ## build the Unet2D with one channel as input and 2 channels as output
+    #unet = Unet2D(cfg)
 
-    #loss function and optimizer
-    loss_fn = nn.CrossEntropyLoss()
+    ##loss function and optimizer
+    #loss_fn = nn.CrossEntropyLoss()
 
-    opt = torch.optim.Adam(unet.parameters(), lr=learning_rate)
+    #opt = torch.optim.Adam(unet.parameters(), lr=learning_rate)
 
-    #do some training
-    train_loss, valid_loss = train(unet, train_data, valid_data, loss_fn, opt, dice_score, epochs=epochs_val)
+    ##do some training
+    #train_loss, valid_loss = train(unet, train_data, valid_data, loss_fn, opt, dice_score, epochs=number_of_epochs)
 
-    #plot training and validation losses
-    if visual_debug:
-        plt.figure(figsize=(10,8))
-        plt.plot(train_loss, label='Train loss')
-        plt.plot(valid_loss, label='Valid loss')
-        plt.legend()
-        plt.show()
+    ##plot training and validation losses
+    #if visual_debug:
+    #    plt.figure(figsize=(10,8))
+    #    plt.plot(train_loss, label='Train loss')
+    #    plt.plot(valid_loss, label='Valid loss')
+    #    plt.legend()
+    #    plt.show()
 
-    #predict on the next train batch (is this fair?)
-    xb, yb = next(iter(train_data))
-    with torch.no_grad():
-        predb = unet(xb.cuda())
+    ##predict on the next train batch (is this fair?)
+    #xb, yb = next(iter(train_data))
+    #with torch.no_grad():
+    #    predb = unet(xb.cuda())
 
-    #show the predicted segmentations
-    if visual_debug:
-        fig, ax = plt.subplots(batch_size,3, figsize=(15,batch_size*5))
-        for i in range(batch_size):
-            ax[i,0].imshow(batch_to_img(xb,i))
-            ax[i,1].imshow(yb[i])
-            ax[i,2].imshow(predb_to_mask(predb, i))
+    ##show the predicted segmentations
+    #if visual_debug:
+    #    fig, ax = plt.subplots(batch_size,3, figsize=(15,batch_size*5))
+    #    for i in range(batch_size):
+    #        ax[i,0].imshow(batch_to_img(xb,i))
+    #        ax[i,1].imshow(yb[i])
+    #        ax[i,2].imshow(predb_to_mask(predb, i))
 
-        plt.show()
+    #    plt.show()
 
 if __name__ == "__main__":
     main()

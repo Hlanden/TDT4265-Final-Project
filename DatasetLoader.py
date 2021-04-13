@@ -18,7 +18,7 @@ import cv2
 class DatasetLoader(Dataset):
     def __init__(self,
                  gray_dir,
-                 gt_dir,
+                 gt_dir='',
                  transforms=None,
                  flip=False,
                  pytorch=True,
@@ -42,6 +42,8 @@ class DatasetLoader(Dataset):
         self.pytorch = pytorch
         self.medimage = medimage
         self.classes = classes
+        self.flip = flip
+        self.transforms = transforms
 
     def combine_files(self, gray_file: Path, gt_dir, camus=True):
         if camus:
@@ -69,12 +71,12 @@ class DatasetLoader(Dataset):
     
         if invert:
             raw_us = raw_us.transpose((2,0,1))
-    
+
         # normalize
         return (raw_us / np.iinfo(raw_us.dtype).max)
     
 
-    def open_mask(self, idx, add_dims=False):
+    def open_mask(self, idx, add_dims=False, transforms=False):
         #open mask file
         if self.medimage:
             raw_mask = image(self.files[idx]['gt']).imdata
@@ -106,11 +108,13 @@ class DatasetLoader(Dataset):
             y = self.rotate_image(y)
         if self.transforms:
                 
-            aug_data = self.transforms(image=x.squeeze()) #ikke noe problem med å legge til squeeze her hilsen Gabriel Kiss
-            x = aug_data["image"]
+            #aug_data = self.transforms(image=x.squeeze()) #ikke noe problem med å legge til squeeze her hilsen Gabriel Kiss
+            aug_gray = self.transforms(image=x.squeeze()) 
+            x = np.expand_dims(aug_gray["image"], 0)
+            
 
-            aug_data2 = self.transforms(image=y)
-            y = aug_data2["image"]
+            aug_gt = self.transforms(image=y)
+            y = aug_gt["image"]
         
         
         return x, y
