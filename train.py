@@ -157,6 +157,8 @@ def main ():
     data = DatasetLoader(base_path)
     print(len(data))
 
+    data.rotate_all_images()
+
     #split the training dataset and initialize the data loaders
     #train_dataset, valid_dataset = torch.utils.data.random_split(data, (300, 150))
     train_data = DataLoader(data, batch_size=bs, shuffle=False)
@@ -205,6 +207,6 @@ def main ():
 
         plt.show()
     '''
-
+q
 if __name__ == "__main__":
     main()
