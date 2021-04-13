@@ -8,8 +8,14 @@ import albumentations as aug
 from pathlib import Path
 from torch.utils.data import Dataset, DataLoader, dataloader, sampler
 from PIL import Image
+<<<<<<< HEAD
 import os
 from medimage import image
+=======
+from torchvision.transforms.transforms import ToPILImage, ToTensor
+import torchvision.transforms.functional as TF
+import cv2
+>>>>>>> pre_pros_data
 
 #load data from a folder
 class DatasetLoader(Dataset):
@@ -85,11 +91,20 @@ class DatasetLoader(Dataset):
         #x = torch.tensor(self.open_as_array(idx, invert=self.pytorch), dtype=torch.float32)
         #y = torch.tensor(self.open_mask(idx, add_dims=True), dtype=torch.torch.int64)
 
+<<<<<<< HEAD
         x = self.open_as_array(idx, invert=self.pytorch)
         y = self.open_mask(idx, add_dims=False)
         # if self.flip:
         #     x = self.rotate_image(x)
         #     y = self.rotate_image(y)
+=======
+        x = self.open_as_array(idx, invert=self.pytorch).astype(np.float32)
+        y = self.open_mask(idx, add_dims=False).astype(np.float32)
+
+        if self.flip:
+            x = self.rotate_image(x)
+            y = self.rotate_image(y)
+>>>>>>> pre_pros_data
         if self.transforms:
                 
             aug_data = self.transforms(image=x.squeeze()) #ikke noe problem med å legge til squeeze her hilsen Gabriel Kiss
@@ -115,7 +130,12 @@ if __name__ == '__main__':
     # Simple test sxript for plotting of data + gt 
 
     transtest = aug.Compose([
+<<<<<<< HEAD
         aug.HorizontalFlip(p=0) #justere sansynlighet for å flippe
+=======
+        aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
+        #aug.HorizontalFlip(p=1)
+>>>>>>> pre_pros_data
     ])
     
     data = DatasetLoader(Path('patient0001',''),gt_dir='' , transforms=transtest)
