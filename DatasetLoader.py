@@ -9,7 +9,7 @@ from pathlib import Path
 from torch.utils.data import Dataset, DataLoader, dataloader, sampler
 from PIL import Image
 import os
-from medimage import image
+from medimage.medimage import image
 from torchvision.transforms.transforms import ToPILImage, ToTensor
 import torchvision.transforms.functional as TF
 import cv2

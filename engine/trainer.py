@@ -46,7 +46,6 @@ def do_train(cfg, model,
         arguments["iteration"] = iteration
         images = torch_utils.to_cuda(images)
         targets = torch_utils.to_cuda(targets)
-        print('Iteration ', iteration)
         x = model(images)
         
         loss = loss_fn(x, targets.long())
