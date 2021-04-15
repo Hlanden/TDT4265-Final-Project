@@ -51,14 +51,13 @@ def start_train(cfg, train_loader):
     optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
     loss_fn = nn.CrossEntropyLoss()
 
-    arguments = {"iteration": 0}
+    arguments = {"iteration": 0, "running_time": 0}
     save_to_disk = True
     checkpointer = CheckPointer(
         model, optimizer, cfg.OUTPUT_DIR, save_to_disk, logger,
         )
     extra_checkpoint_data = checkpointer.load()
     arguments.update(extra_checkpoint_data)
-
 
     max_iter = cfg.SOLVER.MAX_ITER
     # TODO: Import dataloader here

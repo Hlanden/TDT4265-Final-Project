@@ -118,7 +118,6 @@ class DatasetLoader(Dataset):
             aug_gt = self.transforms(image=y)
             y = aug_gt["image"]
         
-        
         return x, y
     
     def get_as_pil(self, idx):
