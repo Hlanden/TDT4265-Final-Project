@@ -13,13 +13,14 @@ def build_transforms(cfg, is_train=True):
         pr = cfg.PREPROCESSING.HORIZONTALFLIP.PROBABILITY 
         trans_list.append(aug.augmentations.transforms.HorizontalFlip(p=pr))
 
-    if cfg.PREPROCESSING.GAUSSIANSMOOTH.ENABLE:
-        bl = cfg.PREPROCESSING.GAUSSIANSMOOTH.BLURLIMIT
-        sl = cfg.PREPROCESSING.GAUSSIANSMOOTH.SIGMALIMIT
-        pr = cfg.PREPROCESSING.GAUSSIANSMOOTH.PROBABILITY
 
-        trans_list.append(aug.augmentations.transforms.GaussianBlur(blur_limit=bl, sigma_limit = sl, p=pr)) 
+    transform = aug.Compose([
+        aug.augmentations.Resize(384, 384, interpolation=INTER_LINEAR, always_apply=False, p=1), 
+        aug.augmentations.transforms.HorizontalFlip(p=1),
+        aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 0, p=1) 
+    ])
 
-    final_transform = aug.Compose(trans_list)
+
+    final_transform = aug.Compose(transforms)
     
-    return final_transform
+    return transform
