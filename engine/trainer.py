@@ -11,6 +11,7 @@ from utils.metric_logger import MetricLogger
 from utils import torch_utils
 
 
+
 def write_metric(eval_result, prefix, summary_writer, global_step):
     for key in eval_result:
         value = eval_result[key]
@@ -40,64 +41,62 @@ def do_train(cfg, model,
     start_iter = arguments["iteration"]
     start_training_time = time.time()
     end = time.time()
-    
-    for iteration, (images, targets) in enumerate(data_loader, start_iter):
-        iteration = iteration + 1
-        arguments["iteration"] = iteration
-        images = torch_utils.to_cuda(images)
-        targets = torch_utils.to_cuda(targets)
-        x = model(images)
-        
-        loss = loss_fn(x, targets.long())
 
-        meters.update(total_loss=loss)
+    while datetime.timedelta(time.time() - start_training_time).total_seconds()/60 <= cfg.SOLVER.MAX_MINUTES:
+        for iteration, (images, targets) in enumerate(data_loader, start_iter):
+            iteration = iteration + 1
+            arguments["iteration"] = iteration
+            images = torch_utils.to_cuda(images)
+            targets = torch_utils.to_cuda(targets)
+            x = model(images)
+            
+            loss = loss_fn(x, targets.long())
 
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+            meters.update(total_loss=loss)
 
-        batch_time = time.time() - end
-        end = time.time()
-        meters.update(time=batch_time)
-        if iteration % cfg.LOG_STEP == 0:
-            eta_seconds = meters.time.global_avg * (max_iter - iteration)
-            eta_string = str(datetime.timedelta(seconds=int(eta_seconds)))
-            lr = optimizer.param_groups[0]['lr']
-            to_log = [
-                f"iter: {iteration:06d}",
-                f"lr: {lr:.5f}",
-                f'{meters}',
-                f"eta: {eta_string}",
-            ]
-            if torch.cuda.is_available():
-                mem = round(torch.cuda.max_memory_allocated() / 1024.0 / 1024.0)
-                to_log.append(f'mem: {mem}M')
-            logger.info(meters.delimiter.join(to_log))
-            global_step = iteration
-            summary_writer.add_scalar(
-                'losses/total_loss', loss, global_step=global_step)
-            # for loss_name, loss_item in loss_dict.items():
-            #     summary_writer.add_scalar(
-            #         'losses/{}'.format(loss_name), loss_item,
-            #         global_step=global_step)
-            summary_writer.add_scalar(
-                'lr', optimizer.param_groups[0]['lr'],
-                global_step=global_step)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
 
-        if iteration % cfg.MODEL_SAVE_STEP == 0:
-            checkpointer.save("model_{:06d}".format(iteration), **arguments)
+            batch_time = time.time() - end
+            end = time.time()
+            meters.update(time=batch_time)
+            if iteration % cfg.LOG_STEP == 0:
+                eta_seconds = meters.time.global_avg * (max_iter - iteration)
+                eta_string = str(datetime.timedelta(seconds=int(eta_seconds)))
+                lr = optimizer.param_groups[0]['lr']
+                to_log = [
+                    f"iter: {iteration:06d}",
+                    f"lr: {lr:.5f}",
+                    f'{meters}',
+                    f"eta: {eta_string}",
+                ]
+                if torch.cuda.is_available():
+                    mem = round(torch.cuda.max_memory_allocated() / 1024.0 / 1024.0)
+                    to_log.append(f'mem: {mem}M')
+                logger.info(meters.delimiter.join(to_log))
+                global_step = iteration
+                summary_writer.add_scalar(
+                    'losses/total_loss', loss, global_step=global_step)
+                
+                summary_writer.add_scalar(
+                    'lr', optimizer.param_groups[0]['lr'],
+                    global_step=global_step)
 
-        # TODO: Currently deactivated. Need dataloader class to make eval
-        """if cfg.EVAL_STEP > 0 and iteration % cfg.EVAL_STEP == 0:
-            #eval_results = do_evaluation(cfg, model, iteration=iteration)
-            eval_results = [0] 
-            for eval_result, dataset in zip(eval_results, cfg.DATASETS.TEST):
-                write_metric(
-                    eval_result['metrics'], 'metrics/' + dataset,summary_writer, iteration)
-            model.train()  # *IMPORTANT*: change to train mode after eval."""
+            if iteration % cfg.MODEL_SAVE_STEP == 0:
+                checkpointer.save("model_{:06d}".format(iteration), **arguments)
 
-        if iteration >= cfg.SOLVER.MAX_ITER:
-            break
+            # TODO: Currently deactivated. Need dataloader class to make eval
+            """if cfg.EVAL_STEP > 0 and iteration % cfg.EVAL_STEP == 0:
+                #eval_results = do_evaluation(cfg, model, iteration=iteration)
+                eval_results = [0] 
+                for eval_result, dataset in zip(eval_results, cfg.DATASETS.TEST):
+                    write_metric(
+                        eval_result['metrics'], 'metrics/' + dataset,summary_writer, iteration)
+                model.train()  # *IMPORTANT*: change to train mode after eval."""
+
+            if iteration >= cfg.SOLVER.MAX_ITER:
+                break
 
     checkpointer.save("model_final", **arguments)
     # compute training time
