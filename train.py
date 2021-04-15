@@ -11,7 +11,7 @@ import torch
 from torch.utils.data import Dataset, DataLoader, sampler
 from torch import nn
 
-from DatasetLoader import DatasetLoader
+from data.DatasetLoader import DatasetLoader
 from Unet2D import Unet2D
 
 from config.defaults import cfg
@@ -21,6 +21,7 @@ from utils.checkpoint import CheckPointer
 from engine.trainer import do_train
 import argparse
 import albumentations as aug
+from data.build import make_data_loaders
 
 def start_train(cfg, train_loader):
     """
@@ -234,6 +235,8 @@ def main ():
     train_data = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     
     valid_data = DataLoader(valid_dataset, batch_size=batch_size, shuffle=True)
+    
+    train_data, valid_data = make_data_loaders(cfg, classes=[1, 2], is_train=True)
     start_train(cfg, train_data)
     if visual_debug:
         fig, ax = plt.subplots(1,2)
