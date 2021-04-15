@@ -1,3 +1,4 @@
+from matplotlib.colors import cnames
 import numpy as np
 from numpy.core import numeric
 import torch
@@ -7,26 +8,52 @@ import albumentations as aug
 from pathlib import Path
 from torch.utils.data import Dataset, DataLoader, dataloader, sampler
 from PIL import Image
+import os
+from medimage.medimage import image
 from torchvision.transforms.transforms import ToPILImage, ToTensor
 import torchvision.transforms.functional as TF
 import cv2
 
 #load data from a folder
 class DatasetLoader(Dataset):
-    def __init__(self, gray_dir, gt_dir,transforms=None, flip=False, pytorch=True): #legger til muligheten for transform her
+    def __init__(self,
+                 gray_dir,
+                 gt_dir='',
+                 transforms=None,
+                 flip=False,
+                 pytorch=True,
+                 medimage=True,
+                 classes=[1, 2]):  # legger til muligheten for transform her
+
         super().__init__()
-        
+        # TODO: Fix if statement below. Not obvious enough to understand what is happening!
         # Loop through the files in red folder and combine, into a dictionary, the other bands
-        self.files = [self.combine_files(f, gt_dir) for f in gray_dir.iterdir() if not f.is_dir()]
+        if gt_dir:
+            self.files = [self.combine_files(f, gt_dir, False) for f in gray_dir.iterdir() if not f.is_dir()]
+        else:
+            self.files = []
+            for patient in gray_dir.iterdir():
+                for f in patient.iterdir():
+                    filename, filetype = os.path.splitext(f)
+
+                    if not f.is_dir() and str(f).__contains__('.mhd') \
+                        and not filename.__contains__('gt') \
+                        and not filename.__contains__('sequence'): #TODO: What shall we do with sequence?
+                            self.files.append(self.combine_files(filename, '', True))
         self.pytorch = pytorch
-        self.rot_deg = 180
+        self.medimage = medimage
+        self.classes = classes
         self.flip = flip
         self.transforms = transforms
-        
-    def combine_files(self, gray_file: Path, gt_dir):
-        
-        files = {'gray': gray_file, 
-                 'gt': gt_dir/gray_file.name.replace('gray', 'gt')}
+
+    def combine_files(self, gray_file: Path, gt_dir, camus=True):
+        if camus:
+            files = {'gray': gray_file + '.mhd', 
+                    'gt': gray_file + '_gt.mhd'}
+
+        else:
+            files = {'gray': gray_file, 
+                    'gt': gt_dir/gray_file.name.replace('gray', 'gt')}
 
         return files
                                        
@@ -36,21 +63,33 @@ class DatasetLoader(Dataset):
      
     def open_as_array(self, idx, invert=False):
         #open ultrasound data
+        if self.medimage:
+            raw_us = image(self.files[idx]['gray']).imdata
+        else:
+            raw_us = np.stack([np.array(Image.open(self.files[idx]['gray'])),
+                              ], axis=2) #exkra dim legges til for å ha kontroll på batch size
 
-        raw_us = np.stack([np.array(Image.open(self.files[idx]['gray'])),
-                           ], axis=2) #exkra dim legges til for å ha kontroll på batch size
     
         if invert:
             raw_us = raw_us.transpose((2,0,1))
-    
+
         # normalize
         return (raw_us / np.iinfo(raw_us.dtype).max)
     
 
-    def open_mask(self, idx, add_dims=False):
+    def open_mask(self, idx, add_dims=False, transforms=False):
         #open mask file
-        raw_mask = np.array(Image.open(self.files[idx]['gt']))
-        raw_mask = np.where(raw_mask>100, 1, 0)
+        if self.medimage:
+            raw_mask = image(self.files[idx]['gt']).imdata
+            raw_mask = raw_mask.squeeze()
+            combined_classes = np.zeros_like(raw_mask)
+            for c in self.classes:
+                combined_classes += np.where(raw_mask==c, c, 0).astype(np.uint8)
+            raw_mask = combined_classes
+
+        else:
+            raw_mask = np.array(Image.open(self.files[idx]['gt']))            
+            raw_mask = np.where(raw_mask>100, 1, 0)
         
         return np.expand_dims(raw_mask, 0) if add_dims else raw_mask
     
@@ -66,16 +105,19 @@ class DatasetLoader(Dataset):
         x = self.open_as_array(idx, invert=self.pytorch).astype(np.float32)
         y = self.open_mask(idx, add_dims=False).astype(np.float32)
 
-        if self.flip:
-            x = self.rotate_image(x)
-            y = self.rotate_image(y)
+        # if self.flip:
+        #     x = self.rotate_image(x)
+        #     y = self.rotate_image(y)
         if self.transforms:
                 
-            aug_data = self.transforms(image=x.squeeze()) #ikke noe problem med å legge til squeeze her hilsen Gabriel Kiss
-            x = aug_data["image"]
+            #aug_data = self.transforms(image=x.squeeze()) #ikke noe problem med å legge til squeeze her hilsen Gabriel Kiss
+            aug_gray = self.transforms(image=x.squeeze()) 
+            x = np.expand_dims(aug_gray["image"], 0)
+            
 
-            aug_data2 = self.transforms(image=y)
-            y = aug_data2["image"]
+            aug_gt = self.transforms(image=y)
+            y = aug_gt["image"]
+        
         
         return x, y
     
@@ -84,18 +126,6 @@ class DatasetLoader(Dataset):
         arr = 256*self.open_as_array(idx)
         
         return Image.fromarray(arr.astype(np.uint8), 'RGB')
-
-
-    # def rotate_all_images(self):
-    #     for i in range(len(self.files)):
-    #         gray_file_path = self.files[i]['gray'] #henter pathen til de forskjellige
-    #         gt_file_path = self.files[i]['gt']
-
-    #         rotate_img(gray_file_path, self.rot_deg)
-    #         rotate_img(gt_file_path, self.rot_deg)
-        
-
-
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
@@ -106,15 +136,13 @@ if __name__ == '__main__':
         #aug.HorizontalFlip(p=1)
         aug.Blur(blur_limit=30, always_apply=False, p=1) # Lagt til slik at ting kan blurres
     ])
+    
+    data = DatasetLoader(Path('patient0001',''),gt_dir='' , transforms=transtest)
 
+    train_data = DataLoader(data, batch_size=5, shuffle=True)
+    import matplotlib.pyplot as plt
 
-    base_path = Path('data/CAMUS_resized')
-    datasetloader = DatasetLoader(base_path/'train_gray', 
-                        base_path/'train_gt',
-                        transforms=transtest)
-
-    train_data = DataLoader(datasetloader, batch_size=5, shuffle=True)
-    fig, axs = plt.subplots(2,5)
+    fig, axs = plt.subplots(2,4)
     ax =axs[0]
     ax2 = axs[1]
     #fig, ax2 = plt.subplots(1,5)
@@ -125,7 +153,13 @@ if __name__ == '__main__':
         gray = data[0]
         gt = data[1]
 
+        #print(gray.shape)
+        #print(gt.shape)
+
         for x, y in zip(gray, gt):
+
+            print(x.shape)
+            print(y.shape)
 
             ax[i].imshow(x.squeeze())
             ax2[i].imshow(y.squeeze())
@@ -133,19 +167,3 @@ if __name__ == '__main__':
         plt.show()
         print(i)
         os.exit()
-
-
-    fig, ax = plt.subplots(2,5)
-    fig, ax2 = plt.subplots(2,5)
-    ax2 = ax2.flat
-    ax = ax.flat
-    for i in range(10):
-        x, y = datasetloader[i]
-        x = np.squeeze(x[0])
-        y = np.squeeze(y[0])
-        #im = Image.open(x)
-        ax[i].imshow(x)
-        ax2[i].imshow(y)
-    plt.show()
-
-
