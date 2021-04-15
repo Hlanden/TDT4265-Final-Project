@@ -1,30 +1,26 @@
-from ssd.modeling.box_head.prior_box import PriorBox
-from .target_transform import SSDTargetTransform
-from .transforms import *
+import albumentations as aug
 
 
 def build_transforms(cfg, is_train=True):
-    if is_train:
-        transform = [
-            ConvertFromInts(),
-            ToPercentCoords(),
-            Resize(cfg.INPUT.IMAGE_SIZE),
-            SubtractMeans(cfg.INPUT.PIXEL_MEAN, cfg.INPUT.PIXEL_STD),
-            ToTensor(),
-        ]
-    else:
-        transform = [
-            Resize(cfg.INPUT.IMAGE_SIZE),
-            SubtractMeans(cfg.INPUT.PIXEL_MEAN, cfg.INPUT.PIXEL_STD),
-            ToTensor()
-        ]
-    transform = Compose(transform)
-    return transform
+
+    trans_list = []
+    if cfg.cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE:
+        si = cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.SIZE
+        pr = cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.PROBABILITY
+        trans_list.append(aug.augmentations.Resize(si, si, interpolation=INTER_LINEAR, always_apply=False, p=pr))
+
+    if cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE:
+        pr = cfg.PREPROCESSING.HORIZONTALFLIP.PROBABILITY 
+        trans_list.append(aug.augmentations.transforms.HorizontalFlip(p=pr))
 
 
-def build_target_transform(cfg):
-    transform = SSDTargetTransform(PriorBox(cfg)(),
-                                   cfg.MODEL.CENTER_VARIANCE,
-                                   cfg.MODEL.SIZE_VARIANCE,
-                                   cfg.MODEL.THRESHOLD)
+    transform = aug.Compose([
+        aug.augmentations.Resize(384, 384, interpolation=INTER_LINEAR, always_apply=False, p=1), 
+        aug.augmentations.transforms.HorizontalFlip(p=1),
+        aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 0, p=1) 
+    ])
+
+
+    final_transform = aug.Compose(transforms)
+    
     return transform
