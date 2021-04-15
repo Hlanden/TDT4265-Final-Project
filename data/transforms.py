@@ -1,13 +1,13 @@
 import albumentations as aug
-
+import cv2
 
 def build_transforms(cfg, is_train=True):
 
     trans_list = []
-    if cfg.cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE:
+    if cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE:
         si = cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.SIZE
         pr = cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.PROBABILITY
-        trans_list.append(aug.augmentations.Resize(si, si, interpolation=INTER_LINEAR, always_apply=False, p=pr))
+        trans_list.append(aug.augmentations.Resize(si, si, interpolation=cv2.INTER_LINEAR, always_apply=False, p=pr))
 
     if cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE:
         pr = cfg.PREPROCESSING.HORIZONTALFLIP.PROBABILITY 
