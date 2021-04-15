@@ -131,13 +131,19 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     import os
 
+    pjap = False
+    skap = True
+    rap = False
     transtest = aug.Compose([
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
-        #aug.HorizontalFlip(p=1)
-        aug.Blur(blur_limit=30, always_apply=False, p=1) # Lagt til slik at ting kan blurres
+        
+        #aug.augmentations.transforms.HorizontalFlip(p=1)
+        #aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 0, p=1) # Lagt til slik at ting kan blurres
+        aug.augmentations.transforms.Normalize (mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
+
     ])
     
-    data = DatasetLoader(Path('patient0001',''),gt_dir='' , transforms=transtest)
+    data = DatasetLoader(Path('patients',''),gt_dir='' , transforms=transtest)
 
     train_data = DataLoader(data, batch_size=5, shuffle=True)
     import matplotlib.pyplot as plt
