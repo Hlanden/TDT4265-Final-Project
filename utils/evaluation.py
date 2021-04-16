@@ -8,3 +8,16 @@ def dice_score(predb, yb):
     intersection = (predb * yb).sum()                      
     dice = (2*intersection)/(predb.sum() + yb.sum())
     return dice
+
+def dice_score_multiclass(predb, yb, num_classes):   #num_classes should not include background
+    dice = []
+    predb = predb.argmax(dim=1)
+    predb = predb.view(-1)
+    yb = yb.view(-1)
+    for i in range(1,num_classes):
+        class_predb = np.where(predb == i, 1,0) 
+        class_yb = np.where(yb == i, 1,0)
+        intersection = (class_predb * class_yb).sum()
+        class_dice = (2*intersection)/(predb.sum() + yb.sum())                 
+        dice.append(class_dice)
+    return dice
