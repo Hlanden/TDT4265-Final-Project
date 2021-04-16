@@ -109,10 +109,11 @@ def do_train(cfg, model,
                 
                 logger.info('Evaluation result: {}'.format(eval_result))
                 #for eval_result in eval_result:
-                write_metric(eval_result,
-                            'metrics/' + cfg.DATASETS.TEST,
-                            summary_writer,
-                            iteration)
+                # write_metric(eval_result,
+                #             'metrics/' + cfg.DATASETS.TEST,
+                #             summary_writer,
+                #             iteration)
+                summary_writer.add_scalar('Validation DICE Score', acc, global_step=global_step)
                 model.train(True)  # *IMPORTANT*: change to train mode after eval.
 
             if iteration >= cfg.SOLVER.MAX_ITER:
