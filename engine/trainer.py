@@ -98,19 +98,19 @@ def do_train(cfg, model,
                 #eval_results = do_evaluation(cfg, model, iteration=iteration)
                 logger.info('Evaluating...')
                 model.train(False)
-                acc = np.zeros((1, len(cfg.MODEL.CLASSES)))
-                acc = 0
+                acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
                 for num_batches, (images, targets) in enumerate(train_data_loader):
                     images = torch_utils.to_cuda(images)
                     targets = torch_utils.to_cuda(targets)
                     outputs = model(images)
                     #acc += dice_score(outputs, targets) # TODO: Wait on working function
-                    acc += dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES))
+                    dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES)).flatten()
+                    acc += dice_score
                 acc = acc/num_batches
 
                 eval_result = {}
                 for i, c in enumerate(cfg.MODEL.CLASSES):
-                    eval_result['DICE Score, class {}'.format(c)] = acc.flatten()[i]
+                    eval_result['DICE Score, class {}'.format(c)] = acc[i]
                 
                 logger.info('Evaluation result: {}'.format(eval_result))
                 #for eval_result in eval_result:
