@@ -5,10 +5,12 @@ import os
 import time
 import torch
 from torch.utils.data import dataloader
+import numpy as np
 import torch.utils.tensorboard
 from engine.inference import do_evaluation
 from utils.metric_logger import MetricLogger
 from utils import torch_utils
+from utils.evaluation import dice_score
 
 
 
@@ -22,7 +24,8 @@ def write_metric(eval_result, prefix, summary_writer, global_step):
             summary_writer.add_scalar(tag, value, global_step=global_step)
 
 def do_train(cfg, model,
-             data_loader,
+             train_data_loader,
+             val_data_loader,
              optimizer,
              checkpointer,
              arguments,
@@ -36,23 +39,23 @@ def do_train(cfg, model,
     summary_writer = torch.utils.tensorboard.SummaryWriter(
         log_dir=os.path.join(cfg.OUTPUT_DIR, 'tf_logs'))
 
-    max_iter = len(data_loader)
+    max_iter = len(train_data_loader)
     start_iter = arguments["iteration"]
     start_training_time = time.time()
     end = time.time()
     
 
     while (time.time() - start_training_time)/60 <= cfg.SOLVER.MAX_MINUTES:        
-        for iteration, (images, targets) in enumerate(data_loader, start_iter):
+        for iteration, (images, targets) in enumerate(train_data_loader, start_iter):
             iteration = iteration + 1
             arguments["iteration"] = iteration
             
             
             images = torch_utils.to_cuda(images)
             targets = torch_utils.to_cuda(targets)
-            x = model(images)
+            outputs = model(images)
             
-            loss = loss_fn(x, targets.long())
+            loss = loss_fn(outputs, targets.long())
 
             meters.update(total_loss=loss)
 
@@ -91,13 +94,26 @@ def do_train(cfg, model,
                 
 
             # TODO: Currently deactivated. Need dataloader class to make eval
-            """if cfg.EVAL_STEP > 0 and iteration % cfg.EVAL_STEP == 0:
+            if cfg.EVAL_STEP > 0 and iteration % cfg.EVAL_STEP == 0:
                 #eval_results = do_evaluation(cfg, model, iteration=iteration)
-                eval_results = [0] 
-                for eval_result, dataset in zip(eval_results, cfg.DATASETS.TEST):
-                    write_metric(
-                        eval_result['metrics'], 'metrics/' + dataset,summary_writer, iteration)
-                model.train()  # *IMPORTANT*: change to train mode after eval."""
+                logger.info('Evaluating...')
+                model.train(False)
+                acc = np.zeros((1, len(cfg.MODEL.CLASSES)))
+                acc = 0
+                for num_batches, (images, targets) in enumerate(train_data_loader):
+                    images = torch_utils.to_cuda(images)
+                    targets = torch_utils.to_cuda(targets)
+                    #acc += dice_score(outputs, targets) # TODO: Wait on working function
+                acc = acc/num_batches
+                eval_result = {'DICE Score': acc,}
+                
+                logger.info('Evaluation result: {}'.format(eval_result))
+                #for eval_result in eval_result:
+                write_metric(eval_result,
+                            'metrics/' + cfg.DATASETS.TEST,
+                            summary_writer,
+                            iteration)
+                model.train(True)  # *IMPORTANT*: change to train mode after eval.
 
             if iteration >= cfg.SOLVER.MAX_ITER:
                 break
