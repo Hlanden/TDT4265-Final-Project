@@ -7,8 +7,8 @@ cfg.MODEL = CN()
 
 # TODO: Fill in right values for training
 cfg.MODEL.IN_CHANNELS = 1
-cfg.MODEL.OUT_CHANNELS = 2
-cfg.MODEL.CLASSES = [1, 2]
+cfg.MODEL.OUT_CHANNELS = 4
+cfg.MODEL.CLASSES = [1, 2, 3]
 
 # cfg.MODEL.THRESHOLD = 0.5
 # cfg.MODEL.NUM_CLASSES = 21
@@ -40,8 +40,25 @@ cfg.INPUT.IMAGE_SIZE = [300, 300]
 # TODO: Find the correct valeus for this
 
 # -----------------------------------------------------------------------------
+# UNETSTRUCTURE
+# -----------------------------------------------------------------------------
+cfg.UNETSTRUCTURE = CN()
+cfg.UNETSTRUCTURE.CONTRACTBLOCK = [[cfg.MODEL.IN_CHANNELS, 32, 7, 3], 
+                                    [32, 64, 3, 1],
+                                    [64, 128, 3, 1],
+                                    [128,256,3,1],
+                                    [256,512,3,1]]
+
+cfg.UNETSTRUCTURE.EXPANDBLOCK = [[512,256,3,1],
+                                [256*2,128,3,1],
+                                [128*2, 64, 3, 1],
+                                [64*2, 32, 3, 1],
+                                [32*2, cfg.MODEL.OUT_CHANNELS, 3, 1]]
+
+# -----------------------------------------------------------------------------
 # PREPROCESSING
 # -----------------------------------------------------------------------------
+
 cfg.PREPROCESSING = CN()
 # Base transformation
 cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE = CN()
@@ -50,17 +67,19 @@ cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.SIZE = 384
 cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.PROBABILITY = 1
 
 cfg.PREPROCESSING.HORIZONTALFLIP = CN()
-cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE = True
+cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE = False
 cfg.PREPROCESSING.HORIZONTALFLIP.PROBABILITY = 1
 
 cfg.PREPROCESSING.GAUSSIANSMOOTH = CN()
 cfg.PREPROCESSING.GAUSSIANSMOOTH.ENABLE = False
-cfg.PREPROCESSING.GAUSSIANSMOOTH.BLURLIMIT = 51 #kan også være en liste med to tall [tall1, tall2]
+cfg.PREPROCESSING.GAUSSIANSMOOTH.BLURLIMIT = 7 #kan også være en liste med to tall [tall1, tall2]
 cfg.PREPROCESSING.GAUSSIANSMOOTH.SIGMALIMIT = 0
 cfg.PREPROCESSING.GAUSSIANSMOOTH.PROBABILITY = 1
 
 
-
+#cfg.PREPROCESSING = CN()
+# Base transformation
+#cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE = True
 cfg.PREPROCESSING.IMAGE_FILTERING = True
 
 
@@ -101,7 +120,7 @@ cfg.DATA_LOADER.PIN_MEMORY = True
 cfg.SOLVER = CN()
 # train configs
 cfg.SOLVER.MAX_ITER = 120000
-cfg.SOLVER.MAX_MINUTES = 600
+cfg.SOLVER.MAX_MINUTES = 1
 # cfg.SOLVER.GAMMA = 0.1
 # cfg.SOLVER.BATCH_SIZE = 32
 cfg.SOLVER.LR = 1e-2
