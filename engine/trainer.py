@@ -10,7 +10,7 @@ import torch.utils.tensorboard
 from engine.inference import do_evaluation
 from utils.metric_logger import MetricLogger
 from utils import torch_utils
-from utils.evaluation import dice_score
+from utils.evaluation import dice_score_multiclass
 
 
 
@@ -31,6 +31,7 @@ def do_train(cfg, model,
              arguments,
              loss_fn):
     logger = logging.getLogger("UNET.trainer")
+    logger.info(input('Hvorfor tester du dette? '))
     logger.info("Start training ...")
     meters = MetricLogger()
 
@@ -44,7 +45,6 @@ def do_train(cfg, model,
     start_training_time = time.time()
     end = time.time()
     
-
     while (time.time() - start_training_time)/60 <= cfg.SOLVER.MAX_MINUTES:        
         for iteration, (images, targets) in enumerate(train_data_loader, start_iter):
             iteration = iteration + 1
@@ -103,9 +103,14 @@ def do_train(cfg, model,
                 for num_batches, (images, targets) in enumerate(train_data_loader):
                     images = torch_utils.to_cuda(images)
                     targets = torch_utils.to_cuda(targets)
+                    outputs = model(images)
                     #acc += dice_score(outputs, targets) # TODO: Wait on working function
+                    acc += dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES))
                 acc = acc/num_batches
-                eval_result = {'DICE Score': acc,}
+
+                eval_result = {}
+                for i, c in enumerate(cfg.MODEL.CLASSES):
+                    eval_result['DICE Score, class {}'.format(c)] = acc.flatten()[i]
                 
                 logger.info('Evaluation result: {}'.format(eval_result))
                 #for eval_result in eval_result:
@@ -113,7 +118,8 @@ def do_train(cfg, model,
                 #             'metrics/' + cfg.DATASETS.TEST,
                 #             summary_writer,
                 #             iteration)
-                summary_writer.add_scalar('Validation DICE Score', acc, global_step=global_step)
+                for key, acc in eval_result.items():
+                    summary_writer.add_scalar(key, acc, global_step=global_step)
                 model.train(True)  # *IMPORTANT*: change to train mode after eval.
 
             if iteration >= cfg.SOLVER.MAX_ITER:
