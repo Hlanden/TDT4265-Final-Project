@@ -10,7 +10,8 @@ def dice_score(predb, yb):
     return dice
 
 def dice_score_multiclass(predb, yb, num_classes):   #num_classes should not include background
-    dice = []
+
+    dice = np.zeros((1,num_classes))
     predb = predb.argmax(dim=1)
     predb = predb.view(-1)
     yb = yb.view(-1)
@@ -19,5 +20,5 @@ def dice_score_multiclass(predb, yb, num_classes):   #num_classes should not inc
         class_yb = np.where(yb == i, 1,0)
         intersection = (class_predb * class_yb).sum()
         class_dice = (2*intersection)/(predb.sum() + yb.sum())                 
-        dice.append(class_dice)
+        dice[i-1] = class_dice.copy()
     return dice
