@@ -23,7 +23,7 @@ import argparse
 import albumentations as aug
 from data.build import make_data_loaders
 
-def start_train(cfg, train_loader):
+def start_train(cfg, train_data_loader, val_data_loader):
     """
     Starts training the model with configurations defined by cfg.
 
@@ -64,7 +64,7 @@ def start_train(cfg, train_loader):
     #train_loader = make_data_loader(cfg, is_train=True, max_iter=max_iter, start_iter=arguments['iteration'])
 
     model = do_train(
-        cfg, model, train_loader, optimizer,
+        cfg, model, train_data_loader, val_data_loader, optimizer,
         checkpointer, arguments, loss_fn)
     return model
 
@@ -230,13 +230,9 @@ def main ():
     #                    #transforms=transtest,
     #                    classes=[1])
     #split the training dataset and initialize the data loaders
-    train_dataset, valid_dataset = torch.utils.data.random_split(data, (1650, 150)) #TODO: Okay split? Ot more on valid?
-    train_data = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     
-    valid_data = DataLoader(valid_dataset, batch_size=batch_size, shuffle=True)
-    
-    train_data, valid_data = make_data_loaders(cfg, classes=[1, 2], is_train=True)
-    start_train(cfg, train_data)
+    train_data_loader, valid_data_loader = make_data_loaders(cfg, classes=[1, 2], is_train=True)
+    start_train(cfg, train_data_loader, valid_data_loader)
     if visual_debug:
         fig, ax = plt.subplots(1,2)
         ax[0].imshow(data.open_as_array(150))

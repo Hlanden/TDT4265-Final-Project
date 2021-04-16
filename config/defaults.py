@@ -8,6 +8,7 @@ cfg.MODEL = CN()
 # TODO: Fill in right values for training
 cfg.MODEL.IN_CHANNELS = 1
 cfg.MODEL.OUT_CHANNELS = 2
+cfg.MODEL.CLASSES = [1, 2]
 
 # cfg.MODEL.THRESHOLD = 0.5
 # cfg.MODEL.NUM_CLASSES = 21
@@ -84,7 +85,7 @@ cfg.DATASETS = CN()
 cfg.DATASETS.TRAIN_IMAGES = '../../../../work/datasets/medical_project/CAMUS'
 cfg.DATASETS.GT_IMAGES = ''
 # # List of the dataset names for testing, as present in pathscfgatalog.py
-# cfg.DATASETS.TEST = ()
+cfg.DATASETS.TEST = '../../../../work/datasets/medical_project/CAMUS'
 
 # -----------------------------------------------------------------------------
 # DataLoader
@@ -121,7 +122,7 @@ cfg.TEST.BATCH_SIZE = 12
 cfg.TEST.NUM_EPOCHS = 50
 
 cfg.EVAL_STEP = 500 # Evaluate dataset every eval_step, disabled when eval_step < 0
-cfg.MODEL_SAVE_STEP = 50 # Save checkpoint every save_step
+cfg.MODEL_SAVE_STEP = 500 # Save checkpoint every save_step
 cfg.LOG_STEP = 10 # Print logs every log_stepPrint logs every log_step
 
 cfg.OUTPUT_DIR = "outputs"
