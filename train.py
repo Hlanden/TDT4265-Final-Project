@@ -71,18 +71,30 @@ def start_train(cfg, train_data_loader, val_data_loader):
 
 
 def train(model, train_dl, valid_dl, loss_fn, optimizer, acc_fn, epochs=1):
+    arguments = {"iteration": 0, 'epoch': 0}
+    arguments
+    save_to_disk = True
+    logger = logging.getLogger('UNET.trainer')
+    model = torch_utils.to_cuda(model)
+    checkpointer = CheckPointer(
+        model, optimizer, cfg.OUTPUT_DIR, save_to_disk, logger,
+        )
+    extra_checkpoint_data = checkpointer.load()
+    arguments.update(extra_checkpoint_data)
+    start_iter = arguments["iteration"]
+    
     start = time.time()
-    model.cuda()
 
     train_loss, valid_loss = [], []
 
     best_acc = 0.0
-
+    i = 0
     for epoch in range(epochs):
         print('Epoch {}/{}'.format(epoch, epochs - 1))
         print('-' * 10)
-
+        arguments['Epoch'] = epoch
         for phase in ['train', 'valid']:
+            #i += 1
             if phase == 'train':
                 model.train(True)  # Set trainind mode = true
                 dataloader = train_dl
@@ -97,10 +109,14 @@ def train(model, train_dl, valid_dl, loss_fn, optimizer, acc_fn, epochs=1):
 
             # iterate over data
             for x, y in dataloader:
+                i += 1
                 x = x.cuda()
-                y = y.cuda()
+                y = y.long().cuda()
+                
                 step += 1
-
+                print('Saving model')
+                checkpointer.save("model_{:06d}".format(i), **arguments)
+                time.sleep(5)
                 # forward pass
                 if phase == 'train':
                     # zero the gradients
@@ -218,10 +234,7 @@ def main ():
         aug.augmentations.Resize(384, 384, interpolation=1, always_apply=False, p=1) 
     ])
     
-    data = DatasetLoader(Path(cfg.DATASETS.TRAIN_IMAGES), 
-                        medimage=True,
-                        transforms=transtest,
-                        classes=[1])
+    
     
     #base_path = Path('datasets/CAMUS_resized')
     #data = DatasetLoader(base_path + '\gray',
@@ -231,8 +244,10 @@ def main ():
     #                    classes=[1])
     #split the training dataset and initialize the data loaders
     
-    train_data_loader, valid_data_loader = make_data_loaders(cfg, classes=[1, 2], is_train=True)
+    train_data_loader, valid_data_loader, test_data_loader = make_data_loaders(cfg, classes=[1, 2], is_train=True)
+
     model = start_train(cfg, train_data_loader, valid_data_loader)
+    
     if visual_debug:
         x, y = data[150]
         fig, ax = plt.subplots(1,3)
@@ -249,37 +264,37 @@ def main ():
 
     ## build the Unet2D with one channel as input and 2 channels as output
     #unet = Unet2D(cfg)
-
+#
     ##loss function and optimizer
     #loss_fn = nn.CrossEntropyLoss()
-
+#
     #opt = torch.optim.Adam(unet.parameters(), lr=learning_rate)
-
+#
     ##do some training
-    #train_loss, valid_loss = train(unet, train_data, valid_data, loss_fn, opt, dice_score, epochs=number_of_epochs)
-
-    ##plot training and validation losses
-    #if visual_debug:
-    #    plt.figure(figsize=(10,8))
-    #    plt.plot(train_loss, label='Train loss')
-    #    plt.plot(valid_loss, label='Valid loss')
-    #    plt.legend()
-    #    plt.show()
-
-    ##predict on the next train batch (is this fair?)
-    #xb, yb = next(iter(train_data))
-    #with torch.no_grad():
-    #    predb = unet(xb.cuda())
-
-    ##show the predicted segmentations
-    #if visual_debug:
-    #    fig, ax = plt.subplots(batch_size,3, figsize=(15,batch_size*5))
-    #    for i in range(batch_size):
-    #        ax[i,0].imshow(batch_to_img(xb,i))
-    #        ax[i,1].imshow(yb[i])
-    #        ax[i,2].imshow(predb_to_mask(predb, i))
-
-    #    plt.show()
+    #train_loss, valid_loss = train(unet, train_data_loader, valid_data_loader, loss_fn, opt, dice_score, epochs=number_of_epochs)
+#
+    ###plot training and validation losses
+    ##if visual_debug:
+    ##    plt.figure(figsize=(10,8))
+    ##    plt.plot(train_loss, label='Train loss')
+    ##    plt.plot(valid_loss, label='Valid loss')
+    ##    plt.legend()
+    ##    plt.show()
+#
+    ###predict on the next train batch (is this fair?)
+    ##xb, yb = next(iter(train_data))
+    ##with torch.no_grad():
+    ##    predb = unet(xb.cuda())
+#
+    ###show the predicted segmentations
+    ##if visual_debug:
+    ##    fig, ax = plt.subplots(batch_size,3, figsize=(15,batch_size*5))
+    ##    for i in range(batch_size):
+    ##        ax[i,0].imshow(batch_to_img(xb,i))
+    ##        ax[i,1].imshow(yb[i])
+    ##        ax[i,2].imshow(predb_to_mask(predb, i))
+#
+    ##    plt.show()
 
 if __name__ == "__main__":
     main()
