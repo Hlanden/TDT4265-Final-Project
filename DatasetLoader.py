@@ -139,7 +139,15 @@ if __name__ == '__main__':
         
         #aug.augmentations.transforms.HorizontalFlip(p=1)
         #aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 0, p=1) # Lagt til slik at ting kan blurres
-        aug.augmentations.transforms.Normalize (mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
+
+        #Denne slet jeg litt med å få immplementert
+        #aug.augmentations.transforms.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0)
+
+
+        #aug.augmentations.transforms.RandomCrop (300, 300, always_apply=False, p=1.0),
+
+        #Her må jeg passe på at de blir rotert likt
+        aug.augmentations.Rotate(limit=90, interpolation=1, border_mode=cv2.BORDER_WRAP, value=None, mask_value=None, always_apply=False, p=1)
 
     ])
     
