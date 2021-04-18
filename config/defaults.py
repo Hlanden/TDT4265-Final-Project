@@ -43,15 +43,12 @@ cfg.INPUT.IMAGE_SIZE = [300, 300]
 # UNETSTRUCTURE
 # -----------------------------------------------------------------------------
 cfg.UNETSTRUCTURE = CN()
+# in_channels, out_channels, kernel_size, padding
 cfg.UNETSTRUCTURE.CONTRACTBLOCK = [[cfg.MODEL.IN_CHANNELS, 32, 7, 3], 
                                     [32, 64, 3, 1],
-                                    [64, 128, 3, 1],
-                                    [128,256,3,1],
-                                    [256,512,3,1]]
+                                    [64, 128, 3, 1]]
 
-cfg.UNETSTRUCTURE.EXPANDBLOCK = [[512,256,3,1],
-                                [256*2,128,3,1],
-                                [128*2, 64, 3, 1],
+cfg.UNETSTRUCTURE.EXPANDBLOCK = [[128, 64, 3, 1],
                                 [64*2, 32, 3, 1],
                                 [32*2, cfg.MODEL.OUT_CHANNELS, 3, 1]]
 
@@ -60,6 +57,7 @@ cfg.UNETSTRUCTURE.EXPANDBLOCK = [[512,256,3,1],
 # -----------------------------------------------------------------------------
 
 cfg.PREPROCESSING = CN()
+
 # Base transformation
 cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE = CN()
 cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE = True
