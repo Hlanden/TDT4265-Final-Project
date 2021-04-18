@@ -44,7 +44,6 @@ def do_train(cfg, model,
     start_iter = arguments["iteration"]
     start_training_time = time.time()
     end = time.time()
-    
     while (time.time() - start_training_time)/60 <= cfg.SOLVER.MAX_MINUTES:        
         for iteration, (images, targets) in enumerate(train_data_loader, start_iter):
             iteration = iteration + 1
@@ -83,12 +82,19 @@ def do_train(cfg, model,
                 logger.info(meters.delimiter.join(to_log))
                 global_step = iteration
                 summary_writer.add_scalar(
-                    'losses/total_loss', loss, global_step=global_step)
+                    'losses/train_loss', loss, global_step=global_step)
                 
                 summary_writer.add_scalar(
                     'lr', optimizer.param_groups[0]['lr'],
                     global_step=global_step)
 
+                train_acc = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
+                train_acc_result = {}
+                for i, c in enumerate(cfg.MODEL.CLASSES): 
+                    train_acc_result['DICE Scores/Train - DICE Score, class {}'.format(c)] = train_acc[i]
+                for key, acc in train_acc_result.items():
+                    summary_writer.add_scalar(key, acc, global_step=global_step)
+                
             if iteration % cfg.MODEL_SAVE_STEP == 0:
                 checkpointer.save("model_{:06d}".format(iteration), **arguments)
                 
@@ -99,20 +105,24 @@ def do_train(cfg, model,
                 logger.info('Evaluating...')
                 model.train(False)
                 acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
-                for num_batches, (images, targets) in enumerate(train_data_loader):
+                val_loss = 0
+                for num_batches, (images, targets) in enumerate(val_data_loader):
                     images = torch_utils.to_cuda(images)
                     targets = torch_utils.to_cuda(targets)
                     outputs = model(images)
+                    val_loss += loss_fn(outputs, targets.long())
                     #acc += dice_score(outputs, targets) # TODO: Wait on working function
-                    dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES)).flatten()
-                    acc += dice_score
-                acc = acc/num_batches
+                    val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
+                    acc += val_dice_score
+                acc = acc/(num_batches+1)
+                val_loss = val_loss/(num_batches+1)
+                train_acc = train_acc/cfg.EVAL_STEP
 
                 eval_result = {}
-                for i, c in enumerate(cfg.MODEL.CLASSES):
-                    eval_result['DICE Score, class {}'.format(c)] = acc[i]
+                for i, c in enumerate(cfg.MODEL.CLASSES): 
+                    eval_result['DICE Scores/Val - DICE Score, class {}'.format(c)] = acc[i]
                 
-                logger.info('Evaluation result: {}'.format(eval_result))
+                logger.info('Evaluation result: {}, val loss: {}'.format(eval_result, val_loss))
                 #for eval_result in eval_result:
                 # write_metric(eval_result,
                 #             'metrics/' + cfg.DATASETS.TEST,
@@ -120,6 +130,8 @@ def do_train(cfg, model,
                 #             iteration)
                 for key, acc in eval_result.items():
                     summary_writer.add_scalar(key, acc, global_step=global_step)
+                summary_writer.add_scalar('losses/Validation loss', val_loss, global_step=global_step)
+
                 model.train(True)  # *IMPORTANT*: change to train mode after eval.
 
             if iteration >= cfg.SOLVER.MAX_ITER:
