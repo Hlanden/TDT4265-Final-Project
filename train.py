@@ -232,13 +232,17 @@ def main ():
     #split the training dataset and initialize the data loaders
     
     train_data_loader, valid_data_loader = make_data_loaders(cfg, classes=[1, 2], is_train=True)
-    start_train(cfg, train_data_loader, valid_data_loader)
+    model = start_train(cfg, train_data_loader, valid_data_loader)
     if visual_debug:
-        fig, ax = plt.subplots(1,2)
-        ax[0].imshow(data.open_as_array(150))
-        ax[1].imshow(data.open_mask(150))
+        x, y = data[150]
+        fig, ax = plt.subplots(1,3)
+        ax[0].imshow(x.squeeze())
+        ax[1].imshow(y.squeeze())
+        ax[2].imshow(predb_to_mask(model(torch.tensor(np.expand_dims(x,0)).cuda()),0))
         logger.info('Showing visual plotting')
+        plt.savefig('pic.png')
         plt.show()
+
 
     #xb, yb = next(iter(train_data))
     #print (xb.shape, yb.shape)
