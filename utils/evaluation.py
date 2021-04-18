@@ -18,11 +18,11 @@ def dice_score_multiclass(predb, yb, num_classes, smooth = 0.00001):   #num_clas
     predb = predb.argmax(dim=1)
     predb = predb.view(-1)
     yb = yb.view(-1)
-    for i in range(1,num_classes):
+    for i in range(1,num_classes+1):
         class_predb = torch.where(predb == i, 1,0) 
         class_yb = torch.where(yb == i, 1,0)
         intersection = (class_predb * class_yb).sum()
         class_dice = (2*intersection)/(predb.sum() + yb.sum() + smooth) 
         class_dice_np = class_dice.clone().cpu()               
-        dice[i-1] = class_dice_np.numpy()
+        dice[0][i-1] = class_dice_np.numpy()
     return dice

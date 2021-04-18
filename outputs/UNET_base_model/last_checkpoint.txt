@@ -1,0 +1,1 @@
+outputs/UNET_base_model/model_000500.pth
