@@ -13,6 +13,13 @@ from utils import torch_utils
 from utils.evaluation import dice_score_multiclass
 
 
+def batch_to_img(xb, idx):
+    img = np.array(xb[idx,0:3])
+    return img.transpose((1,2,0))
+
+def predb_to_mask(predb, idx):
+    p = torch.functional.F.softmax(predb[idx], 0)
+    return p.argmax(0).cpu()
 
 def write_metric(eval_result, prefix, summary_writer, global_step):
     for key in eval_result:
@@ -131,7 +138,8 @@ def do_train(cfg, model,
                 for key, acc in eval_result.items():
                     summary_writer.add_scalar(key, acc, global_step=global_step)
                 summary_writer.add_scalar('losses/Validation loss', val_loss, global_step=global_step)
-
+                print(torch.unsqueeze(outputs[0][0],0).shape)
+                summary_writer.add_image('images/Validation image 1', torch.unsqueeze(outputs[0][0],0), global_step=global_step)
                 model.train(True)  # *IMPORTANT*: change to train mode after eval.
 
             if iteration >= cfg.SOLVER.MAX_ITER:
