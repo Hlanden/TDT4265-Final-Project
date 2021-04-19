@@ -101,6 +101,28 @@ def main ():
     train_data_loader, valid_data_loader, test_data_loader = make_data_loaders(cfg, classes= cfg.MODEL.CLASSES, is_train=True)
 
     model = start_train(cfg, train_data_loader, valid_data_loader)
+
+def load_best_model(cfg):
+    logger = logging.getLogger('UNET.test')
+    model = Unet2D(cfg)
+    model = torch_utils.to_cuda(model)
+
+    optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
+    loss_fn = nn.CrossEntropyLoss()
+
+    arguments = {"iteration": 0, "epoch": 0,"running_time": 0}
+    save_to_disk = True
+    checkpointer = CheckPointer(
+        model, optimizer, cfg.OUTPUT_DIR, save_to_disk, logger,
+        )
     
+    with open(cfg.OUTPUT_DIR + '/best_checkpoint.txt') as best_file:
+        f = best_file.read().strip()
+    extra_checkpoint_data = checkpointer.load(f=f,use_latest=False)
+    arguments.update(extra_checkpoint_data)
+    return model
+
+
 if __name__ == "__main__":
     main()
+

@@ -35,7 +35,6 @@ def plot_model_from_checkpoint(cfg,
         if str(cp).__contains__('pth') and \
             str(cp)[-4-len(str(checkpoint)):-4].__contains__(str(checkpoint)) and \
                 str(cp)[-5-len(str(checkpoint))] == '0':
-            print(cp)
             cp_path = cp
             break
     if not cp_path:
@@ -54,7 +53,7 @@ def plot_model_from_checkpoint(cfg,
                                 save_to_disk,
                                 logger,
                                 )
-    extra_checkpoint_data = checkpointer.load()
+    extra_checkpoint_data = checkpointer.load(f=str(cp_path), use_latest=False)
 
     if axs is None:
         fig, axs = plt.subplots(len(image_idx), 3)
@@ -90,7 +89,10 @@ def plot_mulitple_chekpoints(cfg,
     #fig.tight_layout(pad=1.5)
     fig.suptitle('Results checkpoint: {}'.format(checkpoints))
     is_titles_set = False
-    for cp, ax in zip(checkpoints, axs):
+
+    for i in range(len(checkpoints)):
+        cp = checkpoints[i]
+        ax = axs[i]
         if not is_titles_set:
             ax[0].set_title('Original image')
             ax[1].set_title('Ground thruths')
