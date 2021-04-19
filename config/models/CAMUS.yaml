@@ -1,10 +1,15 @@
 MODEL:
     IN_CHANNELS: 1 #husk å endre i contractblock også
     OUT_CHANNELS: 4 #husk å endre i expandblock også
-INPUT:
-    IMAGE_SIZE: [96, 96]
 DATASETS:
     TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
+MODEL:
+    CLASSES: [1, 2, 3]
+PREPROCESSING:
+    ISOTROPIC_PIXEL_SIZE:
+        ENABLE: True
+        SIZE: 96
+        PROBABILITY: 1
 
 # UNETSTRUCTURE:
 #     CONTRACTBLOCK:  [[1, 32, 7, 3], #in channels er første verdi i denne listen

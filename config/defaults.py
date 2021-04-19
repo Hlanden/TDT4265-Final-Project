@@ -7,8 +7,8 @@ cfg.MODEL = CN()
 
 # TODO: Fill in right values for training
 cfg.MODEL.IN_CHANNELS = 1
-cfg.MODEL.OUT_CHANNELS = 3
-cfg.MODEL.CLASSES = [1, 2]
+cfg.MODEL.OUT_CHANNELS = 4
+cfg.MODEL.CLASSES = [1, 2, 3]
 
 # cfg.MODEL.THRESHOLD = 0.5
 # cfg.MODEL.NUM_CLASSES = 21
@@ -31,8 +31,6 @@ cfg.MODEL.CLASSES = [1, 2]
 # INPUT
 # -----------------------------------------------------------------------------
 cfg.INPUT = CN()
-# Image size
-cfg.INPUT.IMAGE_SIZE = [300, 300]
 # Values to be used for image normalization, RGB layout
 #cfg.INPUT.PIXEL_MEAN = [123.675, 116.280, 103.530]
 #cfg.INPUT.PIXEL_STD = [1, 1, 1]
@@ -65,11 +63,11 @@ cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.SIZE = 96
 cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.PROBABILITY = 1
 
 cfg.PREPROCESSING.HORIZONTALFLIP = CN()
-cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE = True
+cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE = False
 cfg.PREPROCESSING.HORIZONTALFLIP.PROBABILITY = 1
 
 cfg.PREPROCESSING.GAUSSIANSMOOTH = CN()
-cfg.PREPROCESSING.GAUSSIANSMOOTH.ENABLE = True
+cfg.PREPROCESSING.GAUSSIANSMOOTH.ENABLE = False
 cfg.PREPROCESSING.GAUSSIANSMOOTH.BLURLIMIT = 7 #kan også være en liste med to tall [tall1, tall2]
 cfg.PREPROCESSING.GAUSSIANSMOOTH.SIGMALIMIT = 0
 cfg.PREPROCESSING.GAUSSIANSMOOTH.PROBABILITY = 1
@@ -140,8 +138,8 @@ cfg.TEST.NUM_EPOCHS = 50
 cfg.TEST.EARLY_STOPPING_COUNT = 15
 cfg.TEST.EARLY_STOPPING_TOL = 10e-7
 
-cfg.EVAL_STEP = 500 # Evaluate dataset every eval_step, disabled when eval_step < 0
-cfg.MODEL_SAVE_STEP = 50 # Save checkpoint every save_step
+cfg.EVAL_STEP = 50 # Evaluate dataset every eval_step, disabled when eval_step < 0
+cfg.MODEL_SAVE_STEP = 500 # Save checkpoint every save_step
 cfg.LOG_STEP = 10 # Print logs every log_stepPrint logs every log_step
 
 cfg.OUTPUT_DIR = "outputs"
