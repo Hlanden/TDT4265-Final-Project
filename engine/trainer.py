@@ -12,14 +12,11 @@ from utils.metric_logger import MetricLogger
 from utils import torch_utils
 from utils.evaluation import dice_score_multiclass
 
-<<<<<<< HEAD
 
 def batch_to_img(xb, idx):
     img = np.array(xb[idx,0:3])
     return img.transpose((1,2,0))
 
-=======
->>>>>>> 46eaceffff2c2a2a4795e91c1875a7177d6e39fd
 def predb_to_mask(predb, idx):
     p = torch.functional.F.softmax(predb[idx], 0)
     return p.argmax(0).cpu()
@@ -142,10 +139,11 @@ def do_train(cfg, model,
                 for key, acc in eval_result.items():
                     summary_writer.add_scalar(key, acc, global_step=global_step)
                 summary_writer.add_scalar('losses/Validation loss', val_loss, global_step=global_step)
-<<<<<<< HEAD
-                print(torch.unsqueeze(outputs[0][0],0).shape)
-                summary_writer.add_image('images/Validation image 1', torch.unsqueeze(outputs[0][0],0), global_step=global_step)
-=======
+                #for i, c in enumerate(cfg.MODEL.CLASSES):
+                # img = torch.argmax(outputs[0] , dim=0)
+                # summary_writer.add_image('images/Validation image',
+                #                             torch.unsqueeze(img, 0),
+                #                             global_step=global_step)
 
                 #legger til early stopping her
                 if lowest_loss - val_loss > cfg.TEST.EARLY_STOPPING_TOL:
@@ -161,7 +159,6 @@ def do_train(cfg, model,
                     is_early_stopping = True
 
 
->>>>>>> 46eaceffff2c2a2a4795e91c1875a7177d6e39fd
                 model.train(True)  # *IMPORTANT*: change to train mode after eval.
 
             if iteration >= cfg.SOLVER.MAX_ITER or is_early_stopping:
