@@ -12,11 +12,14 @@ from utils.metric_logger import MetricLogger
 from utils import torch_utils
 from utils.evaluation import dice_score_multiclass
 
+<<<<<<< HEAD
 
 def batch_to_img(xb, idx):
     img = np.array(xb[idx,0:3])
     return img.transpose((1,2,0))
 
+=======
+>>>>>>> 46eaceffff2c2a2a4795e91c1875a7177d6e39fd
 def predb_to_mask(predb, idx):
     p = torch.functional.F.softmax(predb[idx], 0)
     return p.argmax(0).cpu()
@@ -51,7 +54,11 @@ def do_train(cfg, model,
     start_iter = arguments["iteration"]
     start_training_time = time.time()
     end = time.time()
-    while (time.time() - start_training_time)/60 <= cfg.SOLVER.MAX_MINUTES:        
+    lowest_loss = 1
+    early_stopping_count = 0
+    is_early_stopping = False
+    while (time.time() - start_training_time)/60 <= cfg.SOLVER.MAX_MINUTES and not is_early_stopping:
+        
         for iteration, (images, targets) in enumerate(train_data_loader, start_iter):
             iteration = iteration + 1
             arguments["iteration"] = iteration
@@ -125,25 +132,42 @@ def do_train(cfg, model,
                 val_loss = val_loss/(num_batches+1)
                 train_acc = train_acc/cfg.EVAL_STEP
 
+                # Tensorboard logging
                 eval_result = {}
                 for i, c in enumerate(cfg.MODEL.CLASSES): 
                     eval_result['DICE Scores/Val - DICE Score, class {}'.format(c)] = acc[i]
                 
                 logger.info('Evaluation result: {}, val loss: {}'.format(eval_result, val_loss))
-                #for eval_result in eval_result:
-                # write_metric(eval_result,
-                #             'metrics/' + cfg.DATASETS.TEST,
-                #             summary_writer,
-                #             iteration)
+              
                 for key, acc in eval_result.items():
                     summary_writer.add_scalar(key, acc, global_step=global_step)
                 summary_writer.add_scalar('losses/Validation loss', val_loss, global_step=global_step)
+<<<<<<< HEAD
                 print(torch.unsqueeze(outputs[0][0],0).shape)
                 summary_writer.add_image('images/Validation image 1', torch.unsqueeze(outputs[0][0],0), global_step=global_step)
+=======
+
+                #legger til early stopping her
+                if lowest_loss - val_loss > cfg.TEST.EARLY_STOPPING_TOL:
+                    lowest_loss = val_loss
+                    early_stopping_count = 0
+                    print('Restting lowest val')
+                else:
+                    early_stopping_count += 1
+                    print('{} > {}'.format(val_loss, lowest_loss))
+
+                if early_stopping_count >= cfg.TEST.EARLY_STOPPING_COUNT: #øker den til 50
+                    logger.info('Early stopping at iteration {}'.format(iteration))
+                    is_early_stopping = True
+
+
+>>>>>>> 46eaceffff2c2a2a4795e91c1875a7177d6e39fd
                 model.train(True)  # *IMPORTANT*: change to train mode after eval.
 
-            if iteration >= cfg.SOLVER.MAX_ITER:
+            if iteration >= cfg.SOLVER.MAX_ITER or is_early_stopping:
                 break
+
+
         start_iter = iteration
 
         

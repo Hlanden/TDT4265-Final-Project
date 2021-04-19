@@ -6,18 +6,18 @@ INPUT:
 DATASETS:
     TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
 
-UNETSTRUCTURE:
-    CONTRACTBLOCK:  [[1, 32, 7, 3], #in channels er første verdi i denne listen
-                    [32, 64, 3, 1],
-                    [64, 128, 3, 1],
-                    [128,256,3,1],
-                    [256,512,3,1]]
+# UNETSTRUCTURE:
+#     CONTRACTBLOCK:  [[1, 32, 7, 3], #in channels er første verdi i denne listen
+#                     [32, 64, 3, 1],
+#                     [64, 128, 3, 1],
+#                     [128,256,3,1],
+#                     [256,512,3,1]]
 
-    EXPANDBLOCK: [[512,256,3,1],
-                [512,128,3,1],
-                [256, 64, 3, 1],
-                [128, 32, 3, 1],
-                [64, 4 , 3, 1]] #out channels er andre verdi i denne listen
+#     EXPANDBLOCK: [[512,256,3,1],
+#                 [512,128,3,1],
+#                 [256, 64, 3, 1],
+#                 [128, 32, 3, 1],
+#                 [64, 4 , 3, 1]] #out channels er andre verdi i denne listen
     #TEST: ("mnist_detection_val", )
 # SOLVER:
     # MAX_ITER: 15000
