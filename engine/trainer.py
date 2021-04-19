@@ -12,6 +12,11 @@ from utils.metric_logger import MetricLogger
 from utils import torch_utils
 from utils.evaluation import dice_score_multiclass
 
+
+def batch_to_img(xb, idx):
+    img = np.array(xb[idx,0:3])
+    return img.transpose((1,2,0))
+
 def predb_to_mask(predb, idx):
     p = torch.functional.F.softmax(predb[idx], 0)
     return p.argmax(0).cpu()
@@ -134,6 +139,11 @@ def do_train(cfg, model,
                 for key, acc in eval_result.items():
                     summary_writer.add_scalar(key, acc, global_step=global_step)
                 summary_writer.add_scalar('losses/Validation loss', val_loss, global_step=global_step)
+                #for i, c in enumerate(cfg.MODEL.CLASSES):
+                # img = torch.argmax(outputs[0] , dim=0)
+                # summary_writer.add_image('images/Validation image',
+                #                             torch.unsqueeze(img, 0),
+                #                             global_step=global_step)
 
                 #legger til early stopping her
                 if lowest_loss - val_loss > cfg.TEST.EARLY_STOPPING_TOL:
