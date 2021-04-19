@@ -244,7 +244,7 @@ def main ():
     #                    classes=[1])
     #split the training dataset and initialize the data loaders
     
-    train_data_loader, valid_data_loader, test_data_loader = make_data_loaders(cfg, classes=[1, 2], is_train=True)
+    train_data_loader, valid_data_loader, test_data_loader = make_data_loaders(cfg, classes= cfg.MODEL.CLASSES, is_train=True)
 
     model = start_train(cfg, train_data_loader, valid_data_loader)
     
