@@ -16,7 +16,7 @@ from data.DatasetLoader import DatasetLoader
 
 def predb_to_mask(predb, idx):
     #p = torch.functional.F.softmax(predb[idx], 0)
-    return predb.argmax(dim=1).squeeze().cpu()
+    return predb.argmax(dim=1).cpu()
 
 
 def plot_model_from_checkpoint(cfg,
@@ -32,9 +32,12 @@ def plot_model_from_checkpoint(cfg,
     cp_dir = Path(cfg.OUTPUT_DIR)
     cp_path = ''
     for cp in cp_dir.iterdir():
-        if str(cp).__contains__('pth') and str(cp)[-4-len(str(checkpoint)):-4].__contains__(str(checkpoint)):
-             cp_path = cp
-             break
+        if str(cp).__contains__('pth') and \
+            str(cp)[-4-len(str(checkpoint)):-4].__contains__(str(checkpoint)) and \
+                str(cp)[-5-len(str(checkpoint))] == '0':
+            print(cp)
+            cp_path = cp
+            break
     if not cp_path:
         print('Invalid checkpoint')
         return
@@ -51,6 +54,8 @@ def plot_model_from_checkpoint(cfg,
                                 save_to_disk,
                                 logger,
                                 )
+    extra_checkpoint_data = checkpointer.load()
+
     if axs is None:
         fig, axs = plt.subplots(len(image_idx), 3)
         fig.suptitle('Checkpoint {}'.format(checkpoint))
@@ -61,9 +66,10 @@ def plot_model_from_checkpoint(cfg,
     for idx, ax in zip(image_idx, axs):
         image, target = dataset_loader[idx]
         output = model(torch.Tensor(np.expand_dims(image,0)).cuda())
+        output = output.argmax(dim=1).cpu()
         ax[0].imshow(image.squeeze())
         ax[1].imshow(target.squeeze())
-        ax[2].imshow(predb_to_mask(output,0))
+        ax[2].imshow(output.squeeze())
         
 
     if filename:
@@ -116,4 +122,4 @@ if __name__ == '__main__':
                             medimage=True,
                             classes=cfg.MODEL.CLASSES, 
                             transforms=transforms)
-    plot_mulitple_chekpoints(cfg, dataset, [100, 500, 1300], 150, config_file='config/models/CAMUS.yaml', filename='test')
+    plot_mulitple_chekpoints(cfg, dataset, [500, 1000, 1500], 150, config_file='config/models/CAMUS.yaml', filename='test')
