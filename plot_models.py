@@ -15,8 +15,8 @@ import argparse
 from data.DatasetLoader import DatasetLoader
 
 def predb_to_mask(predb, idx):
-    p = torch.functional.F.softmax(predb[idx], 0)
-    return p.argmax(0).cpu()
+    #p = torch.functional.F.softmax(predb[idx], 0)
+    return predb.argmax(dim=1).squeeze().cpu()
 
 
 def plot_model_from_checkpoint(cfg,
@@ -109,11 +109,11 @@ def plot_mulitple_chekpoints(cfg,
 
 
 if __name__ == '__main__':
-    train_data_loader, valid_data_loader = make_data_loaders(cfg, classes=cfg.MODEL.CLASSES, is_train=True)
+    train_data_loader, valid_data_loader, _ = make_data_loaders(cfg, classes=cfg.MODEL.CLASSES, is_train=True)
     transforms = build_transforms(cfg, is_plotting=True)
     dataset_list = cfg.DATASETS.TRAIN_IMAGES
     dataset = DatasetLoader(Path(dataset_list),
                             medimage=True,
                             classes=cfg.MODEL.CLASSES, 
                             transforms=transforms)
-    plot_mulitple_chekpoints(cfg, dataset, [500, 1000, 2500], 150, config_file='config/models/CAMUS.yaml', filename='test')
+    plot_mulitple_chekpoints(cfg, dataset, [100, 500, 1300], 150, config_file='config/models/CAMUS.yaml', filename='test')
