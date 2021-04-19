@@ -8,7 +8,7 @@ import torch
 
 class CheckPointer:
     _last_checkpoint_name = 'last_checkpoint.txt'
-
+    _best_checkpoint_name = 'best_checkpoint.txt'
     def __init__(self,
                  model,
                  optimizer=None,
@@ -25,7 +25,7 @@ class CheckPointer:
             logger = logging.getLogger(__name__)
         self.logger = logger
 
-    def save(self, name, **kwargs):
+    def save(self, name, is_best_cp=False, **kwargs):
         if not self.save_dir:
             return
 
@@ -45,6 +45,8 @@ class CheckPointer:
         torch.save(data, save_file)
 
         self.tag_last_checkpoint(save_file)
+        if is_best_cp:
+            self.tag_best_checkpoint(save_file)
 
     def load(self, f=None, use_latest=True):
         if self.has_checkpoint() and use_latest:
@@ -90,6 +92,11 @@ class CheckPointer:
         save_file = os.path.join(self.save_dir, self._last_checkpoint_name)
         with open(save_file, "w") as f:
             f.write(last_filename)
+    
+    def tag_best_checkpoint(self, best_filename):
+        save_file = os.path.join(self.save_dir, self._best_checkpoint_name)
+        with open(save_file, "w") as f:
+            f.write(best_filename)
 
     def _load_file(self, f):
         # download url files
