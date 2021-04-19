@@ -45,7 +45,7 @@ def start_train(cfg, train_data_loader, val_data_loader):
     optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
     loss_fn = nn.CrossEntropyLoss()
 
-    arguments = {"iteration": 0, "running_time": 0}
+    arguments = {"iteration": 0, "epoch": 0,"running_time": 0}
     save_to_disk = True
     checkpointer = CheckPointer(
         model, optimizer, cfg.OUTPUT_DIR, save_to_disk, logger,

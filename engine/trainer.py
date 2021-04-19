@@ -54,8 +54,10 @@ def do_train(cfg, model,
     lowest_loss = 1
     early_stopping_count = 0
     is_early_stopping = False
+    epoch = arguments["epoch"]
     while (time.time() - start_training_time)/60 <= cfg.SOLVER.MAX_MINUTES and not is_early_stopping:
-        
+        epoch += 1
+        arguments["epoch"] = epoch
         for iteration, (images, targets) in enumerate(train_data_loader, start_iter):
             iteration = iteration + 1
             arguments["iteration"] = iteration
@@ -105,66 +107,51 @@ def do_train(cfg, model,
                     train_acc_result['DICE Scores/Train - DICE Score, class {}'.format(c)] = train_acc[i]
                 for key, acc in train_acc_result.items():
                     summary_writer.add_scalar(key, acc, global_step=global_step)
-                
-            if iteration % cfg.MODEL_SAVE_STEP == 0:
-                checkpointer.save("model_{:06d}".format(iteration), **arguments)
-                
-
-            # TODO: Currently deactivated. Need dataloader class to make eval
-            if cfg.EVAL_STEP > 0 and iteration % cfg.EVAL_STEP == 0:
-                #eval_results = do_evaluation(cfg, model, iteration=iteration)
-                logger.info('Evaluating...')
-                model.train(False)
-                acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
-                val_loss = 0
-                for num_batches, (images, targets) in enumerate(val_data_loader):
-                    images = torch_utils.to_cuda(images)
-                    targets = torch_utils.to_cuda(targets)
-                    outputs = model(images)
-                    val_loss += loss_fn(outputs, targets.long())
-                    #acc += dice_score(outputs, targets) # TODO: Wait on working function
-                    val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
-                    acc += val_dice_score
-                acc = acc/(num_batches+1)
-                val_loss = val_loss/(num_batches+1)
-                train_acc = train_acc/cfg.EVAL_STEP
-
-                # Tensorboard logging
-                eval_result = {}
-                for i, c in enumerate(cfg.MODEL.CLASSES): 
-                    eval_result['DICE Scores/Val - DICE Score, class {}'.format(c)] = acc[i]
-                
-                logger.info('Evaluation result: {}, val loss: {}'.format(eval_result, val_loss))
-              
-                for key, acc in eval_result.items():
-                    summary_writer.add_scalar(key, acc, global_step=global_step)
-                summary_writer.add_scalar('losses/Validation loss', val_loss, global_step=global_step)
-                #for i, c in enumerate(cfg.MODEL.CLASSES):
-                # img = torch.argmax(outputs[0] , dim=0)
-                # summary_writer.add_image('images/Validation image',
-                #                             torch.unsqueeze(img, 0),
-                #                             global_step=global_step)
-
-                #legger til early stopping her
-                if lowest_loss - val_loss > cfg.TEST.EARLY_STOPPING_TOL:
-                    lowest_loss = val_loss
-                    early_stopping_count = 0
-                    print('Restting lowest val')
-                else:
-                    early_stopping_count += 1
-                    print('{} > {}'.format(val_loss, lowest_loss))
-
-                if early_stopping_count >= cfg.TEST.EARLY_STOPPING_COUNT: #øker den til 50
-                    logger.info('Early stopping at iteration {}'.format(iteration))
-                    is_early_stopping = True
-
-
-                model.train(True)  # *IMPORTANT*: change to train mode after eval.
-
+            
             if iteration >= cfg.SOLVER.MAX_ITER or is_early_stopping:
                 break
+         # TODO: Currently deactivated. Need dataloader class to make eval
+        if cfg.EVAL_AND_SAVE_EPOCH > 0 and epoch % cfg.EVAL_AND_SAVE_EPOCH == 0 and epoch > 0:
+            logger.info('Evaluating...')
+            model.train(False)
+            acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
+            val_loss = 0
+            for num_batches, (images, targets) in enumerate(val_data_loader):
+                images = torch_utils.to_cuda(images)
+                targets = torch_utils.to_cuda(targets)
+                outputs = model(images)
+                val_loss += loss_fn(outputs, targets.long())
+                #acc += dice_score(outputs, targets) # TODO: Wait on working function
+                val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
+                acc += val_dice_score
+            acc = acc/(num_batches+1)
+            val_loss = val_loss/(num_batches+1)
 
+            # Tensorboard logging
+            eval_result = {}
+            for i, c in enumerate(cfg.MODEL.CLASSES): 
+                eval_result['DICE Scores/Val - DICE Score, class {}'.format(c)] = acc[i]
+            
+            logger.info('Evaluation result: {}, val loss: {}'.format(eval_result, val_loss))
+            
+            for key, acc in eval_result.items():
+                summary_writer.add_scalar(key, acc, global_step=global_step)
+            summary_writer.add_scalar('losses/Validation loss', val_loss, global_step=global_step)
+            if lowest_loss - val_loss > cfg.TEST.EARLY_STOPPING_TOL:
+                lowest_loss = val_loss
+                early_stopping_count = 0
+                is_best_cp = True
+            else:
+                early_stopping_count += 1
+                is_best_cp = False
 
+            if early_stopping_count >= cfg.TEST.EARLY_STOPPING_COUNT: #øker den til 50
+                logger.info('Early stopping at epoch {}'.format(epoch))
+                is_early_stopping = True
+
+            model.train(True)  # *IMPORTANT*: change to train mode after eval.
+
+            checkpointer.save("model_{:03d}".format(epoch), is_best_cp=is_best_cp, **arguments)
         start_iter = iteration
 
         
