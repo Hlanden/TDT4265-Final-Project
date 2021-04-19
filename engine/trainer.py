@@ -116,41 +116,41 @@ def do_train(cfg, model,
             model.train(False)
             acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
             val_loss = 0
-            for num_batches, (images, targets) in enumerate(val_data_loader):
-                images = torch_utils.to_cuda(images)
-                targets = torch_utils.to_cuda(targets)
-                outputs = model(images)
-                val_loss += loss_fn(outputs, targets.long())
-                #acc += dice_score(outputs, targets) # TODO: Wait on working function
-                val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
-                acc += val_dice_score
-            acc = acc/(num_batches+1)
-            val_loss = val_loss/(num_batches+1)
+            with torch.no_grad():
+                for num_batches, (images, targets) in enumerate(val_data_loader):
+                    images = torch_utils.to_cuda(images)
+                    targets = torch_utils.to_cuda(targets)
+                    outputs = model(images)
+                    val_loss += loss_fn(outputs, targets.long())
+                    #acc += dice_score(outputs, targets) # TODO: Wait on working function
+                    val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
+                    acc += val_dice_score
+                acc = acc/(num_batches+1)
+                val_loss = val_loss/(num_batches+1)
 
-            # Tensorboard logging
-            eval_result = {}
-            for i, c in enumerate(cfg.MODEL.CLASSES): 
-                eval_result['DICE Scores/Val - DICE Score, class {}'.format(c)] = acc[i]
-            
-            logger.info('Evaluation result: {}, val loss: {}'.format(eval_result, val_loss))
-            
-            for key, acc in eval_result.items():
-                summary_writer.add_scalar(key, acc, global_step=global_step)
-            summary_writer.add_scalar('losses/Validation loss', val_loss, global_step=global_step)
-            if lowest_loss - val_loss > cfg.TEST.EARLY_STOPPING_TOL:
-                lowest_loss = val_loss
-                early_stopping_count = 0
-                is_best_cp = True
-            else:
-                early_stopping_count += 1
-                is_best_cp = False
+                # Tensorboard logging
+                eval_result = {}
+                for i, c in enumerate(cfg.MODEL.CLASSES): 
+                    eval_result['DICE Scores/Val - DICE Score, class {}'.format(c)] = acc[i]
+                
+                logger.info('Evaluation result: {}, val loss: {}'.format(eval_result, val_loss))
+                
+                for key, acc in eval_result.items():
+                    summary_writer.add_scalar(key, acc, global_step=global_step)
+                summary_writer.add_scalar('losses/Validation loss', val_loss, global_step=global_step)
+                if lowest_loss - val_loss > cfg.TEST.EARLY_STOPPING_TOL:
+                    lowest_loss = val_loss
+                    early_stopping_count = 0
+                    is_best_cp = True
+                else:
+                    early_stopping_count += 1
+                    is_best_cp = False
 
-            if early_stopping_count >= cfg.TEST.EARLY_STOPPING_COUNT: #øker den til 50
-                logger.info('Early stopping at epoch {}'.format(epoch))
-                is_early_stopping = True
+                if early_stopping_count >= cfg.TEST.EARLY_STOPPING_COUNT: #øker den til 50
+                    logger.info('Early stopping at epoch {}'.format(epoch))
+                    is_early_stopping = True
 
             model.train(True)  # *IMPORTANT*: change to train mode after eval.
-
             checkpointer.save("model_{:03d}".format(epoch), is_best_cp=is_best_cp, **arguments)
         start_iter = iteration
 
