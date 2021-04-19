@@ -140,13 +140,8 @@ cfg.TEST.NUM_EPOCHS = 50
 cfg.TEST.EARLY_STOPPING_COUNT = 15
 cfg.TEST.EARLY_STOPPING_TOL = 10e-7
 
-<<<<<<< HEAD
-cfg.EVAL_STEP = 10 # Evaluate dataset every eval_step, disabled when eval_step < 0
-cfg.MODEL_SAVE_STEP = 500 # Save checkpoint every save_step
-=======
 cfg.EVAL_STEP = 500 # Evaluate dataset every eval_step, disabled when eval_step < 0
 cfg.MODEL_SAVE_STEP = 50 # Save checkpoint every save_step
->>>>>>> c011b612ea1611eb1bd617250f6f8c2ec5d63bd5
 cfg.LOG_STEP = 10 # Print logs every log_stepPrint logs every log_step
 
 cfg.OUTPUT_DIR = "outputs"
