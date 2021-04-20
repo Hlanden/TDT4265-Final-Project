@@ -110,12 +110,12 @@ class DatasetLoader(Dataset):
         #     y = self.rotate_image(y)
         if self.transforms:
             #aug_data = self.transforms(image=x.squeeze()) #ikke noe problem med å legge til squeeze her hilsen Gabriel Kiss
-            aug_gray = self.transforms(image=x.squeeze()) 
-            x = np.expand_dims(aug_gray["image"], 0)
+            aug_data = self.transforms(image=x.squeeze(), gt=y.squeeze()) 
+            x = np.expand_dims(aug_data["image"], 0)
             
 
-            aug_gt = self.transforms(image=y)
-            y = aug_gt["image"]
+            #aug_gt = self.transforms(image=y)
+            y = aug_data["gt"]
         
         return x, y
     

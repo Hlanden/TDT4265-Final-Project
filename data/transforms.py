@@ -22,6 +22,6 @@ def build_transforms(cfg,
 
             trans_list.append(aug.augmentations.transforms.GaussianBlur(blur_limit=bl, sigma_limit = sl, p=pr)) 
     
-    final_transform = aug.Compose(trans_list)
+    final_transform = aug.Compose(trans_list, additional_targets={'gt': 'image'})
     
     return final_transform
