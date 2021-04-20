@@ -17,6 +17,7 @@ from medimage.medimage import image
 from torchvision.transforms.transforms import ToPILImage, ToTensor
 import torchvision.transforms.functional as TF
 import cv2
+from data.transforms import Resize
 
 #load data from a folder
 class DatasetLoader(Dataset):
@@ -137,10 +138,12 @@ if __name__ == '__main__':
 
     transtest = aug.Compose([
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
-        
+        Resize(0, 0, fx=1, fy=2, interpolation=1, always_apply=False, p=1)
+        #MAKE PADDIGN
+        #RESIZE DOWN 
         #aug.augmentations.transforms.HorizontalFlip(p=1)
         #aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 0, p=1) # Lagt til slik at ting kan blurres
-        aug.augmentations.transforms.Rotate(limit=90, p=0.5)
+        #aug.augmentations.transforms.Rotate(limit=90, p=0.5)
 
     ], additional_targets={'gt': 'image',})
     
