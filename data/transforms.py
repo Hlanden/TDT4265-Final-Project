@@ -51,7 +51,11 @@ def build_transforms(cfg,
         si = cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.SIZE
         pr = cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.PROBABILITY
         #trans_list.append(aug.augmentations.Resize(si, si, interpolation=cv2.INTER_LINEAR, always_apply=False, p=pr))
-        trans_list.append(Resize(si, si, interpolation=cv2.INTER_LINEAR, always_apply=False, p=pr))
+        #trans_list.append(Resize(si, si, interpolation=cv2.INTER_LINEAR, always_apply=False, p=pr))
+        trans_list.append(Resize(0, 0, fx=1, fy=2, interpolation=1, always_apply=False, p=1))
+        trans_list.append(Padding(always_apply=False, p=1))
+        trans_list.append(aug.augmentations.Resize(si, si, interpolation=cv2.INTER_LINEAR, always_apply=False, p=pr))
+
     if not is_plotting and is_train:
         if cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE:
             pr = cfg.PREPROCESSING.HORIZONTALFLIP.PROBABILITY 
