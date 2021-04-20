@@ -52,7 +52,7 @@ def start_train(cfg, train_data_loader, val_data_loader):
         )
     extra_checkpoint_data = checkpointer.load()
     arguments.update(extra_checkpoint_data)
-
+    logger.info('Number of parameters: {:.2f}M'.format(sum(p.numel() for p in model.parameters() if p.requires_grad)/(1000000)))
     max_iter = cfg.SOLVER.MAX_ITER
 
     model = do_train(
@@ -97,8 +97,10 @@ def main ():
         config_str = "\n" + cf.read()
         logger.info(config_str)
     logger.info("Running with config:\n{}".format(cfg))
+    
 
     train_data_loader, valid_data_loader, test_data_loader = make_data_loaders(cfg, classes= cfg.MODEL.CLASSES, is_train=True)
+        
 
     model = start_train(cfg, train_data_loader, valid_data_loader)
 
