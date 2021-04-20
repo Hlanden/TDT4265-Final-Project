@@ -1,3 +1,7 @@
+if __name__ == '__main__':
+    import os
+    import sys
+    sys.path.append(os.getcwd())
 from matplotlib.colors import cnames
 import numpy as np
 from numpy.core import numeric
@@ -116,6 +120,8 @@ class DatasetLoader(Dataset):
 
             #aug_gt = self.transforms(image=y)
             y = aug_data["gt"]
+            #print('transformed x: ', x.shape)
+            #print('trasformed y', y.shape)
         
         return x, y
     
@@ -127,16 +133,20 @@ class DatasetLoader(Dataset):
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
-    import os
+    import random
 
     transtest = aug.Compose([
-        aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
-        #aug.HorizontalFlip(p=1)
-    ])
-    
-    data = DatasetLoader(Path('patient0001',''),gt_dir='' , transforms=transtest)
+        #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
+        
+        #aug.augmentations.transforms.HorizontalFlip(p=1)
+        #aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 0, p=1) # Lagt til slik at ting kan blurres
+        aug.augmentations.transforms.Rotate(limit=90, p=0.5)
 
-    train_data = DataLoader(data, batch_size=5, shuffle=True)
+    ], additional_targets={'gt': 'image',})
+    
+    dataset = DatasetLoader(Path('patients',''),gt_dir='' , transforms=transtest)
+
+    train_data = DataLoader(dataset, batch_size=4, shuffle=True)
     import matplotlib.pyplot as plt
 
     fig, axs = plt.subplots(2,4)
@@ -145,22 +155,24 @@ if __name__ == '__main__':
     #fig, ax2 = plt.subplots(1,5)
     ax2 = ax2.flat
     ax = ax.flat
-    for data in train_data:
-        i = 0
-        gray = data[0]
-        gt = data[1]
+    #random.seed(42)
+    #for i in range(10):
+    i = 0
+    for data in dataset:
+        x = data[0]
+        y = data[1]
 
-        #print(gray.shape)
-        #print(gt.shape)
+        # print(gray.shape)
+        # print(gt.shape)
 
-        for x, y in zip(gray, gt):
+        # for x, y in zip(gray, gt):
 
-            print(x.shape)
-            print(y.shape)
+        print(x.shape)
+        print(y.shape)
 
-            ax[i].imshow(x.squeeze())
-            ax2[i].imshow(y.squeeze())
-            i += 1
-        plt.show()
-        print(i)
-        os.exit()
+        ax[i].imshow(x.squeeze())
+        ax2[i].imshow(y.squeeze())
+        i += 1
+    plt.savefig('test.png')
+        
+        # os.exit()
