@@ -140,12 +140,13 @@ if __name__ == '__main__':
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
         Resize(0, 0, fx=1, fy=2, interpolation=1, always_apply=False, p=1),
         Padding(always_apply=False, p=1),
-        aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1)
+        aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1),
         #MAKE PADDIGN
         #RESIZE DOWN 
         #aug.augmentations.transforms.HorizontalFlip(p=1)
         #aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 0, p=1) # Lagt til slik at ting kan blurres
         #aug.augmentations.transforms.Rotate(limit=90, p=0.5)
+        aug.augmentations.transforms.ElasticTransform(alpha=300, sigma=30, alpha_affine=1, interpolation=1, border_mode=1, always_apply=False, p=1)
 
     ], additional_targets={'gt': 'image',})
     
@@ -178,6 +179,6 @@ if __name__ == '__main__':
         ax[i].imshow(x.squeeze())
         ax2[i].imshow(y.squeeze())
         i += 1
-    plt.savefig('test.png')
+    plt.savefig('test_trans.png')
         
         # os.exit()
