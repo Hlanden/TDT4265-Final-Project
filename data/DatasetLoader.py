@@ -17,7 +17,7 @@ from medimage.medimage import image
 from torchvision.transforms.transforms import ToPILImage, ToTensor
 import torchvision.transforms.functional as TF
 import cv2
-from data.transforms import Resize
+from data.transforms import Resize, Padding
 
 #load data from a folder
 class DatasetLoader(Dataset):
@@ -138,7 +138,8 @@ if __name__ == '__main__':
 
     transtest = aug.Compose([
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
-        Resize(0, 0, fx=1, fy=2, interpolation=1, always_apply=False, p=1)
+        Resize(0, 0, fx=0.5, fy=1, interpolation=1, always_apply=False, p=1),
+        Padding(always_apply=False, p=1),
         #MAKE PADDIGN
         #RESIZE DOWN 
         #aug.augmentations.transforms.HorizontalFlip(p=1)

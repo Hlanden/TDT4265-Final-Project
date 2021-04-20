@@ -1,6 +1,6 @@
 import albumentations as aug
 import cv2
-from albumentations.core.transforms_interface import DualTransform
+from albumentations.core.transforms_interface import DualTransform, ImageOnlyTransform
 
 class Resize(DualTransform):
     """Resize the input to the given height and width.
@@ -27,6 +27,20 @@ class Resize(DualTransform):
 
     def apply(self, img, interpolation=cv2.INTER_LINEAR, **params):
         return cv2.resize(img, dsize=(self.height, self.width), fx=self.fx, fy=self.fy, interpolation=interpolation) 
+
+class Padding(ImageOnlyTransform):
+    def __init__(self, always_apply=False, p=0.5):
+        super(Padding, self).__init__(always_apply, p)
+
+    def apply(self, img, **params):
+        height, width = img.shape
+        top = bottom = int((width - height)/2) if width > height else 0 
+        right = left = -int((width - height)/2) if width < height else 0 
+        if height + 2*top < width + 2*right:
+            top += 1
+        elif height + 2*top > width + 2*right:
+            right += 1
+        return cv2.copyMakeBorder(img, top, bottom, right, left, cv2.BORDER_CONSTANT)
 
 def build_transforms(cfg, 
                      is_plotting=False,
