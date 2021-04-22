@@ -60,8 +60,8 @@ cfg.PREPROCESSING = CN()
 cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE = CN()
 cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE = True
 cfg.PREPROCESSING.RESIZE = CN()
-cfg.PREPROCESSING.RESIZE.FX = 0.154/0.5
-cfg.PREPROCESSING.RESIZE.FY = 0.308/0.5
+cfg.PREPROCESSING.RESIZE.FX = 0.5
+cfg.PREPROCESSING.RESIZE.FY = 0.5
 
 cfg.PREPROCESSING.NORMALIZE = CN()
 cfg.PREPROCESSING.NORMALIZE.ENABLE = False
@@ -89,28 +89,9 @@ cfg.PREPROCESSING.ELASTICDEFORM.PROBABILITY = 0.5
 
 
 cfg.DROPOUT = CN()
-cfg.DROPOUT.ENABLE = True
+cfg.DROPOUT.ENABLE = False
 cfg.DROPOUT.PROB = 0.15
 
-
-#cfg.PREPROCESSING = CN()
-# Base transformation
-#cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE = True
-cfg.PREPROCESSING.IMAGE_FILTERING = True
-
-
-# Transformations in data augmentation
-cfg.PREPROCESSING.DATA_AUGMENTATION = CN()
-
-# Random sample crop
-cfg.PREPROCESSING.DATA_AUGMENTATION.RANDOM_SAMPLE_CROP = CN()
-cfg.PREPROCESSING.DATA_AUGMENTATION.RANDOM_SAMPLE_CROP.ENABLED = True
-# TODO: Add hyperparams here
-
-# Random rotation
-cfg.PREPROCESSING.DATA_AUGMENTATION.RANDOM_ROTATION = CN()
-cfg.PREPROCESSING.DATA_AUGMENTATION.RANDOM_ROTATION.ENABLED = True
-# TODO: Add hyperparams here
 
 # -----------------------------------------------------------------------------
 # Dataset
@@ -159,7 +140,8 @@ cfg.TEST.EARLY_STOPPING_COUNT = 10
 cfg.TEST.EARLY_STOPPING_TOL = 10e-7
 
 
-cfg.EVAL_AND_SAVE_EPOCH = 5 # Evaluate dataset every eval_step, disabled when eval_step < 0
+cfg.EVAL_EPOCH = 2 # Evaluate dataset every eval_step, disabled when eval_step < 0
+cfg.SAVE_EPOCH = 5 
 cfg.FIND_LR_ITERATION  = 0 
 # cfg.MODEL_SAVE_STEP = 100 # Save checkpoint every save_step
 cfg.LOG_STEP = 10 # Print logs every log_stepPrint logs every log_step

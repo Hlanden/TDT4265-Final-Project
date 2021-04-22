@@ -51,9 +51,8 @@ def build_transforms(cfg,
     additional_trans_list = [] #kun gt blir endret
     val_trans_list = [] #bilde og gt blir endret
     if cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE:
-
-        fx_num = cfg.PREPROCESSING.RESIZE.FX
-        fy_num = cfg.PREPROCESSING.RESIZE.FY
+        fx_num = 0.154/cfg.PREPROCESSING.RESIZE.FX
+        fy_num = 0.308/cfg.PREPROCESSING.RESIZE.FY
 
         train_trans_list.append(Resize(0, 0, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
         val_trans_list.append(Resize(0, 0, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))

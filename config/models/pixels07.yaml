@@ -1,0 +1,8 @@
+PREPROCESSING:
+    RESIZE:
+      FX: 0.7
+      FY: 0.7
+
+OUTPUT_DIR: 'outputs/pixels07'
+LOGGER:
+    SAVE_DIR: True

@@ -78,7 +78,7 @@ def get_parser():
     )
     return parser
 
-def main ():
+def main (logger=None):
     args = get_parser().parse_args()
     print(args)
     cfg.merge_from_file(args.config_file)
@@ -88,7 +88,7 @@ def main ():
 
     output_dir = Path(cfg.OUTPUT_DIR)
     output_dir.mkdir(exist_ok=True, parents=True)
-
+    
     logger = setup_logger("UNET", output_dir)
     logger.info(args)
 
@@ -103,6 +103,8 @@ def main ():
      
 
     model = start_train(cfg, train_data_loader, valid_data_loader)
+    for handler in logger.handlers[:]:
+        logger.removeHandler(handler)
 
 def load_best_model(cfg):
     logger = logging.getLogger('UNET.test')
@@ -128,9 +130,10 @@ def load_best_model(cfg):
 if __name__ == "__main__":
     import sys
     sys.argv.append('--config_file=config/models/DeeperNetwork.yaml')
+    logging.getLogger('UNET')
     main()
-    sys.argv[1] = '--config_file=config/models/07_pixelsize.yaml'
+    sys.argv[1] = '--config_file=config/models/pixels07.yaml'
     main()
-    sys.argv[1] = '--config_file=config/models/03_pixelsize.yaml'
+    sys.argv[1] = '--config_file=config/models/pixels03.yaml'
     main()
 
