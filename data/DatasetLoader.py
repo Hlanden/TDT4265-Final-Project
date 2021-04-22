@@ -117,13 +117,11 @@ class DatasetLoader(Dataset):
         #     y = self.rotate_image(y)
         if self.transforms:
             if type(self.transforms) == list:
-                print('Diff')
                 img_data = self.transforms[0](image=x.squeeze()) 
                 target_data = self.transforms[1](image=y.squeeze()) 
                 x = img_data["image"]
                 y = target_data["image"]
             else:
-                print('The same')
                 #aug_data = self.transforms(image=x.squeeze()) #ikke noe problem med å legge til squeeze her hilsen Gabriel Kiss
                 aug_data = self.transforms(image=x.squeeze(), gt=y.squeeze()) 
                 x = aug_data["image"]
