@@ -124,4 +124,4 @@ if __name__ == '__main__':
                             medimage=True,
                             classes=cfg.MODEL.CLASSES, 
                             transforms=transforms)
-    plot_mulitple_chekpoints(cfg, dataset, [500, 1000, 1500], 150, config_file='config/models/CAMUS.yaml', filename='test')
+    plot_mulitple_chekpoints(cfg, dataset, [2, 4], 150, config_file='config/models/CAMUS.yaml', filename='test')

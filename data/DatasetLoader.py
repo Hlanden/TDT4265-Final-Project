@@ -28,7 +28,8 @@ class DatasetLoader(Dataset):
                  flip=False,
                  pytorch=True,
                  medimage=True,
-                 classes=[1, 2]):  # legger til muligheten for transform her
+                 classes=[1, 2], 
+                 model_depth=False):  # legger til muligheten for transform her
 
         super().__init__()
         # TODO: Fix if statement below. Not obvious enough to understand what is happening!
@@ -50,6 +51,7 @@ class DatasetLoader(Dataset):
         self.classes = classes
         self.flip = flip
         self.transforms = transforms
+        self.model_depth = model_depth
 
     def combine_files(self, gray_file: Path, gt_dir, camus=True):
         if camus:
@@ -116,11 +118,24 @@ class DatasetLoader(Dataset):
         if self.transforms:
             #aug_data = self.transforms(image=x.squeeze()) #ikke noe problem med å legge til squeeze her hilsen Gabriel Kiss
             aug_data = self.transforms(image=x.squeeze(), gt=y.squeeze()) 
-            x = np.expand_dims(aug_data["image"], 0)
-            
-
+            x = aug_data["image"]
             #aug_gt = self.transforms(image=y)
             y = aug_data["gt"]
+
+            if self.model_depth:
+                img_shape = x.shape
+                pad_x = 2**self.model_depth - img_shape[0] % 2**self.model_depth
+                pad_y = 2**self.model_depth - img_shape[1] % 2**self.model_depth
+
+                x = np.vstack([x, np.zeros((pad_x, x.shape[1]))])
+                y = np.vstack([y, np.zeros((pad_x, x.shape[1]))])
+                x = np.hstack([x, np.zeros((x.shape[0], pad_y))])
+                y = np.hstack([y, np.zeros((y.shape[0], pad_y))])
+
+            x = np.expand_dims(x, 0)
+
+
+
             #print('transformed x: ', x.shape)
             #print('trasformed y', y.shape)
         
@@ -138,9 +153,9 @@ if __name__ == '__main__':
 
     transtest = aug.Compose([
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
-        Resize(0, 0, fx=1, fy=2, interpolation=1, always_apply=False, p=1),
-        Padding(always_apply=False, p=1),
-        aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1),
+        Resize(0, 0, fx=1, fy=1, interpolation=1, always_apply=False, p=1),
+        #Padding(always_apply=False, p=1),
+        #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1)
         #MAKE PADDIGN
         #RESIZE DOWN 
         #aug.augmentations.transforms.HorizontalFlip(p=1)

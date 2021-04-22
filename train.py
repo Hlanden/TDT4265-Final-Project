@@ -98,9 +98,9 @@ def main ():
         logger.info(config_str)
     logger.info("Running with config:\n{}".format(cfg))
     
-
-    train_data_loader, valid_data_loader, test_data_loader = make_data_loaders(cfg, classes= cfg.MODEL.CLASSES, is_train=True)
-        
+    depth = len(cfg.UNETSTRUCTURE.CONTRACTBLOCK)
+    train_data_loader, valid_data_loader, test_data_loader = make_data_loaders(cfg, classes= cfg.MODEL.CLASSES, is_train=True, model_depth=depth)
+     
 
     model = start_train(cfg, train_data_loader, valid_data_loader)
 

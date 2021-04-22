@@ -14,9 +14,12 @@ def to_cuda(elements):
     elements can be a object or list/tuple of objects
     """
     if torch.cuda.is_available():
-        if type(elements) == tuple or type(elements) == list:
-            return [x.cuda() for x in elements]
-        return elements.cuda()
+        try:
+            if type(elements) == tuple or type(elements) == list:
+                return [x.cuda() for x in elements]
+            return elements.cuda()
+        except Exception as e:
+            print('No CUDA available...')
     return elements
 
 
