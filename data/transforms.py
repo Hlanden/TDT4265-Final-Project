@@ -47,21 +47,32 @@ def build_transforms(cfg,
                      is_plotting=False,
                      is_train=True):
 
-    train_trans_list = []
-    target_trans_list = []
-
+    train_trans_list = [] #liste der gt og bilde blir endret
+    target_trans_list = [] #kun bilde blir endret
+    val_trans_list = []
     if cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE:
-        # si = cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.SIZE
-        # pr = cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.PROBABILITY
-        # #trans_list.append(aug.augmentations.Resize(si, si, interpolation=cv2.INTER_LINEAR, always_apply=False, p=pr))
-        # #trans_list.append(Resize(si, si, interpolation=cv2.INTER_LINEAR, always_apply=False, p=pr))
-        # trans_list.append(Resize(0, 0, fx=1, fy=2, interpolation=1, always_apply=False, p=1))
-        # trans_list.append(Padding(always_apply=False, p=1))
-        # trans_list.append(aug.augmentations.Resize(si, si, interpolation=cv2.INTER_LINEAR, always_apply=False, p=pr))
-        train_trans_list.append(Resize(0, 0, fx=0.5, fy=1, interpolation=cv2.INTER_LINEAR, p=1))
-        train_trans_list.append(aug.augmentations.transforms.Normalize(mean=0.0, std=0.5, max_pixel_value=255.0, always_apply=False, p=1.0))
-        target_trans_list.append(Resize(0, 0, fx=0.5, fy=1, interpolation=cv2.INTER_LINEAR, p=1))
-        target_trans_list.append(aug.augmentations.transforms.Normalize(mean=0.0, std=0.5, max_pixel_value=255.0, always_apply=False, p=1.0))
+
+        fx_num = cfg.PREPROCESSING.RESIZE.FX
+        fy_num = cfg.PREPROCESSING.RESIZE.FY
+
+        train_trans_list.append(Resize(0, 0, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
+        val_trans_list.append(Resize(0, 0, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1)))
+
+    if cfg.PREPROCESSING.NORMALIZE.ENABLE:
+        m = cfg.PREPROCESSING.NORMALIZE.MEAN
+        s = cfg.PREPROCESSING.NORMALIZE.STD
+
+        target_trans_list.append(aug.augmentations.transforms.Normalize(mean= m, std = s, max_pixel_value=255.0, always_apply=False, p=1.0))
+
+    if cfg.PREPROCESSING.ELASTICDEFORM.ENABLE:
+        a = cfg.PREPROCESSING.ELASTICDEFORM.ALPHA
+        sig = cfg.PREPROCESSING.ELASTICDEFORM.SIGMA
+        a_af = cfg.PREPROCESSING.ELASTICDEFORM.ALPHA_AFFINE
+        pr = cfg.PREPROCESSING.ELASTICDEFORM.PROBABILITY
+
+        train_trans_list.append(aug.augmentations.transforms.ElasticTransform(alpha=a, sigma=sig, alpha_affine=a_af, interpolation=1, border_mode=1, always_apply=False, p=pr))
+        
+
     if not is_plotting and is_train:
         if cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE:
             pr = cfg.PREPROCESSING.HORIZONTALFLIP.PROBABILITY 
@@ -74,9 +85,11 @@ def build_transforms(cfg,
 
             train_trans_list.append(aug.augmentations.transforms.GaussianBlur(blur_limit=bl, sigma_limit = sl, p=pr)) 
     
-    final_transform = aug.Compose(train_trans_list, additional_targets={'gt': 'image'})
+    
     if is_train:
+        train_transform = aug.Compose(train_trans_list, additional_targets={'gt': 'image'})
         target_transform = aug.Compose(target_trans_list)
-        return final_transform, target_transform
+        return train_transform, target_transform
     else:
-        return final_transform
+        val_transform = aug.Compose(val_trans_list, additional_targets={'gt': 'image'})
+        return val_transform
