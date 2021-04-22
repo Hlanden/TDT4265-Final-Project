@@ -4,7 +4,7 @@ from torch import nn
 class Unet2D(nn.Module):
     def __init__(self, cfg):
         super().__init__()
-        
+        self.cfg = cfg
         self.contract_blocks = []
         for c_block in cfg.UNETSTRUCTURE.CONTRACTBLOCK:
             self.contract_blocks.append(self.contract_block(*c_block))
@@ -56,16 +56,31 @@ class Unet2D(nn.Module):
 
         return contract
 
+    #det er inn hit han sammenligner i Unettet
     def expand_block(self, in_channels, out_channels, kernel_size, padding):
 
-        expand = nn.Sequential(torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=padding),
+        if self.cfg.DROPOUT.ENABLE:
+            expand = nn.Sequential(torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=padding),
                             torch.nn.BatchNorm2d(out_channels),
                             torch.nn.ReLU(),
+                            torch.nn.Dropout(self.cfg.DROPOUT.PROB),
 
                             torch.nn.Conv2d(out_channels, out_channels, kernel_size, stride=1, padding=padding),
                             torch.nn.BatchNorm2d(out_channels),
                             torch.nn.ReLU(),
+                            torch.nn.Dropout(self.cfg.DROPOUT.PROB),
 
                             torch.nn.ConvTranspose2d(out_channels, out_channels, kernel_size=3, stride=2, padding=1, output_padding=1) 
                             )
+        else:
+            expand = nn.Sequential(torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=padding),
+                                torch.nn.BatchNorm2d(out_channels),
+                                torch.nn.ReLU(),
+
+                                torch.nn.Conv2d(out_channels, out_channels, kernel_size, stride=1, padding=padding),
+                                torch.nn.BatchNorm2d(out_channels),
+                                torch.nn.ReLU(),
+
+                                torch.nn.ConvTranspose2d(out_channels, out_channels, kernel_size=3, stride=2, padding=1, output_padding=1) 
+                                )
         return expand
