@@ -17,7 +17,8 @@ from medimage.medimage import image
 from torchvision.transforms.transforms import ToPILImage, ToTensor
 import torchvision.transforms.functional as TF
 import cv2
-from data.transforms import Resize, Padding
+from data.transforms import Resize, Padding, build_transforms
+from config.defaults import cfg
 
 #load data from a folder
 class DatasetLoader(Dataset):
@@ -169,8 +170,8 @@ if __name__ == '__main__':
         aug.augmentations.transforms.ElasticTransform(alpha=300, sigma=30, alpha_affine=1, interpolation=1, border_mode=1, always_apply=False, p=1)
 
     ], additional_targets={'gt': 'image',})
-    
-    dataset = DatasetLoader(Path('patients',''),gt_dir='' , transforms=transtest)
+    train_transform, target_transform = build_transforms(cfg, is_train=True)
+    dataset = DatasetLoader(Path('patients',''),gt_dir='' , transforms=[train_transform, target_transform])
 
     train_data = DataLoader(dataset, batch_size=4, shuffle=True)
     import matplotlib.pyplot as plt
@@ -195,6 +196,7 @@ if __name__ == '__main__':
 
         print(x.shape)
         print(y.shape)
+        print(np.amax(y))
 
         ax[i].imshow(x.squeeze())
         ax2[i].imshow(y.squeeze())
