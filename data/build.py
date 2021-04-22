@@ -1,4 +1,4 @@
-from torch.utils.data import DataLoader, random_split
+from torch.utils.data import DataLoader, random_split, Subset
 from data.transforms import build_transforms
 from data.DatasetLoader import DatasetLoader
 from pathlib import Path
@@ -15,7 +15,9 @@ def make_data_loaders(cfg, classes=[1, 2], is_train=True):
                             classes=classes)
     batch_size = cfg.TEST.BATCH_SIZE if is_train else cfg.TEST.BATCH_SIZE
 
-    train_dataset, valid_dataset, test_dataset = random_split(dataset, (1200, 400, 200))
+    test_dataset = Subset(dataset, range(1600,1800))
+    train_val_dataset = Subset(dataset, range(0,1600))
+    train_dataset, valid_dataset = random_split(train_val_dataset, (1200, 400))
     train_dataset.dataset = copy(dataset)
     
     valid_dataset.dataset.transforms = val_transform

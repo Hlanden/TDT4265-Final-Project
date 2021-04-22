@@ -56,6 +56,14 @@ def build_transforms(cfg,
         trans_list.append(Padding(always_apply=False, p=1))
         trans_list.append(aug.augmentations.Resize(si, si, interpolation=cv2.INTER_LINEAR, always_apply=False, p=pr))
 
+    if cfg.PREPROCESSING.ELASTICDEFORM.ENABLE:
+        a = cfg.PREPROCESSING.ELASTICDEFORM.ALPHA
+        sig = cfg.PREPROCESSING.ELASTICDEFORM.SIGMA
+        a_affine = cfg.PREPROCESSING.ELASTICDEFORM.ALPHA_AFFINE
+        pr = cfg.PREPROCESSING.ELASTICDEFORM.PROBABILITY
+
+        trans_list.append(aug.augmentations.transforms.ElasticTransform(alpha=a, sigma=sig, alpha_affine=a_affine, interpolation=1, border_mode=1, always_apply=False, p=pr))
+
     if not is_plotting and is_train:
         if cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE:
             pr = cfg.PREPROCESSING.HORIZONTALFLIP.PROBABILITY 
