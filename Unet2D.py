@@ -4,7 +4,7 @@ from torch import nn
 class Unet2D(nn.Module):
     def __init__(self, cfg):
         super().__init__()
-
+        
         self.contract_blocks = []
         for c_block in cfg.UNETSTRUCTURE.CONTRACTBLOCK:
             self.contract_blocks.append(self.contract_block(*c_block))
@@ -32,7 +32,10 @@ class Unet2D(nn.Module):
         upconv_output = []
         
         for op, up_block in zip(reversed(outputs), self.upconv_blocks):
+            
             if upconv_output:
+                print('OP block: ', op.shape)
+                print('Upconv block: ', upconv_output[-1].shape)
                 upconv_output.append(up_block(torch.cat([upconv_output[-1], op], 1)))
             else:
                 upconv_output.append(up_block(op))
