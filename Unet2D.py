@@ -34,8 +34,6 @@ class Unet2D(nn.Module):
         for op, up_block in zip(reversed(outputs), self.upconv_blocks):
             
             if upconv_output:
-                print('OP block: ', op.shape)
-                print('Upconv block: ', upconv_output[-1].shape)
                 upconv_output.append(up_block(torch.cat([upconv_output[-1], op], 1)))
             else:
                 upconv_output.append(up_block(op))
