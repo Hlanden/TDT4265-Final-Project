@@ -63,7 +63,7 @@ def do_train(cfg, model,
             arguments["iteration"] = iteration
             
             
-            images = torch_utils.to_cuda(images)
+            images = torch_utils.to_cuda(images).float()
             targets = torch_utils.to_cuda(targets)
             outputs = model(images)
             
@@ -118,6 +118,7 @@ def do_train(cfg, model,
             val_loss = 0
             with torch.no_grad():
                 for num_batches, (images, targets) in enumerate(val_data_loader):
+                    print('Image size: ', images[0].shape)
                     images = torch_utils.to_cuda(images)
                     targets = torch_utils.to_cuda(targets)
                     outputs = model(images)
