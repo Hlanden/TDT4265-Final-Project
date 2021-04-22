@@ -59,6 +59,7 @@ cfg.PREPROCESSING = CN()
 # Base transformation
 cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE = CN()
 cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE = True
+cfg.PREPROCESSING.RESIZE = CN()
 cfg.PREPROCESSING.RESIZE.FX = 0.154/0.5
 cfg.PREPROCESSING.RESIZE.FY = 0.308/0.5
 
@@ -135,7 +136,7 @@ cfg.DATA_LOADER.PIN_MEMORY = True
 cfg.SOLVER = CN()
 # train configs
 cfg.SOLVER.MAX_ITER = 120000
-cfg.SOLVER.MAX_MINUTES = 50
+cfg.SOLVER.MAX_MINUTES = 720
 # cfg.SOLVER.GAMMA = 0.1
 # cfg.SOLVER.BATCH_SIZE = 32
 cfg.SOLVER.LR = 1e-2
@@ -154,10 +155,12 @@ cfg.TEST = CN()
 # cfg.TEST.MAX_PER_IMAGE = 100
 cfg.TEST.BATCH_SIZE = 12
 cfg.TEST.NUM_EPOCHS = 50
-cfg.TEST.EARLY_STOPPING_COUNT = 15
+cfg.TEST.EARLY_STOPPING_COUNT = 10
 cfg.TEST.EARLY_STOPPING_TOL = 10e-7
 
-cfg.EVAL_AND_SAVE_EPOCH = 2 # Evaluate dataset every eval_step, disabled when eval_step < 0
+
+cfg.EVAL_AND_SAVE_EPOCH = 5 # Evaluate dataset every eval_step, disabled when eval_step < 0
+cfg.FIND_LR_ITERATION  = 0 
 # cfg.MODEL_SAVE_STEP = 100 # Save checkpoint every save_step
 cfg.LOG_STEP = 10 # Print logs every log_stepPrint logs every log_step
 

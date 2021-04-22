@@ -1,0 +1,4 @@
+FIND_LR_ITERATION: 1000
+OUTPUT_DIR: 'outputs/UNET_base_model_lr_finder'
+LOGGER:
+  SAVE_DIR: True 

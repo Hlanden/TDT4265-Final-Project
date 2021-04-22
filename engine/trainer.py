@@ -119,17 +119,20 @@ def do_train(cfg, model,
             model.train(False)
             acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
             val_loss = 0
+            total_img = 0
             with torch.no_grad():
                 for num_batches, (images, targets) in enumerate(val_data_loader):
+                    batch_size = images.shape[0]
+                    total_img += batch_size
                     images = torch_utils.to_cuda(images)
                     targets = torch_utils.to_cuda(targets)
                     outputs = model(images)
-                    val_loss += loss_fn(outputs, targets.long())
+                    val_loss += loss_fn(outputs, targets.long())*batch_size
                     #acc += dice_score(outputs, targets) # TODO: Wait on working function
                     val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
-                    acc += val_dice_score
-                acc = acc/(num_batches+1)
-                val_loss = val_loss/(num_batches+1)
+                    acc += val_dice_score*batch_size
+                acc = acc/total_img
+                val_loss = val_loss/total_img
 
                 # Tensorboard logging
                 eval_result = {}
@@ -155,11 +158,22 @@ def do_train(cfg, model,
 
             model.train(True)  # *IMPORTANT*: change to train mode after eval.
             checkpointer.save("model_{:03d}".format(epoch), is_best_cp=is_best_cp, **arguments)
-        if cfg.FIND_LR_EPOCH > 0 and epoch % cfg.FIND_LR_EPOCH == 0 and epoch > 0:
+        if cfg.FIND_LR_ITERATION > 0 and iteration % cfg.FIND_LR_ITERATION == 0 and iteration > 0:
             logger.info('Finding new LR')
             
             lr_finder.range_test(train_data_loader, end_lr=100, num_iter=100)
             lr_finder.plot()
+            min_grad_idx = None
+            lrs = lr_finder.history["lr"]
+            losses = lr_finder.history["loss"]
+            try:
+                min_grad_idx = (np.gradient(np.array(losses))).argmin()
+            except ValueError:
+                logger.info(
+                    "Failed to compute the gradients, there might not be enough points."
+                )
+            if min_grad_idx is not None:
+                logger.info("Suggested LR: {:.2E}".format(lrs[min_grad_idx]))
             lr_finder.reset()
             plot_path = os.path.join(cfg.OUTPUT_DIR, 'lr_finder')
             if not os.path.exists(plot_path):
