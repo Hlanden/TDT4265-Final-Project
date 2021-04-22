@@ -90,24 +90,78 @@ def main():
 
     test_loss = 0
     acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
+    total_img = 0
     with torch.no_grad():
         for num_batches, (images, targets) in enumerate(test_data_loader):
             print('Image size: ', images[0].shape)
+            batch_size = images.shape[0]
+            total_img += batch_size
             images = torch_utils.to_cuda(images)
             targets = torch_utils.to_cuda(targets)
             outputs = model(images)
-            test_loss += loss_fn(outputs, targets.long())
+            test_loss += loss_fn(outputs, targets.long())*batch_size
             #acc += dice_score(outputs, targets) # TODO: Wait on working function
             test_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
-            acc += test_dice_score
-        acc = acc/(num_batches+1)
-        test_loss = val_loss/(num_batches+1)
+            acc += test_dice_score*batch_size
+        acc = acc/total_img
+        test_loss = val_loss/total_img
         
 
         eval_result = {}
         for i, c in enumerate(cfg.MODEL.CLASSES): 
             eval_result['DICE Scores/Test - DICE Score, class {}'.format(c)] = acc[i]
+        print("Final test loss", test_loss)        
 
+
+    val_loss = 0
+    acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
+    total_img = 0
+    with torch.no_grad():
+        for num_batches, (images, targets) in enumerate(test_data_loader):
+            print('Image size: ', images[0].shape)
+            batch_size = images.shape[0]
+            total_img += batch_size
+            images = torch_utils.to_cuda(images)
+            targets = torch_utils.to_cuda(targets)
+            outputs = model(images)
+            val_loss += loss_fn(outputs, targets.long())*batch_size
+            #acc += dice_score(outputs, targets) # TODO: Wait on working function
+            val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
+            acc += val_dice_score*batch_size
+        acc = acc/total_img
+        val_loss = val_loss/total_img
+        
+
+        eval_result = {}
+        for i, c in enumerate(cfg.MODEL.CLASSES): 
+            eval_result['DICE Scores/Val - DICE Score, class {}'.format(c)] = acc[i]
+        print("Final val loss", val_loss)   
+
+    train_loss = 0
+    acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
+    total_img = 0
+    with torch.no_grad():
+        for num_batches, (images, targets) in enumerate(test_data_loader):
+            print('Image size: ', images[0].shape)
+            batch_size = images.shape[0]
+            total_img += batch_size
+            images = torch_utils.to_cuda(images)
+            targets = torch_utils.to_cuda(targets)
+            outputs = model(images)
+            train_loss += loss_fn(outputs, targets.long())*batch_size
+            #acc += dice_score(outputs, targets) # TODO: Wait on working function
+            train_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
+            acc += train_dice_score*batch_size
+        acc = acc/total_img
+        train_loss = train_loss/total_img
+        
+
+        eval_result = {}
+        for i, c in enumerate(cfg.MODEL.CLASSES): 
+            eval_result['DICE Scores/Train - DICE Score, class {}'.format(c)] = acc[i]
+        print("Final Train loss", Train loss)   
+
+    
 
 if __name__ == '__main__':
     main()
