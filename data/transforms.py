@@ -47,22 +47,22 @@ def build_transforms(cfg,
                      is_plotting=False,
                      is_train=True):
 
-    train_trans_list = [] #liste der gt og bilde blir endret
-    target_trans_list = [] #kun bilde blir endret
-    val_trans_list = []
+    train_trans_list = [] #liste der bilde blir endret
+    additional_trans_list = [] #kun gt blir endret
+    val_trans_list = [] #bilde og gt blir endret
     if cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE:
 
         fx_num = cfg.PREPROCESSING.RESIZE.FX
         fy_num = cfg.PREPROCESSING.RESIZE.FY
 
         train_trans_list.append(Resize(0, 0, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
-        val_trans_list.append(Resize(0, 0, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1)))
+        val_trans_list.append(Resize(0, 0, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
 
     if cfg.PREPROCESSING.NORMALIZE.ENABLE:
         m = cfg.PREPROCESSING.NORMALIZE.MEAN
         s = cfg.PREPROCESSING.NORMALIZE.STD
 
-        target_trans_list.append(aug.augmentations.transforms.Normalize(mean= m, std = s, max_pixel_value=255.0, always_apply=False, p=1.0))
+        additional_trans_list.append(aug.augmentations.transforms.Normalize(mean= m, std = s, max_pixel_value=255.0, always_apply=False, p=1.0))
 
     if cfg.PREPROCESSING.ELASTICDEFORM.ENABLE:
         a = cfg.PREPROCESSING.ELASTICDEFORM.ALPHA
@@ -88,8 +88,8 @@ def build_transforms(cfg,
     
     if is_train:
         train_transform = aug.Compose(train_trans_list, additional_targets={'gt': 'image'})
-        target_transform = aug.Compose(target_trans_list)
-        return train_transform, target_transform
+        additional_transform = aug.Compose(additional_trans_list)
+        return train_transform, additional_transform
     else:
         val_transform = aug.Compose(val_trans_list, additional_targets={'gt': 'image'})
         return val_transform

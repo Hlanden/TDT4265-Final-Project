@@ -11,7 +11,8 @@ from engine.inference import do_evaluation
 from utils.metric_logger import MetricLogger
 from utils import torch_utils
 from utils.evaluation import dice_score_multiclass
-
+from torch_lr_finder import LRFinder
+import matplotlib.pyplot as plt
 
 def batch_to_img(xb, idx):
     img = np.array(xb[idx,0:3])
@@ -43,6 +44,8 @@ def do_train(cfg, model,
     meters = MetricLogger()
 
     model.train()
+    
+    lr_finder = LRFinder(model, optimizer, loss_fn, device="cuda")
 
     summary_writer = torch.utils.tensorboard.SummaryWriter(
         log_dir=os.path.join(cfg.OUTPUT_DIR, 'tf_logs'))
@@ -58,6 +61,8 @@ def do_train(cfg, model,
     while (time.time() - start_training_time)/60 <= cfg.SOLVER.MAX_MINUTES and not is_early_stopping:
         epoch += 1
         arguments["epoch"] = epoch
+        
+        
         for iteration, (images, targets) in enumerate(train_data_loader, start_iter):
             iteration = iteration + 1
             arguments["iteration"] = iteration
@@ -150,6 +155,16 @@ def do_train(cfg, model,
 
             model.train(True)  # *IMPORTANT*: change to train mode after eval.
             checkpointer.save("model_{:03d}".format(epoch), is_best_cp=is_best_cp, **arguments)
+        if cfg.FIND_LR_EPOCH > 0 and epoch % cfg.FIND_LR_EPOCH == 0 and epoch > 0:
+            logger.info('Finding new LR')
+            
+            lr_finder.range_test(train_data_loader, end_lr=100, num_iter=100)
+            lr_finder.plot()
+            lr_finder.reset()
+            plot_path = os.path.join(cfg.OUTPUT_DIR, 'lr_finder')
+            if not os.path.exists(plot_path):
+                os.makedirs(plot_path)
+            plt.savefig(plot_path + '/epoch{}.png'.format(epoch))
         start_iter = iteration
 
         

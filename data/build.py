@@ -60,7 +60,7 @@ def custom_collate(batch):
     return images.float(), targets.long()
 
 def make_data_loaders(cfg, classes=[1, 2], is_train=True, model_depth=False):
-    train_transform, target_transform = build_transforms(cfg, is_train=True)
+    image_transform, additional_transform = build_transforms(cfg, is_train=True)
     val_transform = build_transforms(cfg, is_train=False)
 
     dataset_list = cfg.DATASETS.TRAIN_IMAGES if is_train else cfg.DATASETS.TEST_IMAGES
@@ -76,8 +76,8 @@ def make_data_loaders(cfg, classes=[1, 2], is_train=True, model_depth=False):
     train_dataset, valid_dataset = random_split(train_val_dataset, (1200, 400))
     train_dataset.dataset = copy(dataset)
 
-    
-    train_dataset.dataset.transforms = [train_transform, target_transform]
+
+    train_dataset.dataset.transforms = [image_transform, additional_transform]
     valid_dataset.dataset.transforms = val_transform
     test_dataset.dataset.transforms = val_transform
     
