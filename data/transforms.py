@@ -59,7 +59,9 @@ def build_transforms(cfg,
         # trans_list.append(Padding(always_apply=False, p=1))
         # trans_list.append(aug.augmentations.Resize(si, si, interpolation=cv2.INTER_LINEAR, always_apply=False, p=pr))
         train_trans_list.append(Resize(0, 0, fx=0.5, fy=1, interpolation=cv2.INTER_LINEAR, p=1))
+        train_trans_list.append(aug.augmentations.transforms.Normalize(mean=0.0, std=0.5, max_pixel_value=255.0, always_apply=False, p=1.0))
         target_trans_list.append(Resize(0, 0, fx=0.5, fy=1, interpolation=cv2.INTER_LINEAR, p=1))
+        target_trans_list.append(aug.augmentations.transforms.Normalize(mean=0.0, std=0.5, max_pixel_value=255.0, always_apply=False, p=1.0))
     if not is_plotting and is_train:
         if cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE:
             pr = cfg.PREPROCESSING.HORIZONTALFLIP.PROBABILITY 
