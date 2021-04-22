@@ -121,7 +121,6 @@ class DatasetLoader(Dataset):
             x = aug_data["image"]
             #aug_gt = self.transforms(image=y)
             y = aug_data["gt"]
-
             if self.model_depth:
                 img_shape = x.shape
                 pad_x = 2**self.model_depth - img_shape[0] % 2**self.model_depth

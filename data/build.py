@@ -13,27 +13,41 @@ def custom_collate(batch):
     # Credits: https://discuss.pytorch.org/t/how-to-create-a-dataloader-with-variable-size-input/8278/3
     data = [item[0] for item in batch]
     target = [item[1] for item in batch]
-    shapes = [item[0].shape for item in batch]
+
+    max_x = 0
+    max_y = 0
+    for item in batch:
+        max_x = item[0].shape[1] if item[0].shape[1] > max_x else max_x 
+        max_y = item[0].shape[2] if item[0].shape[2] > max_y else max_y
+    shapes = []
     ## get sequence lengths
-    max_len = max(shapes)
+    #max_shape = max(shapes)
    
-    images = np.zeros((len(data), *max_len))
-    targets = np.zeros((len(data), *max_len[1:]))
+    images = np.zeros((len(data), 1, max_x, max_y))
+    targets = np.zeros((len(data), max_x, max_y))
+ 
     #labels = torch.tensor(labels)
     shapes = torch.tensor(shapes)
 
     for i in range(len(data)):
         j, k = data[i][0].shape
-        pad_x = max_len[1] - j
-        pad_y = max_len[2] - k
+        
+        pad_x = max_x - j
+        pad_y = max_y - k
+        try:
 
-        padded_img = np.vstack((data[i][0], np.zeros((pad_x, k))))
-        padded_target = np.vstack((target[i], np.zeros((pad_x, k))))
-        padded_target = np.hstack((padded_target, np.zeros((padded_img.shape[0], pad_y))))
-        padded_img = np.hstack((padded_img, np.zeros((padded_img.shape[0], pad_y))))
+            padded_img = np.vstack((data[i][0], np.zeros((pad_x, k))))
+            padded_target = np.vstack((target[i], np.zeros((pad_x, k))))
+            padded_target = np.hstack((padded_target, np.zeros((padded_img.shape[0], pad_y))))
+            padded_img = np.hstack((padded_img, np.zeros((padded_img.shape[0], pad_y))))
+        except Exception:
+            print('max x', max_x)
+            print('max y', max_y)
+            #print('Padded: ', padded_img.shape[0])
+            print('pad_y ', pad_y)
+
         images[i][0] = padded_img
         targets[i] = padded_target
-        
     
     """
     Should return a tensor, but not possible when the sizes are different...
@@ -42,7 +56,8 @@ def custom_collate(batch):
     """
     images = torch.from_numpy(images)
     targets = torch.from_numpy(targets)
-    return images.float(), shapes.long()
+
+    return images.float(), targets.long()
 
 def make_data_loaders(cfg, classes=[1, 2], is_train=True, model_depth=False):
     train_transform = build_transforms(cfg, is_train=True)
