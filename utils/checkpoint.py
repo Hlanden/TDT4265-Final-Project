@@ -83,6 +83,18 @@ class CheckPointer:
             # deleted by a separate process
             last_saved = ""
         return last_saved
+        
+    def get_best_checkpoint_file(self):
+        save_file = os.path.join(self.save_dir, self._best_checkpoint_name)
+        try:
+            with open(save_file, "r") as f:
+                last_saved = f.read()
+                last_saved = last_saved.strip()
+        except IOError:
+            # if file doesn't exist, maybe because it has just been
+            # deleted by a separate process
+            last_saved = ""
+        return last_saved
 
     def has_checkpoint(self):
         save_file = os.path.join(self.save_dir, self._last_checkpoint_name)
