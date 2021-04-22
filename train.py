@@ -126,5 +126,11 @@ def load_best_model(cfg):
 
 
 if __name__ == "__main__":
+    import sys
+    sys.argv.append('--config_file=config/models/DeeperNetwork.yaml')
+    main()
+    sys.argv[1] = '--config_file=config/models/07_pixelsize.yaml'
+    main()
+    sys.argv[1] = '--config_file=config/models/03_pixelsize.yaml'
     main()
 
