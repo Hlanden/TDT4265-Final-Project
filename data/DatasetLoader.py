@@ -4,6 +4,7 @@ if __name__ == '__main__':
     sys.path.append(os.getcwd())
 from itertools import tee
 from matplotlib.colors import cnames
+from matplotlib.pyplot import axes
 import numpy as np
 from numpy.core import numeric
 import torch
@@ -37,7 +38,6 @@ class DatasetLoader(Dataset):
         print('Loading data from: ', self.dataset_dir)
         self.classes = cfg.MODEL.CLASSES
         self.model_depth = len(cfg.UNETSTRUCTURE.CONTRACTBLOCK)
-        self.flip = True if tee else False
         self.tee = tee
         self.transforms = transforms
             
@@ -109,14 +109,17 @@ class DatasetLoader(Dataset):
                 combined_classes += np.where(raw_mask==c, c, 0).astype(np.uint8)
             raw_mask = combined_classes
 
-        else:
-            raw_mask = np.array(Image.open(self.files[idx]['gt']))            
-            raw_mask = np.where(raw_mask>100, 1, 0)
-        
+        else:               
+            raw_mask = np.array(Image.open(self.files[idx]['gt']))
+            raw_mask = raw_mask[:,:,1]
+            combined_classes = np.zeros_like(raw_mask)
+            for c in [1, 2]:
+                combined_classes += np.where(raw_mask==int(127.5*c), c, 0).astype(np.uint8)
+            raw_mask = combined_classes
+            
         return np.expand_dims(raw_mask, 0) if add_dims else raw_mask
     
-    def rotate_image(self, img):
-        return img.flip(2)
+
         
 
     def __getitem__(self, idx):
@@ -125,9 +128,11 @@ class DatasetLoader(Dataset):
         x = self.open_as_array(idx, invert=True).astype(np.float32)
         y = self.open_mask(idx, add_dims=False).astype(np.float32)
 
-        # if self.flip:
-        #     x = self.rotate_image(x)
-        #     y = self.rotate_image(y)
+        if self.tee:
+            x = np.rot90(x, k=2, axes=(1, 2))
+            y = np.rot90(y, k=2)
+        
+            
         if self.transforms:
             if type(self.transforms) == list:
                 aug_data = self.transforms[0](image=x.squeeze(), gt=y.squeeze()) 
@@ -143,23 +148,21 @@ class DatasetLoader(Dataset):
                 x = aug_data["image"]
                 #aug_gt = self.transforms(image=y)
                 y = aug_data["gt"]
-            if self.model_depth:
-                img_shape = x.shape
-                pad_x = 2**self.model_depth - img_shape[0] % 2**self.model_depth
-                pad_y = 2**self.model_depth - img_shape[1] % 2**self.model_depth
-
-                x = np.vstack([x, np.zeros((pad_x, x.shape[1]))])
-                y = np.vstack([y, np.zeros((pad_x, x.shape[1]))])
-                x = np.hstack([x, np.zeros((x.shape[0], pad_y))])
-                y = np.hstack([y, np.zeros((y.shape[0], pad_y))])
-
             x = np.expand_dims(x, 0)
 
+        if self.model_depth:
+            x = x.squeeze()
+            img_shape = x.shape
+            pad_x = 2**self.model_depth - img_shape[0] % 2**self.model_depth
+            pad_y = 2**self.model_depth - img_shape[1] % 2**self.model_depth
 
+            x = np.vstack([x, np.zeros((pad_x, x.shape[1]))])
+            y = np.vstack([y, np.zeros((pad_x, x.shape[1]))])
+            x = np.hstack([x, np.zeros((x.shape[0], pad_y))])
+            y = np.hstack([y, np.zeros((y.shape[0], pad_y))])
 
-            #print('transformed x: ', x.shape)
-            #print('trasformed y', y.shape)
-        
+            x = np.expand_dims(x, 0)
+             
         return x, y
     
     def get_as_pil(self, idx):
@@ -181,24 +184,28 @@ if __name__ == '__main__':
         #MAKE PADDIGN
         #RESIZE DOWN 
         #aug.augmentations.transforms.HorizontalFlip(p=1)
-        aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 1, p=1) # Lagt til slik at ting kan blurres
+        #aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 1, p=1) # Lagt til slik at ting kan blurres
         #aug.augmentations.transforms.Rotate(limit=90, p=0.5)
         #aug.augmentations.transforms.ElasticTransform(alpha=300, sigma=25, alpha_affine=1, interpolation=1, border_mode=1, always_apply=False, p=1)
 
     ], additional_targets={'gt': 'image',})
-<<<<<<< HEAD
     test_trans = build_transforms(cfg, is_train=False, tee=True)
 
-    dataset = DatasetLoader(cfg,
-                            tee=False,
-                            transforms=[])
-=======
-    train_transform, target_transform = build_transforms(cfg, is_train=True)
-    dataset = DatasetLoader(Path('patients',''),gt_dir='' , transforms= transtest) #[train_transform, target_transform])
->>>>>>> 2a3ac2da68a2fd8d31a0ce195c72815094a5a27c
+    
 
-    dataset = Subset(dataset, range(0, 4))
+    dataset = DatasetLoader(cfg,
+                            tee=True,
+                            transforms=[])
+    dataset.classes = [1, 2]
+    
+    # tee_data_loader = DataLoader(dataset,
+    #                              num_workers=cfg.DATA_LOADER.NUM_WORKERS,
+    #                              pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
+    #                              batch_size=1,
+    #                              #shuffle=True,
+    #                              collate_fn)
     import matplotlib.pyplot as plt
+
 
     fig, axs = plt.subplots(2,4)
     ax =axs[0]
@@ -209,7 +216,7 @@ if __name__ == '__main__':
     #random.seed(42)
     #for i in range(10):
     i = 0
-    for data in dataset:
+    for data in Subset(dataset, range(0,4)):
         x = data[0]
         y = data[1]
 
@@ -217,14 +224,16 @@ if __name__ == '__main__':
         # print(gt.shape)
 
         # for x, y in zip(gray, gt):
-
-        print(x.shape)
-        print(y.shape)
-        print(np.amax(y))
-
+        values = []
+        for j in y.flat:
+            if not values.__contains__(j):
+                values.append(j)
+        print(values)
+        
         ax[i].imshow(x.squeeze())
         ax2[i].imshow(y.squeeze())
         i += 1
-    plt.savefig('test_trans.png')
+    plt.legend()
+    plt.savefig('tee_rot.png')
         
-        # os.exit()
+    #     # os.exit()
