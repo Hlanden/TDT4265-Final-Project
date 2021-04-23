@@ -129,11 +129,11 @@ def load_best_model(cfg):
 
 if __name__ == "__main__":
     import sys
-    sys.argv.append('--config_file=config/models/DeeperNetwork.yaml')
-    logging.getLogger('UNET')
+    #sys.argv.append('--config_file=config/models/DeeperNetwork.yaml')
+    #logging.getLogger('UNET')
     main()
-    sys.argv[1] = '--config_file=config/models/pixels07.yaml'
-    main()
-    sys.argv[1] = '--config_file=config/models/pixels03.yaml'
-    main()
+    #sys.argv[1] = '--config_file=config/models/pixels07.yaml'
+    #main()
+    #sys.argv[1] = '--config_file=config/models/pixels03.yaml'
+    #main()
 
