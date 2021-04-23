@@ -1,0 +1,1 @@
+outputs/nomalize_image_new_try/model_012.pth
