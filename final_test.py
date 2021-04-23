@@ -71,10 +71,10 @@ def main():
     train_data_loader, val_data_loader, test_data_loader = make_data_loaders(cfg)
     tee_data_loader = make_data_loaders(cfg, tee=True)
 
-    loaders = {'Train': train_data_loader,
-               'Validation': val_data_loader,
-               'Test': test_data_loader,}
-               #'TEE': tee_data_loader}
+    loaders = {#'Train': train_data_loader,
+               #'Validation': val_data_loader,
+               #'Test': test_data_loader,
+               'TEE': tee_data_loader}
 
 
 

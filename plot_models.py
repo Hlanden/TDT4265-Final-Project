@@ -117,9 +117,8 @@ def plot_mulitple_chekpoints(cfg,
 
 
 if __name__ == '__main__':
-    train_data_loader, valid_data_loader, _ = make_data_loaders(cfg, classes=cfg.MODEL.CLASSES, is_train=True)
-    transforms, additional_transforms = build_transforms(cfg)
-    dataset_list = cfg.DATASETS.TRAIN_IMAGES
+    transforms,_ = build_transforms(cfg, is_train=True, tee=False)
     dataset = DatasetLoader(cfg,
-                            transforms=transforms)
-    plot_mulitple_chekpoints(cfg, dataset, [2, 50, 76], 150, config_file='config/models/CAMUS.yaml', filename='test')
+                            transforms=transforms, 
+                            tee=False)
+    plot_mulitple_chekpoints(cfg, dataset, [2, 50, 76], 0, config_file='config/models/CAMUS.yaml', filename='test')

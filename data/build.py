@@ -9,7 +9,7 @@ import torch
 import numpy as np
 from utils.torch_utils import to_cuda
 
-def custom_collate(batch):
+def custom_collate(batch, tee=False):
     # Credits: https://discuss.pytorch.org/t/how-to-create-a-dataloader-with-variable-size-input/8278/3
     data = [item[0] for item in batch]
     target = [item[1] for item in batch]
@@ -25,7 +25,7 @@ def custom_collate(batch):
    
     images = np.zeros((len(data), 1, max_x, max_y))
     targets = np.zeros((len(data), max_x, max_y))
- 
+    #print('mx', max_x, 'my', max_y)
     #labels = torch.tensor(labels)
     shapes = torch.tensor(shapes)
 
@@ -34,20 +34,27 @@ def custom_collate(batch):
         
         pad_x = max_x - j
         pad_y = max_y - k
-        try:
 
-            padded_img = np.vstack((data[i][0], np.zeros((pad_x, k))))
-            padded_target = np.vstack((target[i], np.zeros((pad_x, k))))
-            padded_target = np.hstack((padded_target, np.zeros((padded_img.shape[0], pad_y))))
-            padded_img = np.hstack((padded_img, np.zeros((padded_img.shape[0], pad_y))))
-        except Exception:
+        try:
+            if pad_x:
+                padded_img = np.vstack((data[i][0], np.zeros((pad_x, k))))
+                padded_target = np.vstack((target[i], np.zeros((pad_x, k))))
+            else:
+                padded_img = data[i][0]
+                padded_target = target[i]
+            if pad_y:
+                padded_target = np.hstack((padded_target, np.zeros((padded_img.shape[0], pad_y))))
+                padded_img = np.hstack((padded_img, np.zeros((padded_img.shape[0], pad_y))))
+        except Exception as e:
             print('max x', max_x)
             print('max y', max_y)
             #print('Padded: ', padded_img.shape[0])
             print('pad_y ', pad_y)
 
         images[i][0] = padded_img
+        
         targets[i] = padded_target
+        
     
     """
     Should return a tensor, but not possible when the sizes are different...
@@ -105,5 +112,5 @@ def make_data_loaders(cfg,
                                      pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
                                      batch_size=1,
                                      #shuffle=True,
-                                     collate_fn=custom_collate)
+                                     collate_fn=lambda x: custom_collate(x, tee=True))
         return tee_data_loader
