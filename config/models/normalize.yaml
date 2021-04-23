@@ -1,0 +1,8 @@
+PREPROCESSING:
+    NORMALIZE:
+        ENABLE: True
+        MEAN: 0.25
+        STD: 0.2
+
+
+OUTPUT_DIR: 'outputs/nomalize_image_new_try'

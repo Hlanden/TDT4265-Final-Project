@@ -23,6 +23,9 @@ import argparse
 import albumentations as aug
 from data.build import make_data_loaders
 
+
+from backboned_unet.unet import Unet 
+
 def start_train(cfg, train_data_loader, val_data_loader):
     """
     Starts training the model with configurations defined by cfg.
@@ -39,11 +42,33 @@ def start_train(cfg, train_data_loader, val_data_loader):
     
     """
     logger = logging.getLogger('UNET.trainer')
-    model = Unet2D(cfg)
+
+
+    #maybe go inn and tweak here???
+    if cfg.MODEL.BACKBONE.USE:
+        model = Unet(
+                backbone_name= cfg.MODEL.BACKBONE.NET,
+                pretrained=cfg.MODEL.BACKBONE.PRETRAINED,
+                encoder_freeze=cfg.MODEL.BACKBONE.ENCODER_FREZE,
+                classes = cfg.MODEL.OUT_CHANNELS,
+                decoder_filters=cfg.MODEL.BACKBONE.DECODER_FILTERS ,
+                parametric_upsampling=cfg.MODEL.BACKBONE.PARAMETRIC_UPSAMPLING ,
+                shortcut_features=cfg.MODEL.BACKBONE.SHORTCUT_FEATURES,
+                decoder_use_batchnorm=cfg.MODEL.BACKBONE.DECODER_USE_BATCHNORM,)
+
+    else:
+        model = Unet2D(cfg)
     model = torch_utils.to_cuda(model)
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
-    loss_fn = nn.CrossEntropyLoss()
+    if cfg.SOLVER.DIFFRENT:
+        optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.SOLVER.LR)
+    else:
+        optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
+
+    if cfg.LOSS.DIFFRENT:
+        loss_fn = nn.CrossEntropyLoss()
+    else:
+        loss_fn = nn.CrossEntropyLoss()
 
     arguments = {"iteration": 0, "epoch": 0,"running_time": 0}
     save_to_disk = True
@@ -99,7 +124,7 @@ def main (logger=None):
     logger.info("Running with config:\n{}".format(cfg))
     
     depth = len(cfg.UNETSTRUCTURE.CONTRACTBLOCK)
-    train_data_loader, valid_data_loader, test_data_loader = make_data_loaders(cfg, classes= cfg.MODEL.CLASSES, is_train=True, model_depth=depth)
+    train_data_loader, valid_data_loader, test_data_loader = make_data_loaders(cfg)
      
 
     model = start_train(cfg, train_data_loader, valid_data_loader)
@@ -111,8 +136,16 @@ def load_best_model(cfg):
     model = Unet2D(cfg)
     model = torch_utils.to_cuda(model)
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
-    loss_fn = nn.CrossEntropyLoss()
+    if cfg.SOLVER.DIFFRENT:
+        optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
+    else:
+        optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
+
+
+    if cfg.LOSS.DIFFRENT:
+        loss_fn = nn.CrossEntropyLoss()
+    else:
+        loss_fn = nn.CrossEntropyLoss()
 
     arguments = {"iteration": 0, "epoch": 0,"running_time": 0}
     save_to_disk = True
@@ -128,12 +161,19 @@ def load_best_model(cfg):
 
 
 if __name__ == "__main__":
-    import sys
-    sys.argv.append('--config_file=config/models/DeeperNetwork.yaml')
-    logging.getLogger('UNET')
     main()
-    sys.argv[1] = '--config_file=config/models/pixels07.yaml'
-    main()
-    sys.argv[1] = '--config_file=config/models/pixels03.yaml'
-    main()
+    #sys.argv[1] = '--config_file=config/models/pixels07.yaml'
+    #main()
+    #sys.argv[1] = '--config_file=config/models/pixels03.yaml'
+    #main()
+
+
+    # import sys
+    # sys.argv.append('--config_file=config/models/DeeperNetwork.yaml')
+    # logging.getLogger('UNET')
+    # main()
+    # sys.argv[1] = '--config_file=config/models/pixels07.yaml'
+    # main()
+    # sys.argv[1] = '--config_file=config/models/pixels03.yaml'
+    # main()
 

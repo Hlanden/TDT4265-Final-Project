@@ -1,4 +1,4 @@
-OUTPUT_DIR: 'outputs/UNET_base_model'
+OUTPUT_DIR: 'outputs/UNET_isotropic'
 LOGGER:
     SAVE_DIR: True
   

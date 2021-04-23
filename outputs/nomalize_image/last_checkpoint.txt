@@ -1,0 +1,1 @@
+outputs/nomalize_image/model_006.pth

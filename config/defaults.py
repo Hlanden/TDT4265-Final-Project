@@ -10,6 +10,11 @@ cfg.MODEL.IN_CHANNELS = 1
 cfg.MODEL.OUT_CHANNELS = 4
 cfg.MODEL.CLASSES = [1, 2, 3]
 
+
+#use of backbone models
+
+
+
 # cfg.MODEL.THRESHOLD = 0.5
 # cfg.MODEL.NUM_CLASSES = 21
 # # Hard negative mining
@@ -20,11 +25,21 @@ cfg.MODEL.CLASSES = [1, 2, 3]
 # ---------------------------------------------------------------------------- #
 # Backbone
 # ---------------------------------------------------------------------------- #
-# cfg.MODEL.BACKBONE = CN()
+cfg.MODEL.BACKBONE = CN()
 # cfg.MODEL.BACKBONE.NAME = 'vgg'
 # cfg.MODEL.BACKBONE.OUT_CHANNELS = (512, 1024, 512, 256, 256, 256)
 # cfg.MODEL.BACKBONE.PRETRAINED = True
 # cfg.MODEL.BACKBONE.INPUT_CHANNELS = 3
+cfg.MODEL.BACKBONE.USE = False
+cfg.MODEL.BACKBONE.NET = 'resnet18'
+cfg.MODEL.BACKBONE.PRETRAINED = True
+cfg.MODEL.BACKBONE.ENCODER_FREZE=False
+cfg.MODEL.BACKBONE.DECODER_FILTERS = (256, 128, 64, 32, 16)
+cfg.MODEL.BACKBONE.PARAMETRIC_UPSAMPLING = True
+cfg.MODEL.BACKBONE.SHORTCUT_FEATURES = 'default'
+cfg.MODEL.BACKBONE.DECODER_USE_BATCHNORM = True
+
+
 
 
 # -----------------------------------------------------------------------------
@@ -76,8 +91,8 @@ cfg.PREPROCESSING.HORIZONTALFLIP.PROBABILITY = 1
 
 cfg.PREPROCESSING.GAUSSIANSMOOTH = CN()
 cfg.PREPROCESSING.GAUSSIANSMOOTH.ENABLE = False
-cfg.PREPROCESSING.GAUSSIANSMOOTH.BLURLIMIT = 7 #kan også være en liste med to tall [tall1, tall2]
-cfg.PREPROCESSING.GAUSSIANSMOOTH.SIGMALIMIT = 0
+cfg.PREPROCESSING.GAUSSIANSMOOTH.BLURLIMIT = (3,11) #kan også være en liste med to tall [tall1, tall2]
+cfg.PREPROCESSING.GAUSSIANSMOOTH.SIGMALIMIT = (0,5)
 cfg.PREPROCESSING.GAUSSIANSMOOTH.PROBABILITY = 1
 
 cfg.PREPROCESSING.ELASTICDEFORM = CN()
@@ -97,11 +112,23 @@ cfg.DROPOUT.PROB = 0.15
 # Dataset
 # -----------------------------------------------------------------------------
 cfg.DATASETS = CN()
-# List of the dataset names for training, as present in pathscfgatalog.py
-cfg.DATASETS.TRAIN_IMAGES = '../../../../work/datasets/medical_project/CAMUS'
-cfg.DATASETS.GT_IMAGES = ''
-# # List of the dataset names for testing, as present in pathscfgatalog.py
-cfg.DATASETS.TEST = '../../../../work/datasets/medical_project/CAMUS'
+
+cfg.DATASETS.CYBELE = False
+if cfg.DATASETS.CYBELE:
+    cfg.DATASETS.BASE_PATH = '../../../../lhome/ojrise/'
+else:
+    cfg.DATASETS.BASE_PATH = '../../../../work/datasets/medical_project/'
+
+cfg.DATASETS.CAMUS = 'CAMUS'
+cfg.DATASETS.TEE = 'TEE/DataTEEGroundTruth'
+
+
+# -----------------------------------------------------------------------------
+# LOSS_function
+# -----------------------------------------------------------------------------
+cfg.LOSS = CN()
+
+cfg.LOSS.DIFFRENT = False
 
 # -----------------------------------------------------------------------------
 # DataLoader
@@ -115,6 +142,8 @@ cfg.DATA_LOADER.PIN_MEMORY = True
 # Solver - The same as optimizer
 # ---------------------------------------------------------------------------- #
 cfg.SOLVER = CN()
+cfg.SOLVER.DIFFRENT = False
+
 # train configs
 cfg.SOLVER.MAX_ITER = 120000
 cfg.SOLVER.MAX_MINUTES = 720
@@ -141,7 +170,7 @@ cfg.TEST.EARLY_STOPPING_TOL = 10e-7
 
 
 cfg.EVAL_EPOCH = 2 # Evaluate dataset every eval_step, disabled when eval_step < 0
-cfg.SAVE_EPOCH = 5 
+cfg.SAVE_EPOCH = 3*cfg.EVAL_EPOCH
 cfg.FIND_LR_ITERATION  = 0 
 # cfg.MODEL_SAVE_STEP = 100 # Save checkpoint every save_step
 cfg.LOG_STEP = 10 # Print logs every log_stepPrint logs every log_step

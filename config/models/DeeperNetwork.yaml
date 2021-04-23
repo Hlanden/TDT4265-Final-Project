@@ -10,8 +10,9 @@ UNETSTRUCTURE:
                     [32, 64, 3, 1],
                     [64, 128, 3, 1],
                     [128,256,3,1]]
-    EXPANDBLOCK: [[512,128,3,1],
-                [256, 64, 3, 1],
+
+    EXPANDBLOCK: [[256,128,3,1],
+                [256, 64, 3, 1],   
                 [128, 32, 3, 1],
                 [64, 4 , 3, 1]] #out channels er andre verdi i denne listen
 OUTPUT_DIR: 'outputs/Deeper_Network_model'
