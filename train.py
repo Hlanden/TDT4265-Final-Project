@@ -60,8 +60,15 @@ def start_train(cfg, train_data_loader, val_data_loader):
         model = Unet2D(cfg)
     model = torch_utils.to_cuda(model)
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
-    loss_fn = nn.CrossEntropyLoss()
+    if cfg.SOLVER.DIFFRENT:
+        optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.SOLVER.LR)
+    else:
+        optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
+
+    if cfg.LOSS.DIFFRENT:
+        loss_fn = nn.CrossEntropyLoss()
+    else:
+        loss_fn = nn.CrossEntropyLoss()
 
     arguments = {"iteration": 0, "epoch": 0,"running_time": 0}
     save_to_disk = True
@@ -129,8 +136,16 @@ def load_best_model(cfg):
     model = Unet2D(cfg)
     model = torch_utils.to_cuda(model)
 
-    optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
-    loss_fn = nn.CrossEntropyLoss()
+    if cfg.SOLVER.DIFFRENT:
+        optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
+    else:
+        optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
+
+
+    if cfg.LOSS.DIFFRENT:
+        loss_fn = nn.CrossEntropyLoss()
+    else:
+        loss_fn = nn.CrossEntropyLoss()
 
     arguments = {"iteration": 0, "epoch": 0,"running_time": 0}
     save_to_disk = True

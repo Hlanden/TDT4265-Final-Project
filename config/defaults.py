@@ -113,7 +113,7 @@ cfg.DROPOUT.PROB = 0.15
 # -----------------------------------------------------------------------------
 cfg.DATASETS = CN()
 
-cfg.DATASETS.CYBELE = True
+cfg.DATASETS.CYBELE = False
 if cfg.DATASETS.CYBELE:
     cfg.DATASETS.BASE_PATH = '../../../../lhome/ojrise/'
 else:
@@ -121,6 +121,14 @@ else:
 
 cfg.DATASETS.CAMUS = 'CAMUS'
 cfg.DATASETS.TEE = 'TEE/DataTEEGroundTruth'
+
+
+# -----------------------------------------------------------------------------
+# LOSS_function
+# -----------------------------------------------------------------------------
+cfg.LOSS = CN()
+
+cfg.LOSS.DIFFRENT = False
 
 # -----------------------------------------------------------------------------
 # DataLoader
@@ -134,6 +142,8 @@ cfg.DATA_LOADER.PIN_MEMORY = True
 # Solver - The same as optimizer
 # ---------------------------------------------------------------------------- #
 cfg.SOLVER = CN()
+cfg.SOLVER.DIFFRENT = False
+
 # train configs
 cfg.SOLVER.MAX_ITER = 120000
 cfg.SOLVER.MAX_MINUTES = 720
