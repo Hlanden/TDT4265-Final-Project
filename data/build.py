@@ -63,7 +63,9 @@ def make_data_loaders(cfg, classes=[1, 2], is_train=True, model_depth=False):
     image_transform, additional_transform = build_transforms(cfg, is_train=True)
     val_transform = build_transforms(cfg, is_train=False)
 
-    dataset_list = cfg.DATASETS.TRAIN_IMAGES if is_train else cfg.DATASETS.TEST_IMAGES
+    #dataset_list = cfg.DATASETS.TRAIN_IMAGES if is_train else cfg.DATASETS.TEST_IMAGES
+    dataset_list = '../../../../lhome/ojrise/training' 
+    print(dataset_list)
 
     dataset = DatasetLoader(Path(dataset_list),
                             medimage=True,
