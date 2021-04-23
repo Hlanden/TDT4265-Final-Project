@@ -41,7 +41,7 @@ def do_train(cfg, model,
              arguments,
              loss_fn):
     logger = logging.getLogger("UNET.trainer")
-    logger.info(input('Hvorfor tester du dette? '))
+    #logger.info(input('Hvorfor tester du dette? '))
     logger.info("Start training ...")
     meters = MetricLogger()
 
