@@ -61,8 +61,8 @@ def build_transforms(cfg,
         m = cfg.PREPROCESSING.NORMALIZE.MEAN
         s = cfg.PREPROCESSING.NORMALIZE.STD
 
-        additional_trans_list.append(aug.augmentations.transforms.Normalize(mean= m, std = s, max_pixel_value=255.0, always_apply=False, p=1.0))
-        val_trans_list.append(aug.augmentations.transforms.Normalize(mean= m, std = s, max_pixel_value=255.0, always_apply=False, p=1.0))
+        additional_trans_list.append(aug.augmentations.transforms.Normalize(mean= m, std = s, max_pixel_value=1.0, always_apply=False, p=1.0))
+        #val_trans_list.append(aug.augmentations.transforms.Normalize(mean= m, std = s, max_pixel_value=1.0, always_apply=False, p=1.0))
 
     if cfg.PREPROCESSING.ELASTICDEFORM.ENABLE:
         a = cfg.PREPROCESSING.ELASTICDEFORM.ALPHA
