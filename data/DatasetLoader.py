@@ -127,7 +127,9 @@ class DatasetLoader(Dataset):
 
         x = self.open_as_array(idx, invert=True).astype(np.float32)
         y = self.open_mask(idx, add_dims=False).astype(np.float32)
-
+        shape = y.shape
+        pad_x = 0
+        pad_y = 0
         if self.tee:
             x = np.rot90(x, k=2, axes=(1, 2))
             y = np.rot90(y, k=2)
@@ -162,8 +164,8 @@ class DatasetLoader(Dataset):
             y = np.hstack([y, np.zeros((y.shape[0], pad_y))])
 
             x = np.expand_dims(x, 0)
-             
-        return x, y
+        padding = [pad_x, pad_y]
+        return x, y, padding, shape
     
     def get_as_pil(self, idx):
         #get an image for visualization

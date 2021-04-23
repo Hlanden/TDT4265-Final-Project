@@ -3,6 +3,7 @@ import datetime
 import logging
 import os
 import time
+from numpy.core.fromnumeric import shape
 import torch
 from torch.utils.data import dataloader
 import numpy as np
@@ -12,6 +13,8 @@ from utils import torch_utils
 from utils.evaluation import dice_score_multiclass
 from torch_lr_finder import LRFinder
 import matplotlib.pyplot as plt
+from tqdm import tqdm
+
 
 def batch_to_img(xb, idx):
     img = np.array(xb[idx,0:3])
@@ -62,7 +65,7 @@ def do_train(cfg, model,
         arguments["epoch"] = epoch
         
         
-        for iteration, (images, targets) in enumerate(train_data_loader, start_iter):
+        for iteration, (images, targets, shapes, padding) in enumerate(train_data_loader, start_iter):
             iteration = iteration + 1
             arguments["iteration"] = iteration
             images = torch_utils.to_cuda(images).float()
@@ -85,16 +88,7 @@ def do_train(cfg, model,
                 eta_seconds = meters.time.global_avg * (max_iter - iteration)
                 eta_string = str(datetime.timedelta(seconds=int(eta_seconds)))
                 lr = optimizer.param_groups[0]['lr']
-                to_log = [
-                    f"iter: {iteration:06d}",
-                    f"lr: {lr:.5f}",
-                    f'{meters}',
-                    f"eta: {eta_string}",
-                ]
-                if torch.cuda.is_available():
-                    mem = round(torch.cuda.max_memory_allocated() / 1024.0 / 1024.0)
-                    to_log.append(f'mem: {mem}M')
-                logger.info(meters.delimiter.join(to_log))
+                
                 global_step = iteration
                 summary_writer.add_scalar(
                     'losses/train_loss', loss, global_step=global_step)
@@ -102,14 +96,24 @@ def do_train(cfg, model,
                 summary_writer.add_scalar(
                     'lr', optimizer.param_groups[0]['lr'],
                     global_step=global_step)
-
-                train_acc = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
+                train_acc = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES), shapes=None, padding=None).flatten()
                 train_acc_result = {}
                 for i, c in enumerate(cfg.MODEL.CLASSES): 
                     train_acc_result['DICE Scores/Train - DICE Score, class {}'.format(c)] = train_acc[i]
                 for key, acc in train_acc_result.items():
                     summary_writer.add_scalar(key, acc, global_step=global_step)
-            
+
+                to_log = [
+                    f"iter: {iteration:06d}",
+                    f"lr: {lr:.5f}",
+                    f'{meters}',
+                    f"eta: {eta_string}",
+                    f"Dice scores: {train_acc_result}"
+                ]
+                if torch.cuda.is_available():
+                    mem = round(torch.cuda.max_memory_allocated() / 1024.0 / 1024.0)
+                    to_log.append(f'mem: {mem}M')
+                logger.info(meters.delimiter.join(to_log))
             if iteration >= cfg.SOLVER.MAX_ITER or is_early_stopping:
                 break
          # TODO: Currently deactivated. Need dataloader class to make eval
@@ -120,7 +124,7 @@ def do_train(cfg, model,
             val_loss = 0
             total_img = 0
             with torch.no_grad():
-                for num_batches, (images, targets) in enumerate(val_data_loader):
+                for num_batches, (images, targets, shapes, padding) in enumerate(tqdm(val_data_loader)):
                     batch_size = images.shape[0]
                     total_img += batch_size
                     images = torch_utils.to_cuda(images)
@@ -128,7 +132,7 @@ def do_train(cfg, model,
                     outputs = model(images)
                     val_loss += loss_fn(outputs, targets.long())*batch_size
                     #acc += dice_score(outputs, targets) # TODO: Wait on working function
-                    val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
+                    val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),shapes=shapes, padding=padding).flatten()
                     acc += val_dice_score*batch_size
                 acc = acc/total_img
                 val_loss = val_loss/total_img

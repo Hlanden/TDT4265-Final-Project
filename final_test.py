@@ -71,9 +71,9 @@ def main():
     train_data_loader, val_data_loader, test_data_loader = make_data_loaders(cfg)
     tee_data_loader = make_data_loaders(cfg, tee=True)
 
-    loaders = {#'Train': train_data_loader,
-               #'Validation': val_data_loader,
-               #'Test': test_data_loader,
+    loaders = {'Train': train_data_loader,
+               'Validation': val_data_loader,
+               'Test': test_data_loader,
                'TEE': tee_data_loader}
 
 
@@ -108,14 +108,14 @@ def main():
         acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
         total_img = 0
         with torch.no_grad():
-            for num_batches, (images, targets) in enumerate(tqdm(loader)):
+            for num_batches, (images, targets, shapes, padding) in enumerate(tqdm(loader)):
                 batch_size = images.shape[0]
                 total_img += batch_size
                 images = torch_utils.to_cuda(images)
                 targets = torch_utils.to_cuda(targets)
                 outputs = model(images)
                 loss += loss_fn(outputs, targets.long())*batch_size
-                dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
+                dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),shapes=shapes, padding=padding).flatten()
                 acc += dice_score*batch_size
             acc = acc/total_img
             loss = loss/total_img
