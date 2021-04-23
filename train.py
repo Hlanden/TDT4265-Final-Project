@@ -23,6 +23,9 @@ import argparse
 import albumentations as aug
 from data.build import make_data_loaders
 
+
+from backboned_unet.unet import Unet 
+
 def start_train(cfg, train_data_loader, val_data_loader):
     """
     Starts training the model with configurations defined by cfg.
@@ -39,7 +42,22 @@ def start_train(cfg, train_data_loader, val_data_loader):
     
     """
     logger = logging.getLogger('UNET.trainer')
-    model = Unet2D(cfg)
+
+
+    #maybe go inn and tweak here???
+    if cfg.MODEL.BACKBONE.USE:
+        model = Unet(
+                backbone_name= cfg.MODEL.BACKBONE.NET,
+                pretrained=cfg.MODEL.BACKBONE.PRETRAINED,
+                encoder_freeze=cfg.MODEL.BACKBONE.ENCODER_FREZE,
+                classes = cfg.MODEL.OUT_CHANNELS,
+                decoder_filters=cfg.MODEL.BACKBONE.DECODER_FILTERS ,
+                parametric_upsampling=cfg.MODEL.BACKBONE.PARAMETRIC_UPSAMPLING ,
+                shortcut_features=cfg.MODEL.BACKBONE.SHORTCUT_FEATURES,
+                decoder_use_batchnorm=cfg.MODEL.BACKBONE.DECODER_USE_BATCHNORM,)
+
+    else:
+        model = Unet2D(cfg)
     model = torch_utils.to_cuda(model)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)

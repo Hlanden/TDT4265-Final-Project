@@ -10,6 +10,11 @@ cfg.MODEL.IN_CHANNELS = 1
 cfg.MODEL.OUT_CHANNELS = 4
 cfg.MODEL.CLASSES = [1, 2, 3]
 
+
+#use of backbone models
+
+
+
 # cfg.MODEL.THRESHOLD = 0.5
 # cfg.MODEL.NUM_CLASSES = 21
 # # Hard negative mining
@@ -20,11 +25,21 @@ cfg.MODEL.CLASSES = [1, 2, 3]
 # ---------------------------------------------------------------------------- #
 # Backbone
 # ---------------------------------------------------------------------------- #
-# cfg.MODEL.BACKBONE = CN()
+cfg.MODEL.BACKBONE = CN()
 # cfg.MODEL.BACKBONE.NAME = 'vgg'
 # cfg.MODEL.BACKBONE.OUT_CHANNELS = (512, 1024, 512, 256, 256, 256)
 # cfg.MODEL.BACKBONE.PRETRAINED = True
 # cfg.MODEL.BACKBONE.INPUT_CHANNELS = 3
+cfg.MODEL.BACKBONE.USE = False
+cfg.MODEL.BACKBONE.NET = 'resnet18'
+cfg.MODEL.BACKBONE.PRETRAINED = True
+cfg.MODEL.BACKBONE.ENCODER_FREZE=False
+cfg.MODEL.BACKBONE.DECODER_FILTERS = (256, 128, 64, 32, 16)
+cfg.MODEL.BACKBONE.PARAMETRIC_UPSAMPLING = True
+cfg.MODEL.BACKBONE.SHORTCUT_FEATURES = 'default'
+cfg.MODEL.BACKBONE.DECODER_USE_BATCHNORM = True
+
+
 
 
 # -----------------------------------------------------------------------------
