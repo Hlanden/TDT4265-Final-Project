@@ -114,7 +114,7 @@ def do_train(cfg, model,
             if iteration >= cfg.SOLVER.MAX_ITER or is_early_stopping:
                 break
          # TODO: Currently deactivated. Need dataloader class to make eval
-        if cfg.EVAL_AND_SAVE_EPOCH > 0 and epoch % cfg.EVAL_AND_SAVE_EPOCH == 0 and epoch > 0:
+        if cfg.EVAL_EPOCH > 0 and epoch % cfg.EVAL_EPOCH == 0 and epoch > 0:
             logger.info('Evaluating...')
             model.train(False)
             acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
@@ -157,7 +157,10 @@ def do_train(cfg, model,
                     is_early_stopping = True
 
             model.train(True)  # *IMPORTANT*: change to train mode after eval.
+            
+        if cfg.SAVE_EPOCH > 0 and epoch % cfg.SAVE_EPOCH == 0 and epoch > 0:
             checkpointer.save("model_{:03d}".format(epoch), is_best_cp=is_best_cp, **arguments)
+
         if cfg.FIND_LR_ITERATION > 0 and iteration % cfg.FIND_LR_ITERATION == 0 and iteration > 0:
             logger.info('Finding new LR')
             

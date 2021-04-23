@@ -141,7 +141,7 @@ cfg.TEST.EARLY_STOPPING_TOL = 10e-7
 
 
 cfg.EVAL_EPOCH = 2 # Evaluate dataset every eval_step, disabled when eval_step < 0
-cfg.SAVE_EPOCH = 5 
+cfg.SAVE_EPOCH = 3*cfg.EVAL_EPOCH
 cfg.FIND_LR_ITERATION  = 0 
 # cfg.MODEL_SAVE_STEP = 100 # Save checkpoint every save_step
 cfg.LOG_STEP = 10 # Print logs every log_stepPrint logs every log_step

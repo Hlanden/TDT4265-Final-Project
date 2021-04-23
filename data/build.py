@@ -99,15 +99,15 @@ def make_data_loaders(cfg, classes=[1, 2], is_train=True, model_depth=False):
         test_data_loader = DataLoader(test_dataset,
                                       num_workers=cfg.DATA_LOADER.NUM_WORKERS,
                                       pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
-                                      batch_size=batch_size,
-                                      shuffle=True,
+                                      batch_size=1,
+                                      #shuffle=True,
                                       collate_fn=custom_collate)
-        return train_data_loader, val_data_loader, test_dataset
+        return train_data_loader, val_data_loader, test_data_loader
     else:
         test_data_loader = DataLoader(test_dataset,
                                       num_workers=cfg.DATA_LOADER.NUM_WORKERS,
                                       pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
                                       batch_size=batch_size,
-                                      shuffle=True,
+                                      #shuffle=True,
                                       collate_fn=custom_collate)
         return test_data_loader
