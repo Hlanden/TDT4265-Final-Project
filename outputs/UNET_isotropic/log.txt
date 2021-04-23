@@ -1720,3 +1720,1183 @@ UNETSTRUCTURE:
 2021-04-22 16:12:17,251 UNET.trainer INFO: Running training for: 01 hours, 40 minutes and 3656 seconds
 2021-04-22 16:12:17,251 UNET.trainer INFO: Saving checkpoint to outputs/UNET_base_model/model_final.pth
 2021-04-22 16:12:17,275 UNET.trainer INFO: Total training time: 0:34:38 (20.7800 s / it)
+2021-04-23 06:32:00,680 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:32:00,681 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:32:00,681 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:32:00,681 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:32:03,215 UNET.trainer INFO: Loading checkpoint from outputs/UNET_base_model/model_076.pth
+2021-04-23 06:32:55,321 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:32:55,321 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:32:55,321 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:32:55,322 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:32:57,805 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:32:57,824 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:32:57,839 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 06:33:13,379 UNET.trainer INFO: Evaluation result: {'DICE Scores/Train - DICE Score, class 1': 0.928310399055481, 'DICE Scores/Train - DICE Score, class 2': 0.8511066311597824, 'DICE Scores/Train - DICE Score, class 3': 0.8996206909418106}, val loss: 0.060497868806123734
+2021-04-23 06:33:50,064 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:33:50,064 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:33:50,064 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:33:50,064 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:33:52,606 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:33:52,623 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:33:52,635 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 06:34:07,914 UNET.trainer INFO: Evaluation result: {'DICE Scores/Train - DICE Score, class 1': 0.9279333263635635, 'DICE Scores/Train - DICE Score, class 2': 0.8515006703138351, 'DICE Scores/Train - DICE Score, class 3': 0.8995426797866821}, val loss: 0.06112741678953171
+2021-04-23 06:38:29,215 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:38:29,216 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:38:29,216 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:38:29,216 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:38:54,931 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:38:54,931 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:38:54,931 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:38:54,931 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:39:14,969 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:39:14,969 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:39:14,969 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:39:14,970 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:39:23,601 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:39:23,601 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:39:23,602 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:39:23,602 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:39:25,947 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:39:25,962 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:39:25,974 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 06:39:41,120 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9277275890111923, 'DICE Scores/Train - DICE Score, class 2': 0.8499415129423141, 'DICE Scores/Train - DICE Score, class 3': 0.8978824836015701}, train loss: 0.06134595349431038
+2021-04-23 06:39:45,594 UNET.trainer INFO: Validation result: {'DICE Scores/Val - DICE Score, class 1': 0.927758799791336, 'DICE Scores/Val - DICE Score, class 2': 0.8526950448751449, 'DICE Scores/Val - DICE Score, class 3': 0.9038050097227096}, validation loss: 0.059752508997917175
+2021-04-23 06:39:48,471 UNET.trainer INFO: Test result: {'DICE Scores/Test - DICE Score, class 1': 0.9133224201202392, 'DICE Scores/Test - DICE Score, class 2': 0.8264264869689941, 'DICE Scores/Test - DICE Score, class 3': 0.877402491569519}, test loss: 0.07282985746860504
+2021-04-23 06:40:22,332 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:40:22,333 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:40:22,334 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:40:22,334 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:40:24,640 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:40:24,656 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:40:24,667 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 06:40:39,767 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.927468358874321, 'DICE Scores/Train - DICE Score, class 2': 0.8508320373296737, 'DICE Scores/Train - DICE Score, class 3': 0.8991854149103164}, train loss: 0.060312673449516296
+2021-04-23 06:40:44,382 UNET.trainer INFO: Validation result: {'DICE Scores/Val - DICE Score, class 1': 0.9285738146305085, 'DICE Scores/Val - DICE Score, class 2': 0.8499571013450623, 'DICE Scores/Val - DICE Score, class 3': 0.9003365290164947}, validation loss: 0.06047609820961952
+2021-04-23 06:40:47,187 UNET.trainer INFO: Test result: {'DICE Scores/Test - DICE Score, class 1': 0.9120792484283448, 'DICE Scores/Test - DICE Score, class 2': 0.8260047221183777, 'DICE Scores/Test - DICE Score, class 3': 0.8769044303894042}, test loss: 0.07269981503486633
+2021-04-23 06:42:59,620 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:42:59,620 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:42:59,620 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:42:59,621 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:43:01,880 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:43:01,894 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:43:01,905 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 06:43:16,653 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9273327809572219, 'DICE Scores/Train - DICE Score, class 2': 0.8497606122493744, 'DICE Scores/Train - DICE Score, class 3': 0.9006311535835266}, train loss: 0.06127774715423584
+2021-04-23 06:43:44,479 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:43:44,479 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:43:44,479 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:43:44,480 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:43:46,823 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:43:46,839 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:43:46,850 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 06:44:02,372 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9282446706295013, 'DICE Scores/Train - DICE Score, class 2': 0.8510872733592987, 'DICE Scores/Train - DICE Score, class 3': 0.9005727881193161}, train loss: 0.05975235626101494
+2021-04-23 06:44:28,967 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:44:28,968 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:44:28,968 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:44:28,968 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:44:31,312 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:44:31,330 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:44:31,340 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 06:44:46,516 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9274545353651047, 'DICE Scores/Train - DICE Score, class 2': 0.8509614312648773, 'DICE Scores/Train - DICE Score, class 3': 0.8987438887357712}, train loss: 0.060181982815265656
+2021-04-23 06:44:51,138 UNET.trainer INFO: Validation result: {'DICE Scores/Val - DICE Score, class 1': 0.9282987028360367, 'DICE Scores/Val - DICE Score, class 2': 0.849824208021164, 'DICE Scores/Val - DICE Score, class 3': 0.9013961809873581}, validation loss: 0.06099984422326088
+2021-04-23 06:44:54,050 UNET.trainer INFO: Test result: {'DICE Scores/Test - DICE Score, class 1': 0.9132655382156372, 'DICE Scores/Test - DICE Score, class 2': 0.8262363207340241, 'DICE Scores/Test - DICE Score, class 3': 0.8765898311138153}, test loss: 0.07171468436717987
+2021-04-23 06:45:33,773 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:45:33,773 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:45:33,773 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:45:33,773 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:45:36,096 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:45:36,110 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:45:36,121 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 06:45:51,300 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9280186909437179, 'DICE Scores/Train - DICE Score, class 2': 0.8509766536951066, 'DICE Scores/Train - DICE Score, class 3': 0.9003504735231399}, train loss: 0.05980831757187843
+2021-04-23 06:46:04,044 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:46:04,044 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:46:04,044 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:46:04,044 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:46:06,423 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:46:06,439 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:46:06,449 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 06:46:41,399 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:46:41,399 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:46:41,399 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:46:41,399 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:46:43,787 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:46:43,803 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:46:43,814 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 06:46:58,935 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9278590959310532, 'DICE Scores/Train - DICE Score, class 2': 0.8514985060691833, 'DICE Scores/Train - DICE Score, class 3': 0.9001668077707291}, train loss: 0.06108277663588524
+2021-04-23 06:47:03,788 UNET.trainer INFO: Validation result: {'DICE Scores/Val - DICE Score, class 1': 0.9273808169364929, 'DICE Scores/Val - DICE Score, class 2': 0.847779648900032, 'DICE Scores/Val - DICE Score, class 3': 0.8994708192348481}, validation loss: 0.059246260672807693
+2021-04-23 06:47:06,291 UNET.trainer INFO: Test result: {'DICE Scores/Test - DICE Score, class 1': 0.9129565513134003, 'DICE Scores/Test - DICE Score, class 2': 0.8257512867450714, 'DICE Scores/Test - DICE Score, class 3': 0.8755664896965026}, test loss: 0.08692136406898499
+2021-04-23 06:47:35,642 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:47:35,643 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:47:35,643 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:47:35,643 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:47:38,149 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:47:38,163 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:47:38,173 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 06:47:53,668 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9276865428686142, 'DICE Scores/Train - DICE Score, class 2': 0.8508490669727325, 'DICE Scores/Train - DICE Score, class 3': 0.8999408376216889}, train loss: 0.059424929320812225
+2021-04-23 06:47:58,101 UNET.trainer INFO: Validation result: {'DICE Scores/Val - DICE Score, class 1': 0.9276569157838821, 'DICE Scores/Val - DICE Score, class 2': 0.8500823980569839, 'DICE Scores/Val - DICE Score, class 3': 0.896562243103981}, validation loss: 0.06349843740463257
+2021-04-23 06:48:00,704 UNET.trainer INFO: Test result: {'DICE Scores/Test - DICE Score, class 1': 0.9129565513134003, 'DICE Scores/Test - DICE Score, class 2': 0.8257512867450714, 'DICE Scores/Test - DICE Score, class 3': 0.8755664896965026}, test loss: 0.08692136406898499
+2021-04-23 06:48:55,817 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-23 06:48:55,817 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-23 06:48:55,817 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-23 06:48:55,817 UNET INFO: Running with config:
+DATASETS:
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 5
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 06:48:58,150 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:48:58,164 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-23 06:48:58,175 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 06:49:13,570 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9280383455753326, 'DICE Scores/Train - DICE Score, class 2': 0.8512405681610108, 'DICE Scores/Train - DICE Score, class 3': 0.9016888928413391}, train loss: 0.059372879564762115
+2021-04-23 06:49:17,967 UNET.trainer INFO: Validation result: {'DICE Scores/Val - DICE Score, class 1': 0.9274712783098221, 'DICE Scores/Val - DICE Score, class 2': 0.8489325684309006, 'DICE Scores/Val - DICE Score, class 3': 0.8925827497243881}, validation loss: 0.06356637924909592
+2021-04-23 06:49:20,571 UNET.trainer INFO: Test result: {'DICE Scores/Test - DICE Score, class 1': 0.9066919896006584, 'DICE Scores/Test - DICE Score, class 2': 0.8252098253369331, 'DICE Scores/Test - DICE Score, class 3': 0.8401784364879131}, test loss: 0.12084583193063736

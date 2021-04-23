@@ -1,5 +1,0 @@
-PREPROCESSING:
-  RESIZE:
-    FX: 0.154/0.3
-    FY: 0.308/0.3
-OUTPUT_DIR: 'outputs/03_pixelsize'

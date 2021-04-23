@@ -1,0 +1,1 @@
+outputs/pixels07/model_final.pth

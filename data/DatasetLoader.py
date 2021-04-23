@@ -175,22 +175,27 @@ if __name__ == '__main__':
 
     transtest = aug.Compose([
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
-        Resize(0, 0, fx=1, fy=1, interpolation=1, always_apply=False, p=1),
+        #Resize(0, 0, fx=1, fy=1, interpolation=1, always_apply=False, p=1),
         #Padding(always_apply=False, p=1),
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1)
         #MAKE PADDIGN
         #RESIZE DOWN 
         #aug.augmentations.transforms.HorizontalFlip(p=1)
-        #aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 0, p=1) # Lagt til slik at ting kan blurres
+        aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 1, p=1) # Lagt til slik at ting kan blurres
         #aug.augmentations.transforms.Rotate(limit=90, p=0.5)
-        aug.augmentations.transforms.ElasticTransform(alpha=300, sigma=30, alpha_affine=1, interpolation=1, border_mode=1, always_apply=False, p=1)
+        #aug.augmentations.transforms.ElasticTransform(alpha=300, sigma=25, alpha_affine=1, interpolation=1, border_mode=1, always_apply=False, p=1)
 
     ], additional_targets={'gt': 'image',})
+<<<<<<< HEAD
     test_trans = build_transforms(cfg, is_train=False, tee=True)
 
     dataset = DatasetLoader(cfg,
                             tee=False,
                             transforms=[])
+=======
+    train_transform, target_transform = build_transforms(cfg, is_train=True)
+    dataset = DatasetLoader(Path('patients',''),gt_dir='' , transforms= transtest) #[train_transform, target_transform])
+>>>>>>> 2a3ac2da68a2fd8d31a0ce195c72815094a5a27c
 
     dataset = Subset(dataset, range(0, 4))
     import matplotlib.pyplot as plt
