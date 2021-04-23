@@ -1,0 +1,6 @@
+PREPROCESSING:
+     GAUSSIANSMOOTH:
+         ENABLE: True 
+
+
+OUTPUT_DIR: 'outputs/gausblur'
