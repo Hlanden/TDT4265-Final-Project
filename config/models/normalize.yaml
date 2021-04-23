@@ -2,7 +2,7 @@ PREPROCESSING:
     NORMALIZE:
         ENABLE: True
         MEAN: 0.0
-        STD: 0.5
+        STD: 0.05
 
 
 OUTPUT_DIR: 'outputs/nomalize_image'
