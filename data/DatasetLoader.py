@@ -2,6 +2,7 @@ if __name__ == '__main__':
     import os
     import sys
     sys.path.append(os.getcwd())
+from itertools import tee
 from matplotlib.colors import cnames
 import numpy as np
 from numpy.core import numeric
@@ -10,7 +11,7 @@ from torchvision import transforms, datasets
 import albumentations as aug 
 
 from pathlib import Path
-from torch.utils.data import Dataset, DataLoader, dataloader, sampler
+from torch.utils.data import Dataset, DataLoader, dataloader, sampler, Subset
 from PIL import Image
 import os
 from medimage.medimage import image
@@ -23,45 +24,58 @@ from config.defaults import cfg
 #load data from a folder
 class DatasetLoader(Dataset):
     def __init__(self,
-                 gray_dir,
-                 gt_dir='',
+                 cfg,
                  transforms=None,
-                 flip=False,
-                 pytorch=True,
-                 medimage=True,
-                 classes=[1, 2], 
-                 model_depth=False):  # legger til muligheten for transform her
+                 tee=False):  # legger til muligheten for transform her
 
         super().__init__()
+        
+        if not tee:
+            self.dataset_dir = Path(cfg.DATASETS.BASE_PATH + cfg.DATASETS.CAMUS)
+        else:
+            self.dataset_dir = Path(cfg.DATASETS.BASE_PATH + cfg.DATASETS.TEE)
+        print('Loading data from: ', self.dataset_dir)
+        self.classes = cfg.MODEL.CLASSES
+        self.model_depth = len(cfg.UNETSTRUCTURE.CONTRACTBLOCK)
+        self.flip = True if tee else False
+        self.tee = tee
+        self.transforms = transforms
+            
+            
+        
         # TODO: Fix if statement below. Not obvious enough to understand what is happening!
         # Loop through the files in red folder and combine, into a dictionary, the other bands
-        if gt_dir:
-            self.files = [self.combine_files(f, gt_dir, False) for f in gray_dir.iterdir() if not f.is_dir()]
+        if tee:
+            gt_dir = Path(str(self.dataset_dir) + '/train_gt')
+            gray_dir = Path(str(self.dataset_dir) + '/train_gray')
+            self.files = [self.combine_files(f, gt_dir) for f in gray_dir.iterdir() if not f.is_dir()]
         else:
             self.files = []
-            for patient in gray_dir.iterdir():
+            for patient in self.dataset_dir.iterdir():
                 for f in patient.iterdir():
                     filename, filetype = os.path.splitext(f)
 
                     if not f.is_dir() and str(f).__contains__('.mhd') \
                         and not filename.__contains__('gt') \
                         and not filename.__contains__('sequence'): #TODO: What shall we do with sequence?
-                            self.files.append(self.combine_files(filename, '', True))
-        self.pytorch = pytorch
-        self.medimage = medimage
-        self.classes = classes
-        self.flip = flip
-        self.transforms = transforms
-        self.model_depth = model_depth
+                            self.files.append(self.combine_files(filename, ''))
+       
 
-    def combine_files(self, gray_file: Path, gt_dir, camus=True):
-        if camus:
+    def combine_files(self, gray_file:Path, gt_file):
+        if not self.tee:
             files = {'gray': gray_file + '.mhd', 
                     'gt': gray_file + '_gt.mhd'}
 
         else:
+            gt_file = gt_file/gray_file.name.replace('gray', 'gt_gt')
+            gt_file, _ = os.path.splitext(gt_file)
+            gt_file += '.tif'
             files = {'gray': gray_file, 
-                    'gt': gt_dir/gray_file.name.replace('gray', 'gt')}
+                    'gt': gt_file}
+        
+        """elif self.camus_resized:
+            files = {'gray': gray_file, 
+                    'gt': gt_file/gray_file.name.replace('gray', 'gt')}"""
 
         return files
                                        
@@ -71,11 +85,11 @@ class DatasetLoader(Dataset):
      
     def open_as_array(self, idx, invert=False):
         #open ultrasound data
-        if self.medimage:
+        if not self.tee:
             raw_us = image(self.files[idx]['gray']).imdata
         else:
             raw_us = np.stack([np.array(Image.open(self.files[idx]['gray'])),
-                              ], axis=2) #exkra dim legges til for å ha kontroll på batch size
+                              ], axis=2) 
 
     
         if invert:
@@ -87,7 +101,7 @@ class DatasetLoader(Dataset):
 
     def open_mask(self, idx, add_dims=False, transforms=False):
         #open mask file
-        if self.medimage:
+        if not self.tee:
             raw_mask = image(self.files[idx]['gt']).imdata
             raw_mask = raw_mask.squeeze()
             combined_classes = np.zeros_like(raw_mask)
@@ -107,10 +121,8 @@ class DatasetLoader(Dataset):
 
     def __getitem__(self, idx):
         #get the image and mask as arrays
-        #x = torch.tensor(self.open_as_array(idx, invert=self.pytorch), dtype=torch.float32)
-        #y = torch.tensor(self.open_mask(idx, add_dims=True), dtype=torch.torch.int64)
 
-        x = self.open_as_array(idx, invert=self.pytorch).astype(np.float32)
+        x = self.open_as_array(idx, invert=True).astype(np.float32)
         y = self.open_mask(idx, add_dims=False).astype(np.float32)
 
         # if self.flip:
@@ -159,6 +171,7 @@ class DatasetLoader(Dataset):
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
     import random
+    print(os.getcwd())
 
     transtest = aug.Compose([
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
@@ -173,10 +186,13 @@ if __name__ == '__main__':
         aug.augmentations.transforms.ElasticTransform(alpha=300, sigma=30, alpha_affine=1, interpolation=1, border_mode=1, always_apply=False, p=1)
 
     ], additional_targets={'gt': 'image',})
-    train_transform, target_transform = build_transforms(cfg, is_train=True)
-    dataset = DatasetLoader(Path('patients',''),gt_dir='' , transforms=[train_transform, target_transform])
+    test_trans = build_transforms(cfg, is_train=False, tee=True)
 
-    train_data = DataLoader(dataset, batch_size=4, shuffle=True)
+    dataset = DatasetLoader(cfg,
+                            tee=False,
+                            transforms=[])
+
+    dataset = Subset(dataset, range(0, 4))
     import matplotlib.pyplot as plt
 
     fig, axs = plt.subplots(2,4)

@@ -7,7 +7,6 @@ import torch
 from torch.utils.data import dataloader
 import numpy as np
 import torch.utils.tensorboard
-from engine.inference import do_evaluation
 from utils.metric_logger import MetricLogger
 from utils import torch_utils
 from utils.evaluation import dice_score_multiclass

@@ -27,6 +27,7 @@ import albumentations as aug
 from data.build import make_data_loaders
 
 from utils.evaluation import dice_score_multiclass
+from tqdm import tqdm
 
 def get_parser():
     parser = argparse.ArgumentParser(description='Single Shot MultiBox Detector Training With PyTorch')
@@ -67,8 +68,15 @@ def main():
         logger.info(config_str)
     logger.info("Running with config:\n{}".format(cfg))
     
-    depth = len(cfg.UNETSTRUCTURE.CONTRACTBLOCK)
-    train_data_loader, val_data_loader, test_data_loader = make_data_loaders(cfg, classes= cfg.MODEL.CLASSES, is_train=True, model_depth=depth)
+    train_data_loader, val_data_loader, test_data_loader = make_data_loaders(cfg)
+    tee_data_loader = make_data_loaders(cfg, tee=True)
+
+    loaders = {'Train': train_data_loader,
+               'Validation': val_data_loader,
+               'Test': test_data_loader,}
+               #'TEE': tee_data_loader}
+
+
 
     logger = logging.getLogger('UNET.trainer')
     model = Unet2D(cfg)
@@ -83,89 +91,41 @@ def main():
         model, optimizer, cfg.OUTPUT_DIR, save_to_disk, logger,
         )
    
-    best_checkpoint_data = checkpointer.load(f=checkpointer.get_best_checkpoint_file(), use_latest = False)
+    best_checkpoint_data = checkpointer.load(f=checkpointer.get_best_checkpoint_file(),
+                                             use_latest=False)
     arguments.update(best_checkpoint_data)
 
     model.train(False)
 
     logger.info('Number of parameters: {:.2f}M'.format(sum(p.numel() for p in model.parameters() if p.requires_grad)/(1000000)))
-    max_iter = cfg.SOLVER.MAX_ITER
 
-    train_loss = 0
-    acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
-    total_img = 0
-    with torch.no_grad():
-        for num_batches, (images, targets) in enumerate(train_data_loader):
-            batch_size = images.shape[0]
-            total_img += batch_size
-            images = torch_utils.to_cuda(images)
-            targets = torch_utils.to_cuda(targets)
-            outputs = model(images)
-            train_loss += loss_fn(outputs, targets.long())*batch_size
-            #acc += dice_score(outputs, targets) # TODO: Wait on working function
-            train_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
-            acc += train_dice_score*batch_size
-        acc = acc/total_img
-        train_loss = train_loss/total_img
-        
-
-        eval_result = {}
-        for i, c in enumerate(cfg.MODEL.CLASSES): 
-            eval_result['DICE Scores/Train - DICE Score, class {}'.format(c)] = acc[i]
-        logger.info('Train result: {}, train loss: {}'.format(eval_result, train_loss))
-
-        #print("Final Train loss", train_loss)   
-  
-
-    val_loss = 0
-    acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
-    total_img = 0
-    with torch.no_grad():
-        for num_batches, (images, targets) in enumerate(val_data_loader):
-            batch_size = images.shape[0]
-            total_img += batch_size
-            images = torch_utils.to_cuda(images)
-            targets = torch_utils.to_cuda(targets)
-            outputs = model(images)
-            val_loss += loss_fn(outputs, targets.long())*batch_size
-            #acc += dice_score(outputs, targets) # TODO: Wait on working function
-            val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
-            acc += val_dice_score*batch_size
-        acc = acc/total_img
-        val_loss = val_loss/total_img
-        
-
-        eval_result = {}
-        for i, c in enumerate(cfg.MODEL.CLASSES): 
-            eval_result['DICE Scores/Val - DICE Score, class {}'.format(c)] = acc[i]
-        logger.info('Validation result: {}, validation loss: {}'.format(eval_result, val_loss))
-        #print("Final val loss", val_loss)   
-
-    test_loss = 0
-    acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
-    total_img = 0
-    with torch.no_grad():
-        for num_batches, (images, targets) in enumerate(test_data_loader):
-            batch_siize = mages.shape[0]
-            total_img += batch_size
-            images = torch_utils.to_cuda(images)
-            targets = torch_utils.to_cuda(targets)
-            outputs = model(images)
-            test_loss += loss_fn(outputs, targets.long())*batch_size
-            #acc += dice_score(outputs, targets) # TODO: Wait on working function
-            test_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
-            acc += test_dice_score*batch_size
-        acc = acc/total_img
-        test_loss = test_loss/total_img
-        
-
-        eval_result = {}
-        for i, c in enumerate(cfg.MODEL.CLASSES): 
-            eval_result['DICE Scores/Test - DICE Score, class {}'.format(c)] = acc[i]
-        logger.info('Test result: {}, test loss: {}'.format(eval_result, test_loss))     
-
-
+    results = {}
     
+    for loader_name, loader in loaders.items():
+        logger.info('Running test on {}'.format(loader_name))
+        results[loader_name] = []
+        loss = 0
+        acc = np.zeros((1, len(cfg.MODEL.CLASSES))).flatten()
+        total_img = 0
+        with torch.no_grad():
+            for num_batches, (images, targets) in enumerate(tqdm(loader)):
+                batch_size = images.shape[0]
+                total_img += batch_size
+                images = torch_utils.to_cuda(images)
+                targets = torch_utils.to_cuda(targets)
+                outputs = model(images)
+                loss += loss_fn(outputs, targets.long())*batch_size
+                dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),model).flatten()
+                acc += dice_score*batch_size
+            acc = acc/total_img
+            loss = loss/total_img
+            
+            results[loader_name].append(loss)
+            eval_result = {}
+            for i, c in enumerate(cfg.MODEL.CLASSES): 
+                eval_result['DICE Scores/Train - DICE Score, class {}'.format(c)] = acc[i]
+                results[loader_name].append(acc[i])
+            logger.info('{} result: {},\n{} loss: {}'.format(loader_name, eval_result, loader_name, loss))  
 
 if __name__ == '__main__':
     main()

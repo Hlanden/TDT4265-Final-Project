@@ -1,3 +1,2 @@
 numpy
-torch-lr-finder
-numpy
+albumentations

@@ -59,29 +59,25 @@ def custom_collate(batch):
 
     return images.float(), targets.long()
 
-def make_data_loaders(cfg, classes=[1, 2], is_train=True, model_depth=False):
-    image_transform, additional_transform = build_transforms(cfg, is_train=True)
-    val_transform = build_transforms(cfg, is_train=False)
 
-    dataset_list = cfg.DATASETS.TRAIN_IMAGES if is_train else cfg.DATASETS.TEST_IMAGES
+def make_data_loaders(cfg,
+                      tee=False):
+    image_transform, additional_transform = build_transforms(cfg, is_train=True, tee=tee)
+    val_transform = build_transforms(cfg, is_train=False, tee=tee)
 
-    dataset = DatasetLoader(Path(dataset_list),
-                            medimage=True,
-                            classes=classes,
-                            model_depth=model_depth)
-    batch_size = cfg.TEST.BATCH_SIZE if is_train else cfg.TEST.BATCH_SIZE
+    dataset = DatasetLoader(cfg, tee=tee)
+    batch_size = cfg.TEST.BATCH_SIZE if not tee else cfg.TEST.BATCH_SIZE
 
-    test_dataset = Subset(dataset, range(1600,1800))
-    train_val_dataset = Subset(dataset, range(0,1600))
-    train_dataset, valid_dataset = random_split(train_val_dataset, (1200, 400))
-    train_dataset.dataset = copy(dataset)
+    if not tee:
+        test_dataset = Subset(dataset, range(1600,1800))
+        train_val_dataset = Subset(dataset, range(0,1600))
+        train_dataset, valid_dataset = random_split(train_val_dataset, (1200, 400))
+        train_dataset.dataset = copy(dataset)
 
 
-    train_dataset.dataset.transforms = [image_transform, additional_transform]
-    valid_dataset.dataset.transforms = val_transform
-    test_dataset.dataset.transforms = val_transform
-    
-    if is_train:
+        train_dataset.dataset.transforms = [image_transform, additional_transform]
+        valid_dataset.dataset.transforms = val_transform
+        test_dataset.dataset.transforms = val_transform
         train_data_loader = DataLoader(train_dataset,
                                        num_workers=cfg.DATA_LOADER.NUM_WORKERS,
                                        pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
@@ -104,10 +100,10 @@ def make_data_loaders(cfg, classes=[1, 2], is_train=True, model_depth=False):
                                       collate_fn=custom_collate)
         return train_data_loader, val_data_loader, test_data_loader
     else:
-        test_data_loader = DataLoader(test_dataset,
-                                      num_workers=cfg.DATA_LOADER.NUM_WORKERS,
-                                      pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
-                                      batch_size=batch_size,
-                                      #shuffle=True,
-                                      collate_fn=custom_collate)
-        return test_data_loader
+        tee_data_loader = DataLoader(dataset,
+                                     num_workers=cfg.DATA_LOADER.NUM_WORKERS,
+                                     pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
+                                     batch_size=1,
+                                     #shuffle=True,
+                                     collate_fn=custom_collate)
+        return tee_data_loader

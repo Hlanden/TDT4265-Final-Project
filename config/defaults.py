@@ -97,11 +97,15 @@ cfg.DROPOUT.PROB = 0.15
 # Dataset
 # -----------------------------------------------------------------------------
 cfg.DATASETS = CN()
-# List of the dataset names for training, as present in pathscfgatalog.py
-cfg.DATASETS.TRAIN_IMAGES = '../../../../work/datasets/medical_project/CAMUS'
-cfg.DATASETS.GT_IMAGES = ''
-# # List of the dataset names for testing, as present in pathscfgatalog.py
-cfg.DATASETS.TEST = '../../../../work/datasets/medical_project/CAMUS'
+
+cfg.DATASETS.CYBELE = True
+if cfg.DATASETS.CYBELE:
+    cfg.DATASETS.BASE_PATH = '../../../lhome/jorghaal/'
+else:
+    cfg.DATASETS.BASE_PATH = '../../../../work/datasets/medical_project/'
+
+cfg.DATASETS.CAMUS = 'CAMUS'
+cfg.DATASETS.TEE = 'TEE/DataTEEGroundTruth'
 
 # -----------------------------------------------------------------------------
 # DataLoader

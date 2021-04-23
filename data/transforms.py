@@ -44,8 +44,8 @@ class Padding(ImageOnlyTransform):
         return cv2.copyMakeBorder(img, top, bottom, right, left, cv2.BORDER_CONSTANT)
 
 def build_transforms(cfg, 
-                     is_plotting=False,
-                     is_train=True):
+                     is_train=True,
+                     tee=False):
 
     train_trans_list = [] #liste der bilde blir endret
     additional_trans_list = [] #kun gt blir endret
@@ -72,7 +72,7 @@ def build_transforms(cfg,
         train_trans_list.append(aug.augmentations.transforms.ElasticTransform(alpha=a, sigma=sig, alpha_affine=a_af, interpolation=1, border_mode=1, always_apply=False, p=pr))
         
 
-    if not is_plotting and is_train:
+    if is_train:
         if cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE:
             pr = cfg.PREPROCESSING.HORIZONTALFLIP.PROBABILITY 
             train_trans_list.append(aug.augmentations.transforms.HorizontalFlip(p=pr))
@@ -84,7 +84,11 @@ def build_transforms(cfg,
 
             train_trans_list.append(aug.augmentations.transforms.GaussianBlur(blur_limit=bl, sigma_limit = sl, p=pr)) 
     
-    
+    if tee:
+        pass
+        #val_trans_list.append(aug.augmentations.geometric.rotate.RandomRotate90(factor=1))
+
+
     if is_train:
         train_transform = aug.Compose(train_trans_list, additional_targets={'gt': 'image'})
         additional_transform = aug.Compose(additional_trans_list)

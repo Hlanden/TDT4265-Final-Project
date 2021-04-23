@@ -99,7 +99,7 @@ def main (logger=None):
     logger.info("Running with config:\n{}".format(cfg))
     
     depth = len(cfg.UNETSTRUCTURE.CONTRACTBLOCK)
-    train_data_loader, valid_data_loader, test_data_loader = make_data_loaders(cfg, classes= cfg.MODEL.CLASSES, is_train=True, model_depth=depth)
+    train_data_loader, valid_data_loader, test_data_loader = make_data_loaders(cfg)
      
 
     model = start_train(cfg, train_data_loader, valid_data_loader)
@@ -129,11 +129,5 @@ def load_best_model(cfg):
 
 if __name__ == "__main__":
     import sys
-    sys.argv.append('--config_file=config/models/DeeperNetwork.yaml')
-    logging.getLogger('UNET')
     main()
-    sys.argv[1] = '--config_file=config/models/pixels07.yaml'
-    main()
-    sys.argv[1] = '--config_file=config/models/pixels03.yaml'
-    main()
-
+    
