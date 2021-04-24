@@ -83,8 +83,8 @@ def make_data_loaders(cfg,
 
 
         train_dataset.dataset.transforms = [image_transform, additional_transform]
-        valid_dataset.dataset.transforms = val_transform
-        test_dataset.dataset.transforms = val_transform
+        valid_dataset.dataset.transforms = [val_transform, additional_transform] #val_transform
+        test_dataset.dataset.transforms = [val_transform, additional_transform] #val_transform
         train_data_loader = DataLoader(train_dataset,
                                        num_workers=cfg.DATA_LOADER.NUM_WORKERS,
                                        pin_memory=cfg.DATA_LOADER.PIN_MEMORY,

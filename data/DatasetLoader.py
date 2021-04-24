@@ -161,8 +161,20 @@ class DatasetLoader(Dataset):
             x = np.hstack([x, np.zeros((x.shape[0], pad_y))])
             y = np.hstack([y, np.zeros((y.shape[0], pad_y))])
 
+<<<<<<< Updated upstream
             x = np.expand_dims(x, 0)
              
+=======
+            #print('transformed x: ', x.shape)
+            #print('trasformed y', y.shape)
+        #print(np.amax(x))
+        #print(np.amax(y))
+
+        #print("x_mean", np.mean(x))
+        #print("x_std", np.std(x))
+
+        
+>>>>>>> Stashed changes
         return x, y
     
     def get_as_pil(self, idx):
@@ -189,6 +201,7 @@ if __name__ == '__main__':
         #aug.augmentations.transforms.ElasticTransform(alpha=300, sigma=25, alpha_affine=1, interpolation=1, border_mode=1, always_apply=False, p=1)
 
     ], additional_targets={'gt': 'image',})
+<<<<<<< Updated upstream
     test_trans = build_transforms(cfg, is_train=False, tee=True)
 
     
@@ -204,6 +217,12 @@ if __name__ == '__main__':
     #                              batch_size=1,
     #                              #shuffle=True,
     #                              collate_fn)
+=======
+    train_transform, target_transform = build_transforms(cfg, is_train=True)
+    dataset = DatasetLoader(Path('patients',''),gt_dir='' , transforms= transtest) #[train_transform, target_transform])
+
+    dataset = Subset(dataset, range(0, 4))
+>>>>>>> Stashed changes
     import matplotlib.pyplot as plt
 
 

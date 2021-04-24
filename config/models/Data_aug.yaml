@@ -1,8 +1,6 @@
 MODEL:
     IN_CHANNELS: 1 #husk å endre i contractblock også
     OUT_CHANNELS: 4 #husk å endre i expandblock også
-DATASETS:
-    TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
 MODEL:
     CLASSES: [1, 2, 3]
 

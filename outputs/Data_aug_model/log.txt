@@ -1291,3 +1291,179 @@ UNETSTRUCTURE:
 2021-04-23 12:39:08,864 UNET.trainer INFO: Running training for: 00 hours, 36 minutes and 35 seconds
 2021-04-23 12:39:08,865 UNET.trainer INFO: Saving checkpoint to outputs/Data_aug_model/model_final.pth
 2021-04-23 12:39:08,959 UNET.trainer INFO: Total training time: 0:36:38 (21.9800 s / it)
+2021-04-23 14:54:43,742 UNET INFO: Namespace(config_file='config/models/Data_aug.yaml', opts=None)
+2021-04-23 14:54:43,742 UNET INFO: Loaded configuration file config/models/Data_aug.yaml
+2021-04-23 14:54:43,743 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1 #husk å endre i contractblock også
+    OUT_CHANNELS: 4 #husk å endre i expandblock også
+MODEL:
+    CLASSES: [1, 2, 3]
+
+PREPROCESSING:
+    ELASTICDEFORM:
+      ENABLE: True
+      ALPHA: 300
+      SIGMA: 25
+      ALPHA_AFFINE: 1
+      PROBABILITY: 0.5
+OUTPUT_DIR: 'outputs/Data_aug_model'
+LOGGER:
+    SAVE_DIR: True
+2021-04-23 14:54:43,744 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/Data_aug_model
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: True
+    PROBABILITY: 0.5
+    SIGMA: 25
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 14:55:30,454 UNET INFO: Namespace(config_file='config/models/Data_aug.yaml', opts=None)
+2021-04-23 14:55:30,455 UNET INFO: Loaded configuration file config/models/Data_aug.yaml
+2021-04-23 14:55:30,455 UNET INFO: 
+MODEL:
+    IN_CHANNELS: 1 #husk å endre i contractblock også
+    OUT_CHANNELS: 4 #husk å endre i expandblock også
+MODEL:
+    CLASSES: [1, 2, 3]
+
+PREPROCESSING:
+    ELASTICDEFORM:
+      ENABLE: True
+      ALPHA: 300
+      SIGMA: 25
+      ALPHA_AFFINE: 1
+      PROBABILITY: 0.5
+OUTPUT_DIR: 'outputs/Data_aug_model'
+LOGGER:
+    SAVE_DIR: True
+2021-04-23 14:55:30,456 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+MODEL:
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/Data_aug_model
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: True
+    PROBABILITY: 0.5
+    SIGMA: 25
+  GAUSSIANSMOOTH:
+    BLURLIMIT: 7
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: 0
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-23 14:55:31,937 UNET.trainer INFO: Loading checkpoint from outputs/Data_aug_model/model_036.pth
+2021-04-23 14:55:31,947 UNET.trainer INFO: Loading optimizer from outputs/Data_aug_model/model_036.pth
+2021-04-23 14:55:31,953 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 14:55:31,953 UNET.trainer INFO: Running test on Train
+2021-04-23 14:55:53,432 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9048460686206817, 'DICE Scores/Train - DICE Score, class 2': 0.8206617510318757, 'DICE Scores/Train - DICE Score, class 3': 0.8650051265954971},
+Train loss: 0.08050420135259628
+2021-04-23 14:55:53,433 UNET.trainer INFO: Running test on Validation
+2021-04-23 14:55:56,431 UNET.trainer INFO: Validation result: {'DICE Scores/Train - DICE Score, class 1': 0.9199060928821564, 'DICE Scores/Train - DICE Score, class 2': 0.8381393945217133, 'DICE Scores/Train - DICE Score, class 3': 0.8745362770557403},
+Validation loss: 0.07172045856714249
+2021-04-23 14:55:56,431 UNET.trainer INFO: Running test on Test
+2021-04-23 14:55:57,854 UNET.trainer INFO: Test result: {'DICE Scores/Train - DICE Score, class 1': 0.9013406276702881, 'DICE Scores/Train - DICE Score, class 2': 0.8174307689070701, 'DICE Scores/Train - DICE Score, class 3': 0.7989282588660717},
+Test loss: 0.126748725771904
