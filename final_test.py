@@ -9,6 +9,8 @@ import matplotlib as mp
 import matplotlib.pyplot as plt
 import time
 import logging
+from backboned_unet.unet import Unet 
+
 
 from pathlib import Path
 import torch
@@ -79,7 +81,19 @@ def main():
 
 
     logger = logging.getLogger('UNET.trainer')
-    model = Unet2D(cfg)
+    if cfg.MODEL.BACKBONE.USE:
+        model = Unet(
+                backbone_name= cfg.MODEL.BACKBONE.NET,
+                pretrained=cfg.MODEL.BACKBONE.PRETRAINED,
+                encoder_freeze=cfg.MODEL.BACKBONE.ENCODER_FREZE,
+                classes = cfg.MODEL.OUT_CHANNELS,
+                decoder_filters=cfg.MODEL.BACKBONE.DECODER_FILTERS ,
+                parametric_upsampling=cfg.MODEL.BACKBONE.PARAMETRIC_UPSAMPLING ,
+                shortcut_features=cfg.MODEL.BACKBONE.SHORTCUT_FEATURES,
+                decoder_use_batchnorm=cfg.MODEL.BACKBONE.DECODER_USE_BATCHNORM,)
+
+    else:
+        model = Unet2D(cfg)
     model = torch_utils.to_cuda(model)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=cfg.SOLVER.LR)
