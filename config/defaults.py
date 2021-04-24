@@ -116,11 +116,13 @@ cfg.DATASETS = CN()
 cfg.DATASETS.CYBELE = False
 if cfg.DATASETS.CYBELE:
     cfg.DATASETS.BASE_PATH = '../../../../lhome/ojrise/'
+    cfg.DATASETS.TEE = 'TEE/DataTEEGroundTruth'
 else:
     cfg.DATASETS.BASE_PATH = '../../../../work/datasets/medical_project/'
+    cfg.DATASETS.TEE = 'DataTEEGroundTruth'
 
 cfg.DATASETS.CAMUS = 'CAMUS'
-cfg.DATASETS.TEE = 'TEE/DataTEEGroundTruth'
+
 
 
 # -----------------------------------------------------------------------------
@@ -153,6 +155,7 @@ cfg.SOLVER.LR = 1e-2
 # cfg.SOLVER.MOMENTUM = 0.9
 # cfg.SOLVER.WEIGHT_DECAY = 5e-4
 
+
 # ---------------------------------------------------------------------------- #
 # Specific test options
 # ---------------------------------------------------------------------------- #
@@ -167,11 +170,11 @@ cfg.TEST.BATCH_SIZE = 12
 cfg.TEST.NUM_EPOCHS = 50
 cfg.TEST.EARLY_STOPPING_COUNT = 10
 cfg.TEST.EARLY_STOPPING_TOL = 10e-7
-
+cfg.FIND_LR_EPOCH = 0
+cfg.SCHEDULER = False
 
 cfg.EVAL_EPOCH = 2 # Evaluate dataset every eval_step, disabled when eval_step < 0
 cfg.SAVE_EPOCH = 3*cfg.EVAL_EPOCH
-cfg.FIND_LR_ITERATION  = 0 
 # cfg.MODEL_SAVE_STEP = 100 # Save checkpoint every save_step
 cfg.LOG_STEP = 10 # Print logs every log_stepPrint logs every log_step
 

@@ -76,7 +76,7 @@ def make_data_loaders(cfg,
 
     dataset = DatasetLoader(cfg, tee=tee)
     batch_size = cfg.TEST.BATCH_SIZE if not tee else cfg.TEST.BATCH_SIZE
-
+    torch.manual_seed(0)
     if not tee:
         test_dataset = Subset(dataset, range(1600,1800))
         train_val_dataset = Subset(dataset, range(0,1600))
@@ -85,8 +85,8 @@ def make_data_loaders(cfg,
 
 
         train_dataset.dataset.transforms = [image_transform, additional_transform]
-        valid_dataset.dataset.transforms = val_transform
-        test_dataset.dataset.transforms = val_transform
+        valid_dataset.dataset.transforms = [val_transform, additional_transform] #val_transform
+        test_dataset.dataset.transforms = [val_transform, additional_transform] #val_transform
         train_data_loader = DataLoader(train_dataset,
                                        num_workers=cfg.DATA_LOADER.NUM_WORKERS,
                                        pin_memory=cfg.DATA_LOADER.PIN_MEMORY,

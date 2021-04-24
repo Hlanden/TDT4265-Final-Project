@@ -164,8 +164,20 @@ class DatasetLoader(Dataset):
             y = np.hstack([y, np.zeros((y.shape[0], pad_y))])
 
             x = np.expand_dims(x, 0)
+
+            #print('transformed x: ', x.shape)
+            #print('trasformed y', y.shape)
+        #print(np.amax(x))
+        #print(np.amax(y))
+
+        #print("x_mean", np.mean(x))
+        #print("x_std", np.std(x))
+
+        
+
         padding = [pad_x, pad_y]
         return x, y, padding, shape
+
     
     def get_as_pil(self, idx):
         #get an image for visualization
@@ -177,6 +189,7 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     import random
     print(os.getcwd())
+    from data.transforms import RandomCrop
 
     transtest = aug.Compose([
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
@@ -189,15 +202,16 @@ if __name__ == '__main__':
         #aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 1, p=1) # Lagt til slik at ting kan blurres
         #aug.augmentations.transforms.Rotate(limit=90, p=0.5)
         #aug.augmentations.transforms.ElasticTransform(alpha=300, sigma=25, alpha_affine=1, interpolation=1, border_mode=1, always_apply=False, p=1)
+        RandomCrop(1, 1)
 
     ], additional_targets={'gt': 'image',})
-    test_trans = build_transforms(cfg, is_train=False, tee=True)
+    test_trans = build_transforms(cfg, is_train=False, tee=False)
 
     
 
     dataset = DatasetLoader(cfg,
                             tee=True,
-                            transforms=[])
+                            transforms=transtest)
     dataset.classes = [1, 2]
     
     # tee_data_loader = DataLoader(dataset,
@@ -236,6 +250,7 @@ if __name__ == '__main__':
         ax2[i].imshow(y.squeeze())
         i += 1
     plt.legend()
+    plt.show()
     plt.savefig('tee_rot.png')
         
     #     # os.exit()
