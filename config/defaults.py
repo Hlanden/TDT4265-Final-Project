@@ -38,6 +38,9 @@ cfg.MODEL.BACKBONE.DECODER_FILTERS = (256, 128, 64, 32, 16)
 cfg.MODEL.BACKBONE.PARAMETRIC_UPSAMPLING = True
 cfg.MODEL.BACKBONE.SHORTCUT_FEATURES = 'default'
 cfg.MODEL.BACKBONE.DECODER_USE_BATCHNORM = True
+cfg.MODEL.BACKBONE.USE_NORMALIZATION = True
+cfg.MODEL.BACKBONE.NORMALIZATION_MEAN = [0.485, 0.456, 0.406]
+cfg.MODEL.BACKBONE.NORMALIZATION_STD = [0.229, 0.224, 0.225]
 
 
 
@@ -113,9 +116,9 @@ cfg.DROPOUT.PROB = 0.15
 # -----------------------------------------------------------------------------
 cfg.DATASETS = CN()
 
-cfg.DATASETS.CYBELE = False
+cfg.DATASETS.CYBELE = True
 if cfg.DATASETS.CYBELE:
-    cfg.DATASETS.BASE_PATH = '../../../../lhome/ojrise/'
+    cfg.DATASETS.BASE_PATH = '../../../lhome/jorghaal/'
 else:
     cfg.DATASETS.BASE_PATH = '../../../../work/datasets/medical_project/'
 
