@@ -11,15 +11,17 @@ from utils.torch_utils import to_cuda
 
 def custom_collate(batch, tee=False):
     # Credits: https://discuss.pytorch.org/t/how-to-create-a-dataloader-with-variable-size-input/8278/3
+    
     data = [item[0] for item in batch]
     target = [item[1] for item in batch]
+    padding = np.array([item[2] for item in batch])
 
     max_x = 0
     max_y = 0
     for item in batch:
         max_x = item[0].shape[1] if item[0].shape[1] > max_x else max_x 
         max_y = item[0].shape[2] if item[0].shape[2] > max_y else max_y
-    shapes = []
+    shapes = [item[3] for item in batch]
     ## get sequence lengths
     #max_shape = max(shapes)
    
@@ -27,14 +29,14 @@ def custom_collate(batch, tee=False):
     targets = np.zeros((len(data), max_x, max_y))
     #print('mx', max_x, 'my', max_y)
     #labels = torch.tensor(labels)
-    shapes = torch.tensor(shapes)
 
     for i in range(len(data)):
         j, k = data[i][0].shape
         
-        pad_x = max_x - j
-        pad_y = max_y - k
-
+        pad_x = max_x - j if max_x - j > 0 else 0
+        pad_y = max_y - k if max_y - k > 0 else 0
+        padding[i, :] += [pad_x, pad_y]
+        
         try:
             if pad_x:
                 padded_img = np.vstack((data[i][0], np.zeros((pad_x, k))))
@@ -45,6 +47,7 @@ def custom_collate(batch, tee=False):
             if pad_y:
                 padded_target = np.hstack((padded_target, np.zeros((padded_img.shape[0], pad_y))))
                 padded_img = np.hstack((padded_img, np.zeros((padded_img.shape[0], pad_y))))
+        
         except Exception as e:
             print('max x', max_x)
             print('max y', max_y)
@@ -52,7 +55,6 @@ def custom_collate(batch, tee=False):
             print('pad_y ', pad_y)
 
         images[i][0] = padded_img
-        
         targets[i] = padded_target
         
     
@@ -64,7 +66,7 @@ def custom_collate(batch, tee=False):
     images = torch.from_numpy(images)
     targets = torch.from_numpy(targets)
 
-    return images.float(), targets.long()
+    return images.float(), targets.long(), shapes, padding
 
 
 def make_data_loaders(cfg,
