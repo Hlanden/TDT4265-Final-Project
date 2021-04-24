@@ -147,13 +147,14 @@ def do_train(cfg, model,
                 for key, acc in eval_result.items():
                     summary_writer.add_scalar(key, acc, global_step=global_step)
                 summary_writer.add_scalar('losses/Validation loss', val_loss, global_step=global_step)
+                is_best_cp = True if val_loss < lowest_loss else False
+
                 if lowest_loss - val_loss > cfg.TEST.EARLY_STOPPING_TOL:
                     lowest_loss = val_loss
                     early_stopping_count = 0
-                    is_best_cp = True
+                    
                 else:
                     early_stopping_count += 1
-                    is_best_cp = False
 
                 if early_stopping_count >= cfg.TEST.EARLY_STOPPING_COUNT: #øker den til 50
                     logger.info('Early stopping at epoch {}'.format(epoch))

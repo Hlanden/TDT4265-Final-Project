@@ -2,6 +2,7 @@ import albumentations as aug
 from albumentations.core.composition import set_always_apply
 import cv2
 from albumentations.core.transforms_interface import DualTransform, ImageOnlyTransform
+from albumentations.augmentations.crops.functional import random_crop
 
 class Resize(DualTransform):
     """Resize the input to the given height and width.
@@ -28,6 +29,44 @@ class Resize(DualTransform):
 
     def apply(self, img, interpolation=cv2.INTER_LINEAR, **params):
         return cv2.resize(img, dsize=(self.height, self.width), fx=self.fx, fy=self.fy, interpolation=interpolation) 
+
+class RandomCrop(DualTransform):
+    """Crop a random part of the input.
+    Args:
+        height (int): height of the crop.
+        width (int): width of the crop.
+        p (float): probability of applying the transform. Default: 1.
+    Targets:
+        image, mask, bboxes, keypoints
+    Image types:
+        uint8, float32
+    """
+
+    def __init__(self, height_scale, width_scale, always_apply=False, p=1.0):
+        super().__init__(always_apply, p)
+        self.height_scale = height_scale
+        self.width_scale = width_scale
+
+    def apply(self, img, h_start=0, w_start=0, **params):
+        x, y = img.shape
+
+        #MERK: Kan hende x og y må bytte plass her
+        height = x*self.height_scale
+        width = y*self.width_scale 
+
+        return random_crop(img, self.height, self.width, h_start, w_start)
+
+    def get_params(self):
+        return {"h_start": random.random(), "w_start": random.random()}
+
+    def apply_to_bbox(self, bbox, **params):
+        return F.bbox_random_crop(bbox, self.height, self.width, **params)
+
+    def apply_to_keypoint(self, keypoint, **params):
+        return F.keypoint_random_crop(keypoint, self.height, self.width, **params)
+
+    def get_transform_init_args_names(self):
+        return ("height", "width")
 
 class Padding(ImageOnlyTransform):
     def __init__(self, always_apply=False, p=0.5):
