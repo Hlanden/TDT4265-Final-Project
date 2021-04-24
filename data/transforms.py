@@ -84,21 +84,19 @@ def build_transforms(cfg,
 
     image_and_gt_transform = [] #train transforms
     only_img_list = [] #kun img blir endret
-    if cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE:
+    
+    #val_trans_list = [] #bilde og gt blir endret
+    if cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE and not tee:
         if cfg.PREPROCESSING.RESIZE.FX:
             fx_num = 0.154/cfg.PREPROCESSING.RESIZE.FX
-            fy_num = 0.308/cfg.PREPROCESSING.RESIZE.FY
+            fy_num = 0.308/cfg.PREPROCESSING.RESIZE.FY    
+        else:
+            fx_num=0
+            fy_num=0
         x = cfg.PREPROCESSING.RESIZE.X
         y = cfg.PREPROCESSING.RESIZE.Y
 
         image_and_gt_transform.append(Resize(x, y, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
-
-    #val_trans_list = [] #bilde og gt blir endret
-    if cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE and not tee:
-        fx_num = 0.154/cfg.PREPROCESSING.RESIZE.FX
-        fy_num = 0.308/cfg.PREPROCESSING.RESIZE.FY
-
-        image_and_gt_transform.append(Resize(0, 0, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
 
     if cfg.PREPROCESSING.NORMALIZE.ENABLE:
         m = cfg.PREPROCESSING.NORMALIZE.MEAN
