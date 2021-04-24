@@ -54,7 +54,8 @@ def start_train(cfg, train_data_loader, val_data_loader):
                 decoder_filters=cfg.MODEL.BACKBONE.DECODER_FILTERS ,
                 parametric_upsampling=cfg.MODEL.BACKBONE.PARAMETRIC_UPSAMPLING ,
                 shortcut_features=cfg.MODEL.BACKBONE.SHORTCUT_FEATURES,
-                decoder_use_batchnorm=cfg.MODEL.BACKBONE.DECODER_USE_BATCHNORM,)
+                decoder_use_batchnorm=cfg.MODEL.BACKBONE.DECODER_USE_BATCHNORM,
+                cfg=cfg)
 
     else:
         model = Unet2D(cfg)
@@ -132,7 +133,7 @@ def main (logger=None):
     for handler in logger.handlers[:]:
         logger.removeHandler(handler)
 
-def load_best_model(cfg):
+def load_best_model(cfg): #Can we delete this?
     logger = logging.getLogger('UNET.test')
     model = Unet2D(cfg)
     model = torch_utils.to_cuda(model)
@@ -162,7 +163,7 @@ def load_best_model(cfg):
 
 
 if __name__ == "__main__":
-    main()
+    #main()
     #sys.argv[1] = '--config_file=config/models/pixels07.yaml'
     #main()
     #sys.argv[1] = '--config_file=config/models/pixels03.yaml'
@@ -177,4 +178,39 @@ if __name__ == "__main__":
     # main()
     # sys.argv[1] = '--config_file=config/models/pixels03.yaml'
     # main()
+    import sys, os
+    test_config_files = []
+    config_path = Path(os.getcwd(), 'config/jorgens_saturday_mix')
+    print('Lørdagens aften består av følgende deltagere:')
+    for config in config_path.iterdir():
+        try:
+            test_config_files.append(str(config))
+            print('\t{}'.format(config))
+        except Exception as e:
+            print('Error running test on {}:\n {}'.format('', e))
 
+        
+    input('Press ENTER når du er klar for en helaften (bokstavlig talt)')
+    sys.argv.append('')
+    results = []
+    
+    counter = 3
+    while counter:
+        print('Starting in: {}'.format(counter))
+        time.sleep(1)
+        counter -= 1
+    for config in test_config_files:
+        try:
+            sys.argv[1] = '--config_file=' + config
+            main()
+            results.append('Config {} SUCCESS!'.format(config))
+        except Exception as e:
+            results.append('Config {} failed with error {}'.format(config, e))
+            print('Error running test on {}:\n {}'.format(config, e))
+        finally:
+            logger = logging.getLogger('UNET')
+            for handler in logger.handlers[:]:
+                logger.removeHandler(handler)
+    
+    for r in results:
+        print(r)

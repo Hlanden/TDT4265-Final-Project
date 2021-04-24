@@ -58,6 +58,7 @@ def do_train(cfg, model,
     end = time.time()
     lowest_loss = 1
     early_stopping_count = 0
+    is_best_cp = False
     is_early_stopping = False
     is_best_cp = False
     epoch = arguments["epoch"]

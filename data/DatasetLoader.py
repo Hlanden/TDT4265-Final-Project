@@ -176,6 +176,7 @@ class DatasetLoader(Dataset):
         
 
         padding = [pad_x, pad_y]
+        
         return x, y, padding, shape
 
     
