@@ -1,6 +1,6 @@
-2021-04-23 16:41:01,766 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
-2021-04-23 16:41:01,766 UNET INFO: Loaded configuration file config/models/normalize.yaml
-2021-04-23 16:41:01,767 UNET INFO: 
+2021-04-23 09:16:30,263 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
+2021-04-23 09:16:30,263 UNET INFO: Loaded configuration file config/models/normalize.yaml
+2021-04-23 09:16:30,263 UNET INFO: 
 PREPROCESSING:
     NORMALIZE:
         ENABLE: True
@@ -9,12 +9,11 @@ PREPROCESSING:
 
 
 OUTPUT_DIR: 'outputs/nomalize_image'
-2021-04-23 16:41:01,767 UNET INFO: Running with config:
+2021-04-23 09:16:30,263 UNET INFO: Running with config:
 DATASETS:
-  BASE_PATH: ../../../../lhome/ojrise/
-  CAMUS: CAMUS
-  CYBELE: True
-  TEE: TEE/DataTEEGroundTruth
+  GT_IMAGES: 
+  TEST: ../../../../work/datasets/medical_project/CAMUS
+  TRAIN_IMAGES: ../../../../work/datasets/medical_project/CAMUS
 DATA_LOADER:
   NUM_WORKERS: 4
   PIN_MEMORY: True
@@ -43,10 +42,10 @@ PREPROCESSING:
     PROBABILITY: 0.5
     SIGMA: 30
   GAUSSIANSMOOTH:
-    BLURLIMIT: (3, 11)
+    BLURLIMIT: 7
     ENABLE: False
     PROBABILITY: 1
-    SIGMALIMIT: (0, 5)
+    SIGMALIMIT: 0
   HORIZONTALFLIP:
     ENABLE: False
     PROBABILITY: 1
@@ -72,1126 +71,96 @@ TEST:
 UNETSTRUCTURE:
   CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
   EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
-2021-04-23 16:41:03,241 UNET.trainer INFO: No checkpoint found.
-2021-04-23 16:41:03,242 UNET.trainer INFO: Number of parameters: 0.54M
-2021-04-23 16:42:04,671 UNET.trainer INFO: nå er det lagt til normalization på train val og test
-2021-04-23 16:42:04,672 UNET.trainer INFO: Start training ...
-2021-04-23 16:42:12,747 UNET.trainer INFO: iter: 000010, lr: 0.01000, total_loss: 1.130 (1.130), time: 0.404 (0.404), eta: 0:00:36, mem: 8972M
-2021-04-23 16:42:16,087 UNET.trainer INFO: iter: 000020, lr: 0.01000, total_loss: 0.679 (0.904), time: 0.334 (0.369), eta: 0:00:29, mem: 8972M
-2021-04-23 16:42:19,235 UNET.trainer INFO: iter: 000030, lr: 0.01000, total_loss: 0.493 (0.767), time: 0.315 (0.351), eta: 0:00:24, mem: 8972M
-2021-04-23 16:42:23,038 UNET.trainer INFO: iter: 000040, lr: 0.01000, total_loss: 0.417 (0.680), time: 0.380 (0.358), eta: 0:00:21, mem: 8972M
-2021-04-23 16:42:26,202 UNET.trainer INFO: iter: 000050, lr: 0.01000, total_loss: 0.412 (0.626), time: 0.316 (0.350), eta: 0:00:17, mem: 8972M
-2021-04-23 16:42:29,914 UNET.trainer INFO: iter: 000060, lr: 0.01000, total_loss: 0.384 (0.586), time: 0.371 (0.353), eta: 0:00:14, mem: 8972M
-2021-04-23 16:42:33,235 UNET.trainer INFO: iter: 000070, lr: 0.01000, total_loss: 0.379 (0.556), time: 0.332 (0.350), eta: 0:00:10, mem: 8972M
-2021-04-23 16:42:36,545 UNET.trainer INFO: iter: 000080, lr: 0.01000, total_loss: 0.381 (0.534), time: 0.331 (0.348), eta: 0:00:06, mem: 8972M
-2021-04-23 16:42:39,777 UNET.trainer INFO: iter: 000090, lr: 0.01000, total_loss: 0.362 (0.515), time: 0.323 (0.345), eta: 0:00:03, mem: 8972M
-2021-04-23 16:42:43,202 UNET.trainer INFO: iter: 000100, lr: 0.01000, total_loss: 0.350 (0.499), time: 0.342 (0.345), eta: 0:00:00, mem: 8972M
-2021-04-23 16:42:43,925 UNET.trainer INFO: Running training for: 00 hours, 00 minutes and 34 seconds
-2021-04-23 16:42:47,483 UNET.trainer INFO: iter: 000110, lr: 0.01000, total_loss: 0.360 (0.486), time: 0.428 (0.352), eta: -1 day, 23:59:57, mem: 8972M
-2021-04-23 16:42:51,540 UNET.trainer INFO: iter: 000120, lr: 0.01000, total_loss: 0.372 (0.477), time: 0.406 (0.357), eta: -1 day, 23:59:53, mem: 8972M
-2021-04-23 16:42:55,604 UNET.trainer INFO: iter: 000130, lr: 0.01000, total_loss: 0.328 (0.465), time: 0.406 (0.361), eta: -1 day, 23:59:50, mem: 8972M
-2021-04-23 16:42:59,333 UNET.trainer INFO: iter: 000140, lr: 0.01000, total_loss: 0.333 (0.456), time: 0.373 (0.362), eta: -1 day, 23:59:46, mem: 8972M
-2021-04-23 16:43:03,218 UNET.trainer INFO: iter: 000150, lr: 0.01000, total_loss: 0.322 (0.447), time: 0.388 (0.363), eta: -1 day, 23:59:42, mem: 8972M
-2021-04-23 16:43:06,567 UNET.trainer INFO: iter: 000160, lr: 0.01000, total_loss: 0.348 (0.441), time: 0.335 (0.362), eta: -1 day, 23:59:39, mem: 8972M
-2021-04-23 16:43:09,721 UNET.trainer INFO: iter: 000170, lr: 0.01000, total_loss: 0.345 (0.435), time: 0.315 (0.359), eta: -1 day, 23:59:35, mem: 8972M
-2021-04-23 16:43:12,941 UNET.trainer INFO: iter: 000180, lr: 0.01000, total_loss: 0.332 (0.429), time: 0.322 (0.357), eta: -1 day, 23:59:32, mem: 8972M
-2021-04-23 16:43:16,215 UNET.trainer INFO: iter: 000190, lr: 0.01000, total_loss: 0.324 (0.424), time: 0.327 (0.355), eta: -1 day, 23:59:29, mem: 8972M
-2021-04-23 16:43:19,416 UNET.trainer INFO: iter: 000200, lr: 0.01000, total_loss: 0.313 (0.418), time: 0.320 (0.354), eta: -1 day, 23:59:25, mem: 8972M
-2021-04-23 16:43:19,690 UNET.trainer INFO: Evaluating...
-2021-04-23 16:43:22,582 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.0, 'DICE Scores/Val - DICE Score, class 2': 0.12864305786788463, 'DICE Scores/Val - DICE Score, class 3': 0.0}, val loss: 0.35513851046562195
-2021-04-23 16:43:22,583 UNET.trainer INFO: Running training for: 00 hours, 01 minutes and 10 seconds
-2021-04-23 16:43:25,795 UNET.trainer INFO: iter: 000210, lr: 0.01000, total_loss: 0.320 (0.413), time: 0.638 (0.367), eta: -1 day, 23:59:20, mem: 8972M
-2021-04-23 16:43:29,147 UNET.trainer INFO: iter: 000220, lr: 0.01000, total_loss: 0.308 (0.409), time: 0.335 (0.366), eta: -1 day, 23:59:17, mem: 8972M
-2021-04-23 16:43:32,215 UNET.trainer INFO: iter: 000230, lr: 0.01000, total_loss: 0.317 (0.405), time: 0.307 (0.363), eta: -1 day, 23:59:13, mem: 8972M
-2021-04-23 16:43:35,547 UNET.trainer INFO: iter: 000240, lr: 0.01000, total_loss: 0.296 (0.400), time: 0.333 (0.362), eta: -1 day, 23:59:10, mem: 8972M
-2021-04-23 16:43:39,729 UNET.trainer INFO: iter: 000250, lr: 0.01000, total_loss: 0.263 (0.395), time: 0.418 (0.364), eta: -1 day, 23:59:06, mem: 8972M
-2021-04-23 16:43:42,958 UNET.trainer INFO: iter: 000260, lr: 0.01000, total_loss: 0.290 (0.391), time: 0.323 (0.362), eta: -1 day, 23:59:03, mem: 8972M
-2021-04-23 16:43:46,144 UNET.trainer INFO: iter: 000270, lr: 0.01000, total_loss: 0.288 (0.387), time: 0.319 (0.361), eta: -1 day, 23:58:59, mem: 8972M
-2021-04-23 16:43:49,513 UNET.trainer INFO: iter: 000280, lr: 0.01000, total_loss: 0.280 (0.383), time: 0.337 (0.360), eta: -1 day, 23:58:56, mem: 8972M
-2021-04-23 16:43:53,304 UNET.trainer INFO: iter: 000290, lr: 0.01000, total_loss: 0.274 (0.379), time: 0.379 (0.361), eta: -1 day, 23:58:52, mem: 8972M
-2021-04-23 16:43:57,091 UNET.trainer INFO: iter: 000300, lr: 0.01000, total_loss: 0.268 (0.376), time: 0.379 (0.361), eta: -1 day, 23:58:48, mem: 8972M
-2021-04-23 16:43:57,430 UNET.trainer INFO: Running training for: 00 hours, 01 minutes and 48 seconds
-2021-04-23 16:44:01,158 UNET.trainer INFO: iter: 000310, lr: 0.01000, total_loss: 0.262 (0.372), time: 0.407 (0.363), eta: -1 day, 23:58:44, mem: 8972M
-2021-04-23 16:44:04,695 UNET.trainer INFO: iter: 000320, lr: 0.01000, total_loss: 0.254 (0.368), time: 0.354 (0.362), eta: -1 day, 23:58:41, mem: 8972M
-2021-04-23 16:44:08,279 UNET.trainer INFO: iter: 000330, lr: 0.01000, total_loss: 0.263 (0.365), time: 0.358 (0.362), eta: -1 day, 23:58:37, mem: 8972M
-2021-04-23 16:44:12,094 UNET.trainer INFO: iter: 000340, lr: 0.01000, total_loss: 0.234 (0.361), time: 0.381 (0.363), eta: -1 day, 23:58:33, mem: 8972M
-2021-04-23 16:44:15,445 UNET.trainer INFO: iter: 000350, lr: 0.01000, total_loss: 0.255 (0.358), time: 0.335 (0.362), eta: -1 day, 23:58:30, mem: 8972M
-2021-04-23 16:44:18,611 UNET.trainer INFO: iter: 000360, lr: 0.01000, total_loss: 0.267 (0.356), time: 0.317 (0.361), eta: -1 day, 23:58:27, mem: 8972M
-2021-04-23 16:44:22,346 UNET.trainer INFO: iter: 000370, lr: 0.01000, total_loss: 0.256 (0.353), time: 0.373 (0.361), eta: -1 day, 23:58:23, mem: 8972M
-2021-04-23 16:44:25,561 UNET.trainer INFO: iter: 000380, lr: 0.01000, total_loss: 0.264 (0.351), time: 0.321 (0.360), eta: -1 day, 23:58:20, mem: 8972M
-2021-04-23 16:44:29,263 UNET.trainer INFO: iter: 000390, lr: 0.01000, total_loss: 0.235 (0.348), time: 0.370 (0.360), eta: -1 day, 23:58:16, mem: 8972M
-2021-04-23 16:44:32,326 UNET.trainer INFO: iter: 000400, lr: 0.01000, total_loss: 0.250 (0.345), time: 0.306 (0.359), eta: -1 day, 23:58:13, mem: 8972M
-2021-04-23 16:44:32,603 UNET.trainer INFO: Evaluating...
-2021-04-23 16:44:35,563 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.5986368453502655, 'DICE Scores/Val - DICE Score, class 2': 0.527888300716877, 'DICE Scores/Val - DICE Score, class 3': 0.0}, val loss: 0.33472099900245667
-2021-04-23 16:44:35,564 UNET.trainer INFO: Running training for: 00 hours, 02 minutes and 23 seconds
-2021-04-23 16:44:38,827 UNET.trainer INFO: iter: 000410, lr: 0.01000, total_loss: 0.233 (0.342), time: 0.650 (0.366), eta: -1 day, 23:58:07, mem: 8972M
-2021-04-23 16:44:42,070 UNET.trainer INFO: iter: 000420, lr: 0.01000, total_loss: 0.225 (0.340), time: 0.324 (0.365), eta: -1 day, 23:58:04, mem: 8972M
-2021-04-23 16:44:45,377 UNET.trainer INFO: iter: 000430, lr: 0.01000, total_loss: 0.218 (0.337), time: 0.331 (0.364), eta: -1 day, 23:58:00, mem: 8972M
-2021-04-23 16:44:49,612 UNET.trainer INFO: iter: 000440, lr: 0.01000, total_loss: 0.213 (0.334), time: 0.424 (0.366), eta: -1 day, 23:57:56, mem: 8990M
-2021-04-23 16:44:53,154 UNET.trainer INFO: iter: 000450, lr: 0.01000, total_loss: 0.213 (0.331), time: 0.354 (0.365), eta: -1 day, 23:57:53, mem: 8990M
-2021-04-23 16:44:56,808 UNET.trainer INFO: iter: 000460, lr: 0.01000, total_loss: 0.235 (0.329), time: 0.365 (0.365), eta: -1 day, 23:57:49, mem: 8990M
-2021-04-23 16:45:00,107 UNET.trainer INFO: iter: 000470, lr: 0.01000, total_loss: 0.216 (0.327), time: 0.330 (0.365), eta: -1 day, 23:57:46, mem: 8990M
-2021-04-23 16:45:03,842 UNET.trainer INFO: iter: 000480, lr: 0.01000, total_loss: 0.205 (0.324), time: 0.374 (0.365), eta: -1 day, 23:57:42, mem: 8990M
-2021-04-23 16:45:06,987 UNET.trainer INFO: iter: 000490, lr: 0.01000, total_loss: 0.208 (0.322), time: 0.314 (0.364), eta: -1 day, 23:57:39, mem: 8990M
-2021-04-23 16:45:10,236 UNET.trainer INFO: iter: 000500, lr: 0.01000, total_loss: 0.205 (0.320), time: 0.325 (0.363), eta: -1 day, 23:57:35, mem: 8990M
-2021-04-23 16:45:10,554 UNET.trainer INFO: Running training for: 00 hours, 03 minutes and 01 seconds
-2021-04-23 16:45:14,604 UNET.trainer INFO: iter: 000510, lr: 0.01000, total_loss: 0.180 (0.317), time: 0.437 (0.364), eta: -1 day, 23:57:31, mem: 8990M
-2021-04-23 16:45:18,611 UNET.trainer INFO: iter: 000520, lr: 0.01000, total_loss: 0.175 (0.314), time: 0.401 (0.365), eta: -1 day, 23:57:27, mem: 8990M
-2021-04-23 16:45:21,829 UNET.trainer INFO: iter: 000530, lr: 0.01000, total_loss: 0.192 (0.312), time: 0.322 (0.364), eta: -1 day, 23:57:24, mem: 8990M
-2021-04-23 16:45:25,024 UNET.trainer INFO: iter: 000540, lr: 0.01000, total_loss: 0.191 (0.310), time: 0.320 (0.364), eta: -1 day, 23:57:21, mem: 8990M
-2021-04-23 16:45:28,162 UNET.trainer INFO: iter: 000550, lr: 0.01000, total_loss: 0.192 (0.307), time: 0.314 (0.363), eta: -1 day, 23:57:17, mem: 8990M
-2021-04-23 16:45:31,457 UNET.trainer INFO: iter: 000560, lr: 0.01000, total_loss: 0.196 (0.305), time: 0.330 (0.362), eta: -1 day, 23:57:14, mem: 8990M
-2021-04-23 16:45:35,208 UNET.trainer INFO: iter: 000570, lr: 0.01000, total_loss: 0.171 (0.303), time: 0.375 (0.362), eta: -1 day, 23:57:10, mem: 8990M
-2021-04-23 16:45:38,515 UNET.trainer INFO: iter: 000580, lr: 0.01000, total_loss: 0.170 (0.301), time: 0.331 (0.362), eta: -1 day, 23:57:07, mem: 8990M
-2021-04-23 16:45:41,887 UNET.trainer INFO: iter: 000590, lr: 0.01000, total_loss: 0.165 (0.298), time: 0.337 (0.361), eta: -1 day, 23:57:03, mem: 8990M
-2021-04-23 16:45:45,553 UNET.trainer INFO: iter: 000600, lr: 0.01000, total_loss: 0.163 (0.296), time: 0.367 (0.361), eta: -1 day, 23:57:00, mem: 8990M
-2021-04-23 16:45:45,878 UNET.trainer INFO: Evaluating...
-2021-04-23 16:45:48,893 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.16433465156704188, 'DICE Scores/Val - DICE Score, class 2': 0.35396078109741214, 'DICE Scores/Val - DICE Score, class 3': 0.09631467008497566}, val loss: 0.6031442284584045
-2021-04-23 16:45:48,894 UNET.trainer INFO: Saving checkpoint to outputs/nomalize_image/model_006.pth
-2021-04-23 16:45:48,967 UNET.trainer INFO: Running training for: 00 hours, 03 minutes and 36 seconds
-2021-04-23 16:45:53,493 UNET.trainer INFO: iter: 000610, lr: 0.01000, total_loss: 0.147 (0.294), time: 0.794 (0.368), eta: -1 day, 23:56:53, mem: 8990M
-2021-04-23 16:45:56,707 UNET.trainer INFO: iter: 000620, lr: 0.01000, total_loss: 0.154 (0.292), time: 0.321 (0.368), eta: -1 day, 23:56:49, mem: 8990M
-2021-04-23 16:46:00,069 UNET.trainer INFO: iter: 000630, lr: 0.01000, total_loss: 0.154 (0.289), time: 0.336 (0.367), eta: -1 day, 23:56:46, mem: 8990M
-2021-04-23 16:46:03,264 UNET.trainer INFO: iter: 000640, lr: 0.01000, total_loss: 0.153 (0.287), time: 0.320 (0.366), eta: -1 day, 23:56:43, mem: 8990M
-2021-04-23 16:46:06,594 UNET.trainer INFO: iter: 000650, lr: 0.01000, total_loss: 0.145 (0.285), time: 0.333 (0.366), eta: -1 day, 23:56:39, mem: 8990M
-2021-04-23 16:46:09,871 UNET.trainer INFO: iter: 000660, lr: 0.01000, total_loss: 0.137 (0.283), time: 0.328 (0.365), eta: -1 day, 23:56:36, mem: 8990M
-2021-04-23 16:46:13,778 UNET.trainer INFO: iter: 000670, lr: 0.01000, total_loss: 0.141 (0.281), time: 0.391 (0.366), eta: -1 day, 23:56:32, mem: 8990M
-2021-04-23 16:46:17,067 UNET.trainer INFO: iter: 000680, lr: 0.01000, total_loss: 0.153 (0.279), time: 0.329 (0.365), eta: -1 day, 23:56:29, mem: 8990M
-2021-04-23 16:46:20,362 UNET.trainer INFO: iter: 000690, lr: 0.01000, total_loss: 0.150 (0.277), time: 0.330 (0.365), eta: -1 day, 23:56:25, mem: 8990M
-2021-04-23 16:46:24,090 UNET.trainer INFO: iter: 000700, lr: 0.01000, total_loss: 0.143 (0.275), time: 0.373 (0.365), eta: -1 day, 23:56:22, mem: 8990M
-2021-04-23 16:46:24,399 UNET.trainer INFO: Running training for: 00 hours, 04 minutes and 15 seconds
-2021-04-23 16:46:27,882 UNET.trainer INFO: iter: 000710, lr: 0.01000, total_loss: 0.150 (0.273), time: 0.379 (0.365), eta: -1 day, 23:56:18, mem: 8990M
-2021-04-23 16:46:31,230 UNET.trainer INFO: iter: 000720, lr: 0.01000, total_loss: 0.129 (0.271), time: 0.335 (0.365), eta: -1 day, 23:56:14, mem: 8990M
-2021-04-23 16:46:34,484 UNET.trainer INFO: iter: 000730, lr: 0.01000, total_loss: 0.130 (0.269), time: 0.325 (0.364), eta: -1 day, 23:56:11, mem: 8990M
-2021-04-23 16:46:37,791 UNET.trainer INFO: iter: 000740, lr: 0.01000, total_loss: 0.129 (0.267), time: 0.331 (0.364), eta: -1 day, 23:56:08, mem: 8990M
-2021-04-23 16:46:42,151 UNET.trainer INFO: iter: 000750, lr: 0.01000, total_loss: 0.129 (0.266), time: 0.436 (0.365), eta: -1 day, 23:56:04, mem: 8990M
-2021-04-23 16:46:45,426 UNET.trainer INFO: iter: 000760, lr: 0.01000, total_loss: 0.136 (0.264), time: 0.327 (0.364), eta: -1 day, 23:56:00, mem: 8990M
-2021-04-23 16:46:49,814 UNET.trainer INFO: iter: 000770, lr: 0.01000, total_loss: 0.113 (0.262), time: 0.439 (0.365), eta: -1 day, 23:55:56, mem: 8990M
-2021-04-23 16:46:53,018 UNET.trainer INFO: iter: 000780, lr: 0.01000, total_loss: 0.124 (0.260), time: 0.320 (0.364), eta: -1 day, 23:55:53, mem: 8990M
-2021-04-23 16:46:56,262 UNET.trainer INFO: iter: 000790, lr: 0.01000, total_loss: 0.129 (0.258), time: 0.324 (0.364), eta: -1 day, 23:55:49, mem: 8990M
-2021-04-23 16:46:59,650 UNET.trainer INFO: iter: 000800, lr: 0.01000, total_loss: 0.118 (0.257), time: 0.339 (0.364), eta: -1 day, 23:55:46, mem: 8990M
-2021-04-23 16:46:59,959 UNET.trainer INFO: Evaluating...
-2021-04-23 16:47:02,974 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.4970199939608574, 'DICE Scores/Val - DICE Score, class 2': 0.5924815240502358, 'DICE Scores/Val - DICE Score, class 3': 0.45077547192573547}, val loss: 0.29514893889427185
-2021-04-23 16:47:02,976 UNET.trainer INFO: Running training for: 00 hours, 04 minutes and 50 seconds
-2021-04-23 16:47:06,263 UNET.trainer INFO: iter: 000810, lr: 0.01000, total_loss: 0.128 (0.255), time: 0.661 (0.367), eta: -1 day, 23:55:40, mem: 8990M
-2021-04-23 16:47:10,547 UNET.trainer INFO: iter: 000820, lr: 0.01000, total_loss: 0.113 (0.253), time: 0.428 (0.368), eta: -1 day, 23:55:35, mem: 8990M
-2021-04-23 16:47:13,760 UNET.trainer INFO: iter: 000830, lr: 0.01000, total_loss: 0.119 (0.252), time: 0.321 (0.368), eta: -1 day, 23:55:32, mem: 8990M
-2021-04-23 16:47:16,953 UNET.trainer INFO: iter: 000840, lr: 0.01000, total_loss: 0.109 (0.250), time: 0.319 (0.367), eta: -1 day, 23:55:29, mem: 8990M
-2021-04-23 16:47:20,268 UNET.trainer INFO: iter: 000850, lr: 0.01000, total_loss: 0.116 (0.248), time: 0.332 (0.367), eta: -1 day, 23:55:26, mem: 8990M
-2021-04-23 16:47:23,373 UNET.trainer INFO: iter: 000860, lr: 0.01000, total_loss: 0.129 (0.247), time: 0.310 (0.366), eta: -1 day, 23:55:22, mem: 8990M
-2021-04-23 16:47:27,639 UNET.trainer INFO: iter: 000870, lr: 0.01000, total_loss: 0.118 (0.246), time: 0.427 (0.367), eta: -1 day, 23:55:18, mem: 8990M
-2021-04-23 16:47:30,929 UNET.trainer INFO: iter: 000880, lr: 0.01000, total_loss: 0.117 (0.244), time: 0.329 (0.366), eta: -1 day, 23:55:15, mem: 8990M
-2021-04-23 16:47:34,463 UNET.trainer INFO: iter: 000890, lr: 0.01000, total_loss: 0.116 (0.243), time: 0.353 (0.366), eta: -1 day, 23:55:11, mem: 8990M
-2021-04-23 16:47:37,892 UNET.trainer INFO: iter: 000900, lr: 0.01000, total_loss: 0.113 (0.241), time: 0.343 (0.366), eta: -1 day, 23:55:08, mem: 8990M
-2021-04-23 16:47:38,148 UNET.trainer INFO: Running training for: 00 hours, 05 minutes and 29 seconds
-2021-04-23 16:47:41,535 UNET.trainer INFO: iter: 000910, lr: 0.01000, total_loss: 0.109 (0.240), time: 0.364 (0.366), eta: -1 day, 23:55:04, mem: 8990M
-2021-04-23 16:47:45,178 UNET.trainer INFO: iter: 000920, lr: 0.01000, total_loss: 0.109 (0.238), time: 0.364 (0.366), eta: -1 day, 23:55:01, mem: 8990M
-2021-04-23 16:47:48,477 UNET.trainer INFO: iter: 000930, lr: 0.01000, total_loss: 0.102 (0.237), time: 0.330 (0.365), eta: -1 day, 23:54:57, mem: 8990M
-2021-04-23 16:47:51,739 UNET.trainer INFO: iter: 000940, lr: 0.01000, total_loss: 0.105 (0.236), time: 0.326 (0.365), eta: -1 day, 23:54:54, mem: 8990M
-2021-04-23 16:47:55,049 UNET.trainer INFO: iter: 000950, lr: 0.01000, total_loss: 0.114 (0.234), time: 0.331 (0.365), eta: -1 day, 23:54:51, mem: 8990M
-2021-04-23 16:47:58,417 UNET.trainer INFO: iter: 000960, lr: 0.01000, total_loss: 0.105 (0.233), time: 0.337 (0.364), eta: -1 day, 23:54:47, mem: 8990M
-2021-04-23 16:48:02,427 UNET.trainer INFO: iter: 000970, lr: 0.01000, total_loss: 0.108 (0.232), time: 0.401 (0.365), eta: -1 day, 23:54:43, mem: 8990M
-2021-04-23 16:48:06,358 UNET.trainer INFO: iter: 000980, lr: 0.01000, total_loss: 0.114 (0.230), time: 0.393 (0.365), eta: -1 day, 23:54:39, mem: 8990M
-2021-04-23 16:48:09,781 UNET.trainer INFO: iter: 000990, lr: 0.01000, total_loss: 0.105 (0.229), time: 0.342 (0.365), eta: -1 day, 23:54:36, mem: 8990M
-2021-04-23 16:48:13,557 UNET.trainer INFO: iter: 001000, lr: 0.01000, total_loss: 0.092 (0.228), time: 0.378 (0.365), eta: -1 day, 23:54:32, mem: 8990M
-2021-04-23 16:48:13,869 UNET.trainer INFO: Evaluating...
-2021-04-23 16:48:16,804 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.2566958710551262, 'DICE Scores/Val - DICE Score, class 2': 0.33242986872792246, 'DICE Scores/Val - DICE Score, class 3': 0.3789618223905563}, val loss: 0.6636080145835876
-2021-04-23 16:48:16,804 UNET.trainer INFO: Running training for: 00 hours, 06 minutes and 04 seconds
-2021-04-23 16:48:20,248 UNET.trainer INFO: iter: 001010, lr: 0.01000, total_loss: 0.107 (0.227), time: 0.669 (0.368), eta: -1 day, 23:54:26, mem: 8990M
-2021-04-23 16:48:23,422 UNET.trainer INFO: iter: 001020, lr: 0.01000, total_loss: 0.100 (0.225), time: 0.317 (0.367), eta: -1 day, 23:54:23, mem: 8990M
-2021-04-23 16:48:26,808 UNET.trainer INFO: iter: 001030, lr: 0.01000, total_loss: 0.102 (0.224), time: 0.339 (0.367), eta: -1 day, 23:54:19, mem: 8990M
-2021-04-23 16:48:30,032 UNET.trainer INFO: iter: 001040, lr: 0.01000, total_loss: 0.093 (0.223), time: 0.322 (0.367), eta: -1 day, 23:54:16, mem: 8990M
-2021-04-23 16:48:33,398 UNET.trainer INFO: iter: 001050, lr: 0.01000, total_loss: 0.096 (0.222), time: 0.337 (0.366), eta: -1 day, 23:54:12, mem: 8990M
-2021-04-23 16:48:37,403 UNET.trainer INFO: iter: 001060, lr: 0.01000, total_loss: 0.089 (0.220), time: 0.400 (0.367), eta: -1 day, 23:54:08, mem: 8990M
-2021-04-23 16:48:41,326 UNET.trainer INFO: iter: 001070, lr: 0.01000, total_loss: 0.098 (0.219), time: 0.392 (0.367), eta: -1 day, 23:54:05, mem: 8990M
-2021-04-23 16:48:44,809 UNET.trainer INFO: iter: 001080, lr: 0.01000, total_loss: 0.105 (0.218), time: 0.348 (0.367), eta: -1 day, 23:54:01, mem: 8990M
-2021-04-23 16:48:48,196 UNET.trainer INFO: iter: 001090, lr: 0.01000, total_loss: 0.099 (0.217), time: 0.339 (0.367), eta: -1 day, 23:53:58, mem: 8990M
-2021-04-23 16:48:52,701 UNET.trainer INFO: iter: 001100, lr: 0.01000, total_loss: 0.104 (0.216), time: 0.450 (0.367), eta: -1 day, 23:53:53, mem: 8990M
-2021-04-23 16:48:52,983 UNET.trainer INFO: Running training for: 00 hours, 06 minutes and 43 seconds
-2021-04-23 16:48:56,629 UNET.trainer INFO: iter: 001110, lr: 0.01000, total_loss: 0.102 (0.215), time: 0.393 (0.367), eta: -1 day, 23:53:49, mem: 8990M
-2021-04-23 16:49:00,782 UNET.trainer INFO: iter: 001120, lr: 0.01000, total_loss: 0.100 (0.214), time: 0.415 (0.368), eta: -1 day, 23:53:45, mem: 8990M
-2021-04-23 16:49:04,144 UNET.trainer INFO: iter: 001130, lr: 0.01000, total_loss: 0.111 (0.213), time: 0.336 (0.368), eta: -1 day, 23:53:42, mem: 8990M
-2021-04-23 16:49:07,501 UNET.trainer INFO: iter: 001140, lr: 0.01000, total_loss: 0.109 (0.212), time: 0.336 (0.367), eta: -1 day, 23:53:38, mem: 8990M
-2021-04-23 16:49:11,194 UNET.trainer INFO: iter: 001150, lr: 0.01000, total_loss: 0.104 (0.211), time: 0.369 (0.367), eta: -1 day, 23:53:35, mem: 8990M
-2021-04-23 16:49:15,041 UNET.trainer INFO: iter: 001160, lr: 0.01000, total_loss: 0.095 (0.210), time: 0.385 (0.368), eta: -1 day, 23:53:31, mem: 8990M
-2021-04-23 16:49:18,874 UNET.trainer INFO: iter: 001170, lr: 0.01000, total_loss: 0.096 (0.209), time: 0.383 (0.368), eta: -1 day, 23:53:27, mem: 8990M
-2021-04-23 16:49:22,686 UNET.trainer INFO: iter: 001180, lr: 0.01000, total_loss: 0.087 (0.208), time: 0.381 (0.368), eta: -1 day, 23:53:23, mem: 8990M
-2021-04-23 16:49:25,893 UNET.trainer INFO: iter: 001190, lr: 0.01000, total_loss: 0.097 (0.207), time: 0.321 (0.367), eta: -1 day, 23:53:20, mem: 8990M
-2021-04-23 16:49:29,410 UNET.trainer INFO: iter: 001200, lr: 0.01000, total_loss: 0.097 (0.206), time: 0.352 (0.367), eta: -1 day, 23:53:17, mem: 8990M
-2021-04-23 16:49:29,647 UNET.trainer INFO: Evaluating...
-2021-04-23 16:49:32,699 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.868387091755867, 'DICE Scores/Val - DICE Score, class 2': 0.7426647794246674, 'DICE Scores/Val - DICE Score, class 3': 0.7540855580568313}, val loss: 0.12413079291582108
-2021-04-23 16:49:32,701 UNET.trainer INFO: Saving checkpoint to outputs/nomalize_image/model_012.pth
-2021-04-23 16:49:32,768 UNET.trainer INFO: Running training for: 00 hours, 07 minutes and 20 seconds
-2021-04-23 16:49:36,399 UNET.trainer INFO: iter: 001210, lr: 0.01000, total_loss: 0.104 (0.206), time: 0.699 (0.370), eta: -1 day, 23:53:10, mem: 8990M
-2021-04-23 16:49:40,156 UNET.trainer INFO: iter: 001220, lr: 0.01000, total_loss: 0.089 (0.205), time: 0.376 (0.370), eta: -1 day, 23:53:06, mem: 8990M
-2021-04-23 16:49:44,070 UNET.trainer INFO: iter: 001230, lr: 0.01000, total_loss: 0.093 (0.204), time: 0.391 (0.370), eta: -1 day, 23:53:02, mem: 8990M
-2021-04-23 16:49:47,476 UNET.trainer INFO: iter: 001240, lr: 0.01000, total_loss: 0.086 (0.203), time: 0.341 (0.370), eta: -1 day, 23:52:59, mem: 8990M
-2021-04-23 16:49:51,384 UNET.trainer INFO: iter: 001250, lr: 0.01000, total_loss: 0.095 (0.202), time: 0.391 (0.370), eta: -1 day, 23:52:55, mem: 8990M
-2021-04-23 16:49:54,626 UNET.trainer INFO: iter: 001260, lr: 0.01000, total_loss: 0.095 (0.201), time: 0.324 (0.370), eta: -1 day, 23:52:52, mem: 8990M
-2021-04-23 16:49:58,676 UNET.trainer INFO: iter: 001270, lr: 0.01000, total_loss: 0.091 (0.200), time: 0.405 (0.370), eta: -1 day, 23:52:48, mem: 8990M
-2021-04-23 16:50:02,050 UNET.trainer INFO: iter: 001280, lr: 0.01000, total_loss: 0.097 (0.199), time: 0.337 (0.370), eta: -1 day, 23:52:44, mem: 8990M
-2021-04-23 16:50:05,426 UNET.trainer INFO: iter: 001290, lr: 0.01000, total_loss: 0.092 (0.199), time: 0.338 (0.370), eta: -1 day, 23:52:41, mem: 8990M
-2021-04-23 16:50:08,765 UNET.trainer INFO: iter: 001300, lr: 0.01000, total_loss: 0.090 (0.198), time: 0.334 (0.369), eta: -1 day, 23:52:37, mem: 8990M
-2021-04-23 16:50:09,029 UNET.trainer INFO: Running training for: 00 hours, 08 minutes and 00 seconds
-2021-04-23 16:50:12,485 UNET.trainer INFO: iter: 001310, lr: 0.01000, total_loss: 0.089 (0.197), time: 0.372 (0.369), eta: -1 day, 23:52:34, mem: 8990M
-2021-04-23 16:50:15,780 UNET.trainer INFO: iter: 001320, lr: 0.01000, total_loss: 0.089 (0.196), time: 0.329 (0.369), eta: -1 day, 23:52:30, mem: 8990M
-2021-04-23 16:50:19,730 UNET.trainer INFO: iter: 001330, lr: 0.01000, total_loss: 0.091 (0.195), time: 0.395 (0.369), eta: -1 day, 23:52:26, mem: 8990M
-2021-04-23 16:50:23,077 UNET.trainer INFO: iter: 001340, lr: 0.01000, total_loss: 0.098 (0.195), time: 0.335 (0.369), eta: -1 day, 23:52:23, mem: 8990M
-2021-04-23 16:50:26,415 UNET.trainer INFO: iter: 001350, lr: 0.01000, total_loss: 0.096 (0.194), time: 0.334 (0.369), eta: -1 day, 23:52:20, mem: 8990M
-2021-04-23 16:50:29,805 UNET.trainer INFO: iter: 001360, lr: 0.01000, total_loss: 0.093 (0.193), time: 0.339 (0.368), eta: -1 day, 23:52:16, mem: 8990M
-2021-04-23 16:50:33,473 UNET.trainer INFO: iter: 001370, lr: 0.01000, total_loss: 0.084 (0.192), time: 0.367 (0.368), eta: -1 day, 23:52:13, mem: 8990M
-2021-04-23 16:50:37,382 UNET.trainer INFO: iter: 001380, lr: 0.01000, total_loss: 0.090 (0.192), time: 0.391 (0.369), eta: -1 day, 23:52:09, mem: 8990M
-2021-04-23 16:50:41,273 UNET.trainer INFO: iter: 001390, lr: 0.01000, total_loss: 0.096 (0.191), time: 0.389 (0.369), eta: -1 day, 23:52:05, mem: 8990M
-2021-04-23 16:50:45,276 UNET.trainer INFO: iter: 001400, lr: 0.01000, total_loss: 0.084 (0.190), time: 0.400 (0.369), eta: -1 day, 23:52:01, mem: 8990M
-2021-04-23 16:50:45,568 UNET.trainer INFO: Evaluating...
-2021-04-23 16:50:48,566 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.820368567109108, 'DICE Scores/Val - DICE Score, class 2': 0.6459901976585388, 'DICE Scores/Val - DICE Score, class 3': 0.6440803050994873}, val loss: 0.1868506222963333
-2021-04-23 16:50:48,567 UNET.trainer INFO: Running training for: 00 hours, 08 minutes and 36 seconds
-2021-04-23 16:50:51,696 UNET.trainer INFO: iter: 001410, lr: 0.01000, total_loss: 0.091 (0.189), time: 0.642 (0.371), eta: -1 day, 23:51:55, mem: 8990M
-2021-04-23 16:50:55,932 UNET.trainer INFO: iter: 001420, lr: 0.01000, total_loss: 0.078 (0.189), time: 0.424 (0.371), eta: -1 day, 23:51:50, mem: 8990M
-2021-04-23 16:50:59,302 UNET.trainer INFO: iter: 001430, lr: 0.01000, total_loss: 0.088 (0.188), time: 0.337 (0.371), eta: -1 day, 23:51:47, mem: 8990M
-2021-04-23 16:51:02,496 UNET.trainer INFO: iter: 001440, lr: 0.01000, total_loss: 0.094 (0.187), time: 0.319 (0.371), eta: -1 day, 23:51:44, mem: 8990M
-2021-04-23 16:51:05,916 UNET.trainer INFO: iter: 001450, lr: 0.01000, total_loss: 0.090 (0.187), time: 0.342 (0.370), eta: -1 day, 23:51:40, mem: 8990M
-2021-04-23 16:51:09,321 UNET.trainer INFO: iter: 001460, lr: 0.01000, total_loss: 0.089 (0.186), time: 0.341 (0.370), eta: -1 day, 23:51:37, mem: 8990M
-2021-04-23 16:51:12,586 UNET.trainer INFO: iter: 001470, lr: 0.01000, total_loss: 0.093 (0.185), time: 0.326 (0.370), eta: -1 day, 23:51:34, mem: 8990M
-2021-04-23 16:51:16,009 UNET.trainer INFO: iter: 001480, lr: 0.01000, total_loss: 0.085 (0.185), time: 0.342 (0.370), eta: -1 day, 23:51:30, mem: 8990M
-2021-04-23 16:51:20,067 UNET.trainer INFO: iter: 001490, lr: 0.01000, total_loss: 0.081 (0.184), time: 0.406 (0.370), eta: -1 day, 23:51:26, mem: 8990M
-2021-04-23 16:51:24,026 UNET.trainer INFO: iter: 001500, lr: 0.01000, total_loss: 0.086 (0.183), time: 0.396 (0.370), eta: -1 day, 23:51:22, mem: 8990M
-2021-04-23 16:51:24,342 UNET.trainer INFO: Running training for: 00 hours, 09 minutes and 15 seconds
-2021-04-23 16:51:27,820 UNET.trainer INFO: iter: 001510, lr: 0.01000, total_loss: 0.087 (0.183), time: 0.379 (0.370), eta: -1 day, 23:51:18, mem: 8990M
-2021-04-23 16:51:31,601 UNET.trainer INFO: iter: 001520, lr: 0.01000, total_loss: 0.082 (0.182), time: 0.378 (0.370), eta: -1 day, 23:51:15, mem: 8990M
-2021-04-23 16:51:35,738 UNET.trainer INFO: iter: 001530, lr: 0.01000, total_loss: 0.079 (0.181), time: 0.414 (0.371), eta: -1 day, 23:51:11, mem: 8990M
-2021-04-23 16:51:39,267 UNET.trainer INFO: iter: 001540, lr: 0.01000, total_loss: 0.075 (0.181), time: 0.353 (0.370), eta: -1 day, 23:51:07, mem: 8990M
-2021-04-23 16:51:42,977 UNET.trainer INFO: iter: 001550, lr: 0.01000, total_loss: 0.089 (0.180), time: 0.371 (0.370), eta: -1 day, 23:51:03, mem: 8990M
-2021-04-23 16:51:46,238 UNET.trainer INFO: iter: 001560, lr: 0.01000, total_loss: 0.086 (0.179), time: 0.326 (0.370), eta: -1 day, 23:51:00, mem: 8990M
-2021-04-23 16:51:49,705 UNET.trainer INFO: iter: 001570, lr: 0.01000, total_loss: 0.084 (0.179), time: 0.347 (0.370), eta: -1 day, 23:50:57, mem: 8990M
-2021-04-23 16:51:53,639 UNET.trainer INFO: iter: 001580, lr: 0.01000, total_loss: 0.080 (0.178), time: 0.393 (0.370), eta: -1 day, 23:50:53, mem: 8990M
-2021-04-23 16:51:57,029 UNET.trainer INFO: iter: 001590, lr: 0.01000, total_loss: 0.089 (0.178), time: 0.339 (0.370), eta: -1 day, 23:50:49, mem: 8990M
-2021-04-23 16:52:00,231 UNET.trainer INFO: iter: 001600, lr: 0.01000, total_loss: 0.089 (0.177), time: 0.320 (0.370), eta: -1 day, 23:50:46, mem: 8990M
-2021-04-23 16:52:00,512 UNET.trainer INFO: Evaluating...
-2021-04-23 16:52:03,561 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.8596336168050766, 'DICE Scores/Val - DICE Score, class 2': 0.7069947791099548, 'DICE Scores/Val - DICE Score, class 3': 0.7613707745075226}, val loss: 0.13343779742717743
-2021-04-23 16:52:03,562 UNET.trainer INFO: Running training for: 00 hours, 09 minutes and 51 seconds
-2021-04-23 16:52:07,066 UNET.trainer INFO: iter: 001610, lr: 0.01000, total_loss: 0.082 (0.176), time: 0.683 (0.372), eta: -1 day, 23:50:39, mem: 8990M
-2021-04-23 16:52:10,506 UNET.trainer INFO: iter: 001620, lr: 0.01000, total_loss: 0.079 (0.176), time: 0.344 (0.371), eta: -1 day, 23:50:36, mem: 8990M
-2021-04-23 16:52:13,890 UNET.trainer INFO: iter: 001630, lr: 0.01000, total_loss: 0.086 (0.175), time: 0.338 (0.371), eta: -1 day, 23:50:32, mem: 8990M
-2021-04-23 16:52:17,882 UNET.trainer INFO: iter: 001640, lr: 0.01000, total_loss: 0.081 (0.175), time: 0.399 (0.371), eta: -1 day, 23:50:28, mem: 8990M
-2021-04-23 16:52:21,486 UNET.trainer INFO: iter: 001650, lr: 0.01000, total_loss: 0.084 (0.174), time: 0.360 (0.371), eta: -1 day, 23:50:25, mem: 8990M
-2021-04-23 16:52:24,854 UNET.trainer INFO: iter: 001660, lr: 0.01000, total_loss: 0.094 (0.174), time: 0.337 (0.371), eta: -1 day, 23:50:21, mem: 8990M
-2021-04-23 16:52:28,974 UNET.trainer INFO: iter: 001670, lr: 0.01000, total_loss: 0.086 (0.173), time: 0.412 (0.371), eta: -1 day, 23:50:17, mem: 8990M
-2021-04-23 16:52:32,441 UNET.trainer INFO: iter: 001680, lr: 0.01000, total_loss: 0.079 (0.173), time: 0.347 (0.371), eta: -1 day, 23:50:14, mem: 8990M
-2021-04-23 16:52:36,448 UNET.trainer INFO: iter: 001690, lr: 0.01000, total_loss: 0.078 (0.172), time: 0.401 (0.371), eta: -1 day, 23:50:10, mem: 8990M
-2021-04-23 16:52:40,475 UNET.trainer INFO: iter: 001700, lr: 0.01000, total_loss: 0.083 (0.172), time: 0.403 (0.372), eta: -1 day, 23:50:06, mem: 8990M
-2021-04-23 16:52:40,750 UNET.trainer INFO: Running training for: 00 hours, 10 minutes and 31 seconds
-2021-04-23 16:52:44,723 UNET.trainer INFO: iter: 001710, lr: 0.01000, total_loss: 0.082 (0.171), time: 0.425 (0.372), eta: -1 day, 23:50:02, mem: 8990M
-2021-04-23 16:52:48,111 UNET.trainer INFO: iter: 001720, lr: 0.01000, total_loss: 0.081 (0.170), time: 0.339 (0.372), eta: -1 day, 23:49:58, mem: 8990M
-2021-04-23 16:52:52,637 UNET.trainer INFO: iter: 001730, lr: 0.01000, total_loss: 0.077 (0.170), time: 0.453 (0.372), eta: -1 day, 23:49:54, mem: 8990M
-2021-04-23 16:52:55,995 UNET.trainer INFO: iter: 001740, lr: 0.01000, total_loss: 0.080 (0.169), time: 0.336 (0.372), eta: -1 day, 23:49:50, mem: 8990M
-2021-04-23 16:52:59,366 UNET.trainer INFO: iter: 001750, lr: 0.01000, total_loss: 0.076 (0.169), time: 0.337 (0.372), eta: -1 day, 23:49:47, mem: 8990M
-2021-04-23 16:53:02,899 UNET.trainer INFO: iter: 001760, lr: 0.01000, total_loss: 0.075 (0.168), time: 0.353 (0.372), eta: -1 day, 23:49:43, mem: 8990M
-2021-04-23 16:53:06,302 UNET.trainer INFO: iter: 001770, lr: 0.01000, total_loss: 0.092 (0.168), time: 0.340 (0.372), eta: -1 day, 23:49:40, mem: 8990M
-2021-04-23 16:53:10,373 UNET.trainer INFO: iter: 001780, lr: 0.01000, total_loss: 0.082 (0.167), time: 0.407 (0.372), eta: -1 day, 23:49:36, mem: 8990M
-2021-04-23 16:53:13,826 UNET.trainer INFO: iter: 001790, lr: 0.01000, total_loss: 0.092 (0.167), time: 0.345 (0.372), eta: -1 day, 23:49:33, mem: 8990M
-2021-04-23 16:53:17,326 UNET.trainer INFO: iter: 001800, lr: 0.01000, total_loss: 0.081 (0.167), time: 0.350 (0.371), eta: -1 day, 23:49:29, mem: 8990M
-2021-04-23 16:53:17,643 UNET.trainer INFO: Evaluating...
-2021-04-23 16:53:20,779 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.8911963242292404, 'DICE Scores/Val - DICE Score, class 2': 0.7989174479246139, 'DICE Scores/Val - DICE Score, class 3': 0.7925566464662552}, val loss: 0.10461660474538803
-2021-04-23 16:53:20,780 UNET.trainer INFO: Saving checkpoint to outputs/nomalize_image/model_018.pth
-2021-04-23 16:53:20,855 UNET.trainer INFO: Running training for: 00 hours, 11 minutes and 08 seconds
-2021-04-23 16:53:24,707 UNET.trainer INFO: iter: 001810, lr: 0.01000, total_loss: 0.082 (0.166), time: 0.738 (0.373), eta: -1 day, 23:49:22, mem: 8990M
-2021-04-23 16:53:28,087 UNET.trainer INFO: iter: 001820, lr: 0.01000, total_loss: 0.082 (0.166), time: 0.338 (0.373), eta: -1 day, 23:49:18, mem: 8990M
-2021-04-23 16:53:31,372 UNET.trainer INFO: iter: 001830, lr: 0.01000, total_loss: 0.091 (0.165), time: 0.329 (0.373), eta: -1 day, 23:49:15, mem: 8990M
-2021-04-23 16:53:35,345 UNET.trainer INFO: iter: 001840, lr: 0.01000, total_loss: 0.085 (0.165), time: 0.397 (0.373), eta: -1 day, 23:49:11, mem: 8990M
-2021-04-23 16:53:38,777 UNET.trainer INFO: iter: 001850, lr: 0.01000, total_loss: 0.079 (0.164), time: 0.343 (0.373), eta: -1 day, 23:49:08, mem: 8990M
-2021-04-23 16:53:42,212 UNET.trainer INFO: iter: 001860, lr: 0.01000, total_loss: 0.083 (0.164), time: 0.343 (0.373), eta: -1 day, 23:49:04, mem: 8990M
-2021-04-23 16:53:46,560 UNET.trainer INFO: iter: 001870, lr: 0.01000, total_loss: 0.085 (0.163), time: 0.435 (0.373), eta: -1 day, 23:49:00, mem: 8990M
-2021-04-23 16:53:49,971 UNET.trainer INFO: iter: 001880, lr: 0.01000, total_loss: 0.083 (0.163), time: 0.341 (0.373), eta: -1 day, 23:48:57, mem: 8990M
-2021-04-23 16:53:53,262 UNET.trainer INFO: iter: 001890, lr: 0.01000, total_loss: 0.080 (0.163), time: 0.329 (0.373), eta: -1 day, 23:48:53, mem: 8990M
-2021-04-23 16:53:56,847 UNET.trainer INFO: iter: 001900, lr: 0.01000, total_loss: 0.080 (0.162), time: 0.358 (0.373), eta: -1 day, 23:48:50, mem: 8990M
-2021-04-23 16:53:57,171 UNET.trainer INFO: Running training for: 00 hours, 11 minutes and 48 seconds
-2021-04-23 16:54:00,743 UNET.trainer INFO: iter: 001910, lr: 0.01000, total_loss: 0.080 (0.162), time: 0.390 (0.373), eta: -1 day, 23:48:46, mem: 8990M
-2021-04-23 16:54:04,371 UNET.trainer INFO: iter: 001920, lr: 0.01000, total_loss: 0.079 (0.161), time: 0.363 (0.373), eta: -1 day, 23:48:42, mem: 8990M
-2021-04-23 16:54:08,061 UNET.trainer INFO: iter: 001930, lr: 0.01000, total_loss: 0.072 (0.161), time: 0.369 (0.373), eta: -1 day, 23:48:38, mem: 8990M
-2021-04-23 16:54:11,501 UNET.trainer INFO: iter: 001940, lr: 0.01000, total_loss: 0.073 (0.160), time: 0.344 (0.373), eta: -1 day, 23:48:35, mem: 8990M
-2021-04-23 16:54:15,010 UNET.trainer INFO: iter: 001950, lr: 0.01000, total_loss: 0.087 (0.160), time: 0.351 (0.372), eta: -1 day, 23:48:31, mem: 8990M
-2021-04-23 16:54:18,874 UNET.trainer INFO: iter: 001960, lr: 0.01000, total_loss: 0.069 (0.160), time: 0.386 (0.373), eta: -1 day, 23:48:28, mem: 8990M
-2021-04-23 16:54:22,747 UNET.trainer INFO: iter: 001970, lr: 0.01000, total_loss: 0.089 (0.159), time: 0.387 (0.373), eta: -1 day, 23:48:24, mem: 8990M
-2021-04-23 16:54:26,179 UNET.trainer INFO: iter: 001980, lr: 0.01000, total_loss: 0.081 (0.159), time: 0.343 (0.372), eta: -1 day, 23:48:20, mem: 8990M
-2021-04-23 16:54:30,150 UNET.trainer INFO: iter: 001990, lr: 0.01000, total_loss: 0.076 (0.158), time: 0.397 (0.373), eta: -1 day, 23:48:16, mem: 8990M
-2021-04-23 16:54:34,152 UNET.trainer INFO: iter: 002000, lr: 0.01000, total_loss: 0.073 (0.158), time: 0.400 (0.373), eta: -1 day, 23:48:12, mem: 8990M
-2021-04-23 16:54:34,524 UNET.trainer INFO: Evaluating...
-2021-04-23 16:54:37,657 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.7705861353874206, 'DICE Scores/Val - DICE Score, class 2': 0.6450636023283005, 'DICE Scores/Val - DICE Score, class 3': 0.6339171683788299}, val loss: 0.19152691960334778
-2021-04-23 16:54:37,658 UNET.trainer INFO: Running training for: 00 hours, 12 minutes and 25 seconds
-2021-04-23 16:54:41,357 UNET.trainer INFO: iter: 002010, lr: 0.01000, total_loss: 0.071 (0.157), time: 0.720 (0.374), eta: -1 day, 23:48:05, mem: 8990M
-2021-04-23 16:54:45,214 UNET.trainer INFO: iter: 002020, lr: 0.01000, total_loss: 0.080 (0.157), time: 0.386 (0.375), eta: -1 day, 23:48:01, mem: 8990M
-2021-04-23 16:54:49,437 UNET.trainer INFO: iter: 002030, lr: 0.01000, total_loss: 0.069 (0.157), time: 0.422 (0.375), eta: -1 day, 23:47:57, mem: 8990M
-2021-04-23 16:54:53,326 UNET.trainer INFO: iter: 002040, lr: 0.01000, total_loss: 0.080 (0.156), time: 0.389 (0.375), eta: -1 day, 23:47:53, mem: 8990M
-2021-04-23 16:54:56,787 UNET.trainer INFO: iter: 002050, lr: 0.01000, total_loss: 0.084 (0.156), time: 0.346 (0.375), eta: -1 day, 23:47:50, mem: 8990M
-2021-04-23 16:55:00,878 UNET.trainer INFO: iter: 002060, lr: 0.01000, total_loss: 0.081 (0.156), time: 0.409 (0.375), eta: -1 day, 23:47:46, mem: 8990M
-2021-04-23 16:55:04,221 UNET.trainer INFO: iter: 002070, lr: 0.01000, total_loss: 0.080 (0.155), time: 0.334 (0.375), eta: -1 day, 23:47:42, mem: 8990M
-2021-04-23 16:55:07,734 UNET.trainer INFO: iter: 002080, lr: 0.01000, total_loss: 0.074 (0.155), time: 0.351 (0.375), eta: -1 day, 23:47:39, mem: 8990M
-2021-04-23 16:55:11,248 UNET.trainer INFO: iter: 002090, lr: 0.01000, total_loss: 0.078 (0.154), time: 0.351 (0.374), eta: -1 day, 23:47:35, mem: 8990M
-2021-04-23 16:55:14,644 UNET.trainer INFO: iter: 002100, lr: 0.01000, total_loss: 0.084 (0.154), time: 0.340 (0.374), eta: -1 day, 23:47:32, mem: 8990M
-2021-04-23 16:55:14,924 UNET.trainer INFO: Running training for: 00 hours, 13 minutes and 05 seconds
-2021-04-23 16:55:18,573 UNET.trainer INFO: iter: 002110, lr: 0.01000, total_loss: 0.084 (0.154), time: 0.393 (0.374), eta: -1 day, 23:47:28, mem: 8990M
-2021-04-23 16:55:22,233 UNET.trainer INFO: iter: 002120, lr: 0.01000, total_loss: 0.076 (0.153), time: 0.366 (0.374), eta: -1 day, 23:47:24, mem: 8990M
-2021-04-23 16:55:25,643 UNET.trainer INFO: iter: 002130, lr: 0.01000, total_loss: 0.079 (0.153), time: 0.341 (0.374), eta: -1 day, 23:47:21, mem: 8990M
-2021-04-23 16:55:30,118 UNET.trainer INFO: iter: 002140, lr: 0.01000, total_loss: 0.072 (0.153), time: 0.447 (0.374), eta: -1 day, 23:47:17, mem: 8990M
-2021-04-23 16:55:33,575 UNET.trainer INFO: iter: 002150, lr: 0.01000, total_loss: 0.077 (0.152), time: 0.346 (0.374), eta: -1 day, 23:47:13, mem: 8990M
-2021-04-23 16:55:37,680 UNET.trainer INFO: iter: 002160, lr: 0.01000, total_loss: 0.072 (0.152), time: 0.410 (0.375), eta: -1 day, 23:47:09, mem: 8990M
-2021-04-23 16:55:40,984 UNET.trainer INFO: iter: 002170, lr: 0.01000, total_loss: 0.085 (0.152), time: 0.330 (0.374), eta: -1 day, 23:47:06, mem: 8990M
-2021-04-23 16:55:44,505 UNET.trainer INFO: iter: 002180, lr: 0.01000, total_loss: 0.069 (0.151), time: 0.352 (0.374), eta: -1 day, 23:47:02, mem: 8990M
-2021-04-23 16:55:48,461 UNET.trainer INFO: iter: 002190, lr: 0.01000, total_loss: 0.078 (0.151), time: 0.396 (0.374), eta: -1 day, 23:46:58, mem: 8990M
-2021-04-23 16:55:51,928 UNET.trainer INFO: iter: 002200, lr: 0.01000, total_loss: 0.076 (0.151), time: 0.347 (0.374), eta: -1 day, 23:46:55, mem: 8990M
-2021-04-23 16:55:52,203 UNET.trainer INFO: Evaluating...
-2021-04-23 16:55:55,304 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.4821629959344864, 'DICE Scores/Val - DICE Score, class 2': 0.4915140900015831, 'DICE Scores/Val - DICE Score, class 3': 0.625750313103199}, val loss: 0.3639642596244812
-2021-04-23 16:55:55,305 UNET.trainer INFO: Running training for: 00 hours, 13 minutes and 43 seconds
-2021-04-23 16:55:59,465 UNET.trainer INFO: iter: 002210, lr: 0.01000, total_loss: 0.074 (0.150), time: 0.754 (0.376), eta: -1 day, 23:46:47, mem: 8990M
-2021-04-23 16:56:02,972 UNET.trainer INFO: iter: 002220, lr: 0.01000, total_loss: 0.085 (0.150), time: 0.351 (0.376), eta: -1 day, 23:46:44, mem: 8990M
-2021-04-23 16:56:06,851 UNET.trainer INFO: iter: 002230, lr: 0.01000, total_loss: 0.072 (0.150), time: 0.388 (0.376), eta: -1 day, 23:46:40, mem: 8990M
-2021-04-23 16:56:10,264 UNET.trainer INFO: iter: 002240, lr: 0.01000, total_loss: 0.068 (0.149), time: 0.341 (0.376), eta: -1 day, 23:46:37, mem: 8990M
-2021-04-23 16:56:13,654 UNET.trainer INFO: iter: 002250, lr: 0.01000, total_loss: 0.072 (0.149), time: 0.339 (0.376), eta: -1 day, 23:46:33, mem: 8990M
-2021-04-23 16:56:17,232 UNET.trainer INFO: iter: 002260, lr: 0.01000, total_loss: 0.076 (0.149), time: 0.358 (0.375), eta: -1 day, 23:46:30, mem: 8990M
-2021-04-23 16:56:20,614 UNET.trainer INFO: iter: 002270, lr: 0.01000, total_loss: 0.076 (0.148), time: 0.338 (0.375), eta: -1 day, 23:46:26, mem: 8990M
-2021-04-23 16:56:24,603 UNET.trainer INFO: iter: 002280, lr: 0.01000, total_loss: 0.075 (0.148), time: 0.399 (0.375), eta: -1 day, 23:46:22, mem: 8990M
-2021-04-23 16:56:28,607 UNET.trainer INFO: iter: 002290, lr: 0.01000, total_loss: 0.075 (0.148), time: 0.400 (0.375), eta: -1 day, 23:46:18, mem: 8990M
-2021-04-23 16:56:32,351 UNET.trainer INFO: iter: 002300, lr: 0.01000, total_loss: 0.073 (0.147), time: 0.374 (0.375), eta: -1 day, 23:46:14, mem: 8990M
-2021-04-23 16:56:32,594 UNET.trainer INFO: Running training for: 00 hours, 14 minutes and 23 seconds
-2021-04-23 16:56:36,138 UNET.trainer INFO: iter: 002310, lr: 0.01000, total_loss: 0.074 (0.147), time: 0.379 (0.376), eta: -1 day, 23:46:11, mem: 8990M
-2021-04-23 16:56:39,614 UNET.trainer INFO: iter: 002320, lr: 0.01000, total_loss: 0.077 (0.147), time: 0.348 (0.375), eta: -1 day, 23:46:07, mem: 8990M
-2021-04-23 16:56:43,586 UNET.trainer INFO: iter: 002330, lr: 0.01000, total_loss: 0.070 (0.146), time: 0.397 (0.375), eta: -1 day, 23:46:03, mem: 8990M
-2021-04-23 16:56:47,057 UNET.trainer INFO: iter: 002340, lr: 0.01000, total_loss: 0.074 (0.146), time: 0.347 (0.375), eta: -1 day, 23:46:00, mem: 8990M
-2021-04-23 16:56:50,654 UNET.trainer INFO: iter: 002350, lr: 0.01000, total_loss: 0.071 (0.146), time: 0.360 (0.375), eta: -1 day, 23:45:56, mem: 8990M
-2021-04-23 16:56:54,091 UNET.trainer INFO: iter: 002360, lr: 0.01000, total_loss: 0.077 (0.145), time: 0.344 (0.375), eta: -1 day, 23:45:53, mem: 8990M
-2021-04-23 16:56:57,419 UNET.trainer INFO: iter: 002370, lr: 0.01000, total_loss: 0.070 (0.145), time: 0.333 (0.375), eta: -1 day, 23:45:49, mem: 8990M
-2021-04-23 16:57:01,429 UNET.trainer INFO: iter: 002380, lr: 0.01000, total_loss: 0.071 (0.145), time: 0.401 (0.375), eta: -1 day, 23:45:45, mem: 8990M
-2021-04-23 16:57:05,537 UNET.trainer INFO: iter: 002390, lr: 0.01000, total_loss: 0.067 (0.144), time: 0.411 (0.375), eta: -1 day, 23:45:41, mem: 8990M
-2021-04-23 16:57:09,608 UNET.trainer INFO: iter: 002400, lr: 0.01000, total_loss: 0.073 (0.144), time: 0.407 (0.375), eta: -1 day, 23:45:37, mem: 8990M
-2021-04-23 16:57:09,863 UNET.trainer INFO: Evaluating...
-2021-04-23 16:57:12,878 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.7946718430519104, 'DICE Scores/Val - DICE Score, class 2': 0.6902497214078903, 'DICE Scores/Val - DICE Score, class 3': 0.6675554233789444}, val loss: 0.16592556238174438
-2021-04-23 16:57:12,880 UNET.trainer INFO: Saving checkpoint to outputs/nomalize_image/model_024.pth
-2021-04-23 16:57:12,948 UNET.trainer INFO: Running training for: 00 hours, 15 minutes and 00 seconds
-2021-04-23 16:57:17,933 UNET.trainer INFO: iter: 002410, lr: 0.01000, total_loss: 0.062 (0.144), time: 0.832 (0.377), eta: -1 day, 23:45:29, mem: 8990M
-2021-04-23 16:57:21,653 UNET.trainer INFO: iter: 002420, lr: 0.01000, total_loss: 0.074 (0.144), time: 0.372 (0.377), eta: -1 day, 23:45:25, mem: 8990M
-2021-04-23 16:57:25,090 UNET.trainer INFO: iter: 002430, lr: 0.01000, total_loss: 0.073 (0.143), time: 0.344 (0.377), eta: -1 day, 23:45:22, mem: 8990M
-2021-04-23 16:57:28,551 UNET.trainer INFO: iter: 002440, lr: 0.01000, total_loss: 0.068 (0.143), time: 0.346 (0.377), eta: -1 day, 23:45:18, mem: 8990M
-2021-04-23 16:57:32,456 UNET.trainer INFO: iter: 002450, lr: 0.01000, total_loss: 0.069 (0.143), time: 0.391 (0.377), eta: -1 day, 23:45:14, mem: 8990M
-2021-04-23 16:57:35,859 UNET.trainer INFO: iter: 002460, lr: 0.01000, total_loss: 0.075 (0.142), time: 0.340 (0.377), eta: -1 day, 23:45:11, mem: 8990M
-2021-04-23 16:57:39,210 UNET.trainer INFO: iter: 002470, lr: 0.01000, total_loss: 0.077 (0.142), time: 0.335 (0.377), eta: -1 day, 23:45:08, mem: 8990M
-2021-04-23 16:57:42,805 UNET.trainer INFO: iter: 002480, lr: 0.01000, total_loss: 0.071 (0.142), time: 0.359 (0.377), eta: -1 day, 23:45:04, mem: 8990M
-2021-04-23 16:57:46,213 UNET.trainer INFO: iter: 002490, lr: 0.01000, total_loss: 0.081 (0.142), time: 0.341 (0.377), eta: -1 day, 23:45:01, mem: 8990M
-2021-04-23 16:57:49,579 UNET.trainer INFO: iter: 002500, lr: 0.01000, total_loss: 0.072 (0.141), time: 0.337 (0.376), eta: -1 day, 23:44:57, mem: 8990M
-2021-04-23 16:57:49,842 UNET.trainer INFO: Running training for: 00 hours, 15 minutes and 40 seconds
-2021-04-23 16:57:53,135 UNET.trainer INFO: iter: 002510, lr: 0.01000, total_loss: 0.071 (0.141), time: 0.356 (0.376), eta: -1 day, 23:44:54, mem: 8990M
-2021-04-23 16:57:56,499 UNET.trainer INFO: iter: 002520, lr: 0.01000, total_loss: 0.081 (0.141), time: 0.336 (0.376), eta: -1 day, 23:44:50, mem: 8990M
-2021-04-23 16:57:59,765 UNET.trainer INFO: iter: 002530, lr: 0.01000, total_loss: 0.076 (0.141), time: 0.327 (0.376), eta: -1 day, 23:44:47, mem: 8990M
-2021-04-23 16:58:04,086 UNET.trainer INFO: iter: 002540, lr: 0.01000, total_loss: 0.069 (0.140), time: 0.432 (0.376), eta: -1 day, 23:44:43, mem: 8990M
-2021-04-23 16:58:07,645 UNET.trainer INFO: iter: 002550, lr: 0.01000, total_loss: 0.072 (0.140), time: 0.356 (0.376), eta: -1 day, 23:44:39, mem: 8990M
-2021-04-23 16:58:11,107 UNET.trainer INFO: iter: 002560, lr: 0.01000, total_loss: 0.072 (0.140), time: 0.346 (0.376), eta: -1 day, 23:44:36, mem: 8990M
-2021-04-23 16:58:14,482 UNET.trainer INFO: iter: 002570, lr: 0.01000, total_loss: 0.074 (0.139), time: 0.337 (0.376), eta: -1 day, 23:44:32, mem: 8990M
-2021-04-23 16:58:17,884 UNET.trainer INFO: iter: 002580, lr: 0.01000, total_loss: 0.075 (0.139), time: 0.340 (0.376), eta: -1 day, 23:44:29, mem: 8990M
-2021-04-23 16:58:21,813 UNET.trainer INFO: iter: 002590, lr: 0.01000, total_loss: 0.069 (0.139), time: 0.393 (0.376), eta: -1 day, 23:44:25, mem: 8990M
-2021-04-23 16:58:25,703 UNET.trainer INFO: iter: 002600, lr: 0.01000, total_loss: 0.070 (0.139), time: 0.389 (0.376), eta: -1 day, 23:44:21, mem: 8990M
-2021-04-23 16:58:25,991 UNET.trainer INFO: Evaluating...
-2021-04-23 16:58:29,096 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.7698479121923447, 'DICE Scores/Val - DICE Score, class 2': 0.6716080099344254, 'DICE Scores/Val - DICE Score, class 3': 0.6681944292783737}, val loss: 0.16432926058769226
-2021-04-23 16:58:29,097 UNET.trainer INFO: Running training for: 00 hours, 16 minutes and 16 seconds
-2021-04-23 16:58:32,446 UNET.trainer INFO: iter: 002610, lr: 0.01000, total_loss: 0.073 (0.138), time: 0.674 (0.377), eta: -1 day, 23:44:14, mem: 8990M
-2021-04-23 16:58:36,982 UNET.trainer INFO: iter: 002620, lr: 0.01000, total_loss: 0.061 (0.138), time: 0.454 (0.377), eta: -1 day, 23:44:10, mem: 8990M
-2021-04-23 16:58:40,432 UNET.trainer INFO: iter: 002630, lr: 0.01000, total_loss: 0.066 (0.138), time: 0.345 (0.377), eta: -1 day, 23:44:06, mem: 8990M
-2021-04-23 16:58:43,845 UNET.trainer INFO: iter: 002640, lr: 0.01000, total_loss: 0.078 (0.138), time: 0.341 (0.377), eta: -1 day, 23:44:03, mem: 8990M
-2021-04-23 16:58:47,601 UNET.trainer INFO: iter: 002650, lr: 0.01000, total_loss: 0.076 (0.137), time: 0.376 (0.377), eta: -1 day, 23:43:59, mem: 8990M
-2021-04-23 16:58:50,968 UNET.trainer INFO: iter: 002660, lr: 0.01000, total_loss: 0.078 (0.137), time: 0.337 (0.377), eta: -1 day, 23:43:56, mem: 8990M
-2021-04-23 16:58:54,350 UNET.trainer INFO: iter: 002670, lr: 0.01000, total_loss: 0.075 (0.137), time: 0.338 (0.377), eta: -1 day, 23:43:53, mem: 8990M
-2021-04-23 16:58:58,317 UNET.trainer INFO: iter: 002680, lr: 0.01000, total_loss: 0.073 (0.137), time: 0.397 (0.377), eta: -1 day, 23:43:49, mem: 8990M
-2021-04-23 16:59:01,517 UNET.trainer INFO: iter: 002690, lr: 0.01000, total_loss: 0.074 (0.136), time: 0.320 (0.377), eta: -1 day, 23:43:45, mem: 8990M
-2021-04-23 16:59:05,098 UNET.trainer INFO: iter: 002700, lr: 0.01000, total_loss: 0.073 (0.136), time: 0.358 (0.376), eta: -1 day, 23:43:42, mem: 8990M
-2021-04-23 16:59:05,444 UNET.trainer INFO: Running training for: 00 hours, 16 minutes and 56 seconds
-2021-04-23 16:59:08,849 UNET.trainer INFO: iter: 002710, lr: 0.01000, total_loss: 0.074 (0.136), time: 0.375 (0.376), eta: -1 day, 23:43:38, mem: 8990M
-2021-04-23 16:59:12,881 UNET.trainer INFO: iter: 002720, lr: 0.01000, total_loss: 0.073 (0.136), time: 0.403 (0.377), eta: -1 day, 23:43:34, mem: 8990M
-2021-04-23 16:59:16,430 UNET.trainer INFO: iter: 002730, lr: 0.01000, total_loss: 0.073 (0.136), time: 0.355 (0.376), eta: -1 day, 23:43:30, mem: 8990M
-2021-04-23 16:59:19,936 UNET.trainer INFO: iter: 002740, lr: 0.01000, total_loss: 0.070 (0.135), time: 0.351 (0.376), eta: -1 day, 23:43:27, mem: 8990M
-2021-04-23 16:59:24,176 UNET.trainer INFO: iter: 002750, lr: 0.01000, total_loss: 0.084 (0.135), time: 0.424 (0.377), eta: -1 day, 23:43:23, mem: 8990M
-2021-04-23 16:59:27,581 UNET.trainer INFO: iter: 002760, lr: 0.01000, total_loss: 0.077 (0.135), time: 0.340 (0.376), eta: -1 day, 23:43:19, mem: 8990M
-2021-04-23 16:59:31,059 UNET.trainer INFO: iter: 002770, lr: 0.01000, total_loss: 0.073 (0.135), time: 0.348 (0.376), eta: -1 day, 23:43:16, mem: 8990M
-2021-04-23 16:59:34,537 UNET.trainer INFO: iter: 002780, lr: 0.01000, total_loss: 0.064 (0.134), time: 0.348 (0.376), eta: -1 day, 23:43:12, mem: 8990M
-2021-04-23 16:59:37,849 UNET.trainer INFO: iter: 002790, lr: 0.01000, total_loss: 0.074 (0.134), time: 0.331 (0.376), eta: -1 day, 23:43:09, mem: 8990M
-2021-04-23 16:59:41,873 UNET.trainer INFO: iter: 002800, lr: 0.01000, total_loss: 0.064 (0.134), time: 0.402 (0.376), eta: -1 day, 23:43:05, mem: 8990M
-2021-04-23 16:59:42,195 UNET.trainer INFO: Evaluating...
-2021-04-23 16:59:45,242 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.8616687381267547, 'DICE Scores/Val - DICE Score, class 2': 0.6932202959060669, 'DICE Scores/Val - DICE Score, class 3': 0.7906662333011627}, val loss: 0.13452258706092834
-2021-04-23 16:59:45,243 UNET.trainer INFO: Running training for: 00 hours, 17 minutes and 33 seconds
-2021-04-23 16:59:49,460 UNET.trainer INFO: iter: 002810, lr: 0.01000, total_loss: 0.064 (0.134), time: 0.759 (0.377), eta: -1 day, 23:42:58, mem: 8990M
-2021-04-23 16:59:52,766 UNET.trainer INFO: iter: 002820, lr: 0.01000, total_loss: 0.070 (0.133), time: 0.331 (0.377), eta: -1 day, 23:42:54, mem: 8990M
-2021-04-23 16:59:56,748 UNET.trainer INFO: iter: 002830, lr: 0.01000, total_loss: 0.064 (0.133), time: 0.398 (0.377), eta: -1 day, 23:42:50, mem: 8990M
-2021-04-23 17:00:00,012 UNET.trainer INFO: iter: 002840, lr: 0.01000, total_loss: 0.071 (0.133), time: 0.326 (0.377), eta: -1 day, 23:42:47, mem: 8990M
-2021-04-23 17:00:03,825 UNET.trainer INFO: iter: 002850, lr: 0.01000, total_loss: 0.072 (0.133), time: 0.381 (0.377), eta: -1 day, 23:42:43, mem: 8990M
-2021-04-23 17:00:07,259 UNET.trainer INFO: iter: 002860, lr: 0.01000, total_loss: 0.069 (0.133), time: 0.343 (0.377), eta: -1 day, 23:42:40, mem: 8990M
-2021-04-23 17:00:10,751 UNET.trainer INFO: iter: 002870, lr: 0.01000, total_loss: 0.073 (0.132), time: 0.349 (0.377), eta: -1 day, 23:42:36, mem: 8990M
-2021-04-23 17:00:14,258 UNET.trainer INFO: iter: 002880, lr: 0.01000, total_loss: 0.072 (0.132), time: 0.351 (0.377), eta: -1 day, 23:42:33, mem: 8990M
-2021-04-23 17:00:17,645 UNET.trainer INFO: iter: 002890, lr: 0.01000, total_loss: 0.072 (0.132), time: 0.339 (0.377), eta: -1 day, 23:42:29, mem: 8990M
-2021-04-23 17:00:21,556 UNET.trainer INFO: iter: 002900, lr: 0.01000, total_loss: 0.074 (0.132), time: 0.391 (0.377), eta: -1 day, 23:42:25, mem: 8990M
-2021-04-23 17:00:21,845 UNET.trainer INFO: Running training for: 00 hours, 18 minutes and 12 seconds
-2021-04-23 17:00:25,709 UNET.trainer INFO: iter: 002910, lr: 0.01000, total_loss: 0.067 (0.132), time: 0.415 (0.377), eta: -1 day, 23:42:21, mem: 8990M
-2021-04-23 17:00:28,934 UNET.trainer INFO: iter: 002920, lr: 0.01000, total_loss: 0.076 (0.131), time: 0.323 (0.377), eta: -1 day, 23:42:18, mem: 8990M
-2021-04-23 17:00:32,345 UNET.trainer INFO: iter: 002930, lr: 0.01000, total_loss: 0.072 (0.131), time: 0.341 (0.377), eta: -1 day, 23:42:15, mem: 8990M
-2021-04-23 17:00:35,595 UNET.trainer INFO: iter: 002940, lr: 0.01000, total_loss: 0.077 (0.131), time: 0.325 (0.376), eta: -1 day, 23:42:11, mem: 8990M
-2021-04-23 17:00:39,169 UNET.trainer INFO: iter: 002950, lr: 0.01000, total_loss: 0.065 (0.131), time: 0.357 (0.376), eta: -1 day, 23:42:08, mem: 8990M
-2021-04-23 17:00:42,825 UNET.trainer INFO: iter: 002960, lr: 0.01000, total_loss: 0.071 (0.131), time: 0.366 (0.376), eta: -1 day, 23:42:04, mem: 8990M
-2021-04-23 17:00:46,604 UNET.trainer INFO: iter: 002970, lr: 0.01000, total_loss: 0.074 (0.130), time: 0.378 (0.376), eta: -1 day, 23:42:00, mem: 8990M
-2021-04-23 17:00:50,561 UNET.trainer INFO: iter: 002980, lr: 0.01000, total_loss: 0.065 (0.130), time: 0.396 (0.376), eta: -1 day, 23:41:56, mem: 8990M
-2021-04-23 17:00:54,369 UNET.trainer INFO: iter: 002990, lr: 0.01000, total_loss: 0.068 (0.130), time: 0.381 (0.376), eta: -1 day, 23:41:52, mem: 8990M
-2021-04-23 17:00:58,182 UNET.trainer INFO: iter: 003000, lr: 0.01000, total_loss: 0.070 (0.130), time: 0.381 (0.376), eta: -1 day, 23:41:49, mem: 8990M
-2021-04-23 17:00:58,452 UNET.trainer INFO: Evaluating...
-2021-04-23 17:01:01,531 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.4506125284731388, 'DICE Scores/Val - DICE Score, class 2': 0.4573372095823288, 'DICE Scores/Val - DICE Score, class 3': 0.6262042382359505}, val loss: 0.3287235200405121
-2021-04-23 17:01:01,533 UNET.trainer INFO: Saving checkpoint to outputs/nomalize_image/model_030.pth
-2021-04-23 17:01:01,606 UNET.trainer INFO: Running training for: 00 hours, 18 minutes and 49 seconds
-2021-04-23 17:01:05,079 UNET.trainer INFO: iter: 003010, lr: 0.01000, total_loss: 0.068 (0.129), time: 0.690 (0.378), eta: -1 day, 23:41:42, mem: 8990M
-2021-04-23 17:01:09,151 UNET.trainer INFO: iter: 003020, lr: 0.01000, total_loss: 0.064 (0.129), time: 0.407 (0.378), eta: -1 day, 23:41:38, mem: 8990M
-2021-04-23 17:01:13,028 UNET.trainer INFO: iter: 003030, lr: 0.01000, total_loss: 0.067 (0.129), time: 0.388 (0.378), eta: -1 day, 23:41:34, mem: 8990M
-2021-04-23 17:01:16,319 UNET.trainer INFO: iter: 003040, lr: 0.01000, total_loss: 0.077 (0.129), time: 0.329 (0.378), eta: -1 day, 23:41:31, mem: 8990M
-2021-04-23 17:01:20,817 UNET.trainer INFO: iter: 003050, lr: 0.01000, total_loss: 0.061 (0.129), time: 0.450 (0.378), eta: -1 day, 23:41:26, mem: 8990M
-2021-04-23 17:01:24,054 UNET.trainer INFO: iter: 003060, lr: 0.01000, total_loss: 0.074 (0.128), time: 0.324 (0.378), eta: -1 day, 23:41:23, mem: 8990M
-2021-04-23 17:01:27,488 UNET.trainer INFO: iter: 003070, lr: 0.01000, total_loss: 0.067 (0.128), time: 0.343 (0.377), eta: -1 day, 23:41:19, mem: 8990M
-2021-04-23 17:01:31,037 UNET.trainer INFO: iter: 003080, lr: 0.01000, total_loss: 0.065 (0.128), time: 0.355 (0.377), eta: -1 day, 23:41:16, mem: 8990M
-2021-04-23 17:01:34,472 UNET.trainer INFO: iter: 003090, lr: 0.01000, total_loss: 0.071 (0.128), time: 0.344 (0.377), eta: -1 day, 23:41:12, mem: 8990M
-2021-04-23 17:01:38,112 UNET.trainer INFO: iter: 003100, lr: 0.01000, total_loss: 0.071 (0.128), time: 0.364 (0.377), eta: -1 day, 23:41:09, mem: 8990M
-2021-04-23 17:01:38,402 UNET.trainer INFO: Running training for: 00 hours, 19 minutes and 29 seconds
-2021-04-23 17:01:41,746 UNET.trainer INFO: iter: 003110, lr: 0.01000, total_loss: 0.074 (0.128), time: 0.363 (0.377), eta: -1 day, 23:41:05, mem: 8990M
-2021-04-23 17:01:45,357 UNET.trainer INFO: iter: 003120, lr: 0.01000, total_loss: 0.066 (0.127), time: 0.361 (0.377), eta: -1 day, 23:41:02, mem: 8990M
-2021-04-23 17:01:48,671 UNET.trainer INFO: iter: 003130, lr: 0.01000, total_loss: 0.068 (0.127), time: 0.331 (0.377), eta: -1 day, 23:40:58, mem: 8990M
-2021-04-23 17:01:52,299 UNET.trainer INFO: iter: 003140, lr: 0.01000, total_loss: 0.062 (0.127), time: 0.363 (0.377), eta: -1 day, 23:40:55, mem: 8990M
-2021-04-23 17:01:56,300 UNET.trainer INFO: iter: 003150, lr: 0.01000, total_loss: 0.064 (0.127), time: 0.400 (0.377), eta: -1 day, 23:40:51, mem: 8990M
-2021-04-23 17:02:00,421 UNET.trainer INFO: iter: 003160, lr: 0.01000, total_loss: 0.067 (0.127), time: 0.412 (0.377), eta: -1 day, 23:40:47, mem: 8990M
-2021-04-23 17:02:04,561 UNET.trainer INFO: iter: 003170, lr: 0.01000, total_loss: 0.063 (0.126), time: 0.414 (0.377), eta: -1 day, 23:40:42, mem: 8990M
-2021-04-23 17:02:08,489 UNET.trainer INFO: iter: 003180, lr: 0.01000, total_loss: 0.065 (0.126), time: 0.393 (0.377), eta: -1 day, 23:40:38, mem: 8990M
-2021-04-23 17:02:11,699 UNET.trainer INFO: iter: 003190, lr: 0.01000, total_loss: 0.067 (0.126), time: 0.321 (0.377), eta: -1 day, 23:40:35, mem: 8990M
-2021-04-23 17:02:15,079 UNET.trainer INFO: iter: 003200, lr: 0.01000, total_loss: 0.066 (0.126), time: 0.338 (0.377), eta: -1 day, 23:40:32, mem: 8990M
-2021-04-23 17:02:15,361 UNET.trainer INFO: Evaluating...
-2021-04-23 17:02:18,385 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.23324321642518042, 'DICE Scores/Val - DICE Score, class 2': 0.11218530710786581, 'DICE Scores/Val - DICE Score, class 3': 0.18418841980397702}, val loss: 0.5574291348457336
-2021-04-23 17:02:18,386 UNET.trainer INFO: Running training for: 00 hours, 20 minutes and 06 seconds
-2021-04-23 17:02:22,841 UNET.trainer INFO: iter: 003210, lr: 0.01000, total_loss: 0.058 (0.126), time: 0.776 (0.378), eta: -1 day, 23:40:24, mem: 8990M
-2021-04-23 17:02:26,810 UNET.trainer INFO: iter: 003220, lr: 0.01000, total_loss: 0.058 (0.125), time: 0.397 (0.378), eta: -1 day, 23:40:20, mem: 8990M
-2021-04-23 17:02:30,260 UNET.trainer INFO: iter: 003230, lr: 0.01000, total_loss: 0.063 (0.125), time: 0.345 (0.378), eta: -1 day, 23:40:17, mem: 8990M
-2021-04-23 17:02:34,226 UNET.trainer INFO: iter: 003240, lr: 0.01000, total_loss: 0.068 (0.125), time: 0.397 (0.378), eta: -1 day, 23:40:13, mem: 8990M
-2021-04-23 17:02:37,364 UNET.trainer INFO: iter: 003250, lr: 0.01000, total_loss: 0.073 (0.125), time: 0.314 (0.378), eta: -1 day, 23:40:10, mem: 8990M
-2021-04-23 17:02:40,977 UNET.trainer INFO: iter: 003260, lr: 0.01000, total_loss: 0.070 (0.125), time: 0.361 (0.378), eta: -1 day, 23:40:06, mem: 8990M
-2021-04-23 17:02:44,472 UNET.trainer INFO: iter: 003270, lr: 0.01000, total_loss: 0.070 (0.125), time: 0.350 (0.378), eta: -1 day, 23:40:03, mem: 8990M
-2021-04-23 17:02:48,337 UNET.trainer INFO: iter: 003280, lr: 0.01000, total_loss: 0.069 (0.124), time: 0.386 (0.378), eta: -1 day, 23:39:59, mem: 8990M
-2021-04-23 17:02:51,674 UNET.trainer INFO: iter: 003290, lr: 0.01000, total_loss: 0.067 (0.124), time: 0.334 (0.378), eta: -1 day, 23:39:55, mem: 8990M
-2021-04-23 17:02:55,235 UNET.trainer INFO: iter: 003300, lr: 0.01000, total_loss: 0.069 (0.124), time: 0.356 (0.378), eta: -1 day, 23:39:52, mem: 8990M
-2021-04-23 17:02:55,529 UNET.trainer INFO: Running training for: 00 hours, 20 minutes and 46 seconds
-2021-04-23 17:02:59,169 UNET.trainer INFO: iter: 003310, lr: 0.01000, total_loss: 0.067 (0.124), time: 0.393 (0.378), eta: -1 day, 23:39:48, mem: 8990M
-2021-04-23 17:34:12,568 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
-2021-04-23 17:34:12,568 UNET INFO: Loaded configuration file config/models/normalize.yaml
-2021-04-23 17:34:12,569 UNET INFO: 
-PREPROCESSING:
-    NORMALIZE:
-        ENABLE: True
-        MEAN: 0.0
-        STD: 0.05
-
-
-OUTPUT_DIR: 'outputs/nomalize_image'
-2021-04-23 17:34:12,570 UNET INFO: Running with config:
-DATASETS:
-  BASE_PATH: ../../../../lhome/ojrise/
-  CAMUS: CAMUS
-  CYBELE: True
-  TEE: TEE/DataTEEGroundTruth
-DATA_LOADER:
-  NUM_WORKERS: 4
-  PIN_MEMORY: True
-DROPOUT:
-  ENABLE: False
-  PROB: 0.15
-EVAL_EPOCH: 2
-FIND_LR_ITERATION: 0
-INPUT:
-  
-LOGGER:
-  NAME: UNET
-  SAVE_DIR: False
-  VISUAL_DEBUG: True
-LOG_STEP: 10
-MODEL:
-  CLASSES: [1, 2, 3]
-  IN_CHANNELS: 1
-  OUT_CHANNELS: 4
-OUTPUT_DIR: outputs/nomalize_image
-PREPROCESSING:
-  ELASTICDEFORM:
-    ALPHA: 300
-    ALPHA_AFFINE: 1
-    ENABLE: False
-    PROBABILITY: 0.5
-    SIGMA: 30
-  GAUSSIANSMOOTH:
-    BLURLIMIT: (3, 11)
-    ENABLE: False
-    PROBABILITY: 1
-    SIGMALIMIT: (0, 5)
-  HORIZONTALFLIP:
-    ENABLE: False
-    PROBABILITY: 1
-  ISOTROPIC_PIXEL_SIZE:
-    ENABLE: True
-  NORMALIZE:
-    ENABLE: True
-    MEAN: 0.0
-    STD: 0.05
-  RESIZE:
-    FX: 0.5
-    FY: 0.5
-SAVE_EPOCH: 6
-SOLVER:
-  LR: 0.01
-  MAX_ITER: 120000
-  MAX_MINUTES: 720
-TEST:
-  BATCH_SIZE: 12
-  EARLY_STOPPING_COUNT: 10
-  EARLY_STOPPING_TOL: 1e-06
-  NUM_EPOCHS: 50
-UNETSTRUCTURE:
-  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
-  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
-2021-04-23 17:34:14,091 UNET.trainer INFO: Loading checkpoint from outputs/nomalize_image/model_030.pth
-2021-04-23 17:34:14,099 UNET.trainer INFO: Loading optimizer from outputs/nomalize_image/model_030.pth
-2021-04-23 17:34:14,106 UNET.trainer INFO: Number of parameters: 0.54M
-2021-04-23 17:34:15,702 UNET.trainer INFO: 
-2021-04-23 17:34:15,703 UNET.trainer INFO: Start training ...
-2021-04-23 17:34:23,645 UNET.trainer INFO: iter: 003010, lr: 0.01000, total_loss: 0.071 (0.071), time: 0.439 (0.439), eta: -1 day, 23:38:42, mem: 8977M
-2021-04-23 17:34:27,051 UNET.trainer INFO: iter: 003020, lr: 0.01000, total_loss: 0.074 (0.073), time: 0.341 (0.390), eta: -1 day, 23:41:02, mem: 8977M
-2021-04-23 17:34:30,391 UNET.trainer INFO: iter: 003030, lr: 0.01000, total_loss: 0.073 (0.073), time: 0.334 (0.371), eta: -1 day, 23:41:52, mem: 8977M
-2021-04-23 17:34:33,803 UNET.trainer INFO: iter: 003040, lr: 0.01000, total_loss: 0.072 (0.073), time: 0.341 (0.364), eta: -1 day, 23:42:11, mem: 8977M
-2021-04-23 17:36:16,819 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
-2021-04-23 17:36:16,819 UNET INFO: Loaded configuration file config/models/normalize.yaml
-2021-04-23 17:36:16,819 UNET INFO: 
-PREPROCESSING:
-    NORMALIZE:
-        ENABLE: True
-        MEAN: 0.0
-        STD: 0.5
-
-
-OUTPUT_DIR: 'outputs/nomalize_image'
-2021-04-23 17:36:16,820 UNET INFO: Running with config:
-DATASETS:
-  BASE_PATH: ../../../../lhome/ojrise/
-  CAMUS: CAMUS
-  CYBELE: True
-  TEE: TEE/DataTEEGroundTruth
-DATA_LOADER:
-  NUM_WORKERS: 4
-  PIN_MEMORY: True
-DROPOUT:
-  ENABLE: False
-  PROB: 0.15
-EVAL_EPOCH: 2
-FIND_LR_ITERATION: 0
-INPUT:
-  
-LOGGER:
-  NAME: UNET
-  SAVE_DIR: False
-  VISUAL_DEBUG: True
-LOG_STEP: 10
-MODEL:
-  CLASSES: [1, 2, 3]
-  IN_CHANNELS: 1
-  OUT_CHANNELS: 4
-OUTPUT_DIR: outputs/nomalize_image
-PREPROCESSING:
-  ELASTICDEFORM:
-    ALPHA: 300
-    ALPHA_AFFINE: 1
-    ENABLE: False
-    PROBABILITY: 0.5
-    SIGMA: 30
-  GAUSSIANSMOOTH:
-    BLURLIMIT: (3, 11)
-    ENABLE: False
-    PROBABILITY: 1
-    SIGMALIMIT: (0, 5)
-  HORIZONTALFLIP:
-    ENABLE: False
-    PROBABILITY: 1
-  ISOTROPIC_PIXEL_SIZE:
-    ENABLE: True
-  NORMALIZE:
-    ENABLE: True
-    MEAN: 0.0
-    STD: 0.5
-  RESIZE:
-    FX: 0.5
-    FY: 0.5
-SAVE_EPOCH: 6
-SOLVER:
-  LR: 0.01
-  MAX_ITER: 120000
-  MAX_MINUTES: 720
-TEST:
-  BATCH_SIZE: 12
-  EARLY_STOPPING_COUNT: 10
-  EARLY_STOPPING_TOL: 1e-06
-  NUM_EPOCHS: 50
-UNETSTRUCTURE:
-  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
-  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
-2021-04-23 17:36:18,302 UNET.trainer INFO: Loading checkpoint from outputs/nomalize_image/model_030.pth
-2021-04-23 17:36:18,311 UNET.trainer INFO: Loading optimizer from outputs/nomalize_image/model_030.pth
-2021-04-23 17:36:18,316 UNET.trainer INFO: Number of parameters: 0.54M
-2021-04-23 17:36:28,654 UNET.trainer INFO: prøver med std 0.5
-2021-04-23 17:36:28,655 UNET.trainer INFO: Start training ...
-2021-04-23 17:36:36,220 UNET.trainer INFO: iter: 003010, lr: 0.01000, total_loss: 0.075 (0.075), time: 0.368 (0.368), eta: -1 day, 23:42:10, mem: 3690M
-2021-04-23 17:36:39,597 UNET.trainer INFO: iter: 003020, lr: 0.01000, total_loss: 0.073 (0.074), time: 0.338 (0.353), eta: -1 day, 23:42:50, mem: 4022M
-2021-04-23 17:36:42,891 UNET.trainer INFO: iter: 003030, lr: 0.01000, total_loss: 0.071 (0.073), time: 0.329 (0.345), eta: -1 day, 23:43:10, mem: 4242M
-2021-04-23 17:37:26,970 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
-2021-04-23 17:37:26,970 UNET INFO: Loaded configuration file config/models/normalize.yaml
-2021-04-23 17:37:26,971 UNET INFO: 
-PREPROCESSING:
-    NORMALIZE:
-        ENABLE: True
-        MEAN: 0.0
-        STD: 0.05
-
-
-OUTPUT_DIR: 'outputs/nomalize_image'
-2021-04-23 17:37:26,971 UNET INFO: Running with config:
-DATASETS:
-  BASE_PATH: ../../../../lhome/ojrise/
-  CAMUS: CAMUS
-  CYBELE: True
-  TEE: TEE/DataTEEGroundTruth
-DATA_LOADER:
-  NUM_WORKERS: 4
-  PIN_MEMORY: True
-DROPOUT:
-  ENABLE: False
-  PROB: 0.15
-EVAL_EPOCH: 2
-FIND_LR_ITERATION: 0
-INPUT:
-  
-LOGGER:
-  NAME: UNET
-  SAVE_DIR: False
-  VISUAL_DEBUG: True
-LOG_STEP: 10
-MODEL:
-  CLASSES: [1, 2, 3]
-  IN_CHANNELS: 1
-  OUT_CHANNELS: 4
-OUTPUT_DIR: outputs/nomalize_image
-PREPROCESSING:
-  ELASTICDEFORM:
-    ALPHA: 300
-    ALPHA_AFFINE: 1
-    ENABLE: False
-    PROBABILITY: 0.5
-    SIGMA: 30
-  GAUSSIANSMOOTH:
-    BLURLIMIT: (3, 11)
-    ENABLE: False
-    PROBABILITY: 1
-    SIGMALIMIT: (0, 5)
-  HORIZONTALFLIP:
-    ENABLE: False
-    PROBABILITY: 1
-  ISOTROPIC_PIXEL_SIZE:
-    ENABLE: True
-  NORMALIZE:
-    ENABLE: True
-    MEAN: 0.0
-    STD: 0.05
-  RESIZE:
-    FX: 0.5
-    FY: 0.5
-SAVE_EPOCH: 6
-SOLVER:
-  LR: 0.01
-  MAX_ITER: 120000
-  MAX_MINUTES: 720
-TEST:
-  BATCH_SIZE: 12
-  EARLY_STOPPING_COUNT: 10
-  EARLY_STOPPING_TOL: 1e-06
-  NUM_EPOCHS: 50
-UNETSTRUCTURE:
-  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
-  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
-2021-04-23 17:37:28,450 UNET.trainer INFO: Loading checkpoint from outputs/nomalize_image/model_030.pth
-2021-04-23 17:37:28,459 UNET.trainer INFO: Loading optimizer from outputs/nomalize_image/model_030.pth
-2021-04-23 17:37:28,464 UNET.trainer INFO: Number of parameters: 0.54M
-2021-04-23 17:37:29,396 UNET.trainer INFO: 
-2021-04-23 17:37:29,396 UNET.trainer INFO: Start training ...
-2021-04-23 17:44:05,886 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
-2021-04-23 17:44:05,886 UNET INFO: Loaded configuration file config/models/normalize.yaml
-2021-04-23 17:44:05,887 UNET INFO: 
-PREPROCESSING:
-    NORMALIZE:
-        ENABLE: False
-        MEAN: 0.0
-        STD: 0.05
-
-
-OUTPUT_DIR: 'outputs/nomalize_image'
-2021-04-23 17:44:05,888 UNET INFO: Running with config:
-DATASETS:
-  BASE_PATH: ../../../../lhome/ojrise/
-  CAMUS: CAMUS
-  CYBELE: True
-  TEE: TEE/DataTEEGroundTruth
-DATA_LOADER:
-  NUM_WORKERS: 4
-  PIN_MEMORY: True
-DROPOUT:
-  ENABLE: False
-  PROB: 0.15
-EVAL_EPOCH: 2
-FIND_LR_ITERATION: 0
-INPUT:
-  
-LOGGER:
-  NAME: UNET
-  SAVE_DIR: False
-  VISUAL_DEBUG: True
-LOG_STEP: 10
-MODEL:
-  CLASSES: [1, 2, 3]
-  IN_CHANNELS: 1
-  OUT_CHANNELS: 4
-OUTPUT_DIR: outputs/nomalize_image
-PREPROCESSING:
-  ELASTICDEFORM:
-    ALPHA: 300
-    ALPHA_AFFINE: 1
-    ENABLE: False
-    PROBABILITY: 0.5
-    SIGMA: 30
-  GAUSSIANSMOOTH:
-    BLURLIMIT: (3, 11)
-    ENABLE: False
-    PROBABILITY: 1
-    SIGMALIMIT: (0, 5)
-  HORIZONTALFLIP:
-    ENABLE: False
-    PROBABILITY: 1
-  ISOTROPIC_PIXEL_SIZE:
-    ENABLE: True
-  NORMALIZE:
-    ENABLE: False
-    MEAN: 0.0
-    STD: 0.05
-  RESIZE:
-    FX: 0.5
-    FY: 0.5
-SAVE_EPOCH: 6
-SOLVER:
-  LR: 0.01
-  MAX_ITER: 120000
-  MAX_MINUTES: 720
-TEST:
-  BATCH_SIZE: 12
-  EARLY_STOPPING_COUNT: 10
-  EARLY_STOPPING_TOL: 1e-06
-  NUM_EPOCHS: 50
-UNETSTRUCTURE:
-  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
-  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
-2021-04-23 17:44:07,374 UNET.trainer INFO: Loading checkpoint from outputs/nomalize_image/model_030.pth
-2021-04-23 17:44:07,382 UNET.trainer INFO: Loading optimizer from outputs/nomalize_image/model_030.pth
-2021-04-23 17:44:07,387 UNET.trainer INFO: Number of parameters: 0.54M
-2021-04-23 17:44:08,665 UNET.trainer INFO: 
-2021-04-23 17:44:08,665 UNET.trainer INFO: Start training ...
-2021-04-23 17:51:07,908 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
-2021-04-23 17:51:07,908 UNET INFO: Loaded configuration file config/models/normalize.yaml
-2021-04-23 17:51:07,909 UNET INFO: 
-PREPROCESSING:
-    NORMALIZE:
-        ENABLE: False
-        MEAN: 0.0
-        STD: 0.05
-
-
-OUTPUT_DIR: 'outputs/nomalize_image'
-2021-04-23 17:51:07,910 UNET INFO: Running with config:
-DATASETS:
-  BASE_PATH: ../../../../lhome/ojrise/
-  CAMUS: CAMUS
-  CYBELE: True
-  TEE: TEE/DataTEEGroundTruth
-DATA_LOADER:
-  NUM_WORKERS: 4
-  PIN_MEMORY: True
-DROPOUT:
-  ENABLE: False
-  PROB: 0.15
-EVAL_EPOCH: 2
-FIND_LR_ITERATION: 0
-INPUT:
-  
-LOGGER:
-  NAME: UNET
-  SAVE_DIR: False
-  VISUAL_DEBUG: True
-LOG_STEP: 10
-MODEL:
-  CLASSES: [1, 2, 3]
-  IN_CHANNELS: 1
-  OUT_CHANNELS: 4
-OUTPUT_DIR: outputs/nomalize_image
-PREPROCESSING:
-  ELASTICDEFORM:
-    ALPHA: 300
-    ALPHA_AFFINE: 1
-    ENABLE: False
-    PROBABILITY: 0.5
-    SIGMA: 30
-  GAUSSIANSMOOTH:
-    BLURLIMIT: (3, 11)
-    ENABLE: False
-    PROBABILITY: 1
-    SIGMALIMIT: (0, 5)
-  HORIZONTALFLIP:
-    ENABLE: False
-    PROBABILITY: 1
-  ISOTROPIC_PIXEL_SIZE:
-    ENABLE: True
-  NORMALIZE:
-    ENABLE: False
-    MEAN: 0.0
-    STD: 0.05
-  RESIZE:
-    FX: 0.5
-    FY: 0.5
-SAVE_EPOCH: 6
-SOLVER:
-  LR: 0.01
-  MAX_ITER: 120000
-  MAX_MINUTES: 720
-TEST:
-  BATCH_SIZE: 12
-  EARLY_STOPPING_COUNT: 10
-  EARLY_STOPPING_TOL: 1e-06
-  NUM_EPOCHS: 50
-UNETSTRUCTURE:
-  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
-  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
-2021-04-23 17:51:09,399 UNET.trainer INFO: Loading checkpoint from outputs/nomalize_image/model_030.pth
-2021-04-23 17:51:09,408 UNET.trainer INFO: Loading optimizer from outputs/nomalize_image/model_030.pth
-2021-04-23 17:51:09,413 UNET.trainer INFO: Number of parameters: 0.54M
-2021-04-23 17:51:11,789 UNET.trainer INFO: 
-2021-04-23 17:51:11,789 UNET.trainer INFO: Start training ...
-2021-04-23 17:54:03,660 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
-2021-04-23 17:54:03,660 UNET INFO: Loaded configuration file config/models/normalize.yaml
-2021-04-23 17:54:03,661 UNET INFO: 
-PREPROCESSING:
-    NORMALIZE:
-        ENABLE: False
-        MEAN: 0.25
-        STD: 0.2
-
-
-OUTPUT_DIR: 'outputs/nomalize_image'
-2021-04-23 17:54:03,662 UNET INFO: Running with config:
-DATASETS:
-  BASE_PATH: ../../../../lhome/ojrise/
-  CAMUS: CAMUS
-  CYBELE: True
-  TEE: TEE/DataTEEGroundTruth
-DATA_LOADER:
-  NUM_WORKERS: 4
-  PIN_MEMORY: True
-DROPOUT:
-  ENABLE: False
-  PROB: 0.15
-EVAL_EPOCH: 2
-FIND_LR_ITERATION: 0
-INPUT:
-  
-LOGGER:
-  NAME: UNET
-  SAVE_DIR: False
-  VISUAL_DEBUG: True
-LOG_STEP: 10
-MODEL:
-  CLASSES: [1, 2, 3]
-  IN_CHANNELS: 1
-  OUT_CHANNELS: 4
-OUTPUT_DIR: outputs/nomalize_image
-PREPROCESSING:
-  ELASTICDEFORM:
-    ALPHA: 300
-    ALPHA_AFFINE: 1
-    ENABLE: False
-    PROBABILITY: 0.5
-    SIGMA: 30
-  GAUSSIANSMOOTH:
-    BLURLIMIT: (3, 11)
-    ENABLE: False
-    PROBABILITY: 1
-    SIGMALIMIT: (0, 5)
-  HORIZONTALFLIP:
-    ENABLE: False
-    PROBABILITY: 1
-  ISOTROPIC_PIXEL_SIZE:
-    ENABLE: True
-  NORMALIZE:
-    ENABLE: False
-    MEAN: 0.25
-    STD: 0.2
-  RESIZE:
-    FX: 0.5
-    FY: 0.5
-SAVE_EPOCH: 6
-SOLVER:
-  LR: 0.01
-  MAX_ITER: 120000
-  MAX_MINUTES: 720
-TEST:
-  BATCH_SIZE: 12
-  EARLY_STOPPING_COUNT: 10
-  EARLY_STOPPING_TOL: 1e-06
-  NUM_EPOCHS: 50
-UNETSTRUCTURE:
-  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
-  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
-2021-04-23 17:54:05,160 UNET.trainer INFO: Loading checkpoint from outputs/nomalize_image/model_030.pth
-2021-04-23 17:54:05,169 UNET.trainer INFO: Loading optimizer from outputs/nomalize_image/model_030.pth
-2021-04-23 17:54:05,175 UNET.trainer INFO: Number of parameters: 0.54M
-2021-04-23 17:54:06,619 UNET.trainer INFO: 
-2021-04-23 17:54:06,619 UNET.trainer INFO: Start training ...
-2021-04-23 17:55:39,656 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
-2021-04-23 17:55:39,656 UNET INFO: Loaded configuration file config/models/normalize.yaml
-2021-04-23 17:55:39,656 UNET INFO: 
-PREPROCESSING:
-    NORMALIZE:
-        ENABLE: False
-        MEAN: 0.25
-        STD: 0.2
-
-
-OUTPUT_DIR: 'outputs/nomalize_image'
-2021-04-23 17:55:39,657 UNET INFO: Running with config:
-DATASETS:
-  BASE_PATH: ../../../../lhome/ojrise/
-  CAMUS: CAMUS
-  CYBELE: True
-  TEE: TEE/DataTEEGroundTruth
-DATA_LOADER:
-  NUM_WORKERS: 4
-  PIN_MEMORY: True
-DROPOUT:
-  ENABLE: False
-  PROB: 0.15
-EVAL_EPOCH: 2
-FIND_LR_ITERATION: 0
-INPUT:
-  
-LOGGER:
-  NAME: UNET
-  SAVE_DIR: False
-  VISUAL_DEBUG: True
-LOG_STEP: 10
-MODEL:
-  CLASSES: [1, 2, 3]
-  IN_CHANNELS: 1
-  OUT_CHANNELS: 4
-OUTPUT_DIR: outputs/nomalize_image
-PREPROCESSING:
-  ELASTICDEFORM:
-    ALPHA: 300
-    ALPHA_AFFINE: 1
-    ENABLE: False
-    PROBABILITY: 0.5
-    SIGMA: 30
-  GAUSSIANSMOOTH:
-    BLURLIMIT: (3, 11)
-    ENABLE: False
-    PROBABILITY: 1
-    SIGMALIMIT: (0, 5)
-  HORIZONTALFLIP:
-    ENABLE: False
-    PROBABILITY: 1
-  ISOTROPIC_PIXEL_SIZE:
-    ENABLE: True
-  NORMALIZE:
-    ENABLE: False
-    MEAN: 0.25
-    STD: 0.2
-  RESIZE:
-    FX: 0.5
-    FY: 0.5
-SAVE_EPOCH: 6
-SOLVER:
-  LR: 0.01
-  MAX_ITER: 120000
-  MAX_MINUTES: 720
-TEST:
-  BATCH_SIZE: 12
-  EARLY_STOPPING_COUNT: 10
-  EARLY_STOPPING_TOL: 1e-06
-  NUM_EPOCHS: 50
-UNETSTRUCTURE:
-  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
-  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
-2021-04-23 17:55:41,146 UNET.trainer INFO: Loading checkpoint from outputs/nomalize_image/model_030.pth
-2021-04-23 17:55:41,154 UNET.trainer INFO: Loading optimizer from outputs/nomalize_image/model_030.pth
-2021-04-23 17:55:41,160 UNET.trainer INFO: Number of parameters: 0.54M
-2021-04-23 17:55:41,938 UNET.trainer INFO: 
-2021-04-23 17:55:41,938 UNET.trainer INFO: Start training ...
-2021-04-23 17:56:09,464 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
-2021-04-23 17:56:09,464 UNET INFO: Loaded configuration file config/models/normalize.yaml
-2021-04-23 17:56:09,464 UNET INFO: 
-PREPROCESSING:
-    NORMALIZE:
-        ENABLE: True
-        MEAN: 0.25
-        STD: 0.2
-
-
-OUTPUT_DIR: 'outputs/nomalize_image'
-2021-04-23 17:56:09,465 UNET INFO: Running with config:
-DATASETS:
-  BASE_PATH: ../../../../lhome/ojrise/
-  CAMUS: CAMUS
-  CYBELE: True
-  TEE: TEE/DataTEEGroundTruth
-DATA_LOADER:
-  NUM_WORKERS: 4
-  PIN_MEMORY: True
-DROPOUT:
-  ENABLE: False
-  PROB: 0.15
-EVAL_EPOCH: 2
-FIND_LR_ITERATION: 0
-INPUT:
-  
-LOGGER:
-  NAME: UNET
-  SAVE_DIR: False
-  VISUAL_DEBUG: True
-LOG_STEP: 10
-MODEL:
-  CLASSES: [1, 2, 3]
-  IN_CHANNELS: 1
-  OUT_CHANNELS: 4
-OUTPUT_DIR: outputs/nomalize_image
-PREPROCESSING:
-  ELASTICDEFORM:
-    ALPHA: 300
-    ALPHA_AFFINE: 1
-    ENABLE: False
-    PROBABILITY: 0.5
-    SIGMA: 30
-  GAUSSIANSMOOTH:
-    BLURLIMIT: (3, 11)
-    ENABLE: False
-    PROBABILITY: 1
-    SIGMALIMIT: (0, 5)
-  HORIZONTALFLIP:
-    ENABLE: False
-    PROBABILITY: 1
-  ISOTROPIC_PIXEL_SIZE:
-    ENABLE: True
-  NORMALIZE:
-    ENABLE: True
-    MEAN: 0.25
-    STD: 0.2
-  RESIZE:
-    FX: 0.5
-    FY: 0.5
-SAVE_EPOCH: 6
-SOLVER:
-  LR: 0.01
-  MAX_ITER: 120000
-  MAX_MINUTES: 720
-TEST:
-  BATCH_SIZE: 12
-  EARLY_STOPPING_COUNT: 10
-  EARLY_STOPPING_TOL: 1e-06
-  NUM_EPOCHS: 50
-UNETSTRUCTURE:
-  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
-  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
-2021-04-23 17:56:10,930 UNET.trainer INFO: Loading checkpoint from outputs/nomalize_image/model_030.pth
-2021-04-23 17:56:10,938 UNET.trainer INFO: Loading optimizer from outputs/nomalize_image/model_030.pth
-2021-04-23 17:56:10,944 UNET.trainer INFO: Number of parameters: 0.54M
-2021-04-23 17:56:12,234 UNET.trainer INFO: 
-2021-04-23 17:56:12,234 UNET.trainer INFO: Start training ...
-2021-04-23 17:57:01,215 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
-2021-04-23 17:57:01,215 UNET INFO: Loaded configuration file config/models/normalize.yaml
-2021-04-23 17:57:01,216 UNET INFO: 
-PREPROCESSING:
-    NORMALIZE:
-        ENABLE: True
-        MEAN: 0.25
-        STD: 0.2
-
-
-OUTPUT_DIR: 'outputs/nomalize_image'
-2021-04-23 17:57:01,216 UNET INFO: Running with config:
-DATASETS:
-  BASE_PATH: ../../../../lhome/ojrise/
-  CAMUS: CAMUS
-  CYBELE: True
-  TEE: TEE/DataTEEGroundTruth
-DATA_LOADER:
-  NUM_WORKERS: 4
-  PIN_MEMORY: True
-DROPOUT:
-  ENABLE: False
-  PROB: 0.15
-EVAL_EPOCH: 2
-FIND_LR_ITERATION: 0
-INPUT:
-  
-LOGGER:
-  NAME: UNET
-  SAVE_DIR: False
-  VISUAL_DEBUG: True
-LOG_STEP: 10
-MODEL:
-  CLASSES: [1, 2, 3]
-  IN_CHANNELS: 1
-  OUT_CHANNELS: 4
-OUTPUT_DIR: outputs/nomalize_image
-PREPROCESSING:
-  ELASTICDEFORM:
-    ALPHA: 300
-    ALPHA_AFFINE: 1
-    ENABLE: False
-    PROBABILITY: 0.5
-    SIGMA: 30
-  GAUSSIANSMOOTH:
-    BLURLIMIT: (3, 11)
-    ENABLE: False
-    PROBABILITY: 1
-    SIGMALIMIT: (0, 5)
-  HORIZONTALFLIP:
-    ENABLE: False
-    PROBABILITY: 1
-  ISOTROPIC_PIXEL_SIZE:
-    ENABLE: True
-  NORMALIZE:
-    ENABLE: True
-    MEAN: 0.25
-    STD: 0.2
-  RESIZE:
-    FX: 0.5
-    FY: 0.5
-SAVE_EPOCH: 6
-SOLVER:
-  LR: 0.01
-  MAX_ITER: 120000
-  MAX_MINUTES: 720
-TEST:
-  BATCH_SIZE: 12
-  EARLY_STOPPING_COUNT: 10
-  EARLY_STOPPING_TOL: 1e-06
-  NUM_EPOCHS: 50
-UNETSTRUCTURE:
-  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
-  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
-2021-04-23 17:57:02,713 UNET.trainer INFO: Loading checkpoint from outputs/nomalize_image/model_030.pth
-2021-04-23 17:57:02,723 UNET.trainer INFO: Loading optimizer from outputs/nomalize_image/model_030.pth
-2021-04-23 17:57:02,729 UNET.trainer INFO: Number of parameters: 0.54M
-2021-04-23 17:57:04,732 UNET.trainer INFO: 
-2021-04-23 17:57:04,733 UNET.trainer INFO: Start training ...
+2021-04-23 09:16:33,295 UNET.trainer INFO: No checkpoint found.
+2021-04-23 09:16:33,296 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-23 09:16:35,033 UNET.trainer INFO: 
+2021-04-23 09:16:35,033 UNET.trainer INFO: Start training ...
+2021-04-23 09:16:47,816 UNET.trainer INFO: iter: 000010, lr: 0.01000, total_loss: 1.172 (1.172), time: 1.108 (1.108), eta: 0:01:39, mem: 9909M
+2021-04-23 09:16:53,538 UNET.trainer INFO: iter: 000020, lr: 0.01000, total_loss: 0.714 (0.943), time: 0.572 (0.840), eta: 0:01:07, mem: 9909M
+2021-04-23 09:16:58,391 UNET.trainer INFO: iter: 000030, lr: 0.01000, total_loss: 0.543 (0.810), time: 0.485 (0.722), eta: 0:00:50, mem: 9909M
+2021-04-23 09:17:03,551 UNET.trainer INFO: iter: 000040, lr: 0.01000, total_loss: 0.467 (0.724), time: 0.516 (0.670), eta: 0:00:40, mem: 9909M
+2021-04-23 09:17:08,352 UNET.trainer INFO: iter: 000050, lr: 0.01000, total_loss: 0.436 (0.666), time: 0.480 (0.632), eta: 0:00:31, mem: 9909M
+2021-04-23 09:17:12,902 UNET.trainer INFO: iter: 000060, lr: 0.01000, total_loss: 0.438 (0.628), time: 0.455 (0.603), eta: 0:00:24, mem: 9909M
+2021-04-23 09:17:17,881 UNET.trainer INFO: iter: 000070, lr: 0.01000, total_loss: 0.382 (0.593), time: 0.498 (0.588), eta: 0:00:17, mem: 9909M
+2021-04-23 09:17:23,053 UNET.trainer INFO: iter: 000080, lr: 0.01000, total_loss: 0.376 (0.566), time: 0.517 (0.579), eta: 0:00:11, mem: 9909M
+2021-04-23 09:17:29,326 UNET.trainer INFO: iter: 000090, lr: 0.01000, total_loss: 0.336 (0.541), time: 0.627 (0.584), eta: 0:00:05, mem: 9909M
+2021-04-23 09:17:35,052 UNET.trainer INFO: iter: 000100, lr: 0.01000, total_loss: 0.380 (0.524), time: 0.573 (0.583), eta: 0:00:00, mem: 9909M
+2021-04-23 09:17:35,503 UNET.trainer INFO: Running training for: 00 hours, 00 minutes and 58 seconds
+2021-04-23 09:17:41,079 UNET.trainer INFO: iter: 000110, lr: 0.01000, total_loss: 0.370 (0.510), time: 0.603 (0.585), eta: -1 day, 23:59:55, mem: 9909M
+2021-04-23 09:17:46,503 UNET.trainer INFO: iter: 000120, lr: 0.01000, total_loss: 0.360 (0.498), time: 0.542 (0.581), eta: -1 day, 23:59:49, mem: 9909M
+2021-04-23 09:17:51,671 UNET.trainer INFO: iter: 000130, lr: 0.01000, total_loss: 0.359 (0.487), time: 0.517 (0.576), eta: -1 day, 23:59:43, mem: 9909M
+2021-04-23 09:17:57,274 UNET.trainer INFO: iter: 000140, lr: 0.01000, total_loss: 0.376 (0.479), time: 0.560 (0.575), eta: -1 day, 23:59:37, mem: 9909M
+2021-04-23 09:18:02,132 UNET.trainer INFO: iter: 000150, lr: 0.01000, total_loss: 0.365 (0.472), time: 0.486 (0.569), eta: -1 day, 23:59:32, mem: 9909M
+2021-04-23 09:18:08,145 UNET.trainer INFO: iter: 000160, lr: 0.01000, total_loss: 0.333 (0.463), time: 0.601 (0.571), eta: -1 day, 23:59:26, mem: 9909M
+2021-04-23 09:18:13,764 UNET.trainer INFO: iter: 000170, lr: 0.01000, total_loss: 0.355 (0.457), time: 0.562 (0.571), eta: -1 day, 23:59:21, mem: 9909M
+2021-04-23 09:18:18,613 UNET.trainer INFO: iter: 000180, lr: 0.01000, total_loss: 0.363 (0.451), time: 0.485 (0.566), eta: -1 day, 23:59:15, mem: 9909M
+2021-04-23 09:18:23,816 UNET.trainer INFO: iter: 000190, lr: 0.01000, total_loss: 0.336 (0.445), time: 0.520 (0.564), eta: -1 day, 23:59:10, mem: 9909M
+2021-04-23 09:18:28,863 UNET.trainer INFO: iter: 000200, lr: 0.01000, total_loss: 0.333 (0.440), time: 0.505 (0.561), eta: -1 day, 23:59:04, mem: 9909M
+2021-04-23 09:18:30,048 UNET.trainer INFO: Evaluating...
+2021-04-23 09:18:34,831 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.0, 'DICE Scores/Val - DICE Score, class 2': 0.0, 'DICE Scores/Val - DICE Score, class 3': 0.0}, val loss: 0.43466296792030334
+2021-04-23 09:18:34,834 UNET.trainer INFO: Running training for: 00 hours, 01 minutes and 52 seconds
+2021-04-23 09:18:40,196 UNET.trainer INFO: iter: 000210, lr: 0.01000, total_loss: 0.366 (0.436), time: 1.133 (0.588), eta: -1 day, 23:58:56, mem: 9909M
+2021-04-23 09:18:45,294 UNET.trainer INFO: iter: 000220, lr: 0.01000, total_loss: 0.350 (0.432), time: 0.510 (0.584), eta: -1 day, 23:58:50, mem: 9909M
+2021-04-23 09:18:51,425 UNET.trainer INFO: iter: 000230, lr: 0.01000, total_loss: 0.316 (0.427), time: 0.613 (0.586), eta: -1 day, 23:58:44, mem: 9909M
+2021-04-23 09:18:57,022 UNET.trainer INFO: iter: 000240, lr: 0.01000, total_loss: 0.329 (0.423), time: 0.560 (0.585), eta: -1 day, 23:58:39, mem: 9909M
+2021-04-23 09:19:01,994 UNET.trainer INFO: iter: 000250, lr: 0.01000, total_loss: 0.334 (0.420), time: 0.497 (0.581), eta: -1 day, 23:58:33, mem: 9909M
+2021-04-23 09:19:08,061 UNET.trainer INFO: iter: 000260, lr: 0.01000, total_loss: 0.301 (0.415), time: 0.607 (0.582), eta: -1 day, 23:58:27, mem: 9909M
+2021-04-23 09:19:13,220 UNET.trainer INFO: iter: 000270, lr: 0.01000, total_loss: 0.329 (0.412), time: 0.516 (0.580), eta: -1 day, 23:58:22, mem: 9909M
+2021-04-23 09:19:18,952 UNET.trainer INFO: iter: 000280, lr: 0.01000, total_loss: 0.323 (0.409), time: 0.573 (0.579), eta: -1 day, 23:58:16, mem: 9909M
+2021-04-23 09:19:23,868 UNET.trainer INFO: iter: 000290, lr: 0.01000, total_loss: 0.320 (0.406), time: 0.492 (0.576), eta: -1 day, 23:58:11, mem: 9909M
+2021-04-23 09:19:29,178 UNET.trainer INFO: iter: 000300, lr: 0.01000, total_loss: 0.309 (0.402), time: 0.531 (0.575), eta: -1 day, 23:58:06, mem: 9909M
+2021-04-23 09:19:29,663 UNET.trainer INFO: Running training for: 00 hours, 02 minutes and 52 seconds
+2021-04-23 09:19:34,953 UNET.trainer INFO: iter: 000310, lr: 0.01000, total_loss: 0.334 (0.400), time: 0.578 (0.575), eta: -1 day, 23:58:00, mem: 9909M
+2021-04-23 09:19:41,116 UNET.trainer INFO: iter: 000320, lr: 0.01000, total_loss: 0.284 (0.397), time: 0.616 (0.576), eta: -1 day, 23:57:54, mem: 9909M
+2021-04-23 09:19:46,300 UNET.trainer INFO: iter: 000330, lr: 0.01000, total_loss: 0.296 (0.394), time: 0.518 (0.574), eta: -1 day, 23:57:48, mem: 9909M
+2021-04-23 09:19:53,268 UNET.trainer INFO: iter: 000340, lr: 0.01000, total_loss: 0.263 (0.390), time: 0.697 (0.578), eta: -1 day, 23:57:42, mem: 9909M
+2021-04-23 09:19:58,950 UNET.trainer INFO: iter: 000350, lr: 0.01000, total_loss: 0.311 (0.387), time: 0.568 (0.578), eta: -1 day, 23:57:36, mem: 9909M
+2021-04-23 09:20:03,806 UNET.trainer INFO: iter: 000360, lr: 0.01000, total_loss: 0.310 (0.385), time: 0.486 (0.575), eta: -1 day, 23:57:31, mem: 9909M
+2021-04-23 09:20:08,870 UNET.trainer INFO: iter: 000370, lr: 0.01000, total_loss: 0.297 (0.383), time: 0.506 (0.573), eta: -1 day, 23:57:26, mem: 9909M
+2021-04-23 09:20:13,844 UNET.trainer INFO: iter: 000380, lr: 0.01000, total_loss: 0.307 (0.381), time: 0.497 (0.571), eta: -1 day, 23:57:21, mem: 9909M
+2021-04-23 09:20:18,698 UNET.trainer INFO: iter: 000390, lr: 0.01000, total_loss: 0.308 (0.379), time: 0.485 (0.569), eta: -1 day, 23:57:15, mem: 9909M
+2021-04-23 09:20:23,711 UNET.trainer INFO: iter: 000400, lr: 0.01000, total_loss: 0.284 (0.377), time: 0.501 (0.567), eta: -1 day, 23:57:10, mem: 9909M
+2021-04-23 09:20:24,264 UNET.trainer INFO: Evaluating...
+2021-04-23 09:20:28,960 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.25924192324280737, 'DICE Scores/Val - DICE Score, class 2': 0.28118792563676837, 'DICE Scores/Val - DICE Score, class 3': 0.0}, val loss: 0.7315533757209778
+2021-04-23 09:20:28,964 UNET.trainer INFO: Running training for: 00 hours, 03 minutes and 46 seconds
+2021-04-23 09:20:34,243 UNET.trainer INFO: iter: 000410, lr: 0.01000, total_loss: 0.293 (0.375), time: 1.053 (0.579), eta: -1 day, 23:57:01, mem: 9909M
+2021-04-23 09:20:40,110 UNET.trainer INFO: iter: 000420, lr: 0.01000, total_loss: 0.262 (0.372), time: 0.587 (0.579), eta: -1 day, 23:56:55, mem: 9909M
+2021-04-23 09:20:44,956 UNET.trainer INFO: iter: 000430, lr: 0.01000, total_loss: 0.272 (0.370), time: 0.485 (0.577), eta: -1 day, 23:56:50, mem: 9909M
+2021-04-23 09:20:50,089 UNET.trainer INFO: iter: 000440, lr: 0.01000, total_loss: 0.275 (0.367), time: 0.513 (0.576), eta: -1 day, 23:56:45, mem: 9909M
+2021-04-23 09:20:55,374 UNET.trainer INFO: iter: 000450, lr: 0.01000, total_loss: 0.240 (0.365), time: 0.528 (0.575), eta: -1 day, 23:56:39, mem: 9909M
+2021-04-23 09:21:01,094 UNET.trainer INFO: iter: 000460, lr: 0.01000, total_loss: 0.258 (0.362), time: 0.572 (0.575), eta: -1 day, 23:56:34, mem: 9909M
+2021-04-23 09:21:07,292 UNET.trainer INFO: iter: 000470, lr: 0.01000, total_loss: 0.233 (0.360), time: 0.620 (0.576), eta: -1 day, 23:56:28, mem: 9909M
+2021-04-23 09:21:12,911 UNET.trainer INFO: iter: 000480, lr: 0.01000, total_loss: 0.255 (0.357), time: 0.562 (0.575), eta: -1 day, 23:56:22, mem: 9909M
+2021-04-23 09:21:18,317 UNET.trainer INFO: iter: 000490, lr: 0.01000, total_loss: 0.230 (0.355), time: 0.541 (0.575), eta: -1 day, 23:56:16, mem: 9909M
+2021-04-23 09:21:23,395 UNET.trainer INFO: iter: 000500, lr: 0.01000, total_loss: 0.265 (0.353), time: 0.508 (0.573), eta: -1 day, 23:56:11, mem: 9909M
+2021-04-23 09:21:23,896 UNET.trainer INFO: Running training for: 00 hours, 04 minutes and 46 seconds
+2021-04-23 09:21:29,355 UNET.trainer INFO: iter: 000510, lr: 0.01000, total_loss: 0.243 (0.351), time: 0.596 (0.574), eta: -1 day, 23:56:05, mem: 9909M
+2021-04-23 09:21:34,473 UNET.trainer INFO: iter: 000520, lr: 0.01000, total_loss: 0.239 (0.349), time: 0.512 (0.573), eta: -1 day, 23:56:00, mem: 9909M
+2021-04-23 09:21:39,717 UNET.trainer INFO: iter: 000530, lr: 0.01000, total_loss: 0.235 (0.347), time: 0.524 (0.572), eta: -1 day, 23:55:55, mem: 9909M
+2021-04-23 09:21:45,099 UNET.trainer INFO: iter: 000540, lr: 0.01000, total_loss: 0.211 (0.344), time: 0.538 (0.571), eta: -1 day, 23:55:49, mem: 9909M
+2021-04-23 09:21:50,548 UNET.trainer INFO: iter: 000550, lr: 0.01000, total_loss: 0.245 (0.342), time: 0.545 (0.571), eta: -1 day, 23:55:44, mem: 9909M
+2021-04-23 09:21:55,583 UNET.trainer INFO: iter: 000560, lr: 0.01000, total_loss: 0.222 (0.340), time: 0.503 (0.569), eta: -1 day, 23:55:39, mem: 9909M
+2021-04-23 09:22:00,644 UNET.trainer INFO: iter: 000570, lr: 0.01000, total_loss: 0.203 (0.338), time: 0.506 (0.568), eta: -1 day, 23:55:33, mem: 9909M
+2021-04-23 09:22:06,519 UNET.trainer INFO: iter: 000580, lr: 0.01000, total_loss: 0.191 (0.335), time: 0.587 (0.569), eta: -1 day, 23:55:28, mem: 9909M
+2021-04-23 09:22:12,565 UNET.trainer INFO: iter: 000590, lr: 0.01000, total_loss: 0.206 (0.333), time: 0.605 (0.569), eta: -1 day, 23:55:22, mem: 9909M
+2021-04-23 09:22:18,395 UNET.trainer INFO: iter: 000600, lr: 0.01000, total_loss: 0.208 (0.331), time: 0.583 (0.569), eta: -1 day, 23:55:16, mem: 9909M
+2021-04-23 09:22:18,814 UNET.trainer INFO: Evaluating...
+2021-04-23 09:22:23,435 UNET.trainer INFO: Evaluation result: {'DICE Scores/Val - DICE Score, class 1': 0.06052488088607788, 'DICE Scores/Val - DICE Score, class 2': 0.3528569284081459, 'DICE Scores/Val - DICE Score, class 3': 0.000248304005490354}, val loss: 0.7865416407585144
+2021-04-23 09:22:23,441 UNET.trainer INFO: Saving checkpoint to outputs/nomalize_image/model_006.pth
+2021-04-23 09:22:23,465 UNET.trainer INFO: Running training for: 00 hours, 05 minutes and 41 seconds
+2021-04-23 09:22:29,006 UNET.trainer INFO: iter: 000610, lr: 0.01000, total_loss: 0.209 (0.329), time: 1.061 (0.577), eta: -1 day, 23:55:06, mem: 9909M
+2021-04-23 09:22:34,111 UNET.trainer INFO: iter: 000620, lr: 0.01000, total_loss: 0.187 (0.327), time: 0.511 (0.576), eta: -1 day, 23:55:01, mem: 9909M
+2021-04-23 09:22:39,927 UNET.trainer INFO: iter: 000630, lr: 0.01000, total_loss: 0.184 (0.324), time: 0.582 (0.576), eta: -1 day, 23:54:55, mem: 9909M
+2021-04-23 09:22:46,639 UNET.trainer INFO: iter: 000640, lr: 0.01000, total_loss: 0.149 (0.322), time: 0.671 (0.578), eta: -1 day, 23:54:48, mem: 9909M
+2021-04-23 09:22:52,016 UNET.trainer INFO: iter: 000650, lr: 0.01000, total_loss: 0.163 (0.319), time: 0.538 (0.577), eta: -1 day, 23:54:43, mem: 9909M
+2021-04-23 09:22:57,785 UNET.trainer INFO: iter: 000660, lr: 0.01000, total_loss: 0.165 (0.317), time: 0.577 (0.577), eta: -1 day, 23:54:37, mem: 9909M
+2021-04-23 09:23:02,915 UNET.trainer INFO: iter: 000670, lr: 0.01000, total_loss: 0.168 (0.315), time: 0.513 (0.576), eta: -1 day, 23:54:32, mem: 9909M
+2021-04-23 09:23:08,068 UNET.trainer INFO: iter: 000680, lr: 0.01000, total_loss: 0.170 (0.312), time: 0.515 (0.575), eta: -1 day, 23:54:27, mem: 9909M
+2021-04-23 09:23:12,867 UNET.trainer INFO: iter: 000690, lr: 0.01000, total_loss: 0.176 (0.311), time: 0.480 (0.574), eta: -1 day, 23:54:22, mem: 9909M
+2021-04-23 09:23:17,939 UNET.trainer INFO: iter: 000700, lr: 0.01000, total_loss: 0.163 (0.308), time: 0.507 (0.573), eta: -1 day, 23:54:17, mem: 9909M
+2021-04-23 09:23:18,444 UNET.trainer INFO: Running training for: 00 hours, 06 minutes and 41 seconds
+2021-04-23 09:23:25,148 UNET.trainer INFO: iter: 000710, lr: 0.01000, total_loss: 0.143 (0.306), time: 0.721 (0.575), eta: -1 day, 23:54:10, mem: 9909M
+2021-04-23 09:23:30,775 UNET.trainer INFO: iter: 000720, lr: 0.01000, total_loss: 0.149 (0.304), time: 0.563 (0.575), eta: -1 day, 23:54:04, mem: 9909M
+2021-04-23 09:23:35,897 UNET.trainer INFO: iter: 000730, lr: 0.01000, total_loss: 0.144 (0.302), time: 0.512 (0.574), eta: -1 day, 23:53:59, mem: 9909M
+2021-04-23 09:23:40,726 UNET.trainer INFO: iter: 000740, lr: 0.01000, total_loss: 0.155 (0.300), time: 0.483 (0.573), eta: -1 day, 23:53:54, mem: 9909M
+2021-04-23 09:23:46,033 UNET.trainer INFO: iter: 000750, lr: 0.01000, total_loss: 0.139 (0.298), time: 0.531 (0.572), eta: -1 day, 23:53:48, mem: 9909M

@@ -14,6 +14,7 @@ from utils.evaluation import dice_score_multiclass
 from torch_lr_finder import LRFinder
 import matplotlib.pyplot as plt
 from tqdm import tqdm
+from copy import copy
 
 
 def batch_to_img(xb, idx):
@@ -46,6 +47,8 @@ def do_train(cfg, model,
     meters = MetricLogger()
 
     model.train()
+    if cfg.SCHEDULER:
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer,mode='min', factor=np.sqrt(0.1), cooldown=0, patience=4, min_lr=0.5e-8, verbose=1)
     
     lr_finder = LRFinder(model, optimizer, loss_fn, device="cuda")
 
@@ -63,8 +66,28 @@ def do_train(cfg, model,
     is_best_cp = False
     epoch = arguments["epoch"]
     while (time.time() - start_training_time)/60 <= cfg.SOLVER.MAX_MINUTES and not is_early_stopping:
+        
         epoch += 1
         arguments["epoch"] = epoch
+        #
+        if  epoch == 1:
+            #lr_finder.reset()
+            logger.info('Finding new LR')
+            
+            lr_finder.range_test(train_data_loader, start_lr = 0.0000001, end_lr=100, num_iter=100)
+            try:
+                _, best_lr = lr_finder.plot()
+                lr_finder.reset()
+                logger.info('Found best lr: {}'.format(best_lr))
+                optimizer.param_groups[0]['lr'] = best_lr
+            except Exception as e:
+                logger.info('Could not find best lr')
+                lr_finder.reset()
+
+            plot_path = os.path.join(cfg.OUTPUT_DIR, 'lr_finder')
+            if not os.path.exists(plot_path):
+                os.makedirs(plot_path)
+            plt.savefig(plot_path + '/epoch{}.png'.format(epoch))
         
         
         for iteration, (images, targets, shapes, padding) in enumerate(train_data_loader, start_iter):
@@ -138,7 +161,8 @@ def do_train(cfg, model,
                     acc += val_dice_score*batch_size
                 acc = acc/total_img
                 val_loss = val_loss/total_img
-
+                if cfg.SCHEDULER:
+                    scheduler.step(val_loss)
                 # Tensorboard logging
                 eval_result = {}
                 for i, c in enumerate(cfg.MODEL.CLASSES): 
@@ -163,31 +187,13 @@ def do_train(cfg, model,
                     is_early_stopping = True
 
             model.train(True)  # *IMPORTANT*: change to train mode after eval.
+
+        
             
         if (cfg.SAVE_EPOCH > 0 and epoch % cfg.SAVE_EPOCH == 0 and epoch > 0) or is_best_cp:
             checkpointer.save("model_{:03d}".format(epoch), is_best_cp=is_best_cp, **arguments)
 
-        if cfg.FIND_LR_ITERATION > 0 and iteration % cfg.FIND_LR_ITERATION == 0 and iteration > 0:
-            logger.info('Finding new LR')
-            
-            lr_finder.range_test(train_data_loader, end_lr=100, num_iter=100)
-            lr_finder.plot()
-            min_grad_idx = None
-            lrs = lr_finder.history["lr"]
-            losses = lr_finder.history["loss"]
-            try:
-                min_grad_idx = (np.gradient(np.array(losses))).argmin()
-            except ValueError:
-                logger.info(
-                    "Failed to compute the gradients, there might not be enough points."
-                )
-            if min_grad_idx is not None:
-                logger.info("Suggested LR: {:.2E}".format(lrs[min_grad_idx]))
-            lr_finder.reset()
-            plot_path = os.path.join(cfg.OUTPUT_DIR, 'lr_finder')
-            if not os.path.exists(plot_path):
-                os.makedirs(plot_path)
-            plt.savefig(plot_path + '/epoch{}.png'.format(epoch))
+
         start_iter = iteration
 
         

@@ -9,6 +9,8 @@ import matplotlib as mp
 import matplotlib.pyplot as plt
 import time
 import logging
+from backboned_unet.unet import Unet 
+
 
 from pathlib import Path
 import torch
@@ -90,6 +92,7 @@ def main():
                 shortcut_features=cfg.MODEL.BACKBONE.SHORTCUT_FEATURES,
                 decoder_use_batchnorm=cfg.MODEL.BACKBONE.DECODER_USE_BATCHNORM,
                 cfg=cfg)
+
     else:
         model = Unet2D(cfg)
         

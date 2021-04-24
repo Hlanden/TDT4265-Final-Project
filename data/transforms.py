@@ -2,9 +2,11 @@ import albumentations as aug
 from albumentations.core.composition import set_always_apply
 import cv2
 from albumentations.core.transforms_interface import DualTransform, ImageOnlyTransform
+
 #from albumentations.augmentations.crops.functional import random_crop
 from albumentations.augmentations.functional import random_crop
 import random
+
 
 class Resize(DualTransform):
     """Resize the input to the given height and width.
@@ -31,6 +33,7 @@ class Resize(DualTransform):
 
     def apply(self, img, interpolation=cv2.INTER_LINEAR, **params):
         return cv2.resize(img, dsize=(self.height, self.width), fx=self.fx, fy=self.fy, interpolation=interpolation) 
+
 
 
 class RandomCrop(DualTransform):
