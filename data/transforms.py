@@ -86,11 +86,14 @@ def build_transforms(cfg,
     additional_trans_list = [] #kun gt blir endret
     val_trans_list = [] #bilde og gt blir endret
     if cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE:
-        fx_num = 0.154/cfg.PREPROCESSING.RESIZE.FX
-        fy_num = 0.308/cfg.PREPROCESSING.RESIZE.FY
+        if cfg.PREPROCESSING.RESIZE.FX:
+            fx_num = 0.154/cfg.PREPROCESSING.RESIZE.FX
+            fy_num = 0.308/cfg.PREPROCESSING.RESIZE.FY
+        x = cfg.PREPROCESSING.RESIZE.X
+        y = cfg.PREPROCESSING.RESIZE.Y
 
-        train_trans_list.append(Resize(0, 0, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
-        val_trans_list.append(Resize(0, 0, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
+        train_trans_list.append(Resize(x, y, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
+        val_trans_list.append(Resize(x, y, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
 
     if cfg.PREPROCESSING.NORMALIZE.ENABLE:
         m = cfg.PREPROCESSING.NORMALIZE.MEAN
@@ -107,6 +110,9 @@ def build_transforms(cfg,
 
         train_trans_list.append(aug.augmentations.transforms.ElasticTransform(alpha=a, sigma=sig, alpha_affine=a_af, interpolation=1, border_mode=1, always_apply=False, p=pr))
         
+    
+
+
 
     if is_train:
         if cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE:
