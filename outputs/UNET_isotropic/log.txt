@@ -3111,3 +3111,118 @@ Test loss: 0.07195942103862762
 2021-04-24 17:49:34,441 UNET.trainer INFO: Running test on TEE
 2021-04-24 17:49:35,697 UNET.trainer INFO: TEE result: {'DICE Scores/Train - DICE Score, class 1': 0.26093061877978047, 'DICE Scores/Train - DICE Score, class 2': 0.14700572501217535, 'DICE Scores/Train - DICE Score, class 3': 0.0},
 TEE loss: 0.5221620798110962
+2021-04-24 23:21:02,494 UNET INFO: Namespace(config_file='/work/jorghaal/TDT4265-Final-Project/config/jorgens_saturday_mix/CAMUS.yaml', opts=None)
+2021-04-24 23:21:02,495 UNET INFO: Loaded configuration file /work/jorghaal/TDT4265-Final-Project/config/jorgens_saturday_mix/CAMUS.yaml
+2021-04-24 23:21:02,495 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-24 23:21:02,495 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../lhome/jorghaal/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+LOSS:
+  DIFFRENT: False
+MODEL:
+  BACKBONE:
+    DECODER_FILTERS: (256, 128, 64, 32, 16)
+    DECODER_USE_BATCHNORM: True
+    ENCODER_FREZE: False
+    NET: resnet18
+    NORMALIZATION_MEAN: [0.485, 0.456, 0.406]
+    NORMALIZATION_STD: [0.229, 0.224, 0.225]
+    PARAMETRIC_UPSAMPLING: True
+    PRETRAINED: True
+    SHORTCUT_FEATURES: default
+    USE: False
+    USE_NORMALIZATION: False
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 20
+  GAUSSIANSMOOTH:
+    BLURLIMIT: (3, 11)
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: (0, 5)
+  GRIDDISTORTIAN:
+    DISTORT_LIMIT: 0.2
+    ENABLE: False
+    MUM_STEPS: 3
+    PROB: 0.5
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RANDOMCROP:
+    ENABLE: False
+    PROB: 0.5
+    X_RESIZE: 0.8
+    Y_RESIZE: 0.8
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+    X: 0
+    Y: 0
+  ROTATE:
+    BORDER_MODE: 0
+    ENABLE: False
+    LIMIT: 15
+    PROB: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  DIFFRENT: False
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 120
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-24 23:21:03,963 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_final.pth
+2021-04-24 23:21:03,972 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_final.pth
+2021-04-24 23:21:03,977 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-24 23:21:03,977 UNET.trainer INFO: Start training ...
+2021-04-24 23:21:05,896 UNET.trainer INFO: iter: 010610, lr: 0.01000, total_loss: 0.198 (0.198), time: 0.106 (0.106), eta: -1 day, 23:41:30, Dice scores: {'DICE Scores/Train - DICE Score, class 1': 0.7731772993514653, 'DICE Scores/Train - DICE Score, class 2': 0.6459449802058893, 'DICE Scores/Train - DICE Score, class 3': 0.7139039173737358}, mem: 942M
+2021-04-24 23:21:06,600 UNET.trainer INFO: iter: 010620, lr: 0.01000, total_loss: 0.140 (0.169), time: 0.072 (0.089), eta: -1 day, 23:44:27, Dice scores: {'DICE Scores/Train - DICE Score, class 1': 0.7927669609229138, 'DICE Scores/Train - DICE Score, class 2': 0.6785288408243052, 'DICE Scores/Train - DICE Score, class 3': 0.7531862309785751}, mem: 942M
+2021-04-24 23:21:07,395 UNET.trainer INFO: iter: 010630, lr: 0.01000, total_loss: 0.107 (0.148), time: 0.080 (0.086), eta: -1 day, 23:44:57, Dice scores: {'DICE Scores/Train - DICE Score, class 1': 0.8778738311093405, 'DICE Scores/Train - DICE Score, class 2': 0.7613807586956347, 'DICE Scores/Train - DICE Score, class 3': 0.8625055452129456}, mem: 1810M
+2021-04-24 23:21:08,186 UNET.trainer INFO: iter: 010640, lr: 0.01000, total_loss: 0.101 (0.137), time: 0.080 (0.084), eta: -1 day, 23:45:12, Dice scores: {'DICE Scores/Train - DICE Score, class 1': 0.8654662434954947, 'DICE Scores/Train - DICE Score, class 2': 0.7527389619819503, 'DICE Scores/Train - DICE Score, class 3': 0.8000164965562682}, mem: 1810M
+2021-04-24 23:21:08,862 UNET.trainer INFO: iter: 010650, lr: 0.01000, total_loss: 0.103 (0.130), time: 0.067 (0.081), eta: -1 day, 23:45:48, Dice scores: {'DICE Scores/Train - DICE Score, class 1': 0.8810894347030954, 'DICE Scores/Train - DICE Score, class 2': 0.8069232371447616, 'DICE Scores/Train - DICE Score, class 3': 0.8421450927583691}, mem: 1810M
+2021-04-24 23:21:09,577 UNET.trainer INFO: iter: 010660, lr: 0.01000, total_loss: 0.101 (0.125), time: 0.072 (0.079), eta: -1 day, 23:46:03, Dice scores: {'DICE Scores/Train - DICE Score, class 1': 0.8464207288435615, 'DICE Scores/Train - DICE Score, class 2': 0.7287106339197121, 'DICE Scores/Train - DICE Score, class 3': 0.7868301693319208}, mem: 1810M
+2021-04-24 23:21:10,238 UNET.trainer INFO: iter: 010670, lr: 0.01000, total_loss: 0.091 (0.120), time: 0.066 (0.077), eta: -1 day, 23:46:22, Dice scores: {'DICE Scores/Train - DICE Score, class 1': 0.8972730666796843, 'DICE Scores/Train - DICE Score, class 2': 0.7999999998175806, 'DICE Scores/Train - DICE Score, class 3': 0.8652405523284332}, mem: 1810M
+2021-04-24 23:21:10,936 UNET.trainer INFO: iter: 010680, lr: 0.01000, total_loss: 0.087 (0.116), time: 0.070 (0.076), eta: -1 day, 23:46:31, Dice scores: {'DICE Scores/Train - DICE Score, class 1': 0.8869046384041714, 'DICE Scores/Train - DICE Score, class 2': 0.8027402621251242, 'DICE Scores/Train - DICE Score, class 3': 0.8986126824684133}, mem: 1810M

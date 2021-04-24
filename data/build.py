@@ -65,7 +65,6 @@ def custom_collate(batch, tee=False):
     """
     images = torch.from_numpy(images)
     targets = torch.from_numpy(targets)
-
     return images.float(), targets.long(), shapes, padding
 
 
@@ -76,6 +75,7 @@ def make_data_loaders(cfg,
 
     dataset = DatasetLoader(cfg, tee=tee)
     batch_size = cfg.TEST.BATCH_SIZE if not tee else cfg.TEST.BATCH_SIZE
+    print('BATCH SIZE ', batch_size)
     torch.manual_seed(0)
     if not tee:
         test_dataset = Subset(dataset, range(1600,1800))
