@@ -123,16 +123,10 @@ def build_transforms(cfg,
             image_and_gt_transform.append(aug.augmentations.transforms.ElasticTransform(alpha=a, sigma=sig, alpha_affine=a_af, interpolation=1, border_mode=1, always_apply=False, p=pr))
         
         
-<<<<<<< HEAD
-    
-
-
-=======
         if cfg.PREPROCESSING.GRIDDISTORTIAN.ENABLE:
             steps = cfg.PREPROCESSING.GRIDDISTORTIAN.MUM_STEPS
             dis_lim = cfg.PREPROCESSING.GRIDDISTORTIAN.DISTORT_LIMIT
             pr = cfg.PREPROCESSING.GRIDDISTORTIAN.PROB
->>>>>>> 33a64b16766b0fef571ef1e427a981c45825ff19
 
             image_and_gt_transform.append(aug.augmentations.transforms.GridDistortion(num_steps=steps, distort_limit= dis_lim, interpolation=1, border_mode=0, p = pr))
 
