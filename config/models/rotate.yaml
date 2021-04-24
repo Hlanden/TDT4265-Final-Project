@@ -1,0 +1,8 @@
+PREPROCESSING:
+  ROTATE:
+    ENABLE: True
+    LIMIT: 15
+    BORDER_MODE: 0 #cv2.BORDER_CONSTANT
+    PROB: 0.5
+
+OUTPUT_DIR: 'outputs/rotate'

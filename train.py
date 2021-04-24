@@ -106,6 +106,7 @@ def get_parser():
 def main (logger=None):
     args = get_parser().parse_args()
     print(args)
+    print(cfg.PREPROCESSING.RANDOMCROP.ENABLE)
     cfg.merge_from_file(args.config_file)
     if args.opts:
         cfg.merge_from_list(args.opts)

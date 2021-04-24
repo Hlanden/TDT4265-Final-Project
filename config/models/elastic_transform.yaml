@@ -1,0 +1,12 @@
+PREPROCESSING:
+    ELASTICDEFORM:
+      ENABLE: True
+      ALPHA: 300
+      SIGMA: 20
+      ALPHA_AFFINE: 1
+      PROBABILITY: 0.5
+      
+
+OUTPUT_DIR: 'outputs/elastic_transform'
+LOGGER:
+    SAVE_DIR: True
