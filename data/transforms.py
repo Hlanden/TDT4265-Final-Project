@@ -2,8 +2,9 @@ import albumentations as aug
 from albumentations.core.composition import set_always_apply
 import cv2
 from albumentations.core.transforms_interface import DualTransform, ImageOnlyTransform
+#from albumentations.augmentations.crops.functional import random_crop
 from albumentations.augmentations.functional import random_crop
-import random 
+import random
 
 class Resize(DualTransform):
     """Resize the input to the given height and width.
@@ -31,6 +32,7 @@ class Resize(DualTransform):
     def apply(self, img, interpolation=cv2.INTER_LINEAR, **params):
         return cv2.resize(img, dsize=(self.height, self.width), fx=self.fx, fy=self.fy, interpolation=interpolation) 
 
+
 class RandomCrop(DualTransform):
     """Crop a random part of the input.
     Args:
@@ -54,8 +56,6 @@ class RandomCrop(DualTransform):
         #MERK: Kan hende x og y må bytte plass her
         height = int(x*self.height_scale)
         width = int(y*self.width_scale )
-        print('height', height)
-        print('width ', width)
         return random_crop(img, height, width, h_start, w_start)
 
     def get_params(self):
@@ -82,9 +82,8 @@ def build_transforms(cfg,
                      is_train=True,
                      tee=False):
 
-    train_trans_list = [] #liste der bilde blir endret
-    additional_trans_list = [] #kun gt blir endret
-    val_trans_list = [] #bilde og gt blir endret
+    image_and_gt_transform = [] #train transforms
+    only_img_list = [] #kun img blir endret
     if cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE:
         if cfg.PREPROCESSING.RESIZE.FX:
             fx_num = 0.154/cfg.PREPROCESSING.RESIZE.FX
@@ -92,49 +91,77 @@ def build_transforms(cfg,
         x = cfg.PREPROCESSING.RESIZE.X
         y = cfg.PREPROCESSING.RESIZE.Y
 
-        train_trans_list.append(Resize(x, y, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
-        val_trans_list.append(Resize(x, y, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
+        image_and_gt_transform.append(Resize(x, y, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
+
+    #val_trans_list = [] #bilde og gt blir endret
+    if cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE and not tee:
+        fx_num = 0.154/cfg.PREPROCESSING.RESIZE.FX
+        fy_num = 0.308/cfg.PREPROCESSING.RESIZE.FY
+
+        image_and_gt_transform.append(Resize(0, 0, fx=fx_num, fy=fy_num, interpolation=cv2.INTER_LINEAR, p=1))
 
     if cfg.PREPROCESSING.NORMALIZE.ENABLE:
         m = cfg.PREPROCESSING.NORMALIZE.MEAN
         s = cfg.PREPROCESSING.NORMALIZE.STD
 
-        additional_trans_list.append(aug.augmentations.transforms.Normalize(mean= m, std = s, max_pixel_value=1.0, always_apply=False, p=1.0))
-        #val_trans_list.append(aug.augmentations.transforms.Normalize(mean= m, std = s, max_pixel_value=1.0, always_apply=False, p=1.0))
+        only_img_list.append(aug.augmentations.transforms.Normalize(mean= m, std = s, max_pixel_value=1.0, always_apply=False, p=1.0))
+    
+    if cfg.PREPROCESSING.GAUSSIANSMOOTH.ENABLE:
+        bl = cfg.PREPROCESSING.GAUSSIANSMOOTH.BLURLIMIT
+        sl = cfg.PREPROCESSING.GAUSSIANSMOOTH.SIGMALIMIT
+        pr = cfg.PREPROCESSING.GAUSSIANSMOOTH.PROBABILITY
 
-    if cfg.PREPROCESSING.ELASTICDEFORM.ENABLE:
-        a = cfg.PREPROCESSING.ELASTICDEFORM.ALPHA
-        sig = cfg.PREPROCESSING.ELASTICDEFORM.SIGMA
-        a_af = cfg.PREPROCESSING.ELASTICDEFORM.ALPHA_AFFINE
-        pr = cfg.PREPROCESSING.ELASTICDEFORM.PROBABILITY
+        only_img_list.append(aug.augmentations.transforms.GaussianBlur(blur_limit=bl, sigma_limit = sl, p=pr)) 
+    
+    if is_train:
+        if cfg.PREPROCESSING.ELASTICDEFORM.ENABLE:
+            a = cfg.PREPROCESSING.ELASTICDEFORM.ALPHA
+            sig = cfg.PREPROCESSING.ELASTICDEFORM.SIGMA
+            a_af = cfg.PREPROCESSING.ELASTICDEFORM.ALPHA_AFFINE
+            pr = cfg.PREPROCESSING.ELASTICDEFORM.PROBABILITY
 
-        train_trans_list.append(aug.augmentations.transforms.ElasticTransform(alpha=a, sigma=sig, alpha_affine=a_af, interpolation=1, border_mode=1, always_apply=False, p=pr))
+            image_and_gt_transform.append(aug.augmentations.transforms.ElasticTransform(alpha=a, sigma=sig, alpha_affine=a_af, interpolation=1, border_mode=1, always_apply=False, p=pr))
         
+        
+<<<<<<< HEAD
     
 
 
+=======
+        if cfg.PREPROCESSING.GRIDDISTORTIAN.ENABLE:
+            steps = cfg.PREPROCESSING.GRIDDISTORTIAN.MUM_STEPS
+            dis_lim = cfg.PREPROCESSING.GRIDDISTORTIAN.DISTORT_LIMIT
+            pr = cfg.PREPROCESSING.GRIDDISTORTIAN.PROB
+>>>>>>> 33a64b16766b0fef571ef1e427a981c45825ff19
 
-    if is_train:
+            image_and_gt_transform.append(aug.augmentations.transforms.GridDistortion(num_steps=steps, distort_limit= dis_lim, interpolation=1, border_mode=0, p = pr))
+
+        if cfg.PREPROCESSING.RANDOMCROP.ENABLE:
+            x = cfg.PREPROCESSING.RANDOMCROP.X_RESIZE
+            y = cfg.PREPROCESSING.RANDOMCROP.Y_RESIZE
+            pr = cfg.PREPROCESSING.RANDOMCROP.PROB
+
+            image_and_gt_transform.append(RandomCrop(height_scale = x, width_scale = y, always_apply=False, p=pr))
+
+
+
+
+        if cfg.PREPROCESSING.ROTATE.ENABLE:
+            lim =  cfg.PREPROCESSING.ROTATE.LIMIT  
+            r_mod = cfg.PREPROCESSING.ROTATE.BORDER_MODE
+            pr = cfg.PREPROCESSING.ROTATE.PROB
+
+            image_and_gt_transform.append(aug.augmentations.transforms.Rotate(limit = lim, border_mode= r_mod, p= pr))
         if cfg.PREPROCESSING.HORIZONTALFLIP.ENABLE:
             pr = cfg.PREPROCESSING.HORIZONTALFLIP.PROBABILITY 
-            train_trans_list.append(aug.augmentations.transforms.HorizontalFlip(p=pr))
+            image_and_gt_transform.append(aug.augmentations.transforms.HorizontalFlip(p=pr))
 
-        if cfg.PREPROCESSING.GAUSSIANSMOOTH.ENABLE:
-            bl = cfg.PREPROCESSING.GAUSSIANSMOOTH.BLURLIMIT
-            sl = cfg.PREPROCESSING.GAUSSIANSMOOTH.SIGMALIMIT
-            pr = cfg.PREPROCESSING.GAUSSIANSMOOTH.PROBABILITY
-
-            train_trans_list.append(aug.augmentations.transforms.GaussianBlur(blur_limit=bl, sigma_limit = sl, p=pr)) 
-    
+       
     if tee:
         pass
-        #val_trans_list.append(aug.augmentations.geometric.rotate.RandomRotate90(factor=1))
 
 
-    if is_train:
-        train_transform = aug.Compose(train_trans_list, additional_targets={'gt': 'image'})
-        additional_transform = aug.Compose(additional_trans_list)
-        return train_transform, additional_transform
-    else:
-        val_transform = aug.Compose(val_trans_list, additional_targets={'gt': 'image'})
-        return val_transform
+    final_transform = aug.Compose(image_and_gt_transform, additional_targets={'gt': 'image'})
+    only_img_transform = aug.Compose(only_img_list)
+    return final_transform, only_img_transform
+

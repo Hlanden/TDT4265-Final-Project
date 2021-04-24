@@ -139,22 +139,24 @@ def plot_mulitple_chekpoints(cfg,
 
     if filename:
         print('Saving to file: {}'.format(filename))
+        #plt.show()
         plt.savefig(filename + '.png')
     
 
 
 
 if __name__ == '__main__':
-    transforms,_ = build_transforms(cfg, is_train=True, tee=False)
+    tee = False
+    transforms,_ = build_transforms(cfg, is_train=True, tee=tee)
     dataset = DatasetLoader(cfg,
-                            transforms=[], 
-                            tee=False)
+                            transforms=[transforms, _], 
+                            tee=tee)
     
 
     
     #t = plot_mulitple_chekpoints(cfg, dataset, [2, 50, 76], 0, config_file='config/models/CAMUS.yaml', filename='test_org', plot_original_size=True)
-    plot_mulitple_chekpoints(cfg, dataset, [2, 50, 76], 0, config_file='config/models/CAMUS.yaml', filename='test_org', plot_original_size=True)
-    plot_mulitple_chekpoints(cfg, dataset, [2, 50, 76], 0, config_file='config/models/CAMUS.yaml', filename='test_unorg', plot_original_size=False)
+    plot_mulitple_chekpoints(cfg, dataset, [6, 30, 48, 60], 0, config_file='config/models/gaussblur.yaml', filename='test_org', plot_original_size=True)
+    plot_mulitple_chekpoints(cfg, dataset, [6, 30, 48, 60], 0, config_file='config/models/gaussblur.yaml', filename='test_unorg', plot_original_size=False)
 
     # x, og_target, padding, shape = dataset[0]
     # x_org, y_org = og_target.shape
