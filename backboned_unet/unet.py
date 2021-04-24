@@ -4,8 +4,8 @@ from torchvision import models, datasets, transforms
 from torch.nn import functional as F
 
 from config.defaults import cfg
-import numpy as np
 from torchvision.transforms.functional import normalize
+
 
 def get_backbone(name, pretrained=True):
 
@@ -117,7 +117,12 @@ class UpsampleBlock(nn.Module):
             x = self.conv1(x)
             x = self.bn1(x) if self.bn1 is not None else x
             x = self.relu(x)
-        x = self.conv2(x),
+        x = self.conv2(x)
+        x = self.bn2(x) if self.bn2 is not None else x
+        x = self.relu(x)
+
+        return x
+
 
 class Unet(nn.Module):
 
@@ -133,9 +138,9 @@ class Unet(nn.Module):
                  shortcut_features='default',
                  decoder_use_batchnorm=True,
                  cfg=None):
-        super(Unet, self).__init__(),
+        super(Unet, self).__init__()
+        self.cfg = cfg
         self.backbone_name = backbone_name
-        self.mean_array = None
 
         self.backbone, self.shortcut_features, self.bb_out_name = get_backbone(backbone_name, pretrained=pretrained)
         shortcut_chs, bb_out_chs = self.infer_skip_channels()
@@ -181,27 +186,12 @@ class Unet(nn.Module):
         x = self.final_conv(x)
         return x
 
-    def normalize(img, mean, std, max_pixel_value=255.0):
-        mean = np.array(mean, dtype=np.float32)
-        mean *= max_pixel_value
-
-        std = np.array(std, dtype=np.float32)
-        std *= max_pixel_value
-
-        denominator = np.reciprocal(std, dtype=np.float32)
-
-        img = img.astype(np.float32)
-        img -= mean
-        img *= denominator
-        return img
-
     def forward_backbone(self, x):
 
         """ Forward propagation in backbone encoder network.  """
-        
-        
+
         x = x.repeat(1,3, 1, 1)
-        if self.cfg is not None and self.MODEL.BACKBONE.USE_NORMALIZATION:
+        if self.cfg is not None and self.cfg.MODEL.BACKBONE.USE_NORMALIZATION:
             x = normalize(x, cfg.MODEL.BACKBONE.NORMALIZATION_MEAN, cfg.MODEL.BACKBONE.NORMALIZATION_STD)
 
         features = {None: None} if None in self.shortcut_features else dict()

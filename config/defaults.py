@@ -137,7 +137,7 @@ cfg.DROPOUT.PROB = 0.15
 # -----------------------------------------------------------------------------
 cfg.DATASETS = CN()
 
-cfg.DATASETS.CYBELE = True
+cfg.DATASETS.CYBELE = False
 if cfg.DATASETS.CYBELE:
     cfg.DATASETS.BASE_PATH = '../../../lhome/jorghaal/'
 else:

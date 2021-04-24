@@ -50,7 +50,7 @@ def do_train(cfg, model,
     if cfg.SCHEDULER:
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer,mode='min', factor=np.sqrt(0.1), cooldown=0, patience=4, min_lr=0.5e-8, verbose=1)
     
-    lr_finder = LRFinder(model, optimizer, loss_fn, device="cuda")
+    #lr_finder = LRFinder(model, optimizer, loss_fn, device="cuda")
 
     summary_writer = torch.utils.tensorboard.SummaryWriter(
         log_dir=os.path.join(cfg.OUTPUT_DIR, 'tf_logs'))
@@ -69,7 +69,8 @@ def do_train(cfg, model,
         
         epoch += 1
         arguments["epoch"] = epoch
-        #
+        
+        '''
         if  epoch == 1:
             #lr_finder.reset()
             logger.info('Finding new LR')
@@ -88,7 +89,7 @@ def do_train(cfg, model,
             if not os.path.exists(plot_path):
                 os.makedirs(plot_path)
             plt.savefig(plot_path + '/epoch{}.png'.format(epoch))
-        
+        '''
         
         for iteration, (images, targets, shapes, padding) in enumerate(train_data_loader, start_iter):
             iteration = iteration + 1
