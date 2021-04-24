@@ -72,6 +72,8 @@ def do_train(cfg, model,
         
         '''
         if  epoch == 1:
+        #
+        if  epoch == 1 and cfg.FIND_LR_EPOCH:
             #lr_finder.reset()
             logger.info('Finding new LR')
             

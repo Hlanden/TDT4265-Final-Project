@@ -1,6 +1,0 @@
-OUTPUT_DIR: 'outputs/UNET_iso'
-LOGGER:
-    SAVE_DIR: True
-PREPROCESSING:
-  ISOTROPIC_PIXEL_SIZE:
-    ENABLE: True  

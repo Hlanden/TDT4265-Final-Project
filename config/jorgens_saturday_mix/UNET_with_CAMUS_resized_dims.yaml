@@ -1,9 +1,0 @@
-PREPROCESSING:
-  RESIZE:
-    X: 384
-    Y: 384
-    FX: 0.0
-    FY: 0.0
-OUTPUT_DIR: 'outputs/UNET_with_CAMUS_resized_dims'
-LOGGER:
-    SAVE_DIR: True
