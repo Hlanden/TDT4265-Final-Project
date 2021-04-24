@@ -2,7 +2,8 @@ import albumentations as aug
 from albumentations.core.composition import set_always_apply
 import cv2
 from albumentations.core.transforms_interface import DualTransform, ImageOnlyTransform
-from albumentations.augmentations.crops.functional import random_crop
+from albumentations.augmentations.functional import random_crop
+import random 
 
 class Resize(DualTransform):
     """Resize the input to the given height and width.
@@ -51,19 +52,14 @@ class RandomCrop(DualTransform):
         x, y = img.shape
 
         #MERK: Kan hende x og y må bytte plass her
-        height = x*self.height_scale
-        width = y*self.width_scale 
-
-        return random_crop(img, self.height, self.width, h_start, w_start)
+        height = int(x*self.height_scale)
+        width = int(y*self.width_scale )
+        print('height', height)
+        print('width ', width)
+        return random_crop(img, height, width, h_start, w_start)
 
     def get_params(self):
         return {"h_start": random.random(), "w_start": random.random()}
-
-    def apply_to_bbox(self, bbox, **params):
-        return F.bbox_random_crop(bbox, self.height, self.width, **params)
-
-    def apply_to_keypoint(self, keypoint, **params):
-        return F.keypoint_random_crop(keypoint, self.height, self.width, **params)
 
     def get_transform_init_args_names(self):
         return ("height", "width")
