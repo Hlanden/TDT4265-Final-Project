@@ -2900,3 +2900,214 @@ UNETSTRUCTURE:
 2021-04-23 06:49:13,570 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9280383455753326, 'DICE Scores/Train - DICE Score, class 2': 0.8512405681610108, 'DICE Scores/Train - DICE Score, class 3': 0.9016888928413391}, train loss: 0.059372879564762115
 2021-04-23 06:49:17,967 UNET.trainer INFO: Validation result: {'DICE Scores/Val - DICE Score, class 1': 0.9274712783098221, 'DICE Scores/Val - DICE Score, class 2': 0.8489325684309006, 'DICE Scores/Val - DICE Score, class 3': 0.8925827497243881}, validation loss: 0.06356637924909592
 2021-04-23 06:49:20,571 UNET.trainer INFO: Test result: {'DICE Scores/Test - DICE Score, class 1': 0.9066919896006584, 'DICE Scores/Test - DICE Score, class 2': 0.8252098253369331, 'DICE Scores/Test - DICE Score, class 3': 0.8401784364879131}, test loss: 0.12084583193063736
+2021-04-24 11:27:25,701 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-24 11:27:25,701 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-24 11:27:25,702 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-24 11:27:25,703 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+LOSS:
+  DIFFRENT: False
+MODEL:
+  BACKBONE:
+    DECODER_FILTERS: (256, 128, 64, 32, 16)
+    DECODER_USE_BATCHNORM: True
+    ENCODER_FREZE: False
+    NET: resnet18
+    PARAMETRIC_UPSAMPLING: True
+    PRETRAINED: True
+    SHORTCUT_FEATURES: default
+    USE: False
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: (3, 11)
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: (0, 5)
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+  ROTATE:
+    BORDER_MODE: 0
+    ENABLE: False
+    LIMIT: 15
+    PROB: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  DIFFRENT: False
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-24 11:27:27,167 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-24 11:27:27,379 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-24 11:27:27,386 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-24 11:27:27,386 UNET.trainer INFO: Running test on Train
+2021-04-24 11:30:29,671 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9336421490388009, 'DICE Scores/Train - DICE Score, class 2': 0.8447055707007907, 'DICE Scores/Train - DICE Score, class 3': 0.8953816602601075},
+Train loss: 0.061662349849939346
+2021-04-24 11:30:29,672 UNET.trainer INFO: Running test on Validation
+2021-04-24 11:31:28,480 UNET.trainer INFO: Validation result: {'DICE Scores/Train - DICE Score, class 1': 0.9342580030588369, 'DICE Scores/Train - DICE Score, class 2': 0.8448434742989115, 'DICE Scores/Train - DICE Score, class 3': 0.8966406960621398},
+Validation loss: 0.06357764452695847
+2021-04-24 11:31:28,481 UNET.trainer INFO: Running test on Test
+2021-04-24 11:32:00,350 UNET.trainer INFO: Test result: {'DICE Scores/Train - DICE Score, class 1': 0.9305887139563009, 'DICE Scores/Train - DICE Score, class 2': 0.8377671548537512, 'DICE Scores/Train - DICE Score, class 3': 0.8913509089481021},
+Test loss: 0.07195942103862762
+2021-04-24 11:32:00,351 UNET.trainer INFO: Running test on TEE
+2021-04-24 11:32:01,555 UNET.trainer INFO: TEE result: {'DICE Scores/Train - DICE Score, class 1': 0.26093061877978047, 'DICE Scores/Train - DICE Score, class 2': 0.14700572501217535, 'DICE Scores/Train - DICE Score, class 3': 0.0},
+TEE loss: 0.5221620798110962
+2021-04-24 17:44:55,590 UNET INFO: Namespace(config_file='config/models/CAMUS.yaml', opts=None)
+2021-04-24 17:44:55,590 UNET INFO: Loaded configuration file config/models/CAMUS.yaml
+2021-04-24 17:44:55,591 UNET INFO: 
+OUTPUT_DIR: 'outputs/UNET_isotropic'
+LOGGER:
+    SAVE_DIR: True
+  
+
+2021-04-24 17:44:55,593 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: True
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+LOSS:
+  DIFFRENT: False
+MODEL:
+  BACKBONE:
+    DECODER_FILTERS: (256, 128, 64, 32, 16)
+    DECODER_USE_BATCHNORM: True
+    ENCODER_FREZE: False
+    NET: resnet18
+    PARAMETRIC_UPSAMPLING: True
+    PRETRAINED: True
+    SHORTCUT_FEATURES: default
+    USE: False
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/UNET_isotropic
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 20
+  GAUSSIANSMOOTH:
+    BLURLIMIT: (3, 11)
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: (0, 5)
+  GRIDDISTORTIAN:
+    DISTORT_LIMIT: 0.2
+    ENABLE: False
+    MUM_STEPS: 3
+    PROB: 0.5
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+  ROTATE:
+    BORDER_MODE: 0
+    ENABLE: False
+    LIMIT: 15
+    PROB: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  DIFFRENT: False
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-24 17:44:57,099 UNET.trainer INFO: Loading checkpoint from outputs/UNET_isotropic/model_076.pth
+2021-04-24 17:44:57,111 UNET.trainer INFO: Loading optimizer from outputs/UNET_isotropic/model_076.pth
+2021-04-24 17:44:57,117 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-24 17:44:57,117 UNET.trainer INFO: Running test on Train
+2021-04-24 17:48:01,455 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9345369629276776, 'DICE Scores/Train - DICE Score, class 2': 0.8440792086312666, 'DICE Scores/Train - DICE Score, class 3': 0.8958346490232907},
+Train loss: 0.06231500208377838
+2021-04-24 17:48:01,456 UNET.trainer INFO: Running test on Validation
+2021-04-24 17:49:01,738 UNET.trainer INFO: Validation result: {'DICE Scores/Train - DICE Score, class 1': 0.9320004637519231, 'DICE Scores/Train - DICE Score, class 2': 0.8466585322802344, 'DICE Scores/Train - DICE Score, class 3': 0.8962507838293701},
+Validation loss: 0.06367073953151703
+2021-04-24 17:49:01,739 UNET.trainer INFO: Running test on Test
+2021-04-24 17:49:34,440 UNET.trainer INFO: Test result: {'DICE Scores/Train - DICE Score, class 1': 0.9305887139563009, 'DICE Scores/Train - DICE Score, class 2': 0.8377671548537512, 'DICE Scores/Train - DICE Score, class 3': 0.8913509089481021},
+Test loss: 0.07195942103862762
+2021-04-24 17:49:34,441 UNET.trainer INFO: Running test on TEE
+2021-04-24 17:49:35,697 UNET.trainer INFO: TEE result: {'DICE Scores/Train - DICE Score, class 1': 0.26093061877978047, 'DICE Scores/Train - DICE Score, class 2': 0.14700572501217535, 'DICE Scores/Train - DICE Score, class 3': 0.0},
+TEE loss: 0.5221620798110962

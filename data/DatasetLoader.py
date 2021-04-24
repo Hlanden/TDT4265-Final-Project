@@ -189,8 +189,7 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     import random
     print(os.getcwd())
-    from data.transforms import RandomCrop
-
+    from transforms import RandomCrop
     transtest = aug.Compose([
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
         #Resize(0, 0, fx=1, fy=1, interpolation=1, always_apply=False, p=1),
@@ -202,16 +201,15 @@ if __name__ == '__main__':
         #aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 1, p=1) # Lagt til slik at ting kan blurres
         #aug.augmentations.transforms.Rotate(limit=90, p=0.5)
         #aug.augmentations.transforms.ElasticTransform(alpha=300, sigma=25, alpha_affine=1, interpolation=1, border_mode=1, always_apply=False, p=1)
-        RandomCrop(1, 1)
-
+        RandomCrop(0.8, 0.8)
     ], additional_targets={'gt': 'image',})
-    test_trans = build_transforms(cfg, is_train=False, tee=False)
+    test_trans = build_transforms(cfg, is_train=False, tee=True)
 
     
 
     dataset = DatasetLoader(cfg,
-                            tee=True,
-                            transforms=transtest)
+                            tee=False,
+                            transforms= [transtest])
     dataset.classes = [1, 2]
     
     # tee_data_loader = DataLoader(dataset,
@@ -220,6 +218,10 @@ if __name__ == '__main__':
     #                              batch_size=1,
     #                              #shuffle=True,
     #                              collate_fn)
+    # train_transform, target_transform = build_transforms(cfg, is_train=True)
+    # dataset = DatasetLoader(Path('patients',''),gt_dir='' , transforms= transtest) #[train_transform, target_transform])
+
+    # dataset = Subset(dataset, range(0, 4))
     import matplotlib.pyplot as plt
 
 

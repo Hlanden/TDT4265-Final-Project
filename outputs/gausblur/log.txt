@@ -1014,3 +1014,423 @@ Validation loss: 0.1426939219236374
 2021-04-23 16:24:31,275 UNET.trainer INFO: Running test on Test
 2021-04-23 16:24:32,726 UNET.trainer INFO: Test result: {'DICE Scores/Train - DICE Score, class 1': 0.7185948514938354, 'DICE Scores/Train - DICE Score, class 2': 0.5666277344693662, 'DICE Scores/Train - DICE Score, class 3': 0.6301807023212314},
 Test loss: 0.24180425703525543
+2021-04-24 10:10:46,989 UNET INFO: Namespace(config_file='config/models/gaussblur.yaml', opts=None)
+2021-04-24 10:10:46,989 UNET INFO: Loaded configuration file config/models/gaussblur.yaml
+2021-04-24 10:10:46,990 UNET INFO: 
+PREPROCESSING:
+     GAUSSIANSMOOTH:
+         ENABLE: True 
+
+
+OUTPUT_DIR: 'outputs/gausblur'
+
+2021-04-24 10:10:46,991 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: False
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+LOSS:
+  DIFFRENT: False
+MODEL:
+  BACKBONE:
+    DECODER_FILTERS: (256, 128, 64, 32, 16)
+    DECODER_USE_BATCHNORM: True
+    ENCODER_FREZE: False
+    NET: resnet18
+    PARAMETRIC_UPSAMPLING: True
+    PRETRAINED: True
+    SHORTCUT_FEATURES: default
+    USE: False
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/gausblur
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: (3, 11)
+    ENABLE: True
+    PROBABILITY: 1
+    SIGMALIMIT: (0, 5)
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+  ROTATE:
+    BORDER_MODE: 0
+    ENABLE: False
+    LIMIT: 15
+    PROB: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  DIFFRENT: False
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-24 10:10:48,478 UNET.trainer INFO: Loading checkpoint from outputs/gausblur/model_036.pth
+2021-04-24 10:10:48,801 UNET.trainer INFO: Loading optimizer from outputs/gausblur/model_036.pth
+2021-04-24 10:10:48,811 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-24 10:10:48,811 UNET.trainer INFO: Running test on Train
+2021-04-24 10:13:50,561 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.7256971428945386, 'DICE Scores/Train - DICE Score, class 2': 0.6079403626240236, 'DICE Scores/Train - DICE Score, class 3': 0.7629787486300552},
+Train loss: 0.14423048496246338
+2021-04-24 10:13:50,562 UNET.trainer INFO: Running test on Validation
+2021-04-24 10:14:49,363 UNET.trainer INFO: Validation result: {'DICE Scores/Train - DICE Score, class 1': 0.8972207803118957, 'DICE Scores/Train - DICE Score, class 2': 0.7977612771945094, 'DICE Scores/Train - DICE Score, class 3': 0.8498109739290375},
+Validation loss: 0.10989174246788025
+2021-04-24 10:14:49,364 UNET.trainer INFO: Running test on Test
+2021-04-24 10:15:20,196 UNET.trainer INFO: Test result: {'DICE Scores/Train - DICE Score, class 1': 0.8738593202604938, 'DICE Scores/Train - DICE Score, class 2': 0.7697344574660637, 'DICE Scores/Train - DICE Score, class 3': 0.7912415039911629},
+Test loss: 0.1860523372888565
+2021-04-24 10:15:20,196 UNET.trainer INFO: Running test on TEE
+2021-04-24 10:15:21,434 UNET.trainer INFO: TEE result: {'DICE Scores/Train - DICE Score, class 1': 0.3528920049654407, 'DICE Scores/Train - DICE Score, class 2': 0.2404731355090457, 'DICE Scores/Train - DICE Score, class 3': 0.0},
+TEE loss: 0.362958163022995
+2021-04-24 10:40:24,667 UNET INFO: Namespace(config_file='config/models/gaussblur.yaml', opts=None)
+2021-04-24 10:40:24,667 UNET INFO: Loaded configuration file config/models/gaussblur.yaml
+2021-04-24 10:40:24,668 UNET INFO: 
+PREPROCESSING:
+     GAUSSIANSMOOTH:
+         ENABLE: True 
+
+
+OUTPUT_DIR: 'outputs/gausblur'
+
+2021-04-24 10:40:24,668 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: False
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+LOSS:
+  DIFFRENT: False
+MODEL:
+  BACKBONE:
+    DECODER_FILTERS: (256, 128, 64, 32, 16)
+    DECODER_USE_BATCHNORM: True
+    ENCODER_FREZE: False
+    NET: resnet18
+    PARAMETRIC_UPSAMPLING: True
+    PRETRAINED: True
+    SHORTCUT_FEATURES: default
+    USE: False
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/gausblur
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: (3, 11)
+    ENABLE: True
+    PROBABILITY: 1
+    SIGMALIMIT: (0, 5)
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+  ROTATE:
+    BORDER_MODE: 0
+    ENABLE: False
+    LIMIT: 15
+    PROB: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  DIFFRENT: False
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-24 10:40:26,158 UNET.trainer INFO: Loading checkpoint from outputs/gausblur/model_036.pth
+2021-04-24 10:40:26,167 UNET.trainer INFO: Loading optimizer from outputs/gausblur/model_036.pth
+2021-04-24 10:40:26,173 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-24 10:40:26,173 UNET.trainer INFO: Running test on Train
+2021-04-24 10:43:26,904 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.8881806335460004, 'DICE Scores/Train - DICE Score, class 2': 0.7640107641691355, 'DICE Scores/Train - DICE Score, class 3': 0.849325921889677},
+Train loss: 0.11656516045331955
+2021-04-24 10:43:26,905 UNET.trainer INFO: Running test on Validation
+2021-04-24 10:44:27,815 UNET.trainer INFO: Validation result: {'DICE Scores/Train - DICE Score, class 1': 0.882713105787029, 'DICE Scores/Train - DICE Score, class 2': 0.7675759797220987, 'DICE Scores/Train - DICE Score, class 3': 0.8638389791686094},
+Validation loss: 0.11285629123449326
+2021-04-24 10:44:27,815 UNET.trainer INFO: Running test on Test
+2021-04-24 10:44:58,628 UNET.trainer INFO: Test result: {'DICE Scores/Train - DICE Score, class 1': 0.8678710783252334, 'DICE Scores/Train - DICE Score, class 2': 0.7434986161493577, 'DICE Scores/Train - DICE Score, class 3': 0.7813966036010237},
+Test loss: 0.1965269297361374
+2021-04-24 10:44:58,629 UNET.trainer INFO: Running test on TEE
+2021-04-24 10:44:59,691 UNET.trainer INFO: TEE result: {'DICE Scores/Train - DICE Score, class 1': 0.015370839338502678, 'DICE Scores/Train - DICE Score, class 2': 0.01861677533941528, 'DICE Scores/Train - DICE Score, class 3': 0.0},
+TEE loss: 0.4009237587451935
+2021-04-24 10:46:06,186 UNET INFO: Namespace(config_file='config/models/gaussblur.yaml', opts=None)
+2021-04-24 10:46:06,186 UNET INFO: Loaded configuration file config/models/gaussblur.yaml
+2021-04-24 10:46:06,187 UNET INFO: 
+PREPROCESSING:
+     GAUSSIANSMOOTH:
+         ENABLE: True 
+
+
+OUTPUT_DIR: 'outputs/gausblur'
+
+2021-04-24 10:46:06,187 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: False
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+LOSS:
+  DIFFRENT: False
+MODEL:
+  BACKBONE:
+    DECODER_FILTERS: (256, 128, 64, 32, 16)
+    DECODER_USE_BATCHNORM: True
+    ENCODER_FREZE: False
+    NET: resnet18
+    PARAMETRIC_UPSAMPLING: True
+    PRETRAINED: True
+    SHORTCUT_FEATURES: default
+    USE: False
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/gausblur
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: (3, 11)
+    ENABLE: True
+    PROBABILITY: 1
+    SIGMALIMIT: (0, 5)
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+  ROTATE:
+    BORDER_MODE: 0
+    ENABLE: False
+    LIMIT: 15
+    PROB: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  DIFFRENT: False
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-24 10:46:07,630 UNET.trainer INFO: Loading checkpoint from outputs/gausblur/model_036.pth
+2021-04-24 10:46:07,639 UNET.trainer INFO: Loading optimizer from outputs/gausblur/model_036.pth
+2021-04-24 10:46:07,644 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-24 10:46:07,644 UNET.trainer INFO: Running test on Train
+2021-04-24 10:49:09,425 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.8872649190580801, 'DICE Scores/Train - DICE Score, class 2': 0.7656395803782194, 'DICE Scores/Train - DICE Score, class 3': 0.8524029691988921},
+Train loss: 0.11446675658226013
+2021-04-24 10:49:09,426 UNET.trainer INFO: Running test on Validation
+2021-04-24 10:50:10,334 UNET.trainer INFO: Validation result: {'DICE Scores/Train - DICE Score, class 1': 0.8852410502920018, 'DICE Scores/Train - DICE Score, class 2': 0.7599971682871087, 'DICE Scores/Train - DICE Score, class 3': 0.8559869150158086},
+Validation loss: 0.11916501075029373
+2021-04-24 10:50:10,335 UNET.trainer INFO: Running test on Test
+2021-04-24 10:50:42,957 UNET.trainer INFO: Test result: {'DICE Scores/Train - DICE Score, class 1': 0.8753781792872714, 'DICE Scores/Train - DICE Score, class 2': 0.7423558210086589, 'DICE Scores/Train - DICE Score, class 3': 0.8287795815359036},
+Test loss: 0.14313645660877228
+2021-04-24 10:50:42,957 UNET.trainer INFO: Running test on TEE
+2021-04-24 10:50:44,033 UNET.trainer INFO: TEE result: {'DICE Scores/Train - DICE Score, class 1': 0.01890885104582153, 'DICE Scores/Train - DICE Score, class 2': 0.01589272481861196, 'DICE Scores/Train - DICE Score, class 3': 0.0},
+TEE loss: 0.3860790431499481
+2021-04-24 11:04:18,230 UNET INFO: Namespace(config_file='config/models/gaussblur.yaml', opts=None)
+2021-04-24 11:04:18,230 UNET INFO: Loaded configuration file config/models/gaussblur.yaml
+2021-04-24 11:04:18,231 UNET INFO: 
+PREPROCESSING:
+     GAUSSIANSMOOTH:
+         ENABLE: True 
+
+
+OUTPUT_DIR: 'outputs/gausblur'
+
+2021-04-24 11:04:18,231 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: False
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+LOSS:
+  DIFFRENT: False
+MODEL:
+  BACKBONE:
+    DECODER_FILTERS: (256, 128, 64, 32, 16)
+    DECODER_USE_BATCHNORM: True
+    ENCODER_FREZE: False
+    NET: resnet18
+    PARAMETRIC_UPSAMPLING: True
+    PRETRAINED: True
+    SHORTCUT_FEATURES: default
+    USE: False
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/gausblur
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: (3, 11)
+    ENABLE: True
+    PROBABILITY: 1
+    SIGMALIMIT: (0, 5)
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: False
+    MEAN: 0.0
+    STD: 0.5
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+  ROTATE:
+    BORDER_MODE: 0
+    ENABLE: False
+    LIMIT: 15
+    PROB: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  DIFFRENT: False
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-24 11:04:19,669 UNET.trainer INFO: Loading checkpoint from outputs/gausblur/model_036.pth
+2021-04-24 11:04:19,677 UNET.trainer INFO: Loading optimizer from outputs/gausblur/model_036.pth
+2021-04-24 11:04:19,683 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-24 11:04:19,683 UNET.trainer INFO: Running test on Train
+2021-04-24 11:07:22,012 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.8867000877642427, 'DICE Scores/Train - DICE Score, class 2': 0.7633849570245318, 'DICE Scores/Train - DICE Score, class 3': 0.8522231527658949},
+Train loss: 0.11574165523052216
+2021-04-24 11:07:22,013 UNET.trainer INFO: Running test on Validation
+2021-04-24 11:08:21,489 UNET.trainer INFO: Validation result: {'DICE Scores/Train - DICE Score, class 1': 0.8873954122120159, 'DICE Scores/Train - DICE Score, class 2': 0.770347344158382, 'DICE Scores/Train - DICE Score, class 3': 0.8564129097420252},
+Validation loss: 0.11258529126644135
+2021-04-24 11:08:21,490 UNET.trainer INFO: Running test on Test
+2021-04-24 11:08:53,556 UNET.trainer INFO: Test result: {'DICE Scores/Train - DICE Score, class 1': 0.8752067913354142, 'DICE Scores/Train - DICE Score, class 2': 0.7419904738784219, 'DICE Scores/Train - DICE Score, class 3': 0.8286966718851625},
+Test loss: 0.14358830451965332
+2021-04-24 11:08:53,556 UNET.trainer INFO: Running test on TEE
+2021-04-24 11:08:54,776 UNET.trainer INFO: TEE result: {'DICE Scores/Train - DICE Score, class 1': 0.41013284866531424, 'DICE Scores/Train - DICE Score, class 2': 0.24282678227988422, 'DICE Scores/Train - DICE Score, class 3': 0.0},
+TEE loss: 0.3422619104385376
