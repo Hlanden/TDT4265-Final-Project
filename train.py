@@ -57,7 +57,8 @@ def start_train(cfg, train_data_loader, val_data_loader):
                 decoder_filters=cfg.MODEL.BACKBONE.DECODER_FILTERS ,
                 parametric_upsampling=cfg.MODEL.BACKBONE.PARAMETRIC_UPSAMPLING ,
                 shortcut_features=cfg.MODEL.BACKBONE.SHORTCUT_FEATURES,
-                decoder_use_batchnorm=cfg.MODEL.BACKBONE.DECODER_USE_BATCHNORM,)
+                decoder_use_batchnorm=cfg.MODEL.BACKBONE.DECODER_USE_BATCHNORM,
+                cfg=cfg)
 
     else:
         model = Unet2D(cfg)
@@ -109,6 +110,7 @@ def get_parser():
 def main (logger=None):
     args = get_parser().parse_args()
     print(args)
+    print(cfg.PREPROCESSING.RANDOMCROP.ENABLE)
     cfg.merge_from_file(args.config_file)
     if args.opts:
         cfg.merge_from_list(args.opts)
@@ -134,7 +136,7 @@ def main (logger=None):
     for handler in logger.handlers[:]:
         logger.removeHandler(handler)
 
-def load_best_model(cfg):
+def load_best_model(cfg): #Can we delete this?
     logger = logging.getLogger('UNET.test')
     model = Unet2D(cfg)
     model = torch_utils.to_cuda(model)

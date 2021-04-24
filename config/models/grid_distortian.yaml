@@ -1,0 +1,11 @@
+PREPROCESSING:
+    GRIDDISTORTIAN:
+      ENABLE: True
+      MUM_STEPS: 3
+      DISTORT_LIMIT: 0.2
+      PROB: 0.5
+      
+
+OUTPUT_DIR: 'outputs/grid_distortion'
+LOGGER:
+    SAVE_DIR: True

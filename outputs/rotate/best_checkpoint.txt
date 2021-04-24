@@ -1,0 +1,1 @@
+outputs/rotate/model_054.pth

@@ -1,0 +1,10 @@
+PREPROCESSING:
+    RANDOMCROP:
+        ENABLE: True
+        X_RESIZE: 0.8
+        Y_RESIZE: 0.8
+        PROB: 0.4
+
+OUTPUT_DIR: 'outputs/random_crop'
+LOGGER:
+    SAVE_DIR: True

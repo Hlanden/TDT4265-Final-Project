@@ -61,7 +61,9 @@ def do_train(cfg, model,
     end = time.time()
     lowest_loss = 1
     early_stopping_count = 0
+    is_best_cp = False
     is_early_stopping = False
+    is_best_cp = False
     epoch = arguments["epoch"]
     while (time.time() - start_training_time)/60 <= cfg.SOLVER.MAX_MINUTES and not is_early_stopping:
         
@@ -173,7 +175,7 @@ def do_train(cfg, model,
                 summary_writer.add_scalar('losses/Validation loss', val_loss, global_step=global_step)
                 is_best_cp = True if val_loss < lowest_loss else False
 
-                if lowest_loss - val_loss > cfg.TEST.EARLY_STOPPING_TOL:
+                if val_loss < lowest_loss:
                     lowest_loss = val_loss
                     early_stopping_count = 0
                     
@@ -188,7 +190,7 @@ def do_train(cfg, model,
 
         
             
-        if cfg.SAVE_EPOCH > 0 and epoch % cfg.SAVE_EPOCH == 0 and epoch > 0:
+        if (cfg.SAVE_EPOCH > 0 and epoch % cfg.SAVE_EPOCH == 0 and epoch > 0) or is_best_cp:
             checkpointer.save("model_{:03d}".format(epoch), is_best_cp=is_best_cp, **arguments)
 
 

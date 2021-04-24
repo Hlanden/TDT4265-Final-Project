@@ -71,44 +71,44 @@ def custom_collate(batch, tee=False):
 
 def make_data_loaders(cfg,
                       tee=False):
-    image_transform, additional_transform = build_transforms(cfg, is_train=True, tee=tee)
-    val_transform = build_transforms(cfg, is_train=False, tee=tee)
+    train_transform, only_img_transform = build_transforms(cfg, is_train=True, tee=tee)
+    val_transform, only_img_val_transform = build_transforms(cfg, is_train=False, tee=tee)
 
     dataset = DatasetLoader(cfg, tee=tee)
     batch_size = cfg.TEST.BATCH_SIZE if not tee else cfg.TEST.BATCH_SIZE
     torch.manual_seed(0)
     if not tee:
         test_dataset = Subset(dataset, range(1600,1800))
-        train_val_dataset = Subset(dataset, range(0,1600))
-        train_dataset, valid_dataset = random_split(train_val_dataset, (1200, 400))
+        train_and_val_dataset = Subset(dataset, range(0,1600))
+        train_dataset, valid_dataset = random_split(train_and_val_dataset, (1200, 400))
         train_dataset.dataset = copy(dataset)
 
 
-        train_dataset.dataset.transforms = [image_transform, additional_transform]
-        valid_dataset.dataset.transforms = [val_transform, additional_transform] #val_transform
-        test_dataset.dataset.transforms = [val_transform, additional_transform] #val_transform
+        train_dataset.dataset.transforms = [train_transform, only_img_transform]
+        valid_dataset.dataset.transforms = [val_transform, only_img_val_transform] #val_transform
+        test_dataset.dataset.transforms = [val_transform, only_img_val_transform] #val_transform
+
         train_data_loader = DataLoader(train_dataset,
                                        num_workers=cfg.DATA_LOADER.NUM_WORKERS,
                                        pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
                                        batch_size=batch_size,
                                        shuffle=True,
                                        collate_fn=custom_collate)
-
         val_data_loader = DataLoader(valid_dataset,
                                      num_workers=cfg.DATA_LOADER.NUM_WORKERS,
                                      pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
                                      batch_size=batch_size,
                                      shuffle=True,
                                      collate_fn=custom_collate)
-
         test_data_loader = DataLoader(test_dataset,
                                       num_workers=cfg.DATA_LOADER.NUM_WORKERS,
                                       pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
-                                      batch_size=1,
+                                      batch_size=batch_size,
                                       #shuffle=True,
                                       collate_fn=custom_collate)
         return train_data_loader, val_data_loader, test_data_loader
     else:
+        dataset.transforms = [val_transform, only_img_val_transform]
         tee_data_loader = DataLoader(dataset,
                                      num_workers=cfg.DATA_LOADER.NUM_WORKERS,
                                      pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
