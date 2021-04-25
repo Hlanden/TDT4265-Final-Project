@@ -29,8 +29,11 @@ def plot_model_from_checkpoint(cfg,
                                filename='', 
                                plot_original_size=False):
     if config_file:
+        print('Merging options from', config_file)
         cfg.merge_from_file(config_file)
+
     cfg.freeze()
+    print('Output dir: ', cfg.OUTPUT_DIR)
     cp_dir = Path(cfg.OUTPUT_DIR)
     cp_path = ''
     for cp in cp_dir.iterdir():
@@ -65,27 +68,25 @@ def plot_model_from_checkpoint(cfg,
         axs[0, 2].set_title('Model images')
     
     for idx, ax in zip(image_idx, axs):
-        image, target, padding, shape = dataset_loader[idx]
-        
+        image, target, padding, shape, org_target, org_image = dataset_loader[idx]
+        print(np.expand_dims(image,0).shape)
         output = model(torch.Tensor(np.expand_dims(image,0)).cuda())
-        output = output.argmax(dim=1).cpu().numpy().squeeze()
+        output = output.cpu().detach().numpy()
+        output = np.argmax(output, axis=1)[0]
+        print(output.shape)
 
 
         if plot_original_size:
-            image = image.squeeze()
-            target = target.squeeze()
-            x_org, y_org = image.shape
+            x_org, y_org = image.squeeze().shape
             x_lim = x_org - padding[0]
             y_lim = y_org - padding[1]
-            image = cv2.resize(image[:x_lim, :y_lim].astype(np.float32),
-                               dsize=tuple(reversed(shape)),
-                               interpolation=cv2.INTER_LINEAR)
+            
             output = cv2.resize(output[:x_lim, :y_lim].astype(np.float32),
                                 dsize=tuple(reversed(shape)),
                                 interpolation=cv2.INTER_LINEAR)
-            target = cv2.resize(target[:x_lim, :y_lim].astype(np.float32),
-                                dsize=tuple(reversed(shape)),
-                                interpolation=cv2.INTER_LINEAR)
+            
+            image = org_image
+            target = org_target
 
         ax[0].imshow(image.squeeze())
         ax[1].imshow(target.squeeze())
@@ -135,7 +136,8 @@ def plot_mulitple_chekpoints(cfg,
                                    image_idx=[image_idx],
                                    axs=[ax],
                                    filename='',
-                                   plot_original_size=plot_original_size)
+                                   plot_original_size=plot_original_size, 
+                                   config_file=config_file)
 
     if filename:
         print('Saving to file: {}'.format(filename))
@@ -146,17 +148,31 @@ def plot_mulitple_chekpoints(cfg,
 
 
 if __name__ == '__main__':
+    from torch.utils.data import DataLoader, random_split, Subset
+    from copy import copy
+    config_file='config/OJs_sondags_skole/pixels2.yaml'
+    if config_file:
+        print('Merging options from', config_file)
+        cfg.merge_from_file(config_file)
+
+    cfg.freeze()
     tee = False
-    transforms,_ = build_transforms(cfg, is_train=True, tee=tee)
-    dataset = DatasetLoader(cfg,
-                            transforms=[transforms, _], 
-                            tee=tee)
+    dataset = DatasetLoader(cfg, tee=tee)
+    train_and_val_dataset = Subset(dataset, range(0,1600))
+
+    train_transform, only_img_transform = build_transforms(cfg, is_train=True, tee=tee)
+    train_dataset, valid_dataset = random_split(train_and_val_dataset, (1200, 400))
+    train_dataset.dataset = copy(dataset)
+    train_dataset.dataset.transforms = [train_transform, only_img_transform]
+    # dataset = DatasetLoader(cfg,
+    #                         transforms=[transforms, _], 
+    #                         tee=tee)
     
 
     
     #t = plot_mulitple_chekpoints(cfg, dataset, [2, 50, 76], 0, config_file='config/models/CAMUS.yaml', filename='test_org', plot_original_size=True)
-    plot_mulitple_chekpoints(cfg, dataset, [6, 30, 48, 60], 0, config_file='config/models/gaussblur.yaml', filename='test_org', plot_original_size=True)
-    plot_mulitple_chekpoints(cfg, dataset, [6, 30, 48, 60], 0, config_file='config/models/gaussblur.yaml', filename='test_unorg', plot_original_size=False)
+    plot_mulitple_chekpoints(cfg, train_dataset, [6, 30, 36], 400, config_file=config_file, filename='test_org', plot_original_size=True)
+    plot_mulitple_chekpoints(cfg, train_dataset, [6, 30, 36], 400, config_file=config_file, filename='test_unorg', plot_original_size=False)
 
     # x, og_target, padding, shape = dataset[0]
     # x_org, y_org = og_target.shape
