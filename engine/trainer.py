@@ -161,7 +161,7 @@ def do_train(cfg, model,
                     outputs = model(images)
                     val_loss += loss_fn(outputs, targets.long())*batch_size
                     #acc += dice_score(outputs, targets) # TODO: Wait on working function
-                    val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),shapes=shapes, padding=padding, org_traget=org_targets).flatten()
+                    val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),shapes=shapes, padding=padding, org_targets=org_targets).flatten()
                     acc += val_dice_score*batch_size
                 acc = acc/total_img
                 val_loss = val_loss/total_img
