@@ -1,0 +1,11 @@
+PREPROCESSING:
+  RESIZE:
+    FX: 2.0
+    FY: 2.0
+OUTPUT_DIR: 'outputs/pixels2'
+
+TEST:
+  BATCH_SIZE : 12
+
+SOLVER:
+  MAX_MINUTES: 90

@@ -15,25 +15,35 @@ def dice_score(predb, yb):
     dice = (2*intersection)/(predb.sum() + yb.sum())
     return dice
 
-def dice_score_multiclass(predb, yb, num_classes, shapes=None, padding=None, smooth = 0.00001):   #num_classes should not include background
+def dice_score_multiclass(predb, yb, num_classes, shapes=None, padding=None, smooth = 0.00001,org_targets=None):   #num_classes should not include background
     if type(predb) == torch.Tensor:
         predb = predb.cpu().detach().numpy()
     if type(yb) == torch.Tensor:
         yb = yb.cpu().detach().numpy()
+    
     predb = np.argmax(predb, axis=1)
     reshaped_predb = []
     reshaped_yb = []
     if shapes is not None and padding is not None:
-        for shape, padding, p, y in zip(shapes, padding, predb, yb):
-            x_org, y_org = y.shape
-            x_lim = x_org - padding[0]
-            y_lim = y_org - padding[1]
+        if org_targets is not None:
+            for shape, padding, p, y, org_target in zip(shapes, padding, predb, yb, org_targets):
+                x_org, y_org = y.shape
+                x_lim = x_org - padding[0]
+                y_lim = y_org - padding[1]
 
-            reshaped_predb.extend(cv2.resize(p[:x_lim, :y_lim].astype(np.float32), dsize=tuple(reversed(shape)), interpolation=cv2.INTER_LINEAR).flat)
-            reshaped_yb.extend(cv2.resize(y[:x_lim, :y_lim].astype(np.float32), dsize=tuple(reversed(shape)), interpolation=cv2.INTER_LINEAR).flat)
+                reshaped_predb.extend(cv2.resize(p[:x_lim, :y_lim].astype(np.float32), dsize=tuple(reversed(shape)), interpolation=cv2.INTER_LINEAR).flat)
+                reshaped_yb.extend(org_target.flat)
+        else:
+            for shape, padding, p, y in zip(shapes, padding, predb, yb):
+                x_org, y_org = y.shape
+                x_lim = x_org - padding[0]
+                y_lim = y_org - padding[1]
 
+                reshaped_predb.extend(cv2.resize(p[:x_lim, :y_lim].astype(np.float32), dsize=tuple(reversed(shape)), interpolation=cv2.INTER_LINEAR).flat)
+                reshaped_yb.extend(cv2.resize(y[:x_lim, :y_lim].astype(np.float32), dsize=tuple(reversed(shape)), interpolation=cv2.INTER_LINEAR).flat)
 
         predb = np.array(reshaped_predb)
+        
         yb = np.array(reshaped_yb)
             
     

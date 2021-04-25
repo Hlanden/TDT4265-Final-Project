@@ -129,6 +129,7 @@ class DatasetLoader(Dataset):
         x = self.open_as_array(idx, invert=True).astype(np.float32)
         y = self.open_mask(idx, add_dims=False).astype(np.float32)
         org_target = copy(y)
+        org_image = copy(x)
         shape = y.shape
         pad_x = 0
         pad_y = 0
@@ -178,7 +179,7 @@ class DatasetLoader(Dataset):
 
         padding = [pad_x, pad_y]
         
-        return x, y, padding, shape, org_target
+        return x, y, padding, shape, org_target, org_image
 
     
     def get_as_pil(self, idx):

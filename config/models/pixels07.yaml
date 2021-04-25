@@ -6,3 +6,5 @@ PREPROCESSING:
 OUTPUT_DIR: 'outputs/pixels07'
 LOGGER:
     SAVE_DIR: True
+SOLVER:
+  MAX_MINUTES: 90
