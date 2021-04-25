@@ -2,7 +2,28 @@ PREPROCESSING:
   RESIZE:
     FX: 0.6
     FY: 0.6
-OUTPUT_DIR: 'outputs/backbone_densenet121adamW'
+  ROTATE:
+    ENABLE: True
+    LIMIT: 6
+    BORDER_MODE: 0 #cv2.BORDER_CONSTANT
+    PROB: 0.25
+  ELASTICDEFORM:
+    ENABLE: True
+    ALPHA: 270
+    SIGMA: 25
+    ALPHA_AFFINE: 1
+    PROBABILITY: 0.25
+  RANDOMCROP:
+    ENABLE: True
+    X_RESIZE: 0.8
+    Y_RESIZE: 0.8
+    PROB: 0.25
+
+LOGGER:
+  SAVE_DIR: True
+
+
+OUTPUT_DIR: 'outputs/backbone_densenet121_final_w_normalize'
 
 UNETSTRUCTURE:
   CONTRACTBLOCK : [[cfg.MODEL.IN_CHANNELS, 32, 7, 3], 
@@ -10,6 +31,7 @@ UNETSTRUCTURE:
                                     [64, 128, 3, 1],
                                     [64, 128, 3, 1],
                                     [64, 128, 3, 1]]     #number of layers should equal the depth of the backbone model
+
 
 
 MODEL:
@@ -25,17 +47,10 @@ MODEL:
     USE_NORMALIZATION : True
 
 SOLVER:
-  LR : 1e-2
-  MAX_ITER : 5000
-  MAX_MINUTES : 90
-  DIFFRENT : False
-
-cfg:
-  TEST:
-    EARLY_STOPPING_COUNT: 1000
+  LR : 1e-4
+  MAX_ITER : 8000
+  MAX_MINUTES : 120
 
 FIND_LR_EPOCH : 0
 
 SCHEDULER : True
-
-    

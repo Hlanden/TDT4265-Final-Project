@@ -5,7 +5,6 @@ DATASETS:
     TRAIN_IMAGES: '../../../../work/datasets/medical_project/CAMUS'
 MODEL:
     CLASSES: [1, 2, 3]
-
 UNETSTRUCTURE:
     CONTRACTBLOCK:  [[1, 32, 7, 3], #in channels er første verdi i denne listen
                     [32, 64, 3, 1],
@@ -15,8 +14,7 @@ UNETSTRUCTURE:
     EXPANDBLOCK: [[256,128,3,1],
                 [256, 64, 3, 1],   
                 [128, 32, 3, 1],
-                [64, 4 , 3, 1]] #out channels er andre verdi i denne listen              
- 
+                [64, 4 , 3, 1]] #out channels er andre verdi i denne listen
 OUTPUT_DIR: 'outputs/Deeper_Network_model'
 LOGGER:
     SAVE_DIR: True
