@@ -4,6 +4,7 @@ from torchvision import models, datasets, transforms
 from torch.nn import functional as F
 
 from config.defaults import cfg
+from torchvision.transforms.functional import normalize
 
 
 def get_backbone(name, pretrained=True):
@@ -135,9 +136,10 @@ class Unet(nn.Module):
                  decoder_filters=(256, 128, 64, 32, 16),
                  parametric_upsampling=True,
                  shortcut_features='default',
-                 decoder_use_batchnorm=True):
+                 decoder_use_batchnorm=True,
+                 cfg=None):
         super(Unet, self).__init__()
-
+        self.cfg = cfg
         self.backbone_name = backbone_name
 
         self.backbone, self.shortcut_features, self.bb_out_name = get_backbone(backbone_name, pretrained=pretrained)
@@ -189,7 +191,8 @@ class Unet(nn.Module):
         """ Forward propagation in backbone encoder network.  """
 
         x = x.repeat(1,3, 1, 1)
-
+        if self.cfg is not None and self.cfg.MODEL.BACKBONE.USE_NORMALIZATION:
+            x = normalize(x, cfg.MODEL.BACKBONE.NORMALIZATION_MEAN, cfg.MODEL.BACKBONE.NORMALIZATION_STD)
 
         features = {None: None} if None in self.shortcut_features else dict()
         for name, child in self.backbone.named_children():

@@ -1,0 +1,41 @@
+PREPROCESSING:
+  RESIZE:
+    FX: 0.6
+    FY: 0.6
+OUTPUT_DIR: 'outputs/backbone_densenet121adamW'
+
+UNETSTRUCTURE:
+  CONTRACTBLOCK : [[cfg.MODEL.IN_CHANNELS, 32, 7, 3], 
+                                    [32, 64, 3, 1],
+                                    [64, 128, 3, 1],
+                                    [64, 128, 3, 1],
+                                    [64, 128, 3, 1]]     #number of layers should equal the depth of the backbone model
+
+
+MODEL:
+  BACKBONE:
+    USE : True
+    NET : 'densenet121'      
+    PRETRAINED : True
+    ENCODER_FREZE : False
+    DECODER_FILTERS : (256, 128, 64, 32, 16)
+    PARAMETRIC_UPSAMPLING : True
+    SHORTCUT_FEATURES : 'default'
+    DECODER_USE_BATCHNORM : True
+    USE_NORMALIZATION : True
+
+SOLVER:
+  LR : 1e-2
+  MAX_ITER : 5000
+  MAX_MINUTES : 90
+  DIFFRENT : False
+
+cfg:
+  TEST:
+    EARLY_STOPPING_COUNT: 1000
+
+FIND_LR_EPOCH : 0
+
+SCHEDULER : True
+
+    

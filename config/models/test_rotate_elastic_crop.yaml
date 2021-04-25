@@ -1,0 +1,24 @@
+PREPROCESSING:
+  ROTATE:
+    ENABLE: True
+    LIMIT: 6
+    BORDER_MODE: 0 #cv2.BORDER_CONSTANT
+    PROB: 0.25
+  
+
+  ELASTICDEFORM:
+      ENABLE: True
+      ALPHA: 270
+      SIGMA: 25
+      ALPHA_AFFINE: 1
+      PROBABILITY: 0.25
+
+  RANDOMCROP:
+      ENABLE: True
+      X_RESIZE: 0.8
+      Y_RESIZE: 0.8
+      PROB: 0.25
+
+OUTPUT_DIR: 'outputs/test_rotate_elastic_crop'
+LOGGER:
+    SAVE_DIR: True

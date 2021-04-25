@@ -1,0 +1,28 @@
+PREPROCESSING:
+  RESIZE:
+    FX: 0.7
+    FY: 0.7
+OUTPUT_DIR: 'outputs/backbone_test_vgg16_2'
+
+UNETSTRUCTURE:
+  CONTRACTBLOCK : [[cfg.MODEL.IN_CHANNELS, 32, 7, 3], 
+                                    [32, 64, 3, 1],
+                                    [64, 128, 3, 1],
+                                    [64, 128, 3, 1],
+                                    [64, 128, 3, 1]]     #number of layers should equal the depth of the backbone model
+
+
+MODEL:
+  BACKBONE:
+    USE : True
+    NET : 'vgg16'      
+    PRETRAINED : True
+    ENCODER_FREZE : False
+    DECODER_FILTERS : (256, 128, 64, 32, 16)
+    PARAMETRIC_UPSAMPLING : True
+    SHORTCUT_FEATURES : 'default'
+    DECODER_USE_BATCHNORM : True
+
+SOLVER:
+  LR : 1e-4
+  MAX_ITER : 10000

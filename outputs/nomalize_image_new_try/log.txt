@@ -870,3 +870,474 @@ Validation loss: 0.10211062431335449
 2021-04-23 18:48:41,484 UNET.trainer INFO: Running test on Test
 2021-04-23 18:48:42,943 UNET.trainer INFO: Test result: {'DICE Scores/Train - DICE Score, class 1': 0.8768250501155853, 'DICE Scores/Train - DICE Score, class 2': 0.726778814047575, 'DICE Scores/Train - DICE Score, class 3': 0.7418411418935285},
 Test loss: 0.16365382075309753
+2021-04-24 09:43:47,891 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
+2021-04-24 09:43:47,892 UNET INFO: Loaded configuration file config/models/normalize.yaml
+2021-04-24 09:43:47,892 UNET INFO: 
+PREPROCESSING:
+    NORMALIZE:
+        ENABLE: True
+        MEAN: 0.25
+        STD: 0.2
+
+
+OUTPUT_DIR: 'outputs/nomalize_image_new_try'
+2021-04-24 09:43:47,893 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: False
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+LOSS:
+  DIFFRENT: False
+MODEL:
+  BACKBONE:
+    DECODER_FILTERS: (256, 128, 64, 32, 16)
+    DECODER_USE_BATCHNORM: True
+    ENCODER_FREZE: False
+    NET: resnet18
+    PARAMETRIC_UPSAMPLING: True
+    PRETRAINED: True
+    SHORTCUT_FEATURES: default
+    USE: False
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/nomalize_image_new_try
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: (3, 11)
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: (0, 5)
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: True
+    MEAN: 0.25
+    STD: 0.2
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+  ROTATE:
+    BORDER_MODE: 0
+    ENABLE: False
+    LIMIT: 15
+    PROB: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  DIFFRENT: False
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-24 09:44:18,494 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
+2021-04-24 09:44:18,494 UNET INFO: Loaded configuration file config/models/normalize.yaml
+2021-04-24 09:44:18,494 UNET INFO: 
+PREPROCESSING:
+    NORMALIZE:
+        ENABLE: True
+        MEAN: 0.25
+        STD: 0.2
+
+
+OUTPUT_DIR: 'outputs/nomalize_image_new_try'
+2021-04-24 09:44:18,495 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: False
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+LOSS:
+  DIFFRENT: False
+MODEL:
+  BACKBONE:
+    DECODER_FILTERS: (256, 128, 64, 32, 16)
+    DECODER_USE_BATCHNORM: True
+    ENCODER_FREZE: False
+    NET: resnet18
+    PARAMETRIC_UPSAMPLING: True
+    PRETRAINED: True
+    SHORTCUT_FEATURES: default
+    USE: False
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/nomalize_image_new_try
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: (3, 11)
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: (0, 5)
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: True
+    MEAN: 0.25
+    STD: 0.2
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+  ROTATE:
+    BORDER_MODE: 0
+    ENABLE: False
+    LIMIT: 15
+    PROB: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  DIFFRENT: False
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-24 09:48:20,766 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
+2021-04-24 09:48:20,766 UNET INFO: Loaded configuration file config/models/normalize.yaml
+2021-04-24 09:48:20,767 UNET INFO: 
+PREPROCESSING:
+    NORMALIZE:
+        ENABLE: True
+        MEAN: 0.25
+        STD: 0.2
+
+
+OUTPUT_DIR: 'outputs/nomalize_image_new_try'
+2021-04-24 09:48:20,767 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: False
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+LOSS:
+  DIFFRENT: False
+MODEL:
+  BACKBONE:
+    DECODER_FILTERS: (256, 128, 64, 32, 16)
+    DECODER_USE_BATCHNORM: True
+    ENCODER_FREZE: False
+    NET: resnet18
+    PARAMETRIC_UPSAMPLING: True
+    PRETRAINED: True
+    SHORTCUT_FEATURES: default
+    USE: False
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/nomalize_image_new_try
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: (3, 11)
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: (0, 5)
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: True
+    MEAN: 0.25
+    STD: 0.2
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+  ROTATE:
+    BORDER_MODE: 0
+    ENABLE: False
+    LIMIT: 15
+    PROB: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  DIFFRENT: False
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-24 09:48:59,688 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
+2021-04-24 09:48:59,688 UNET INFO: Loaded configuration file config/models/normalize.yaml
+2021-04-24 09:48:59,688 UNET INFO: 
+PREPROCESSING:
+    NORMALIZE:
+        ENABLE: True
+        MEAN: 0.25
+        STD: 0.2
+
+
+OUTPUT_DIR: 'outputs/nomalize_image_new_try'
+2021-04-24 09:48:59,689 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: False
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+LOSS:
+  DIFFRENT: False
+MODEL:
+  BACKBONE:
+    DECODER_FILTERS: (256, 128, 64, 32, 16)
+    DECODER_USE_BATCHNORM: True
+    ENCODER_FREZE: False
+    NET: resnet18
+    PARAMETRIC_UPSAMPLING: True
+    PRETRAINED: True
+    SHORTCUT_FEATURES: default
+    USE: False
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/nomalize_image_new_try
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: (3, 11)
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: (0, 5)
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: True
+    MEAN: 0.25
+    STD: 0.2
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+  ROTATE:
+    BORDER_MODE: 0
+    ENABLE: False
+    LIMIT: 15
+    PROB: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  DIFFRENT: False
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-24 09:49:01,142 UNET.trainer INFO: Loading checkpoint from outputs/nomalize_image_new_try/model_012.pth
+2021-04-24 09:49:49,264 UNET INFO: Namespace(config_file='config/models/normalize.yaml', opts=None)
+2021-04-24 09:49:49,265 UNET INFO: Loaded configuration file config/models/normalize.yaml
+2021-04-24 09:49:49,265 UNET INFO: 
+PREPROCESSING:
+    NORMALIZE:
+        ENABLE: True
+        MEAN: 0.25
+        STD: 0.2
+
+
+OUTPUT_DIR: 'outputs/nomalize_image_new_try'
+2021-04-24 09:49:49,266 UNET INFO: Running with config:
+DATASETS:
+  BASE_PATH: ../../../../lhome/ojrise/
+  CAMUS: CAMUS
+  CYBELE: True
+  TEE: TEE/DataTEEGroundTruth
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+DROPOUT:
+  ENABLE: False
+  PROB: 0.15
+EVAL_EPOCH: 2
+FIND_LR_ITERATION: 0
+INPUT:
+  
+LOGGER:
+  NAME: UNET
+  SAVE_DIR: False
+  VISUAL_DEBUG: True
+LOG_STEP: 10
+LOSS:
+  DIFFRENT: False
+MODEL:
+  BACKBONE:
+    DECODER_FILTERS: (256, 128, 64, 32, 16)
+    DECODER_USE_BATCHNORM: True
+    ENCODER_FREZE: False
+    NET: resnet18
+    PARAMETRIC_UPSAMPLING: True
+    PRETRAINED: True
+    SHORTCUT_FEATURES: default
+    USE: False
+  CLASSES: [1, 2, 3]
+  IN_CHANNELS: 1
+  OUT_CHANNELS: 4
+OUTPUT_DIR: outputs/nomalize_image_new_try
+PREPROCESSING:
+  ELASTICDEFORM:
+    ALPHA: 300
+    ALPHA_AFFINE: 1
+    ENABLE: False
+    PROBABILITY: 0.5
+    SIGMA: 30
+  GAUSSIANSMOOTH:
+    BLURLIMIT: (3, 11)
+    ENABLE: False
+    PROBABILITY: 1
+    SIGMALIMIT: (0, 5)
+  HORIZONTALFLIP:
+    ENABLE: False
+    PROBABILITY: 1
+  ISOTROPIC_PIXEL_SIZE:
+    ENABLE: True
+  NORMALIZE:
+    ENABLE: True
+    MEAN: 0.25
+    STD: 0.2
+  RESIZE:
+    FX: 0.5
+    FY: 0.5
+  ROTATE:
+    BORDER_MODE: 0
+    ENABLE: False
+    LIMIT: 15
+    PROB: 0.5
+SAVE_EPOCH: 6
+SOLVER:
+  DIFFRENT: False
+  LR: 0.01
+  MAX_ITER: 120000
+  MAX_MINUTES: 720
+TEST:
+  BATCH_SIZE: 12
+  EARLY_STOPPING_COUNT: 10
+  EARLY_STOPPING_TOL: 1e-06
+  NUM_EPOCHS: 50
+UNETSTRUCTURE:
+  CONTRACTBLOCK: [[1, 32, 7, 3], [32, 64, 3, 1], [64, 128, 3, 1]]
+  EXPANDBLOCK: [[128, 64, 3, 1], [128, 32, 3, 1], [64, 4, 3, 1]]
+2021-04-24 09:49:50,728 UNET.trainer INFO: Loading checkpoint from outputs/nomalize_image_new_try/model_048.pth
+2021-04-24 09:49:50,941 UNET.trainer INFO: Loading optimizer from outputs/nomalize_image_new_try/model_048.pth
+2021-04-24 09:49:50,947 UNET.trainer INFO: Number of parameters: 0.54M
+2021-04-24 09:49:50,947 UNET.trainer INFO: Running test on Train
+2021-04-24 09:52:51,778 UNET.trainer INFO: Train result: {'DICE Scores/Train - DICE Score, class 1': 0.9390709347709703, 'DICE Scores/Train - DICE Score, class 2': 0.8625811921516241, 'DICE Scores/Train - DICE Score, class 3': 0.898768036512995},
+Train loss: 0.05995308607816696
+2021-04-24 09:52:51,779 UNET.trainer INFO: Running test on Validation
+2021-04-24 09:53:52,187 UNET.trainer INFO: Validation result: {'DICE Scores/Train - DICE Score, class 1': 0.9343735209251182, 'DICE Scores/Train - DICE Score, class 2': 0.8608148056589284, 'DICE Scores/Train - DICE Score, class 3': 0.8995815047491341},
+Validation loss: 0.05778845027089119
+2021-04-24 09:53:52,188 UNET.trainer INFO: Running test on Test
+2021-04-24 09:54:22,795 UNET.trainer INFO: Test result: {'DICE Scores/Train - DICE Score, class 1': 0.9123194560219196, 'DICE Scores/Train - DICE Score, class 2': 0.8278242822780352, 'DICE Scores/Train - DICE Score, class 3': 0.8253836588482457},
+Test loss: 0.12082117050886154
+2021-04-24 09:54:22,796 UNET.trainer INFO: Running test on TEE
+2021-04-24 09:54:24,010 UNET.trainer INFO: TEE result: {'DICE Scores/Train - DICE Score, class 1': 0.010442367393826984, 'DICE Scores/Train - DICE Score, class 2': 0.11405775742082958, 'DICE Scores/Train - DICE Score, class 3': 0.0},
+TEE loss: 0.6314206123352051
