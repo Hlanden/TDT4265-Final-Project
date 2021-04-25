@@ -137,12 +137,12 @@ cfg.DROPOUT.PROB = 0.15
 # -----------------------------------------------------------------------------
 cfg.DATASETS = CN()
 
-cfg.DATASETS.CYBELE = False
+cfg.DATASETS.CYBELE = True
 if cfg.DATASETS.CYBELE:
     cfg.DATASETS.BASE_PATH = '../../../lhome/jorghaal/'
 else:
     cfg.DATASETS.BASE_PATH = '../../../../work/datasets/medical_project/'
-    cfg.DATASETS.TEE = 'DataTEEGroundTruth'
+cfg.DATASETS.TEE = 'DataTEEGroundTruth'
 
 cfg.DATASETS.CAMUS = 'CAMUS'
 
