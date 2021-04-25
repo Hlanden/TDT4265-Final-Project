@@ -42,7 +42,6 @@ def do_train(cfg, model,
              arguments,
              loss_fn):
     logger = logging.getLogger("UNET.trainer")
-    #logger.info(input('Hvorfor tester du dette? '))
     logger.info("Start training ...")
     meters = MetricLogger()
 
@@ -50,7 +49,6 @@ def do_train(cfg, model,
     if cfg.SCHEDULER:
         scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer,mode='min', factor=np.sqrt(0.1), cooldown=0, patience=4, min_lr=0.5e-8, verbose=1)
     
-    #lr_finder = LRFinder(model, optimizer, loss_fn, device="cuda")
 
     summary_writer = torch.utils.tensorboard.SummaryWriter(
         log_dir=os.path.join(cfg.OUTPUT_DIR, 'tf_logs'))
@@ -70,11 +68,9 @@ def do_train(cfg, model,
         epoch += 1
         arguments["epoch"] = epoch
         
-        '''
-        if  epoch == 1:
-        #
-        if  epoch == 1 and cfg.FIND_LR_EPOCH:
-            #lr_finder.reset()
+        
+        if  epoch == 1 and cfg.FIND_LR:
+            # This does not work very well...
             logger.info('Finding new LR')
             
             lr_finder.range_test(train_data_loader, start_lr = 0.0000001, end_lr=100, num_iter=100)
@@ -91,7 +87,7 @@ def do_train(cfg, model,
             if not os.path.exists(plot_path):
                 os.makedirs(plot_path)
             plt.savefig(plot_path + '/epoch{}.png'.format(epoch))
-        '''
+        
         
         for iteration, (images, targets, shapes, padding, org_targets) in enumerate(train_data_loader, start_iter):
             iteration = iteration + 1
@@ -144,7 +140,6 @@ def do_train(cfg, model,
                 logger.info(meters.delimiter.join(to_log))
             if iteration >= cfg.SOLVER.MAX_ITER or is_early_stopping:
                 break
-         # TODO: Currently deactivated. Need dataloader class to make eval
         if cfg.EVAL_EPOCH > 0 and epoch % cfg.EVAL_EPOCH == 0 and epoch > 0:
             logger.info('Evaluating...')
             model.train(False)
@@ -160,14 +155,12 @@ def do_train(cfg, model,
                     targets = torch_utils.to_cuda(targets)
                     outputs = model(images)
                     val_loss += loss_fn(outputs, targets.long())*batch_size
-                    #acc += dice_score(outputs, targets) # TODO: Wait on working function
                     val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),shapes=shapes, padding=padding, org_targets=org_targets).flatten()
                     acc += val_dice_score*batch_size
                 acc = acc/total_img
                 val_loss = val_loss/total_img
                 if cfg.SCHEDULER:
                     scheduler.step(val_loss)
-                # Tensorboard logging
                 eval_result = {}
                 for i, c in enumerate(cfg.MODEL.CLASSES): 
                     eval_result['DICE Scores/Val - DICE Score, class {}'.format(c)] = acc[i]
@@ -186,7 +179,7 @@ def do_train(cfg, model,
                 else:
                     early_stopping_count += 1
 
-                if early_stopping_count >= cfg.TEST.EARLY_STOPPING_COUNT: #øker den til 50
+                if early_stopping_count >= cfg.TEST.EARLY_STOPPING_COUNT: 
                     logger.info('Early stopping at epoch {}'.format(epoch))
                     is_early_stopping = True
 

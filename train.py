@@ -166,54 +166,5 @@ def load_best_model(cfg): #Can we delete this?
 
 
 if __name__ == "__main__":
-    #import sys
-    #sys.argv.append('--config_file=config/models/backbone_resnet34.yaml')
-    #sys.argv[1] = '--config_file=config/models/backbone_vgg16.yaml'
-    #main()
-    #sys.argv[1] = '--config_file=config/models/backbone_resnet34.yaml'
-    #main()
-
-    # import sys
-    # sys.argv.append('--config_file=config/models/DeeperNetwork.yaml')
-    # logging.getLogger('UNET')
-    # main()
-    # sys.argv[1] = '--config_file=config/models/pixels07.yaml'
-    # main()
-    # sys.argv[1] = '--config_file=config/models/pixels03.yaml'
-    import sys, os
-    test_config_files = []
-    config_path = Path(os.getcwd(), 'config/OJs_sondags_skole')
-    print('Programmet for dagens søndags skole består av følgende deltagere:')
-    for config in config_path.iterdir():
-        try:
-            test_config_files.append(str(config))
-            print('\t{}'.format(config))
-        except Exception as e:
-            print('Error running test on {}:\n {}'.format('', e))
-
-        
-    input('Press ENTER når du er klar for en helaften (bokstavlig talt)')
-    sys.argv.append('')
-    results = []
+    main()
     
-    counter = 0
-    while counter:
-        print('Starting in: {}'.format(counter))
-        time.sleep(1)
-        counter -= 1
-    for config in test_config_files:
-        try:
-            sys.argv[1] = '--config_file=' + config
-            main()
-            results.append('Config {} SUCCESS!'.format(config))
-        except Exception as e:
-            raise(e)
-            results.append('Config {} failed with error {}'.format(config, e))
-            print('Error running test on {}:\n {}'.format(config, e))
-        finally:
-            logger = logging.getLogger('UNET')
-            for handler in logger.handlers[:]:
-                logger.removeHandler(handler)
-    
-    for r in results:
-        print(r)

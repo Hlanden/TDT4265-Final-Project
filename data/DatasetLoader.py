@@ -28,7 +28,7 @@ class DatasetLoader(Dataset):
     def __init__(self,
                  cfg,
                  transforms=None,
-                 tee=False):  # legger til muligheten for transform her
+                 tee=False): 
 
         super().__init__()
         
@@ -42,10 +42,6 @@ class DatasetLoader(Dataset):
         self.tee = tee
         self.transforms = transforms
             
-            
-        
-        # TODO: Fix if statement below. Not obvious enough to understand what is happening!
-        # Loop through the files in red folder and combine, into a dictionary, the other bands
         if tee:
             gt_dir = Path(str(self.dataset_dir) + '/train_gt')
             gray_dir = Path(str(self.dataset_dir) + '/train_gray')
@@ -141,16 +137,13 @@ class DatasetLoader(Dataset):
             if type(self.transforms) == list:
                 aug_data = self.transforms[0](image=x.squeeze(), gt=y.squeeze()) 
                 x = aug_data["image"]
-                #aug_gt = self.transforms(image=y)
                 y = aug_data["gt"]
                 for i in range(1, len(self.transforms)):
                     x = self.transforms[i](image=x.squeeze())['image']
             
             else:
-                #aug_data = self.transforms(image=x.squeeze()) #ikke noe problem med å legge til squeeze her hilsen Gabriel Kiss
                 aug_data = self.transforms(image=x.squeeze(), gt=y.squeeze()) 
                 x = aug_data["image"]
-                #aug_gt = self.transforms(image=y)
                 y = aug_data["gt"]
             x = np.expand_dims(x, 0)
 
@@ -166,17 +159,7 @@ class DatasetLoader(Dataset):
             y = np.hstack([y, np.zeros((y.shape[0], pad_y))])
 
             x = np.expand_dims(x, 0)
-
-            #print('transformed x: ', x.shape)
-            #print('trasformed y', y.shape)
-        #print(np.amax(x))
-        #print(np.amax(y))
-
-        #print("x_mean", np.mean(x))
-        #print("x_std", np.std(x))
-
         
-
         padding = [pad_x, pad_y]
         
         return x, y, padding, shape, org_target, org_image
@@ -188,11 +171,13 @@ class DatasetLoader(Dataset):
         
         return Image.fromarray(arr.astype(np.uint8), 'RGB')
 
+# Code for debuggin, please don't read this hehe
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
     import random
     print(os.getcwd())
     from transforms import RandomCrop
+    
     transtest = aug.Compose([
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
         Resize(0, 0, fx=0.154/4, fy=0.308/4, interpolation=1, always_apply=False, p=1),

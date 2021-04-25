@@ -113,7 +113,6 @@ def plot_mulitple_chekpoints(cfg,
         cfg.merge_from_file(config_file)
     cfg.freeze()
     fig, axs = plt.subplots(len(checkpoints), 3, figsize=(15, 8))
-    #fig.tight_layout(pad=1.5)
     fig.suptitle('Results checkpoint: {}'.format(checkpoints))
     is_titles_set = False
 
@@ -125,7 +124,6 @@ def plot_mulitple_chekpoints(cfg,
             ax[1].set_title('Ground thruths')
             ax[2].set_title('Model images')
             is_titles_set = True
-        #ax[0].set_ylabel(str(cp), size='large', rotation=0)
         pad=5
         ax[0].annotate(str(cp), xy=(0, 0.5), xytext=(-ax[0].yaxis.labelpad - pad, 0),
                 xycoords=ax[0].yaxis.label, textcoords='offset points',
@@ -164,21 +162,8 @@ if __name__ == '__main__':
     train_dataset, valid_dataset = random_split(train_and_val_dataset, (1200, 400))
     train_dataset.dataset = copy(dataset)
     train_dataset.dataset.transforms = [train_transform, only_img_transform]
-    # dataset = DatasetLoader(cfg,
-    #                         transforms=[transforms, _], 
-    #                         tee=tee)
-    
-
     
     #t = plot_mulitple_chekpoints(cfg, dataset, [2, 50, 76], 0, config_file='config/models/CAMUS.yaml', filename='test_org', plot_original_size=True)
     plot_mulitple_chekpoints(cfg, train_dataset, [6, 30, 36], 400, config_file=config_file, filename='test_org', plot_original_size=True)
     plot_mulitple_chekpoints(cfg, train_dataset, [6, 30, 36], 400, config_file=config_file, filename='test_unorg', plot_original_size=False)
 
-    # x, og_target, padding, shape = dataset[0]
-    # x_org, y_org = og_target.shape
-    # x_lim = x_org - padding[0]
-    # y_lim = y_org - padding[1]
-    # og_target = og_target[:x_lim, :y_lim]
-    # print(og_target.shape)
-    # print(t.shape)
-    # print((t==og_target).all()) # Returns true

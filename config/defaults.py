@@ -14,15 +14,6 @@ cfg.MODEL.CLASSES = [1, 2, 3]
 
 #use of backbone models
 
-
-
-# cfg.MODEL.THRESHOLD = 0.5
-# cfg.MODEL.NUM_CLASSES = 21
-# # Hard negative mining
-# cfg.MODEL.NEG_POS_RATIO = 3
-# cfg.MODEL.CENTER_VARIANCE = 0.1
-# cfg.MODEL.SIZE_VARIANCE = 0.2
-
 # ---------------------------------------------------------------------------- #
 # Backbone
 # ---------------------------------------------------------------------------- #
@@ -50,12 +41,6 @@ cfg.MODEL.BACKBONE.NORMALIZATION_STD = [0.229, 0.224, 0.225]
 # INPUT
 # -----------------------------------------------------------------------------
 cfg.INPUT = CN()
-# Values to be used for image normalization, RGB layout
-#cfg.INPUT.PIXEL_MEAN = [123.675, 116.280, 103.530]
-#cfg.INPUT.PIXEL_STD = [1, 1, 1]
-
-# TODO: Find the correct valeus for this
-
 # -----------------------------------------------------------------------------
 # UNETSTRUCTURE
 # -----------------------------------------------------------------------------
@@ -168,15 +153,9 @@ cfg.DATA_LOADER.PIN_MEMORY = True
 # ---------------------------------------------------------------------------- #
 cfg.SOLVER = CN()
 cfg.SOLVER.DIFFRENT = False
-
-# train configs
 cfg.SOLVER.MAX_ITER = 120000
 cfg.SOLVER.MAX_MINUTES = 120
-# cfg.SOLVER.GAMMA = 0.1
-# cfg.SOLVER.BATCH_SIZE = 32
 cfg.SOLVER.LR = 1e-2
-# cfg.SOLVER.MOMENTUM = 0.9
-# cfg.SOLVER.WEIGHT_DECAY = 5e-4
 
 
 # ---------------------------------------------------------------------------- #
@@ -185,24 +164,18 @@ cfg.SOLVER.LR = 1e-2
 
 # TODO: Fill in correct values here: 
 cfg.TEST = CN()
-# cfg.TEST.NMS_THRESHOLD = 0.45
-# cfg.TEST.CONFIDENCE_THRESHOLD = 0.01
-# cfg.TEST.MAX_PER_CLASS = -1
-# cfg.TEST.MAX_PER_IMAGE = 100
 cfg.TEST.BATCH_SIZE = 12
 cfg.TEST.NUM_EPOCHS = 50
 cfg.TEST.EARLY_STOPPING_COUNT = 10
 cfg.TEST.EARLY_STOPPING_TOL = 10e-7
-cfg.FIND_LR_EPOCH = 0
+cfg.FIND_LR = False 
 cfg.SCHEDULER = False
 
 cfg.EVAL_EPOCH = 2 # Evaluate dataset every eval_step, disabled when eval_step < 0
 cfg.SAVE_EPOCH = 3*cfg.EVAL_EPOCH
-# cfg.MODEL_SAVE_STEP = 100 # Save checkpoint every save_step
 cfg.LOG_STEP = 10 # Print logs every log_stepPrint logs every log_step
 
 cfg.OUTPUT_DIR = "outputs"
-# cfg.DATASET_DIR = "datasets"
 
 # ---------------------------------------------------------------------------- #
 # Logger options

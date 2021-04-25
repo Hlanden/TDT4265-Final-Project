@@ -23,13 +23,11 @@ def custom_collate(batch, tee=False):
         max_y = item[0].shape[2] if item[0].shape[2] > max_y else max_y
     shapes = [item[3] for item in batch]
     org_targets = [item[4] for item in batch]   
-    ## get sequence lengths
-    #max_shape = max(shapes)
+
    
     images = np.zeros((len(data), 1, max_x, max_y))
     targets = np.zeros((len(data), max_x, max_y))
-    #print('mx', max_x, 'my', max_y)
-    #labels = torch.tensor(labels)
+
 
     for i in range(len(data)):
         j, k = data[i][0].shape
@@ -52,7 +50,6 @@ def custom_collate(batch, tee=False):
         except Exception as e:
             print('max x', max_x)
             print('max y', max_y)
-            #print('Padded: ', padded_img.shape[0])
             print('pad_y ', pad_y)
 
         images[i][0] = padded_img
@@ -105,7 +102,6 @@ def make_data_loaders(cfg,
                                       num_workers=cfg.DATA_LOADER.NUM_WORKERS,
                                       pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
                                       batch_size=batch_size,
-                                      #shuffle=True,
                                       collate_fn=custom_collate)
         return train_data_loader, val_data_loader, test_data_loader
     else:
@@ -114,6 +110,5 @@ def make_data_loaders(cfg,
                                      num_workers=cfg.DATA_LOADER.NUM_WORKERS,
                                      pin_memory=cfg.DATA_LOADER.PIN_MEMORY,
                                      batch_size=1,
-                                     #shuffle=True,
                                      collate_fn=lambda x: custom_collate(x, tee=True))
         return tee_data_loader

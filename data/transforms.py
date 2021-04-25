@@ -88,7 +88,6 @@ def build_transforms(cfg,
     image_and_gt_transform = [] #train transforms
     only_img_list = [] #kun img blir endret
     
-    #val_trans_list = [] #bilde og gt blir endret
     if cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE and not tee:
         if cfg.PREPROCESSING.RESIZE.FX:
             fx_num = 0.154/cfg.PREPROCESSING.RESIZE.FX
