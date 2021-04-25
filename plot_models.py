@@ -68,26 +68,25 @@ def plot_model_from_checkpoint(cfg,
         axs[0, 2].set_title('Model images')
     
     for idx, ax in zip(image_idx, axs):
-        image, target, padding, shape = dataset_loader[idx]
+        image, target, padding, shape, org_target, org_image = dataset_loader[idx]
+        print(np.expand_dims(image,0).shape)
         output = model(torch.Tensor(np.expand_dims(image,0)).cuda())
         output = output.cpu().detach().numpy()
         output = np.argmax(output, axis=1)[0]
+        print(output.shape)
+
 
         if plot_original_size:
-            image = image.squeeze()
-            target = target.squeeze()
-            x_org, y_org = image.shape
+            x_org, y_org = image.squeeze().shape
             x_lim = x_org - padding[0]
             y_lim = y_org - padding[1]
-            image = cv2.resize(image[:x_lim, :y_lim].astype(np.float32),
-                               dsize=tuple(reversed(shape)),
-                               interpolation=cv2.INTER_LINEAR)
+            
             output = cv2.resize(output[:x_lim, :y_lim].astype(np.float32),
                                 dsize=tuple(reversed(shape)),
                                 interpolation=cv2.INTER_LINEAR)
-            target = cv2.resize(target[:x_lim, :y_lim].astype(np.float32),
-                                dsize=tuple(reversed(shape)),
-                                interpolation=cv2.INTER_LINEAR)
+            
+            image = org_image
+            target = org_target
 
         ax[0].imshow(image.squeeze())
         ax[1].imshow(target.squeeze())
