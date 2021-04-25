@@ -22,6 +22,7 @@ def custom_collate(batch, tee=False):
         max_x = item[0].shape[1] if item[0].shape[1] > max_x else max_x 
         max_y = item[0].shape[2] if item[0].shape[2] > max_y else max_y
     shapes = [item[3] for item in batch]
+    org_targets = [item[4] for item in batch]   
     ## get sequence lengths
     #max_shape = max(shapes)
    
@@ -65,7 +66,7 @@ def custom_collate(batch, tee=False):
     """
     images = torch.from_numpy(images)
     targets = torch.from_numpy(targets)
-    return images.float(), targets.long(), shapes, padding
+    return images.float(), targets.long(), shapes, padding, org_targets
 
 
 def make_data_loaders(cfg,

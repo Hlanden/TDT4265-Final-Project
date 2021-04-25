@@ -69,12 +69,9 @@ def plot_model_from_checkpoint(cfg,
     
     for idx, ax in zip(image_idx, axs):
         image, target, padding, shape = dataset_loader[idx]
-        print(np.expand_dims(image,0).shape)
         output = model(torch.Tensor(np.expand_dims(image,0)).cuda())
         output = output.cpu().detach().numpy()
         output = np.argmax(output, axis=1)[0]
-        print(output.shape)
-
 
         if plot_original_size:
             image = image.squeeze()

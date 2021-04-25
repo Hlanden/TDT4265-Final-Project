@@ -92,7 +92,7 @@ def build_transforms(cfg,
     if cfg.PREPROCESSING.ISOTROPIC_PIXEL_SIZE.ENABLE and not tee:
         if cfg.PREPROCESSING.RESIZE.FX:
             fx_num = 0.154/cfg.PREPROCESSING.RESIZE.FX
-            fy_num = 0.308/cfg.PREPROCESSING.RESIZE.FY    
+            fy_num = 0.308/cfg.PREPROCESSING.RESIZE.FY  
         else:
             fx_num=0
             fy_num=0
