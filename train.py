@@ -180,11 +180,10 @@ if __name__ == "__main__":
     # sys.argv[1] = '--config_file=config/models/pixels07.yaml'
     # main()
     # sys.argv[1] = '--config_file=config/models/pixels03.yaml'
-    # main()
     import sys, os
     test_config_files = []
-    config_path = Path(os.getcwd(), 'config/jorgens_saturday_mix')
-    print('Lørdagens aften består av følgende deltagere:')
+    config_path = Path(os.getcwd(), 'config/OJs_sondags_skole')
+    print('Programmet for dagens søndags skole består av følgende deltagere:')
     for config in config_path.iterdir():
         try:
             test_config_files.append(str(config))
