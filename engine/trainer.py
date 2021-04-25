@@ -93,7 +93,7 @@ def do_train(cfg, model,
             plt.savefig(plot_path + '/epoch{}.png'.format(epoch))
         '''
         
-        for iteration, (images, targets, shapes, padding) in enumerate(train_data_loader, start_iter):
+        for iteration, (images, targets, shapes, padding, org_targets) in enumerate(train_data_loader, start_iter):
             iteration = iteration + 1
             arguments["iteration"] = iteration
             images = torch_utils.to_cuda(images).float()
@@ -152,7 +152,8 @@ def do_train(cfg, model,
             val_loss = 0
             total_img = 0
             with torch.no_grad():
-                for num_batches, (images, targets, shapes, padding) in enumerate(tqdm(val_data_loader)):
+                for num_batches, (images, targets, shapes, padding, org_targets) in enumerate(tqdm(val_data_loader)):
+                    
                     batch_size = images.shape[0]
                     total_img += batch_size
                     images = torch_utils.to_cuda(images)
@@ -160,7 +161,7 @@ def do_train(cfg, model,
                     outputs = model(images)
                     val_loss += loss_fn(outputs, targets.long())*batch_size
                     #acc += dice_score(outputs, targets) # TODO: Wait on working function
-                    val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),shapes=shapes, padding=padding).flatten()
+                    val_dice_score = dice_score_multiclass(outputs, targets, len(cfg.MODEL.CLASSES),shapes=shapes, padding=padding, org_targets=org_targets).flatten()
                     acc += val_dice_score*batch_size
                 acc = acc/total_img
                 val_loss = val_loss/total_img

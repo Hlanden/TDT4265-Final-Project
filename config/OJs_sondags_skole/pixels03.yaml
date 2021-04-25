@@ -1,0 +1,8 @@
+PREPROCESSING:
+  RESIZE:
+    FX: 0.3
+    FY: 0.3
+OUTPUT_DIR: 'outputs/pixels03'
+
+TEST:
+  BATCH_SIZE : 5

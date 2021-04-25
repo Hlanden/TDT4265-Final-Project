@@ -21,6 +21,7 @@ import torchvision.transforms.functional as TF
 import cv2
 from data.transforms import Resize, Padding, build_transforms
 from config.defaults import cfg
+from copy import copy
 
 #load data from a folder
 class DatasetLoader(Dataset):
@@ -127,6 +128,8 @@ class DatasetLoader(Dataset):
 
         x = self.open_as_array(idx, invert=True).astype(np.float32)
         y = self.open_mask(idx, add_dims=False).astype(np.float32)
+        org_target = copy(y)
+        org_image = copy(x)
         shape = y.shape
         pad_x = 0
         pad_y = 0
@@ -134,7 +137,6 @@ class DatasetLoader(Dataset):
             x = np.rot90(x, k=2, axes=(1, 2))
             y = np.rot90(y, k=2)
         
-            
         if self.transforms:
             if type(self.transforms) == list:
                 aug_data = self.transforms[0](image=x.squeeze(), gt=y.squeeze()) 
@@ -177,7 +179,7 @@ class DatasetLoader(Dataset):
 
         padding = [pad_x, pad_y]
         
-        return x, y, padding, shape
+        return x, y, padding, shape, org_target, org_image
 
     
     def get_as_pil(self, idx):
@@ -193,7 +195,7 @@ if __name__ == '__main__':
     from transforms import RandomCrop
     transtest = aug.Compose([
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1), #dette er for å resize bilde til ønsket størrelse
-        #Resize(0, 0, fx=1, fy=1, interpolation=1, always_apply=False, p=1),
+        Resize(0, 0, fx=0.154/4, fy=0.308/4, interpolation=1, always_apply=False, p=1),
         #Padding(always_apply=False, p=1),
         #aug.augmentations.Resize(300, 300, interpolation=1, always_apply=False, p=1)
         #MAKE PADDIGN
@@ -202,7 +204,7 @@ if __name__ == '__main__':
         #aug.augmentations.transforms.GaussianBlur(blur_limit=111, sigma_limit = 1, p=1) # Lagt til slik at ting kan blurres
         #aug.augmentations.transforms.Rotate(limit=90, p=0.5)
         #aug.augmentations.transforms.ElasticTransform(alpha=300, sigma=25, alpha_affine=1, interpolation=1, border_mode=1, always_apply=False, p=1)
-        RandomCrop(0.8, 0.8)
+        #RandomCrop(0.8, 0.8)
     ], additional_targets={'gt': 'image',})
     test_trans = build_transforms(cfg, is_train=False, tee=True)
 
