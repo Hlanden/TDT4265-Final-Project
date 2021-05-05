@@ -6,9 +6,3 @@ The groups members are:
 - Ole Jørgen Rise
 - Ludvik Kasbo
 - Jørgen Haaland
-
-## Problem description
-TODO 
-
-## Final result
-TODO
